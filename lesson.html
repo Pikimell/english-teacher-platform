@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Матеріал уроку | English Teacher Platform</title>
+    <script type="module" crossorigin src="/english-teacher-platform/lesson.js"></script>
+    <link rel="modulepreload" crossorigin href="/english-teacher-platform/assets/lessons-ClpnWO2D.js">
+    <link rel="stylesheet" crossorigin href="/english-teacher-platform/assets/lessons-1VnpuHdB.css">
+  </head>
+  <body class="lesson-layout">
+    <header class="lesson-header">
+      <a class="lesson-header__back" href="index.html">&larr; До каталогу</a>
+      <div>
+        <p class="lesson-header__eyebrow" data-lesson-category></p>
+        <h1 class="lesson-header__title" data-lesson-title>Матеріал уроку</h1>
+        <p class="lesson-header__meta">
+          <span data-lesson-level></span>
+        </p>
+      </div>
+    </header>
+
+    <main class="lesson-main">
+      <article class="lesson-content" id="lesson-content" aria-live="polite">
+        <p data-lesson-status>Завантаження матеріалу…</p>
+      </article>
+      <section class="lesson-practice" aria-labelledby="practice-title">
+        <div class="lesson-practice__intro">
+          <p class="section-title">Практика</p>
+          <h2 id="practice-title"></h2>
+          <p>
+            Вкажіть тему, оберіть один або кілька типів завдань і кількість
+            пунктів для генерації.
+          </p>
+        </div>
+
+        <div class="practice-admin" data-practice-admin>
+          <form class="practice-generator" data-practice-generator>
+            <label class="field field--input">
+              <span>Тема</span>
+              <input
+                type="text"
+                name="topic"
+                placeholder="Наприклад, Present Simple"
+              />
+            </label>
+
+            <div class="field field--dropdown" data-types>
+              <span>Типи завдань</span>
+              <button class="dropdown-trigger" type="button" data-types-trigger>
+                Multiple Choice, Gap Fill
+              </button>
+              <div class="types-dropdown hidden" data-types-panel>
+                <div class="checkbox-grid" data-generator-types>
+                  <label class="checkbox">
+                    <input type="checkbox" name="types" value="mcq" checked />
+                    <span>Multiple Choice</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="types" value="gap" checked />
+                    <span>Gap Fill</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="types" value="transform" />
+                    <span>Transform</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="types" value="match" />
+                    <span>Match</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="types" value="error" />
+                    <span>Error Correction</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="types" value="order" />
+                    <span>Word Order</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="types" value="short" />
+                    <span>Short Answers</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="types" value="writing" />
+                    <span>Writing Prompt</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <label class="field field--count">
+              <span>Кількість пунктів</span>
+              <input type="number" name="count" min="1" max="20" value="10" />
+            </label>
+
+            <div class="practice-generator__actions">
+              <button class="btn btn--primary" type="submit">
+                Згенерувати завдання
+              </button>
+              <span
+                class="practice-generator__status"
+                data-practice-status
+                aria-live="polite"
+              ></span>
+            </div>
+          </form>
+
+          <div
+            class="practice-generator__output js-json-tasks hidden"
+            data-generator-output
+          >
+            <div class="practice-generator__output-header">
+              <h3>Останній згенерований JSON</h3>
+              <div class="practice-generator__output-actions">
+                <button
+                  class="btn btn--ghost"
+                  type="button"
+                  data-generator-copy
+                >
+                  Скопіювати
+                </button>
+                <button
+                  class="btn btn--ghost"
+                  type="button"
+                  data-generator-download
+                >
+                  Завантажити
+                </button>
+              </div>
+            </div>
+            <pre class="practice-generator__json" data-generator-json></pre>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="lesson-practice practice-feed"
+        id="practice"
+        aria-live="polite"
+      >
+        <p class="practice-feed__placeholder" data-practice-placeholder>
+          Завдання з’являться тут.
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer lesson-footer">
+      <small
+        >&copy; <span data-component="copyright-year"></span> English Teacher
+        Platform</small
+      >
+    </footer>
+
+    <script src="./scripts/practice.js"></script>
+  </body>
+</html>
