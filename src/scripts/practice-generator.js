@@ -1,6 +1,6 @@
 import { generateTask } from './api/chatGpt.js';
 
-const adminWrapper = document.querySelector('[data-practice-admin]');
+const adminWrapper = document.querySelector('.js-practice-section');
 const form = document.querySelector('[data-practice-generator]');
 const statusElement = form?.querySelector('[data-practice-status]');
 const outputWrapper = document.querySelector('[data-generator-output]');
