@@ -3,6 +3,7 @@ import { glob } from 'glob';
 import injectHTML from 'vite-plugin-html-inject';
 import FullReload from 'vite-plugin-full-reload';
 import SortCss from 'postcss-sort-media-queries';
+import { resolve } from 'node:path';
 
 export default defineConfig(({ command }) => {
   return {
@@ -10,6 +11,7 @@ export default defineConfig(({ command }) => {
       [command === 'serve' ? 'global' : '_global']: {},
     },
     root: 'src',
+    publicDir: resolve(__dirname, 'src/public'),
     build: {
       sourcemap: true,
       rollupOptions: {
