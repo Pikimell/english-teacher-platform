@@ -1,7 +1,27 @@
 // Lightweight practice renderer for topic pages
 // Convention: for page /X/indexN.html → fetch /X/practice/indexN.json
 (function () {
-  const basePath = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) || '/';
+  const scriptUrl = (() => {
+    if (document.currentScript && document.currentScript.src) {
+      return document.currentScript.src;
+    }
+    const fallback = Array.from(document.querySelectorAll('script[src]')).find((script) =>
+      script.src.includes('scripts/practice.js'),
+    );
+    return fallback?.src || window.location.href;
+  })();
+
+  const basePath = (() => {
+    try {
+      const url = new URL(scriptUrl, window.location.href);
+      const pathname = url.pathname.replace(/scripts\/practice\.js.*$/, '');
+      const normalizedPath = pathname.endsWith('/') ? pathname : `${pathname}/`;
+      return `${url.origin}${normalizedPath}`;
+    } catch (error) {
+      console.warn('Не вдалося визначити базовий шлях, використовується /', error);
+      return '/';
+    }
+  })();
 
   function resolveAssetPath(path) {
     const normalizedBase = basePath.endsWith('/') ? basePath : `${basePath}/`;
