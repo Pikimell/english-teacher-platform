@@ -1,23 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
-    <link rel="stylesheet" href="./css/styles.css" />
+    <title>English Teacher Platform</title>
+    <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
-    <load src="./partials/header.html" icon-path="img/sprite.svg#logo" />
+    <header class="header">
+      <div class="header__inner">
+        <div class="header__copy">
+          <p class="header__eyebrow">English Teacher Platform</p>
+          <h1>Навчальна база для викладачів та студентів</h1>
+          <p class="tagline">
+            Знаходьте граматику, комунікативні сценарії та швидкі довідники за кілька кліків.
+            Використовуйте фільтри, щоб перейти до потрібної теми та одразу відкривати конспект.
+          </p>
+        </div>
+        <dl class="header__stats">
+          <div>
+            <dt>Уроків загалом</dt>
+            <dd data-stat-total>0</dd>
+          </div>
+          <div>
+            <dt>Граматика</dt>
+            <dd data-stat-grammar>0</dd>
+          </div>
+          <div>
+            <dt>Комунікація</dt>
+            <dd data-stat-communication>0</dd>
+          </div>
+          <div>
+            <dt>Швидкий доступ</dt>
+            <dd data-stat-quick>0</dd>
+          </div>
+        </dl>
+      </div>
+    </header>
 
-    <main>
-      <!-- Loads the specified .html file -->
-      <load src="./partials/vite-promo.html" />
-      <load src="./partials/badges.html" />
+    <main class="main">
+      <section class="filters" aria-labelledby="filters-title">
+        <div class="filters__intro">
+          <h2 id="filters-title">Пошук і фільтри</h2>
+          <p>Комбінуйте пошук, категорії та рівні, щоб знайти потрібну тему.</p>
+        </div>
+        <div class="filters__grid">
+          <label class="field">
+            <span>Пошук</span>
+            <input type="search" placeholder="Наприклад, Present Simple" data-filter="search" />
+          </label>
+
+          <div class="field">
+            <span>Категорія</span>
+            <div class="chip-group" role="group" aria-label="Фільтр за категорією">
+              <button class="chip chip--filled" type="button" data-category="all" aria-pressed="true">Усі</button>
+              <button class="chip" type="button" data-category="grammar">Граматика</button>
+              <button class="chip" type="button" data-category="communication">Комунікація</button>
+              <button class="chip" type="button" data-category="quick">Швидкий доступ</button>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>Рівень</span>
+            <select data-filter="level">
+              <option value="all">Усі рівні</option>
+              <option value="A1">A1 — Beginner</option>
+              <option value="A2">A2 — Elementary</option>
+              <option value="B1">B1 — Intermediate</option>
+              <option value="B2">B2 — Upper-Intermediate</option>
+              <option value="C1">C1 — Advanced</option>
+              <option value="C2">C2 — Proficient</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="catalog" data-category-section="grammar" aria-labelledby="grammar-heading">
+        <div class="catalog__header">
+          <p class="section-title">Категорія</p>
+          <h2 id="grammar-heading">Граматика</h2>
+          <p class="catalog__description">Чіткі пояснення правил, таблиць та прикладів для кожного часу чи конструкції.</p>
+        </div>
+        <div class="cards-grid" data-category-grid="grammar" aria-live="polite"></div>
+        <p class="catalog__empty" data-category-empty="grammar" hidden>Немає тем, що відповідають обраним фільтрам.</p>
+      </section>
+
+      <section class="catalog" data-category-section="communication" aria-labelledby="communication-heading">
+        <div class="catalog__header">
+          <p class="section-title">Категорія</p>
+          <h2 id="communication-heading">Комунікація</h2>
+          <p class="catalog__description">Готові плани занять, діалоги та вправи для розвитку розмовних навичок.</p>
+        </div>
+        <div class="cards-grid" data-category-grid="communication" aria-live="polite"></div>
+        <p class="catalog__empty" data-category-empty="communication" hidden>Немає тем, що відповідають обраним фільтрам.</p>
+      </section>
+
+      <section class="catalog" data-category-section="quick" aria-labelledby="quick-heading">
+        <div class="catalog__header">
+          <p class="section-title">Категорія</p>
+          <h2 id="quick-heading">Швидкий доступ</h2>
+          <p class="catalog__description">Шаблони, довідники та списки, до яких звертаєтесь щодня.</p>
+        </div>
+        <div class="cards-grid" data-category-grid="quick" aria-live="polite"></div>
+        <p class="catalog__empty" data-category-empty="quick" hidden>Немає тем, що відповідають обраним фільтрам.</p>
+      </section>
     </main>
 
-    <load src="./partials/footer.html" />
+    <footer class="footer">
+      <small>&copy; <span data-component="copyright-year"></span> English Teacher Platform</small>
+    </footer>
 
-    <script type="module" src="./main.js"></script>
+    <script type="module" src="./scripts/main.js"></script>
   </body>
 </html>
