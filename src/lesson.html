@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Матеріал уроку | English Teacher Platform</title>
-    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body class="lesson-layout">
     <header class="lesson-header">
@@ -22,6 +22,7 @@
       <article class="lesson-content" id="lesson-content" aria-live="polite">
         <p data-lesson-status>Завантаження матеріалу…</p>
       </article>
+
       <section
         class="lesson-practice js-practice-section"
         aria-labelledby="practice-title"
@@ -30,8 +31,8 @@
           <p class="section-title">Практика</p>
           <h2 id="practice-title"></h2>
           <p>
-            Вкажіть тему, оберіть один або кілька типів завдань і кількість
-            пунктів для генерації.
+            Вкажіть тему, оберіть один або кілька типів завдань і кількість пунктів
+            для генерації.
           </p>
         </div>
 
@@ -113,35 +114,22 @@
             <div class="practice-generator__output-header">
               <h3>Останній згенерований JSON</h3>
               <div class="practice-generator__output-actions">
-                <button
-                  class="btn btn--ghost"
-                  type="button"
-                  data-generator-copy
-                >
+                <button class="btn btn--ghost" type="button" data-generator-copy>
                   Скопіювати
                 </button>
-                <button
-                  class="btn btn--ghost"
-                  type="button"
-                  data-generator-download
-                >
+                <button class="btn btn--ghost" type="button" data-generator-download>
                   Завантажити
                 </button>
               </div>
-            </div>
             <pre class="practice-generator__json" data-generator-json></pre>
           </div>
         </div>
-      </section>
 
-      <section
-        class="lesson-practice practice-feed"
-        id="practice"
-        aria-live="polite"
-      >
-        <p class="practice-feed__placeholder" data-practice-placeholder>
-          Завдання з’являться тут.
-        </p>
+        <section class="practice-feed" id="practice" aria-live="polite">
+          <p class="practice-feed__placeholder" data-practice-placeholder>
+            Завдання з’являться тут.
+          </p>
+        </section>
       </section>
     </main>
 
@@ -152,8 +140,8 @@
       >
     </footer>
 
-    <script src="/scripts/practice.js"></script>
-    <script type="module" src="/scripts/lesson.js"></script>
-    <script type="module" src="/scripts/practice-generator.js"></script>
+    <script src="./scripts/practice.js"></script>
+    <script type="module" src="./scripts/lesson.js"></script>
+    <script type="module" src="./scripts/practice-generator.js"></script>
   </body>
 </html>
