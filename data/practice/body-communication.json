@@ -1,0 +1,83 @@
+{
+  "title": "Communication: Talking about the Body",
+  "level": "B1",
+  "tasks": [
+    {
+      "id": "mcq-body-1",
+      "type": "mcq",
+      "prompt": "Обери фразу, яка найкраще відповідає ситуації.",
+      "items": [
+        {
+          "q": "Студент скаржиться, що не може розслабити плечі.",
+          "choices": [
+            "Try to keep your spine straight in the chair.",
+            "Roll your shoulders back and take a deep breath.",
+            "I sprained my ankle yesterday."
+          ],
+          "answer": ["1"]
+        },
+        {
+          "q": "Тренер просить перевірити поставу учня.",
+          "choices": [
+            "Stretch your arms above your head.",
+            "Keep your spine straight while sitting.",
+            "Take a deep breath in and out."
+          ],
+          "answer": ["1"]
+        },
+        {
+          "q": "Друг запитує, як ти почуваєшся після тренування, але ти потягнув щиколотку.",
+          "choices": [
+            "I sprained my ankle yesterday.",
+            "My shoulders feel tense.",
+            "Could you stretch your spine a little?"
+          ],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "gap-body-1",
+      "type": "gap",
+      "prompt": "Заповни пропуски фразами з блоку лексики.",
+      "items": [
+        {
+          "q": "My _____ feels tense after working on the computer all day.",
+          "answer": ["shoulder", "shoulders"]
+        },
+        {
+          "q": "Please keep your _____ straight during the exercise.",
+          "answer": ["spine"]
+        },
+        {
+          "q": "Take a deep _____ and slowly ______ out.",
+          "answer": ["breath", "breath", "breath in", "breath out"],
+          "hint": "Використай пару in/out"
+        },
+        {
+          "q": "He has a light _____ _____ in his leg after the match.",
+          "answer": ["muscle", "strain"]
+        }
+      ]
+    },
+    {
+      "id": "short-body-1",
+      "type": "short",
+      "prompt": "Відповідай коротко на запитання тренера.",
+      "items": [
+        {
+          "q": "What do you do when your shoulders feel tense?",
+          "keywords": ["roll", "shoulders", "breath"]
+        },
+        {
+          "q": "How can you describe a muscle strain to your trainer?",
+          "keywords": ["pain", "muscle", "movement"]
+        },
+        {
+          "q": "What advice would you give to someone who sprained an ankle?",
+          "keywords": ["rest", "ice", "keep", "elevated"]
+        }
+      ]
+    }
+  ]
+}

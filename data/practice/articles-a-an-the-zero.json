@@ -1,0 +1,123 @@
+{
+  "title": "Артиклі — a/an, the, zero article",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "mcq-a-an-the-1",
+      "type": "mcq",
+      "prompt": "Обери правильну форму артикля.",
+      "items": [
+        {
+          "q": "I saw ___ elephant at the zoo.",
+          "choices": [
+            "a",
+            "an",
+            "the"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "She is ___ doctor.",
+          "choices": [
+            "a",
+            "an",
+            "the"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "This is ___ book I told you about.",
+          "choices": [
+            "a",
+            "an",
+            "the"
+          ],
+          "answer": [
+            "2"
+          ]
+        },
+        {
+          "q": "He wants to be ___ engineer.",
+          "choices": [
+            "a",
+            "an",
+            "the"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "I need ___ apple from the fridge.",
+          "choices": [
+            "a",
+            "an",
+            "the"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "Do you have ___ pen?",
+          "choices": [
+            "a",
+            "an",
+            "the"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "She is reading ___ interesting story.",
+          "choices": [
+            "a",
+            "an",
+            "the"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "I have ___ idea.",
+          "choices": [
+            "a",
+            "an",
+            "the"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "Can you pass me ___ salt, please?",
+          "choices": [
+            "a",
+            "an",
+            "the"
+          ],
+          "answer": [
+            "2"
+          ]
+        },
+        {
+          "q": "There is ___ cat on the roof.",
+          "choices": [
+            "a",
+            "an",
+            "the"
+          ],
+          "answer": [
+            "0"
+          ]
+        }
+      ]
+    }
+  ]
+}
