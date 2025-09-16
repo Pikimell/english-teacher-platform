@@ -1,6 +1,14 @@
 // Lightweight practice renderer for topic pages
 // Convention: for page /X/indexN.html → fetch /X/practice/indexN.json
 (function () {
+  const basePath = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) || '/';
+
+  function resolveAssetPath(path) {
+    const normalizedBase = basePath.endsWith('/') ? basePath : `${basePath}/`;
+    const rawPath = String(path || '');
+    if (rawPath.startsWith(normalizedBase)) return rawPath;
+    return `${normalizedBase}${rawPath.replace(/^\/+/, '')}`;
+  }
   function derivePracticePath() {
     try {
       const url = new URL(window.location.href);
@@ -341,8 +349,9 @@
 
   async function fetchPracticeCandidate(path) {
     if (!path) return null;
+    const resolvedPath = resolveAssetPath(path);
     try {
-      const res = await fetch(path, { cache: 'no-store' });
+      const res = await fetch(resolvedPath, { cache: 'no-store' });
       if (!res.ok) return null;
       return await res.json();
     } catch (error) {

@@ -1,5 +1,14 @@
 import { lessons, lessonCategories } from '../data/lessons.js';
 
+const basePath = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) || '/';
+
+function resolveAssetPath(path) {
+  const normalizedBase = basePath.endsWith('/') ? basePath : `${basePath}/`;
+  const rawPath = String(path || '');
+  if (rawPath.startsWith(normalizedBase)) return rawPath;
+  return `${normalizedBase}${rawPath.replace(/^\/+/, '')}`;
+}
+
 const params = new URLSearchParams(window.location.search);
 const topicId = params.get('topic');
 const fallbackTitle = params.get('title');
@@ -62,7 +71,7 @@ async function loadLesson() {
   }
 
   try {
-    const response = await fetch(resolvedFile);
+    const response = await fetch(resolveAssetPath(resolvedFile));
     if (!response.ok) {
       throw new Error(`Не вдалося завантажити файл: ${response.status}`);
     }
