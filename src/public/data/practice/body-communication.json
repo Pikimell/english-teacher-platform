@@ -244,6 +244,61 @@
       ]
     },
     {
+      "id": "context-body-com-dialog-1",
+      "type": "context",
+      "prompt": "Прочитай короткий діалог і оберіть правильні відповіді.",
+      "context": {
+        "title": "Morning Warm-up",
+        "format": "dialog",
+        "body": [
+          { "speaker": "Lena", "line": "Hi, Max! Ready for the stretching lesson?" },
+          { "speaker": "Max", "line": "Almost. My arms still feel sleepy." },
+          { "speaker": "Lena", "line": "Let's roll our shoulders and shake our hands." },
+          { "speaker": "Coach", "line": "Good idea! After that we move our heads side to side." },
+          { "speaker": "Max", "line": "Can we also wake up our legs?" },
+          { "speaker": "Coach", "line": "Sure, we will march in place to warm the knees." }
+        ]
+      },
+      "questions": [
+        {
+          "q": "Що хоче зробити Лена спочатку?",
+          "choices": [
+            "Пострибати на місці",
+            "Покрутити плечима і потрясти руками",
+            "Повернути голову вперед"
+          ],
+          "answer": ["1"]
+        },
+        {
+          "q": "Чому Макс каже, що його руки ще сплять?",
+          "choices": [
+            "Він пропустив сніданок",
+            "Він не рухав ними вранці",
+            "Він носить рукавички"
+          ],
+          "answer": ["1"]
+        },
+        {
+          "q": "Що роблять після того, як рухають плечима?",
+          "choices": [
+            "Махають головою вгору-вниз",
+            "Стоять спокійно",
+            "Повертають голову з боку в бік"
+          ],
+          "answer": ["2"]
+        },
+        {
+          "q": "Як тренер пропонує розбудити ноги?",
+          "choices": [
+            "Бігти по залу",
+            "Марширувати на місці",
+            "Сісти і відпочити"
+          ],
+          "answer": ["1"]
+        }
+      ]
+    },
+    {
       "id": "short-body-com-short-1",
       "type": "short",
       "prompt": "Короткі відповіді: Body Communication Essentials. Згенеруй задачі для початківців на рівні A1. Використовуй слова повязані з Body",

@@ -31,8 +31,8 @@
           <p class="section-title">Практика</p>
           <h2 id="practice-title"></h2>
           <p>
-            Вкажіть тему, оберіть один або кілька типів завдань і кількість пунктів
-            для генерації.
+            Вкажіть тему, оберіть один або кілька типів завдань і кількість
+            пунктів для генерації.
           </p>
         </div>
 
@@ -69,6 +69,10 @@
                   <label class="checkbox">
                     <input type="checkbox" name="types" value="match" />
                     <span>Match</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="types" value="context" />
+                    <span>Text Q&amp;A</span>
                   </label>
                   <label class="checkbox">
                     <input type="checkbox" name="types" value="error" />
@@ -114,24 +118,35 @@
             <div class="practice-generator__output-header">
               <h3>Останній згенерований JSON</h3>
               <div class="practice-generator__output-actions">
-                <button class="btn btn--ghost" type="button" data-generator-copy>
+                <button
+                  class="btn btn--ghost"
+                  type="button"
+                  data-generator-copy
+                >
                   Скопіювати
                 </button>
-                <button class="btn btn--ghost" type="button" data-generator-download>
+                <button
+                  class="btn btn--ghost"
+                  type="button"
+                  data-generator-download
+                >
                   Завантажити
                 </button>
               </div>
+            </div>
             <pre class="practice-generator__json" data-generator-json></pre>
           </div>
         </div>
-
-        
       </section>
-      <section class="practice-feed lesson-practice" id="practice" aria-live="polite">
-          <p class="practice-feed__placeholder" data-practice-placeholder>
-            Завдання з’являться тут.
-          </p>
-        </section>
+      <section
+        class="practice-feed lesson-practice"
+        id="practice"
+        aria-live="polite"
+      >
+        <p class="practice-feed__placeholder" data-practice-placeholder>
+          Завдання з’являться тут.
+        </p>
+      </section>
     </main>
 
     <footer class="footer lesson-footer">

@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "start": "sudo vite",
     "build": "vite build --base=/english-teacher-platform/",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "push": "git cmp 'update'"
   },
   "devDependencies": {
     "glob": "^11.0.0",

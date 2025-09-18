@@ -114,7 +114,7 @@ REQUIREMENTS:
 6. Tables should cover different aspects such as:
    - Forms (affirmative, negative, questions)  
    - Usage (rules, functions, signal words, time markers)  
-   - Common mistakes (“Use it right!”)  
+   - Common mistakes ("Use it right!")  
    - Exceptions/irregularities/special cases  
    - Practical examples or mini-dialogues  
    - Vocabulary lists (if relevant to the topic)  
@@ -360,6 +360,63 @@ ${commonRules}
       `.trim(),
       user: oneLineUser(topic, 'writing', itemsCount),
     },
+    context: {
+      system: `
+${commonRules}
+СХЕМА ВИХОДУ:
+{
+  "id": "context-${seedId}-1",
+  "type": "context",
+  "prompt": "<інструкція англійською>",
+  "context": {
+    "title": "<2–4 слова>",
+    "format": "dialog" | "narrative",
+    "body": []
+  },
+  "questions": [
+    {
+      "q": "<питання>",
+      "choices": ["<варіант0>", "<варіант1>", "<варіант2>"],
+      "answer": ["<index_правильної_відповіді_рядком>"]
+    },
+    ...
+  ]
+}
+
+ВИМОГИ:
+- ${itemsCount} питань для тексту.
+- Текст максимум 200 слів, простими фразами рівня A1.
+- Якщо format = "dialog" — масив об'єктів {"speaker": "...", "line": "..."}.
+- Якщо format = "narrative" — масив рядків, кожен рядок = короткий абзац.
+- Питання перевіряють розуміння тексту.
+- У choices завжди 3 варіанти, лише один правильний.
+- Правильна відповідь — індекс рядком ("0" | "1" | "2").
+- ЖОДНОГО додаткового тексту поза JSON.
+
+ПРИКЛАД (АНАЛОГІЧНИЙ; НЕ КОПІЮВАТИ ЗМІСТ):
+{
+  "id": "context-ps-1",
+  "type": "context",
+  "prompt": "Прочитайте діалог та оберіть правильну відповідь.",
+  "context": {
+    "title": "Morning Chat",
+    "format": "dialog",
+    "body": [
+      { "speaker": "Emma", "line": "Hi, Leo! Are you ready for school?" },
+      { "speaker": "Leo", "line": "Yes, but I can't find my maths book." },
+      { "speaker": "Emma", "line": "Check your bag again." }
+    ]
+  },
+  "questions": [
+    {
+      "q": "What did Leo lose?",
+      "choices": ["Pencil case", "Math textbook", "English notebook"],
+      "answer": ["1"]
+    }
+  ]
+}`.trim(),
+      user: oneLineUser(topic, 'context', itemsCount),
+    },
   };
 
   const tpl = templates[type];
@@ -381,6 +438,7 @@ const defaultItemsByType = {
   order: 10,
   short: 3,
   writing: 1,
+  context: 4,
 };
 
 function oneLineUser(topic, type, itemsCount) {
