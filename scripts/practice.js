@@ -294,6 +294,208 @@
     container.appendChild(result);
   }
 
+  function renderContext(container, task) {
+    container.appendChild(
+      el('h3', {}, task.prompt || 'Прочитайте текст та дайте відповіді')
+    );
+
+    const context = task.context || {};
+    const format = String(context.format || 'narrative').toLowerCase();
+    const body = Array.isArray(context.body) ? context.body : [];
+    const textWrap = el('div', {
+      style:
+        'margin:12px 0;padding:14px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc;',
+    });
+
+    if (context.title) {
+      textWrap.appendChild(
+        el('h4', { style: 'margin:0 0 8px;font-size:18px;' }, context.title)
+      );
+    }
+
+    if (format === 'dialog') {
+      body.forEach((turn) => {
+        if (!turn) return;
+        const speaker =
+          typeof turn === 'object' && turn.speaker
+            ? `${turn.speaker}:`
+            : '';
+        const line =
+          typeof turn === 'object' && 'line' in turn
+            ? turn.line
+            : typeof turn === 'string'
+            ? turn
+            : '';
+        textWrap.appendChild(
+          el(
+            'p',
+            {
+              style:
+                'margin:4px 0;display:flex;gap:6px;align-items:flex-start;line-height:1.5;',
+            },
+            speaker ? el('strong', {}, speaker) : null,
+            el('span', {}, line)
+          )
+        );
+      });
+    } else {
+      body.forEach((paragraph, index) => {
+        const text =
+          typeof paragraph === 'string'
+            ? paragraph
+            : paragraph && paragraph.text
+            ? paragraph.text
+            : '';
+        if (!text) return;
+        textWrap.appendChild(
+          el(
+            'p',
+            { style: index ? 'margin:8px 0 0;' : 'margin:0;' },
+            text
+          )
+        );
+      });
+    }
+
+    container.appendChild(textWrap);
+
+    const questions = Array.isArray(task.questions) ? task.questions : [];
+    if (!questions.length) return;
+
+    const blocks = [];
+    questions.forEach((question, idx) => {
+      const block = el(
+        'div',
+        {
+          style:
+            'margin-bottom:12px;padding:12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+        },
+        el(
+          'div',
+          { style: 'margin-bottom:8px;font-weight:600;' },
+          question.q || `Питання ${idx + 1}`
+        )
+      );
+
+      const answers = Array.isArray(question.answer)
+        ? question.answer.map(String)
+        : question.answer != null
+        ? [String(question.answer)]
+        : [];
+
+      if (Array.isArray(question.choices) && question.choices.length) {
+        const name = `${task.id || 'context'}-${idx}`;
+        const allowMulti = answers.length > 1;
+        const expectedIsIndex = answers.every((value) => /^\d+$/.test(value));
+        question.choices.forEach((choice, cIdx) => {
+          const id = `${name}-${cIdx}`;
+          block.appendChild(
+            el(
+              'label',
+              {
+                for: id,
+                style: 'display:flex;align-items:center;gap:8px;margin:4px 0;',
+              },
+              el('input', {
+                type: allowMulti ? 'checkbox' : 'radio',
+                name,
+                id,
+                value: String(cIdx),
+              }),
+              el('span', {}, choice)
+            )
+          );
+        });
+        blocks.push({
+          block,
+          type: 'choices',
+          allowMulti,
+          getPicked: () => {
+            const inputs = Array.from(
+              block.querySelectorAll(`input[name='${name}']`)
+            );
+            const picked = inputs
+              .filter((input) => input.checked)
+              .map((input) => input.value);
+            if (!expectedIsIndex) {
+              return picked.map((index) =>
+                normalize(question.choices[Number(index)] || '')
+              );
+            }
+            return picked;
+          },
+          expected: expectedIsIndex
+            ? answers
+            : answers.map((answer) => normalize(answer)),
+        });
+      } else {
+        const input = el('textarea', {
+          rows: 2,
+          style:
+            'width:100%;max-width:640px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
+        });
+        block.appendChild(input);
+        blocks.push({
+          block,
+          type: 'text',
+          input,
+          expected: answers.map((answer) => normalize(answer)),
+        });
+      }
+
+      if (question.explanation) {
+        block.appendChild(
+          el(
+            'div',
+            {
+              class: 'muted',
+              style: 'display:none;margin-top:6px;color:#475569;',
+            },
+            question.explanation
+          )
+        );
+      }
+
+      container.appendChild(block);
+    });
+
+    const result = el('div', {
+      style: 'margin-top:8px;font-weight:600;',
+    });
+    const button = el(
+      'button',
+      { type: 'button', class: 'btn primary', style: 'margin-top:8px;' },
+      'Перевірити'
+    );
+
+    button.addEventListener('click', () => {
+      let correct = 0;
+      blocks.forEach((entry) => {
+        let ok = false;
+        if (entry.type === 'choices') {
+          const picked = entry.getPicked().sort();
+          const expected = entry.expected.slice().sort();
+          ok =
+            picked.length === expected.length &&
+            picked.every((value, index) => value === expected[index]);
+        } else {
+          const value = normalize(entry.input.value);
+          ok = entry.expected.length
+            ? entry.expected.includes(value)
+            : Boolean(value);
+        }
+        entry.block.style.borderColor = ok ? '#10b981' : '#ef4444';
+        const explanation = entry.block.querySelector('.muted');
+        if (explanation) explanation.style.display = ok ? 'none' : 'block';
+        if (ok) correct++;
+      });
+      result.textContent = `Результат: ${correct}/${blocks.length}`;
+    });
+
+    container.appendChild(button);
+    container.appendChild(result);
+  }
+
   function renderTask(container, task, taskKey) {
     const keyBase = taskKey || (task && task.id ? String(task.id) : `task-${Math.random().toString(16).slice(2, 8)}`);
     const box = el("section", {
@@ -334,6 +536,9 @@
         break;
       case "match":
         renderMatch(box, task);
+        break;
+      case "context":
+        renderContext(box, task);
         break;
       case "transform":
         renderTransform(box, task);
