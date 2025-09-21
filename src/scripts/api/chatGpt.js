@@ -19,12 +19,13 @@ export const getAnswer = async body => {
 /**
  * Генерує один блок завдання під конкретний typeQuestion (mcq/gap/...)
  * @param {string} topic - наприклад: "Present Simple"
- * @param {string} typeQuestion - один з: mcq, gap, transform, match, error, order, short, writing
- * @param {object} opts - { language: 'uk', items: 10, seedId: 'ps' } тощо
+ * @param {string} typeQuestion - один з: mcq, gap, transform, match, error, order, short, writing, roleplay, context, dialogue-gap, dialogue-order, truefalse, definition-match, synonym-clue, scramble, wordpairs, odd-one-out
+ * @param {object} opts - { language: 'en', items: 10, seedId: 'ps' } etc.
+ * @param {Array<object>} vocabulary - опційний масив слів для фокусування ({ word, translation, example })
  * @returns {Promise<object>} JSON блоку завдання
  */
-export const generateTask = async (topic, typeQuestion, opts = {}) => {
-  const promptBody = buildBody(topic, typeQuestion, opts);
+export const generateTask = async (topic, typeQuestion, opts = {}, vocabulary = []) => {
+  const promptBody = buildBody(topic, typeQuestion, opts, vocabulary);
   const raw = await getAnswer(promptBody);
 
   // API зазвичай повертає строку JSON -> парсимо.
@@ -60,7 +61,7 @@ export const generateTheory = async (topic, opts = {}) => {
 };
 
 // ---- Prompt builder ---------------------------------------------------------
-function buildBody(topic, typeQuestion, opts = {}) {
+function buildBody(topic, typeQuestion, opts = {}, vocabulary = []) {
   const token = localStorage.getItem('gptToken');
   if (!token || token?.length < 10) {
     console.warn('⚠️ gptToken відсутній у localStorage');
@@ -74,13 +75,14 @@ function buildBody(topic, typeQuestion, opts = {}) {
     .toLowerCase();
 
   const { system, user } = makeMessages(topic, normalizedType, opts);
+  const userWithVocabulary = appendVocabularyToPrompt(user, vocabulary);
 
   return {
     token,
     model,
     messages: [
       { role: 'system', content: system },
-      { role: 'user', content: user },
+      { role: 'user', content: userWithVocabulary },
     ],
     temperature: 0.3,
     max_tokens: 4000,
@@ -152,53 +154,53 @@ Be as detailed as possible, but keep the language simple and level-appropriate. 
  * - суворі вимоги: лише JSON, українська, без крапок у відповідях де потрібно тощо
  */
 function makeMessages(topic, type, opts) {
-  const lang = opts.language || 'uk'; // наразі використовуємо ua/uk
+  const lang = opts.language || 'en';
   const itemsCount = Number.isInteger(opts.items)
     ? opts.items
     : defaultItemsByType[type] || 10;
   const seedId = opts.seedId || shortSeed(topic);
 
   const commonRules = `
-ТИ — генератор навчальних завдань з англійської мови.
-МЕТА: Згенерувати ОДИН блок завдань типу "${type}" по темі "${topic}".
-ПОВЕРТАЙ ЛИШЕ ВАЛІДНИЙ JSON. Узгоджуйся рівнем А1–A2.
-Мова інтерфейсу — українська.
-Кодування — UTF-8. Без пояснень, без префіксів, без \`\`\`.
-Верифікуй внутрішню узгодженість (варіанти відповіді відповідають правилу/темі).
+YOU ARE an ESL task generator.
+GOAL: create ONE task block of type "${type}" on the topic "${topic}".
+OUTPUT ONLY VALID JSON. Keep the language level around A1–A2.
+All prompts, questions, answers, hints, and labels must be written in ENGLISH.
+Encoding — UTF-8. No explanations, no prefixes, no code fences.
+Ensure internal consistency so answers match the task logic.
 `;
 
   const templates = {
     mcq: {
       system: `
 ${commonRules}
-СХЕМА ВИХОДУ:
+OUTPUT SCHEMA:
 {
   "id": "mcq-${seedId}-1",
   "type": "mcq",
-  "prompt": "<коротка інструкція українською>",
+  "prompt": "Choose the correct option.",
   "items": [
     {
-      "q": "<питання зі зниклою формою>",
-      "choices": ["<варіант0>", "<варіант1>", "<варіант2>"],
-      "answer": ["<index_правильної_відповіді_рядком>"]
+      "q": "<short question with one missing form>",
+      "choices": ["<option0>", "<option1>", "<option2>"],
+      "answer": ["<index_of_correct_choice_as_string>"]
     },
     ...
   ]
 }
 
-ВИМОГИ:
-- ${itemsCount} пунктів.
-- Формат як у прикладі нижче.
-- У choices рівно 3 варіанти, лише один правильний.
-- Правильна відповідь — індекс як рядок: "0" | "1" | "2".
-- Питання та варіанти короткі, природні, у темі "${topic}".
-- ЖОДНОГО додаткового тексту поза JSON.
+REQUIREMENTS:
+- ${itemsCount} items.
+- Follow the schema exactly.
+- Provide exactly 3 answer choices per question with a single correct one.
+- "answer" must be the index of the correct option as a string: "0" | "1" | "2".
+- Keep questions natural, concise, and on the topic "${topic}".
+- Return JSON only, no additional commentary.
 
-ПРИКЛАД (АНАЛОГІЧНИЙ; НЕ КОПІЮВАТИ ДОКЛАДНО ЗМІСТ):
+EXAMPLE (FORMAT ONLY; DO NOT COPY CONTENT):
 {
   "id": "mcq-ps-1",
   "type": "mcq",
-  "prompt": "Обери правильну форму (Present Simple)",
+  "prompt": "Choose the correct Present Simple form.",
   "items": [
     { "q": "He usually ___ the bus to work.", "choices": ["take", "takes", "is taking"], "answer": ["1"] },
     { "q": "They ___ coffee in the morning.", "choices": ["have", "haves", "are having"], "answer": ["0"] }
@@ -206,29 +208,29 @@ ${commonRules}
 }
       `.trim(),
       user: `
-Тема: ${topic}
-Згенеруй блок типу "mcq" строго за СХЕМОЮ ВИХОДУ.
-Кількість пунктів: ${itemsCount}.
+Topic: ${topic}
+Generate a task block of type "mcq" strictly following the OUTPUT SCHEMA.
+Number of items: ${itemsCount}.
       `.trim(),
     },
 
     gap: {
       system: `
 ${commonRules}
-СХЕМА ВИХОДУ:
+OUTPUT SCHEMA:
 {
   "id": "gap-${seedId}-1",
   "type": "gap",
-  "prompt": "<інструкція>",
+  "prompt": "Fill the gaps with the correct word.",
   "items": [
-    { "q": "<They ___ (work) on Sundays.>", "answer": ["<правильна форма>", "<альтернатива_якщо_є>"] },
+    { "q": "<They ___ (work) on Sundays.>", "answer": ["<correct_form>", "<alternative_if_any>"] },
     ...
   ]
 }
-ВИМОГИ:
-- ${itemsCount} пунктів.
-- В полі "answer" завжди масив зі щонайменше одним варіантом.
-- Коротко, рівень А1–A2.
+REQUIREMENTS:
+- ${itemsCount} sentences.
+- "answer" must always be an array with at least one valid solution in lowercase.
+- Keep sentences short, level A1–A2, and connected to "${topic}".
       `.trim(),
       user: oneLineUser(topic, 'gap', itemsCount),
     },
@@ -236,23 +238,23 @@ ${commonRules}
     transform: {
       system: `
 ${commonRules}
-СХЕМА ВИХОДУ:
+OUTPUT SCHEMA:
 {
   "id": "transform-${seedId}-1",
   "type": "transform",
-  "prompt": "Перетвори на заперечення (Present Simple, без крапки)",
+  "prompt": "Rewrite each sentence in the negative form (no final period).",
   "items": [
     {
       "q": "She likes coffee.",
-      "hint": "використай doesn't; без крапки",
+      "hint": "use doesn't + base verb; no period",
       "answer": ["she doesn't like coffee", "she does not like coffee"]
     }
   ]
 }
-ВИМОГИ:
-- ${itemsCount} пунктів.
-- Усі відповіді — без фінальної крапки (якщо так вказано в prompt).
-- Дай корисний "hint".
+REQUIREMENTS:
+- ${itemsCount} items.
+- Answers must follow the prompt instructions (for example, omit the final period).
+- Provide a helpful English hint for each item.
       `.trim(),
       user: oneLineUser(topic, 'transform', itemsCount),
     },
@@ -260,19 +262,20 @@ ${commonRules}
     match: {
       system: `
 ${commonRules}
-СХЕМА ВИХОДУ:
+OUTPUT SCHEMA:
 {
   "id": "match-${seedId}-1",
   "type": "match",
-  "prompt": "Зістав: дієслово → форма 3-ї особи (he/she/it)",
+  "prompt": "Match the base verb with the third person singular form (he/she/it).",
   "pairs": [
     { "left": "go", "right": "goes" },
     ...
   ]
 }
-ВИМОГИ:
-- Кількість пар: ${Math.max(6, Math.min(12, itemsCount))}.
-- Однозначні відповідності (без омонімії у межах набору).
+REQUIREMENTS:
+- ${Math.max(6, Math.min(12, itemsCount))} unique pairs.
+- Provide one clear correct match for each pair without duplicates.
+- Use vocabulary related to "${topic}".
       `.trim(),
       user: oneLineUser(topic, 'match', itemsCount),
     },
@@ -280,19 +283,19 @@ ${commonRules}
     error: {
       system: `
 ${commonRules}
-СХЕМА ВИХОДУ:
+OUTPUT SCHEMA:
 {
   "id": "error-${seedId}-1",
   "type": "error",
-  "prompt": "Знайди й виправ помилку (Present Simple, без крапки)",
+  "prompt": "Find and correct the mistake (Present Simple, no final period).",
   "items": [
-    { "q": "She don't like tea.", "hint": "doesn't + V", "answer": ["she doesn't like tea", "she does not like tea"] }
+    { "q": "She don't like tea.", "hint": "use doesn't + base verb", "answer": ["she doesn't like tea", "she does not like tea"] }
   ]
 }
-ВИМОГИ:
-- ${itemsCount} пунктів.
-- У кожному "q" повинна бути типова помилка саме з теми "${topic}".
-- "answer" — без фінальної крапки, якщо так зазначено в prompt.
+REQUIREMENTS:
+- ${itemsCount} sentences containing a typical error connected to "${topic}".
+- Provide clear English hints.
+- Match the formatting requested in the prompt (for example, omit the period).
       `.trim(),
       user: oneLineUser(topic, 'error', itemsCount),
     },
@@ -300,19 +303,19 @@ ${commonRules}
     order: {
       system: `
 ${commonRules}
-СХЕМА ВИХОДУ:
+OUTPUT SCHEMA:
 {
   "id": "order-${seedId}-1",
   "type": "order",
-  "prompt": "Постав слова в правильному порядку",
+  "prompt": "Put the words in the correct order.",
   "items": [
-    { "q": "Впорядкуй речення", "tokens": ["she", "often", "reads", "books"], "answer": "she often reads books" }
+    { "q": "Arrange the sentence", "tokens": ["she", "often", "reads", "books"], "answer": "she often reads books" }
   ]
 }
-ВИМОГИ:
-- ${itemsCount} пунктів.
-- "tokens" мають складати саме правильну відповідь.
-- Відповідь без крапки, якщо не потрібно.
+REQUIREMENTS:
+- ${itemsCount} items.
+- Provide tokens that form exactly the correct answer (lowercase, no period unless required by the topic).
+- Use sentences relevant to "${topic}".
       `.trim(),
       user: oneLineUser(topic, 'order', itemsCount),
     },
@@ -320,21 +323,21 @@ ${commonRules}
     short: {
       system: `
 ${commonRules}
-СХЕМА ВИХОДУ:
+OUTPUT SCHEMA:
 {
   "id": "short-${seedId}-1",
   "type": "short",
-  "prompt": "Короткі відповіді: ${topic}",
+  "prompt": "Write short answers about ${topic}.",
   "items": [
-    { "q": "Напиши 2–3 речення про свою щоденну рутину.", "keywords": ["i", "usually", "every"] }
+    { "q": "Write 2–3 sentences about your daily routine.", "keywords": ["i", "usually", "every"] }
   ]
 }
-ВИМОГИ:
+REQUIREMENTS:
 - ${Math.min(
         6,
         Math.max(3, Math.floor(itemsCount / 2))
-      )} пунктів (короткі письмові міні-завдання).
-- Ключові слова — підказка, а не жорстка вимога.
+      )} tasks that invite short written responses.
+- "keywords" act as guidance, not strict scoring rubrics, and must be lowercase English words.
       `.trim(),
       user: oneLineUser(topic, 'short', itemsCount),
     },
@@ -342,62 +345,269 @@ ${commonRules}
     writing: {
       system: `
 ${commonRules}
-СХЕМА ВИХОДУ:
+OUTPUT SCHEMA:
 {
   "id": "writing-${seedId}-1",
   "type": "writing",
-  "prompt": "Міні-письмо по темі ${topic}",
-  "description": "<1–2 речення з умовою>",
+  "prompt": "Short writing task about ${topic}.",
+  "description": "<1–2 sentences describing the assignment>",
   "checklist": [
-    "<критерій 1>",
-    "<критерій 2>",
-    "<критерій 3>"
+    "<criterion 1>",
+    "<criterion 2>",
+    "<criterion 3>"
   ]
 }
-ВИМОГИ:
-- Чітка інструкція в "description".
-- 4–6 пунктів у "checklist" з конкретними критеріями перевірки.
+REQUIREMENTS:
+- Provide a clear English description of the task.
+- Include 4–6 checklist items with concrete evaluation criteria.
       `.trim(),
       user: oneLineUser(topic, 'writing', itemsCount),
+    },
+    roleplay: {
+      system: `
+${commonRules}
+OUTPUT SCHEMA:
+{
+  "id": "roleplay-${seedId}-1",
+  "type": "roleplay",
+  "prompt": "<short instruction in English>",
+  "scenario": {
+    "setting": "<where the situation takes place>",
+    "summary": "<1–2 sentences describing the task>",
+    "roles": [
+      {
+        "name": "Student 1",
+        "goal": "<goal to achieve>",
+        "details": "<two facts or prompts>"
+      },
+      {
+        "name": "Student 2",
+        "goal": "<goal to achieve>",
+        "details": "<two facts or prompts>"
+      }
+    ],
+    "steps": [
+      "<step 1>",
+      "<step 2>",
+      "<step 3>",
+      "<step 4>"
+    ]
+  },
+  "phrases": [
+    { "phrase": "<useful English phrase>", "translation": "<short explanation or translation in English>" }
+  ]
+}
+REQUIREMENTS:
+- The situation must clearly connect to the topic "${topic}".
+- Exactly two roles: Student 1 and Student 2.
+- Provide 3–5 steps describing how the dialogue should develop.
+- Include ${Math.max(6, Math.min(10, itemsCount))} useful English phrases with brief English explanations or synonyms.
+- Do not add bullet symbols inside the strings.
+      `.trim(),
+      user: oneLineUser(topic, 'roleplay', itemsCount),
+    },
+    'dialogue-gap': {
+      system: `
+${commonRules}
+OUTPUT SCHEMA:
+{
+  "id": "dialogue-gap-${seedId}-1",
+  "type": "dialogue-gap",
+  "prompt": "Fill the blanks in the dialogue using the word bank.",
+  "words": ["<word1>", "<word2>", "<word3>"],
+  "dialogue": [
+    { "speaker": "Student 1", "line": "<Line with one or two ___ blanks>" }
+  ],
+  "answers": ["<correct word 1>", "<correct word 2>"]
+}
+REQUIREMENTS:
+- ${Math.max(4, Math.min(8, itemsCount))} turns in the dialogue.
+- Use exactly ${Math.max(4, Math.min(8, itemsCount))} blanks "___" across the dialogue.
+- "words" must include every required word once with no extra distractors.
+- "answers" list the correct words in the order the blanks appear (lowercase English).
+- Keep each line short (maximum 12 words) and on the topic "${topic}".
+- Do not add extra fields beyond the schema.
+      `.trim(),
+      user: oneLineUser(topic, 'dialogue-gap', itemsCount),
+    },
+    'dialogue-order': {
+      system: `
+${commonRules}
+OUTPUT SCHEMA:
+{
+  "id": "dialogue-order-${seedId}-1",
+  "type": "dialogue-order",
+  "prompt": "Arrange the dialogue lines in the correct order.",
+  "lines": [
+    { "speaker": "Student 1", "line": "<Line>" },
+    { "speaker": "Student 2", "line": "<Line>" }
+  ],
+  "solution": [1, 0]
+}
+REQUIREMENTS:
+- ${Math.max(4, Math.min(8, itemsCount))} total lines.
+- Each line must contain 6–12 words, sound natural, and stay on the topic "${topic}".
+- "solution" is an array of zero-based indices describing the correct order of the lines.
+- Do not add extra fields beyond the schema.
+      `.trim(),
+      user: oneLineUser(topic, 'dialogue-order', itemsCount),
+    },
+    truefalse: {
+      system: `
+${commonRules}
+OUTPUT SCHEMA:
+{
+  "id": "truefalse-${seedId}-1",
+  "type": "truefalse",
+  "prompt": "Decide if each statement is true or false.",
+  "items": [
+    { "statement": "<short statement>", "answer": true }
+  ]
+}
+REQUIREMENTS:
+- ${Math.max(6, Math.min(12, itemsCount))} statements.
+- "answer" must be strictly true or false.
+- Use simple A1–A2 level sentences in English related to "${topic}".
+      `.trim(),
+      user: oneLineUser(topic, 'truefalse', itemsCount),
+    },
+    'definition-match': {
+      system: `
+${commonRules}
+OUTPUT SCHEMA:
+{
+  "id": "definition-match-${seedId}-1",
+  "type": "definition-match",
+  "prompt": "Match the word with its definition.",
+  "pairs": [
+    { "left": "<word>", "right": "<short definition>" }
+  ]
+}
+REQUIREMENTS:
+- ${Math.max(6, Math.min(10, itemsCount))} pairs.
+- "left" must be a single lowercase word without articles.
+- "right" must be one sentence of up to 14 words.
+- Use vocabulary connected to the topic "${topic}".
+      `.trim(),
+      user: oneLineUser(topic, 'definition-match', itemsCount),
+    },
+    'synonym-clue': {
+      system: `
+${commonRules}
+OUTPUT SCHEMA:
+{
+  "id": "synonym-clue-${seedId}-1",
+  "type": "synonym-clue",
+  "prompt": "Choose the correct word based on the clue.",
+  "wordBank": ["<word1>", "<word2>", "<word3>"],
+  "items": [
+    { "clue": "<clue>", "answers": ["<correct word>"] }
+  ]
+}
+REQUIREMENTS:
+- ${Math.max(6, Math.min(10, itemsCount))} items.
+- Provide a word bank of 6–8 lowercase English words that includes all correct answers.
+- "answers" may contain 1–2 acceptable synonyms, all in lowercase English.
+- Write concise clues; omit the final period if the clue is a fragment.
+      `.trim(),
+      user: oneLineUser(topic, 'synonym-clue', itemsCount),
+    },
+    scramble: {
+      system: `
+${commonRules}
+OUTPUT SCHEMA:
+{
+  "id": "scramble-${seedId}-1",
+  "type": "scramble",
+  "prompt": "Unscramble the word.",
+  "items": [
+    { "scrambled": "<jumbled letters>", "answers": ["<correct word>"] }
+  ]
+}
+REQUIREMENTS:
+- ${Math.max(6, Math.min(10, itemsCount))} items.
+- "scrambled" must be a shuffled version of an English word from "${topic}".
+- "answers" may list 1–2 valid spellings in lowercase English.
+      `.trim(),
+      user: oneLineUser(topic, 'scramble', itemsCount),
+    },
+    wordpairs: {
+      system: `
+${commonRules}
+OUTPUT SCHEMA:
+{
+  "id": "wordpairs-${seedId}-1",
+  "type": "wordpairs",
+  "prompt": "Match the singular form to the plural form.",
+  "pairs": [
+    { "left": "<singular>", "right": "<plural>" }
+  ]
+}
+REQUIREMENTS:
+- ${Math.max(6, Math.min(10, itemsCount))} pairs.
+- Use accurate singular/plural pairs relevant to "${topic}".
+- Do not add extra keys beyond the schema.
+      `.trim(),
+      user: oneLineUser(topic, 'wordpairs', itemsCount),
+    },
+    'odd-one-out': {
+      system: `
+${commonRules}
+OUTPUT SCHEMA:
+{
+  "id": "odd-one-out-${seedId}-1",
+  "type": "odd-one-out",
+  "prompt": "Find the odd one out.",
+  "items": [
+    { "options": ["<word1>", "<word2>", "<word3>", "<word4>"], "answer": "2", "explanation": "<reason>" }
+  ]
+}
+REQUIREMENTS:
+- ${Math.max(6, Math.min(10, itemsCount))} items.
+- Provide exactly 4 options per item.
+- "answer" must be the index of the odd item as a string ("0"–"3").
+- Include a brief English explanation (up to 10 words) for why the option is odd.
+- Only one option may be different; the rest must relate to "${topic}".
+      `.trim(),
+      user: oneLineUser(topic, 'odd-one-out', itemsCount),
     },
     context: {
       system: `
 ${commonRules}
-СХЕМА ВИХОДУ:
+OUTPUT SCHEMA:
 {
   "id": "context-${seedId}-1",
   "type": "context",
-  "prompt": "<інструкція англійською>",
+  "prompt": "<instruction in English>",
   "context": {
-    "title": "<2–4 слова>",
+    "title": "<2–4 words>",
     "format": "dialog" | "narrative",
     "body": []
   },
   "questions": [
     {
-      "q": "<питання>",
-      "choices": ["<варіант0>", "<варіант1>", "<варіант2>"],
-      "answer": ["<index_правильної_відповіді_рядком>"]
+      "q": "<question>",
+      "choices": ["<option0>", "<option1>", "<option2>"],
+      "answer": ["<index_of_correct_choice_as_string>"]
     },
     ...
   ]
 }
 
-ВИМОГИ:
-- ${itemsCount} питань для тексту.
-- Текст максимум 200 слів, простими фразами рівня A1.
-- Якщо format = "dialog" — масив об'єктів {"speaker": "...", "line": "..."}.
-- Якщо format = "narrative" — масив рядків, кожен рядок = короткий абзац.
-- Питання перевіряють розуміння тексту.
-- У choices завжди 3 варіанти, лише один правильний.
-- Правильна відповідь — індекс рядком ("0" | "1" | "2").
-- ЖОДНОГО додаткового тексту поза JSON.
+REQUIREMENTS:
+- Provide ${itemsCount} comprehension questions for the passage.
+- Keep the text within 200 words using simple A1 English connected to "${topic}".
+- If "format" is "dialog", use objects {"speaker": "...", "line": "..."}.
+- If "format" is "narrative", use an array of short paragraph strings.
+- Each question must offer exactly 3 choices and a single correct answer.
+- Return the index of the correct choice as a string ("0" | "1" | "2").
+- Output only JSON, no extra commentary.
 
-ПРИКЛАД (АНАЛОГІЧНИЙ; НЕ КОПІЮВАТИ ЗМІСТ):
+EXAMPLE (FORMAT ONLY; DO NOT COPY CONTENT):
 {
   "id": "context-ps-1",
   "type": "context",
-  "prompt": "Прочитайте діалог та оберіть правильну відповідь.",
+  "prompt": "Read the dialogue and choose the correct answer.",
   "context": {
     "title": "Morning Chat",
     "format": "dialog",
@@ -438,11 +648,20 @@ const defaultItemsByType = {
   order: 10,
   short: 3,
   writing: 1,
+  roleplay: 8,
+  'dialogue-gap': 6,
+  'dialogue-order': 6,
+  truefalse: 8,
+  'definition-match': 8,
+  'synonym-clue': 8,
+  scramble: 8,
+  wordpairs: 8,
+  'odd-one-out': 8,
   context: 4,
 };
 
 function oneLineUser(topic, type, itemsCount) {
-  return `Тема: ${topic}\nЗгенеруй блок типу "${type}" з кількістю пунктів: ${itemsCount}. Поверни строго JSON за описаною схемою.`;
+  return `Topic: ${topic}\nGenerate a task block of type "${type}" with ${itemsCount} items. Return JSON only that follows the described schema.`;
 }
 
 function shortSeed(s) {
@@ -453,4 +672,30 @@ function shortSeed(s) {
       .replace(/^-+|-+$/g, '')
       .slice(0, 6) || 'task'
   );
+}
+
+function appendVocabularyToPrompt(userContent, vocabulary) {
+  const trimmed = String(userContent || '').trim();
+  const formattedList = formatVocabularyList(vocabulary);
+  if (!formattedList) return trimmed || userContent || '';
+  const base = trimmed || 'Generate the task block.';
+  return `${base}\n\nFocus on these vocabulary items:\n${formattedList}`;
+}
+
+function formatVocabularyList(list) {
+  if (!Array.isArray(list) || !list.length) return '';
+  const lines = list
+    .map((entry, index) => {
+      if (!entry) return '';
+      const word = entry.word || entry.term || entry.phrase || entry.text || `Item ${index + 1}`;
+      const translation = entry.translation || entry.meaning || entry.ua || entry.uk || '';
+      const example = entry.example || entry.sentence || entry.usage || entry.sample || '';
+      let line = `${index + 1}. ${word}`;
+      if (translation) line += ` — ${translation}`;
+      if (example) line += ` (Example: ${example})`;
+      return line;
+    })
+    .filter(Boolean);
+  if (!lines.length) return '';
+  return lines.join('\n');
 }

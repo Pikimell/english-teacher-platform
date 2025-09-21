@@ -92,11 +92,19 @@ function attachToolbar(topic = 'Present Simple') {
     btn.textContent = 'Генерую...';
     status.textContent = '';
     try {
-      const task = await generateTask(topic, type, {
-        items: count,
-        language: 'uk',
-        seedId: 'ps',
-      });
+      const vocabulary = Array.isArray(window.communicationCurrentWords)
+        ? window.communicationCurrentWords
+        : undefined;
+      const task = await generateTask(
+        topic,
+        type,
+        {
+          items: count,
+          language: 'en',
+          seedId: 'ps',
+        },
+        vocabulary,
+      );
       if (!task || !task.type) throw new Error('Невірний формат відповіді');
       if (window.practice && typeof window.practice.appendTask === 'function') {
         window.practice.appendTask(task);

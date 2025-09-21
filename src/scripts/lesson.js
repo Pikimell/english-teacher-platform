@@ -1,5 +1,12 @@
 import { lessons, lessonCategories } from '../data/lessons.js';
 
+const communicationWordLoaders = {
+  body: () => import('../public/scripts/communication/words/body.js'),
+  'small-talk': () => import('../public/scripts/communication/words/smallTalk.js'),
+  'problem-solving': () => import('../public/scripts/communication/words/problemSolving.js'),
+  feedback: () => import('../public/scripts/communication/words/feedback.js'),
+};
+
 const basePath = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) || '/';
 
 function resolveAssetPath(path) {
@@ -77,11 +84,84 @@ async function loadLesson() {
     }
     const markup = await response.text();
     contentElement.innerHTML = markup;
+    await hydrateCommunicationWords(contentElement);
   } catch (error) {
     if (statusElement) {
       statusElement.textContent = 'Сталася помилка під час завантаження матеріалу. Спробуйте пізніше або поверніться до каталогу.';
     }
     console.error(error);
+  }
+}
+
+function renderCommunicationTable(container, entries) {
+  if (!container) return;
+  const words = Array.isArray(entries) ? entries : [];
+  if (!words.length) return;
+
+  container.classList.add('communication__table');
+
+  const table = document.createElement('table');
+
+  const thead = document.createElement('thead');
+  const headRow = document.createElement('tr');
+  ['Слово', 'Переклад', 'Приклад'].forEach((label) => {
+    const th = document.createElement('th');
+    th.textContent = label;
+    headRow.appendChild(th);
+  });
+  thead.appendChild(headRow);
+
+  const tbody = document.createElement('tbody');
+  words.forEach((item) => {
+    if (!item) return;
+    const row = document.createElement('tr');
+
+    const wordCell = document.createElement('td');
+    wordCell.textContent = item.word || item.term || '';
+
+    const translationCell = document.createElement('td');
+    translationCell.textContent = item.translation || item.meaning || '';
+
+    const exampleCell = document.createElement('td');
+    exampleCell.textContent = item.example || item.sentence || '';
+
+    row.appendChild(wordCell);
+    row.appendChild(translationCell);
+    row.appendChild(exampleCell);
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(thead);
+  table.appendChild(tbody);
+
+  container.innerHTML = '';
+  container.appendChild(table);
+}
+
+async function hydrateCommunicationWords(root) {
+  if (!root) return;
+  const placeholders = root.querySelectorAll('[data-communication-words]');
+  if (!placeholders.length) return;
+
+  window.communicationVocabularyMap = window.communicationVocabularyMap || {};
+
+  for (const placeholder of placeholders) {
+    const moduleName = placeholder.getAttribute('data-module');
+    if (!moduleName) continue;
+    const loader = communicationWordLoaders[moduleName];
+    if (typeof loader !== 'function') continue;
+    try {
+      const module = await loader();
+      const words = module?.default || module?.words || [];
+      if (!Array.isArray(words) || !words.length) continue;
+
+      window.communicationVocabularyMap[moduleName] = words;
+      window.communicationCurrentWords = words;
+
+      renderCommunicationTable(placeholder, words);
+    } catch (error) {
+      console.error(`Не вдалося завантажити слова для модуля "${moduleName}"`, error);
+    }
   }
 }
 

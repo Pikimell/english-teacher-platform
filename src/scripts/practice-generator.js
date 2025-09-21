@@ -260,13 +260,24 @@ async function handleSubmit(event) {
     submitButton.textContent = 'Генерація…';
   }
 
+  const shouldAttachVocabulary =
+    String(defaultContext.category || '').toLowerCase() === 'communication' &&
+    Array.isArray(window.communicationCurrentWords) &&
+    window.communicationCurrentWords.length;
+  const vocabulary = shouldAttachVocabulary ? window.communicationCurrentWords : undefined;
+
   try {
     const generationPromises = selectedTypes.map(type =>
-      generateTask(topic, type, {
-        items: count,
-        language: 'uk',
-        seedId: `${seedBase}-${type}`,
-      }).then(task => ({ type, task }))
+      generateTask(
+        topic,
+        type,
+        {
+          items: count,
+          language: 'en',
+          seedId: `${seedBase}-${type}`,
+        },
+        vocabulary,
+      ).then(task => ({ type, task }))
     );
 
     const settled = await Promise.allSettled(generationPromises);
