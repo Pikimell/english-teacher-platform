@@ -5,41 +5,56 @@
     {
       "id": "mcq-body-com-mcq-1",
       "type": "mcq",
-      "prompt": "Обери правильний варіант.",
+      "prompt": "Choose the correct option.",
       "items": [
         {
-          "q": "I use my ___ to see.",
-          "choices": ["hands", "eyes", "feet"],
-          "answer": ["1"]
-        },
-        {
-          "q": "She listens with her ___.",
-          "choices": ["mouth", "ears", "nose"],
-          "answer": ["1"]
-        },
-        {
-          "q": "He walks on his ___.",
-          "choices": ["hands", "legs", "arms"],
-          "answer": ["1"]
-        },
-        {
-          "q": "They wave with their ___.",
-          "choices": ["head", "arms", "eyes"],
-          "answer": ["1"]
-        },
-        {
-          "q": "We touch with our ___.",
-          "choices": ["feet", "hands", "back"],
-          "answer": ["1"]
-        },
-        {
-          "q": "I smell with my ___.",
-          "choices": ["nose", "mouth", "ears"],
+          "q": "My ___ hurts.",
+          "choices": ["head", "hand", "foot"],
           "answer": ["0"]
         },
         {
-          "q": "She shows her feelings with her ___.",
-          "choices": ["face", "legs", "hands"],
+          "q": "Wash your ___ every morning.",
+          "choices": ["face", "arm", "leg"],
+          "answer": ["0"]
+        },
+        {
+          "q": "She has long ___.",
+          "choices": ["hair", "nose", "ear"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Close your ___ for a moment.",
+          "choices": ["eyes", "mouth", "toes"],
+          "answer": ["0"]
+        },
+        {
+          "q": "My left ___ is cold.",
+          "choices": ["ear", "neck", "shoulder"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Touch your ___.",
+          "choices": ["nose", "back", "finger"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Open your ___, please.",
+          "choices": ["mouth", "stomach", "knee"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Brush your ___ twice a day.",
+          "choices": ["teeth", "toes", "hands"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Move your ___ slowly.",
+          "choices": ["neck", "leg", "face"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Relax your ___.",
+          "choices": ["shoulders", "eyes", "stomach"],
           "answer": ["0"]
         }
       ]
@@ -47,178 +62,357 @@
     {
       "id": "gap-body-com-gap-1",
       "type": "gap",
-      "prompt": "Заповніть пропуски правильними формами слів.",
+      "prompt": "Fill the gaps with the correct word.",
       "items": [
         {
-          "q": "I ___ (smile) when I am happy.",
-          "answer": ["smile"]
+          "q": "<My ___ (head) hurts.>",
+          "answer": ["head"]
         },
         {
-          "q": "She ___ (nod) her head to say yes.",
-          "answer": ["nod"]
+          "q": "<Wash your ___ (face) every morning.>",
+          "answer": ["face"]
         },
         {
-          "q": "They ___ (shake) hands to greet.",
-          "answer": ["shake"]
+          "q": "<She has long ___. (hair)>",
+          "answer": ["hair"]
         },
         {
-          "q": "He ___ (point) at the door.",
-          "answer": ["points"]
+          "q": "<Close your ___ (eye) for a moment.>",
+          "answer": ["eyes"]
         },
         {
-          "q": "We ___ (clap) our hands for the performance.",
-          "answer": ["clap"]
+          "q": "<My left ___ (ear) is cold.>",
+          "answer": ["ear"]
         },
         {
-          "q": "You ___ (wave) goodbye.",
-          "answer": ["wave"]
+          "q": "<Touch your ___. (nose)>",
+          "answer": ["nose"]
         },
         {
-          "q": "The baby ___ (crawl) on the floor.",
-          "answer": ["crawls"]
+          "q": "<Open your ___ (mouth), please.>",
+          "answer": ["mouth"]
+        },
+        {
+          "q": "Brush your ___ (tooth) twice a day.",
+          "answer": ["teeth"]
+        },
+        {
+          "q": "<Move your ___ (neck) slowly.>",
+          "answer": ["neck"]
+        },
+        {
+          "q": "Relax your ___. (shoulder)",
+          "answer": ["shoulders"]
         }
       ]
     },
     {
       "id": "transform-body-com-transform-1",
       "type": "transform",
-      "prompt": "Перетвори на заперечення (Present Simple, без крапки)",
+      "prompt": "Rewrite each sentence in the negative form (no final period)",
       "items": [
         {
-          "q": "He smiles.",
-          "hint": "використай doesn't; без крапки",
-          "answer": ["he doesn't smile", "he does not smile"]
+          "q": "My head hurts.",
+          "hint": "use doesn't + base verb; no period",
+          "answer": ["my head doesn't hurt", "my head does not hurt"]
         },
         {
-          "q": "They walk fast.",
-          "hint": "використай don't; без крапки",
-          "answer": ["they don't walk fast", "they do not walk fast"]
+          "q": "Wash your face every morning.",
+          "hint": "use doesn't + base verb; no period",
+          "answer": [
+            "you don't wash your face every morning",
+            "you do not wash your face every morning"
+          ]
         },
         {
-          "q": "She dances well.",
-          "hint": "використай doesn't; без крапки",
-          "answer": ["she doesn't dance well", "she does not dance well"]
+          "q": "She has long hair.",
+          "hint": "use doesn't + base verb; no period",
+          "answer": [
+            "she doesn't have long hair",
+            "she does not have long hair"
+          ]
         },
         {
-          "q": "I run every day.",
-          "hint": "використай don't; без крапки",
-          "answer": ["I don't run every day", "I do not run every day"]
+          "q": "Close your eyes for a moment.",
+          "hint": "use doesn't + base verb; no period",
+          "answer": [
+            "you don't close your eyes for a moment",
+            "you do not close your eyes for a moment"
+          ]
         },
         {
-          "q": "We jump high.",
-          "hint": "використай don't; без крапки",
-          "answer": ["we don't jump high", "we do not jump high"]
+          "q": "My left ear is cold.",
+          "hint": "use doesn't + base verb; no period",
+          "answer": ["my left ear isn't cold", "my left ear is not cold"]
         },
         {
-          "q": "You listen to music.",
-          "hint": "використай don't; без крапки",
-          "answer": ["you don't listen to music", "you do not listen to music"]
+          "q": "Touch your nose.",
+          "hint": "use doesn't + base verb; no period",
+          "answer": ["you don't touch your nose", "you do not touch your nose"]
         },
         {
-          "q": "The dog barks.",
-          "hint": "використай doesn't; без крапки",
-          "answer": ["the dog doesn't bark", "the dog does not bark"]
+          "q": "Open your mouth, please.",
+          "hint": "use doesn't + base verb; no period",
+          "answer": ["you don't open your mouth", "you do not open your mouth"]
+        },
+        {
+          "q": "Brush your teeth twice a day.",
+          "hint": "use doesn't + base verb; no period",
+          "answer": [
+            "you don't brush your teeth twice a day",
+            "you do not brush your teeth twice a day"
+          ]
+        },
+        {
+          "q": "Move your neck slowly.",
+          "hint": "use doesn't + base verb; no period",
+          "answer": [
+            "you don't move your neck slowly",
+            "you do not move your neck slowly"
+          ]
+        },
+        {
+          "q": "Relax your shoulders.",
+          "hint": "use doesn't + base verb; no period",
+          "answer": [
+            "you don't relax your shoulders",
+            "you do not relax your shoulders"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "match-body-com-match-1",
+      "type": "match",
+      "prompt": "Match the body part with its example sentence.",
+      "pairs": [
+        {
+          "left": "head",
+          "right": "My head hurts."
+        },
+        {
+          "left": "face",
+          "right": "Wash your face every morning."
+        },
+        {
+          "left": "hair",
+          "right": "She has long hair."
+        },
+        {
+          "left": "eye",
+          "right": "Close your eyes for a moment."
+        },
+        {
+          "left": "ear",
+          "right": "My left ear is cold."
+        },
+        {
+          "left": "nose",
+          "right": "Touch your nose."
+        },
+        {
+          "left": "mouth",
+          "right": "Open your mouth, please."
+        },
+        {
+          "left": "tooth",
+          "right": "Brush your teeth twice a day."
+        },
+        {
+          "left": "neck",
+          "right": "Move your neck slowly."
+        },
+        {
+          "left": "shoulder",
+          "right": "Relax your shoulders."
+        }
+      ]
+    },
+    {
+      "id": "context-body-com-context-1",
+      "type": "context",
+      "prompt": "Read the text and answer the questions.",
+      "context": {
+        "title": "Body Parts",
+        "format": "narrative",
+        "body": [
+          "The head is very important. It holds the brain. My head hurts sometimes.",
+          "The face shows our feelings. We can smile or frown. Wash your face every morning.",
+          "Hair is on our head. She has long hair and it is beautiful.",
+          "Eyes help us see. Close your eyes for a moment to relax.",
+          "Ears help us hear sounds. My left ear is cold today.",
+          "The nose helps us smell. Touch your nose with your finger.",
+          "The mouth is for talking and eating. Open your mouth, please.",
+          "Teeth are in the mouth. Brush your teeth twice a day for health.",
+          "The neck connects the head to the body. Move your neck slowly.",
+          "Shoulders are above the arms. Relax your shoulders after a long day."
+        ]
+      },
+      "questions": [
+        {
+          "q": "What does the head hold?",
+          "choices": ["Eyes", "Brain", "Mouth"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What do we do with our face?",
+          "choices": ["Wash it", "Kick it", "Hide it"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What is on our head?",
+          "choices": ["Hair", "Foot", "Knee"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What do eyes help us do?",
+          "choices": ["Hear", "See", "Smell"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What helps us hear?",
+          "choices": ["Nose", "Ears", "Mouth"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What do we touch with our finger?",
+          "choices": ["Nose", "Leg", "Back"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What do we brush for health?",
+          "choices": ["Teeth", "Hair", "Nose"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What connects the head to the body?",
+          "choices": ["Neck", "Arm", "Shoulder"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What do we relax after a long day?",
+          "choices": ["Shoulders", "Toes", "Fingers"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What part is above the arms?",
+          "choices": ["Neck", "Shoulders", "Legs"],
+          "answer": ["1"]
         }
       ]
     },
     {
       "id": "error-body-com-error-1",
       "type": "error",
-      "prompt": "Знайди й виправ помилку (Present Simple, без крапки)",
+      "prompt": "Find and correct the mistake (Present Simple, no final period)",
       "items": [
         {
-          "q": "He don't have a big hand.",
-          "hint": "doesn't + V",
-          "answer": [
-            "he doesn't have a big hand",
-            "he does not have a big hand"
-          ]
+          "q": "My head hurt.",
+          "hint": "use hurts + subject",
+          "answer": ["my head hurts"]
         },
         {
-          "q": "They is happy with their legs.",
-          "hint": "are + adjective",
-          "answer": ["they are happy with their legs"]
+          "q": "She wash her face every morning.",
+          "hint": "use washes + subject",
+          "answer": ["she washes her face every morning"]
         },
         {
-          "q": "I doesn't like my feet.",
-          "hint": "don't + V",
-          "answer": ["I don't like my feet", "I do not like my feet"]
+          "q": "He have long hair.",
+          "hint": "use has + subject",
+          "answer": ["he has long hair"]
         },
         {
-          "q": "She like to smile with her mouth.",
-          "hint": "likes + V",
-          "answer": ["she likes to smile with her mouth"]
+          "q": "They closes their eyes for a moment.",
+          "hint": "use close + subject",
+          "answer": ["they close their eyes for a moment"]
         },
         {
-          "q": "We doesn't see our eyes.",
-          "hint": "don't + V",
-          "answer": ["we don't see our eyes", "we do not see our eyes"]
+          "q": "My ear are cold.",
+          "hint": "use is + subject",
+          "answer": ["my ear is cold"]
         },
         {
-          "q": "You is tall and strong.",
-          "hint": "are + adjective",
-          "answer": ["you are tall and strong"]
+          "q": "Touch your noses.",
+          "hint": "use nose in singular",
+          "answer": ["touch your nose"]
         },
         {
-          "q": "He don't use his arms.",
-          "hint": "doesn't + V",
-          "answer": ["he doesn't use his arms", "he does not use his arms"]
+          "q": "Open your mouths, please.",
+          "hint": "use mouth in singular",
+          "answer": ["open your mouth, please"]
+        },
+        {
+          "q": "He brush his teeth twice a day.",
+          "hint": "use brushes + subject",
+          "answer": ["he brushes his teeth twice a day"]
+        },
+        {
+          "q": "She move her neck slowly.",
+          "hint": "use moves + subject",
+          "answer": ["she moves her neck slowly"]
+        },
+        {
+          "q": "Relax your shoulder.",
+          "hint": "use shoulders in plural",
+          "answer": ["relax your shoulders"]
         }
       ]
     },
     {
       "id": "order-body-com-order-1",
       "type": "order",
-      "prompt": "Постав слова в правильному порядку",
+      "prompt": "Put the words in the correct order.",
       "items": [
         {
-          "q": "Впорядкуй речення",
-          "tokens": ["I", "smile", "with", "my", "face"],
-          "answer": "I smile with my face"
+          "q": "Arrange the sentence",
+          "tokens": ["my", "head", "hurts"],
+          "answer": "my head hurts"
         },
         {
-          "q": "Впорядкуй речення",
-          "tokens": ["he", "waves", "with", "his", "hand"],
-          "answer": "he waves with his hand"
+          "q": "Arrange the sentence",
+          "tokens": ["wash", "your", "face", "every", "morning"],
+          "answer": "wash your face every morning"
         },
         {
-          "q": "Впорядкуй речення",
-          "tokens": ["they", "nod", "with", "their", "heads"],
-          "answer": "they nod with their heads"
+          "q": "Arrange the sentence",
+          "tokens": ["she", "has", "long", "hair"],
+          "answer": "she has long hair"
         },
         {
-          "q": "Впорядкуй речення",
-          "tokens": ["she", "claps", "with", "her", "hands"],
-          "answer": "she claps with her hands"
+          "q": "Arrange the sentence",
+          "tokens": ["close", "your", "eyes", "for", "a", "moment"],
+          "answer": "close your eyes for a moment"
         },
         {
-          "q": "Впорядкуй речення",
-          "tokens": ["we", "jump", "with", "our", "legs"],
-          "answer": "we jump with our legs"
+          "q": "Arrange the sentence",
+          "tokens": ["my", "left", "ear", "is", "cold"],
+          "answer": "my left ear is cold"
         },
         {
-          "q": "Впорядкуй речення",
-          "tokens": ["he", "points", "with", "his", "finger"],
-          "answer": "he points with his finger"
+          "q": "Arrange the sentence",
+          "tokens": ["touch", "your", "nose"],
+          "answer": "touch your nose"
         },
         {
-          "q": "Впорядкуй речення",
-          "tokens": ["I", "sit", "with", "my", "back"],
-          "answer": "I sit with my back"
+          "q": "Arrange the sentence",
+          "tokens": ["open", "your", "mouth", "please"],
+          "answer": "open your mouth please"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["brush", "your", "teeth", "twice", "a", "day"],
+          "answer": "brush your teeth twice a day"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["move", "your", "neck", "slowly"],
+          "answer": "move your neck slowly"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["relax", "your", "shoulders"],
+          "answer": "relax your shoulders"
         }
-      ]
-    },
-    {
-      "id": "writing-body-com-writing-1",
-      "type": "writing",
-      "prompt": "Short writing task about Body Communication Essentials.",
-      "description": "Write 5 sentences using the vocabulary about body parts. Use each word at least once.",
-      "checklist": [
-        "Use at least 5 different body parts in your sentences.",
-        "Each sentence should be clear and correct.",
-        "Use simple vocabulary and grammar.",
-        "Make sure to write complete sentences.",
-        "Check for spelling and punctuation."
       ]
     },
     {
@@ -238,35 +432,35 @@
       "dialogue": [
         {
           "speaker": "Student 1",
-          "line": "I have a pain in my ___. "
+          "line": "I have a bad headache. My ___ hurts."
         },
         {
           "speaker": "Student 2",
-          "line": "Oh no! Is it your ___?"
+          "line": "Do you also have pain in your ___? You use it for listening."
         },
         {
           "speaker": "Student 1",
-          "line": "No, it's my ___."
+          "line": "No, my ear is fine. But my ___ is very stiff. I cannot turn it."
         },
         {
           "speaker": "Student 2",
-          "line": "Can you see with your ___?"
+          "line": "Can you see well with your ___?"
         },
         {
           "speaker": "Student 1",
-          "line": "Yes, my ___ is fine."
+          "line": "Yes, my ___ looks okay in the mirror."
         },
         {
           "speaker": "Student 2",
-          "line": "What about your ___?"
+          "line": "And your ___? Is it blocked when you breathe?"
         },
         {
           "speaker": "Student 1",
-          "line": "My ___ hurts when I move."
+          "line": "No, my nose is fine. But my ___ hurts when I carry my school bag."
         },
         {
           "speaker": "Student 2",
-          "line": "You should relax your ___."
+          "line": "You should put your bag down and relax your ___."
         }
       ],
       "answers": [
@@ -277,7 +471,7 @@
         "face",
         "nose",
         "shoulder",
-        "neck"
+        "shoulder"
       ]
     },
     {
