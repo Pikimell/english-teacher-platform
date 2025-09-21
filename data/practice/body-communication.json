@@ -8,52 +8,52 @@
       "prompt": "Choose the correct option.",
       "items": [
         {
-          "q": "My ___ hurts.",
+          "q": "I have a hat on my ___.",
           "choices": ["head", "hand", "foot"],
           "answer": ["0"]
         },
         {
-          "q": "Wash your ___ every morning.",
+          "q": "Before school, wash your ___.",
           "choices": ["face", "arm", "leg"],
           "answer": ["0"]
         },
         {
-          "q": "She has long ___.",
+          "q": "She brushes her ___ every day.",
           "choices": ["hair", "nose", "ear"],
           "answer": ["0"]
         },
         {
-          "q": "Close your ___ for a moment.",
+          "q": "Cover your ___ in the sun.",
           "choices": ["eyes", "mouth", "toes"],
           "answer": ["0"]
         },
         {
-          "q": "My left ___ is cold.",
+          "q": "My right ___ hurts after the cold wind.",
           "choices": ["ear", "neck", "shoulder"],
           "answer": ["0"]
         },
         {
-          "q": "Touch your ___.",
+          "q": "Please wipe your ___ after you sneeze.",
           "choices": ["nose", "back", "finger"],
           "answer": ["0"]
         },
         {
-          "q": "Open your ___, please.",
+          "q": "Do not talk with your ___ full.",
           "choices": ["mouth", "stomach", "knee"],
           "answer": ["0"]
         },
         {
-          "q": "Brush your ___ twice a day.",
+          "q": "The dentist checks your ___.",
           "choices": ["teeth", "toes", "hands"],
           "answer": ["0"]
         },
         {
-          "q": "Move your ___ slowly.",
+          "q": "Turn your ___ slowly left and right.",
           "choices": ["neck", "leg", "face"],
           "answer": ["0"]
         },
         {
-          "q": "Relax your ___.",
+          "q": "Roll your ___ back and down.",
           "choices": ["shoulders", "eyes", "stomach"],
           "answer": ["0"]
         }
@@ -65,43 +65,43 @@
       "prompt": "Fill the gaps with the correct word.",
       "items": [
         {
-          "q": "<My ___ (head) hurts.>",
+          "q": "I wear a helmet on my ___ (head).",
           "answer": ["head"]
         },
         {
-          "q": "<Wash your ___ (face) every morning.>",
+          "q": "Smile with your ___ (face) for the photo.",
           "answer": ["face"]
         },
         {
-          "q": "<She has long ___. (hair)>",
+          "q": "Her ___ (hair) is short this year.",
           "answer": ["hair"]
         },
         {
-          "q": "<Close your ___ (eye) for a moment.>",
+          "q": "Open your ___ (eye) to read the sign.",
           "answer": ["eyes"]
         },
         {
-          "q": "<My left ___ (ear) is cold.>",
+          "q": "My right ___ (ear) is fine.",
           "answer": ["ear"]
         },
         {
-          "q": "<Touch your ___. (nose)>",
+          "q": "Pinch your ___ (nose) for one second.",
           "answer": ["nose"]
         },
         {
-          "q": "<Open your ___ (mouth), please.>",
+          "q": "Close your ___ (mouth) when you chew.",
           "answer": ["mouth"]
         },
         {
-          "q": "Brush your ___ (tooth) twice a day.",
+          "q": "He brushes his ___ (tooth) after meals.",
           "answer": ["teeth"]
         },
         {
-          "q": "<Move your ___ (neck) slowly.>",
+          "q": "Stretch your ___ (neck) after work.",
           "answer": ["neck"]
         },
         {
-          "q": "Relax your ___. (shoulder)",
+          "q": "Lift your ___ (shoulder) gently.",
           "answer": ["shoulders"]
         }
       ]
@@ -112,71 +112,77 @@
       "prompt": "Rewrite each sentence in the negative form (no final period)",
       "items": [
         {
-          "q": "My head hurts.",
+          "q": "My head feels hot.",
           "hint": "use doesn't + base verb; no period",
-          "answer": ["my head doesn't hurt", "my head does not hurt"]
+          "answer": ["my head doesn't feel hot", "my head does not feel hot"]
         },
         {
-          "q": "Wash your face every morning.",
+          "q": "She washes her face at night.",
           "hint": "use doesn't + base verb; no period",
           "answer": [
-            "you don't wash your face every morning",
-            "you do not wash your face every morning"
+            "she doesn't wash her face at night",
+            "she does not wash her face at night"
           ]
         },
         {
-          "q": "She has long hair.",
-          "hint": "use doesn't + base verb; no period",
+          "q": "He has short hair.",
+          "hint": "use doesn't + have; no period",
           "answer": [
-            "she doesn't have long hair",
-            "she does not have long hair"
+            "he doesn't have short hair",
+            "he does not have short hair"
           ]
         },
         {
-          "q": "Close your eyes for a moment.",
-          "hint": "use doesn't + base verb; no period",
+          "q": "We close our eyes during the game.",
+          "hint": "use don't + base verb; no period",
           "answer": [
-            "you don't close your eyes for a moment",
-            "you do not close your eyes for a moment"
+            "we don't close our eyes during the game",
+            "we do not close our eyes during the game"
           ]
         },
         {
-          "q": "My left ear is cold.",
-          "hint": "use doesn't + base verb; no period",
-          "answer": ["my left ear isn't cold", "my left ear is not cold"]
+          "q": "My ear is painful.",
+          "hint": "use isn't / is not; no period",
+          "answer": ["my ear isn't painful", "my ear is not painful"]
         },
         {
-          "q": "Touch your nose.",
-          "hint": "use doesn't + base verb; no period",
-          "answer": ["you don't touch your nose", "you do not touch your nose"]
-        },
-        {
-          "q": "Open your mouth, please.",
-          "hint": "use doesn't + base verb; no period",
-          "answer": ["you don't open your mouth", "you do not open your mouth"]
-        },
-        {
-          "q": "Brush your teeth twice a day.",
-          "hint": "use doesn't + base verb; no period",
+          "q": "Touch your nose in class.",
+          "hint": "use don't + base verb; no period",
           "answer": [
-            "you don't brush your teeth twice a day",
-            "you do not brush your teeth twice a day"
+            "you don't touch your nose in class",
+            "you do not touch your nose in class"
           ]
         },
         {
-          "q": "Move your neck slowly.",
-          "hint": "use doesn't + base verb; no period",
+          "q": "Open your mouth wide.",
+          "hint": "use don't + base verb; no period",
           "answer": [
-            "you don't move your neck slowly",
-            "you do not move your neck slowly"
+            "you don't open your mouth wide",
+            "you do not open your mouth wide"
           ]
         },
         {
-          "q": "Relax your shoulders.",
+          "q": "He brushes his teeth after lunch.",
           "hint": "use doesn't + base verb; no period",
           "answer": [
-            "you don't relax your shoulders",
-            "you do not relax your shoulders"
+            "he doesn't brush his teeth after lunch",
+            "he does not brush his teeth after lunch"
+          ]
+        },
+        {
+          "q": "She moves her neck quickly.",
+          "hint": "use doesn't + base verb; no period",
+          "answer": [
+            "she doesn't move her neck quickly",
+            "she does not move her neck quickly"
+          ]
+        },
+        {
+          "q": "Relax your shoulders now.",
+          "hint": "use don't + base verb; no period",
+          "answer": [
+            "you don't relax your shoulders now",
+            "you do not relax your shoulders now"
           ]
         }
       ]
@@ -186,46 +192,16 @@
       "type": "match",
       "prompt": "Match the body part with its example sentence.",
       "pairs": [
-        {
-          "left": "head",
-          "right": "My head hurts."
-        },
-        {
-          "left": "face",
-          "right": "Wash your face every morning."
-        },
-        {
-          "left": "hair",
-          "right": "She has long hair."
-        },
-        {
-          "left": "eye",
-          "right": "Close your eyes for a moment."
-        },
-        {
-          "left": "ear",
-          "right": "My left ear is cold."
-        },
-        {
-          "left": "nose",
-          "right": "Touch your nose."
-        },
-        {
-          "left": "mouth",
-          "right": "Open your mouth, please."
-        },
-        {
-          "left": "tooth",
-          "right": "Brush your teeth twice a day."
-        },
-        {
-          "left": "neck",
-          "right": "Move your neck slowly."
-        },
-        {
-          "left": "shoulder",
-          "right": "Relax your shoulders."
-        }
+        { "left": "head", "right": "I wear a hat on my head." },
+        { "left": "face", "right": "Smile with your face for the photo." },
+        { "left": "hair", "right": "She brushes her hair every day." },
+        { "left": "eye", "right": "Cover your eyes in the sun." },
+        { "left": "ear", "right": "My right ear hurts after the cold wind." },
+        { "left": "nose", "right": "Please wipe your nose after you sneeze." },
+        { "left": "mouth", "right": "Do not talk with your mouth full." },
+        { "left": "tooth", "right": "The dentist checks your teeth." },
+        { "left": "neck", "right": "Turn your neck slowly left and right." },
+        { "left": "shoulder", "right": "Roll your shoulders back and down." }
       ]
     },
     {
@@ -233,71 +209,71 @@
       "type": "context",
       "prompt": "Read the text and answer the questions.",
       "context": {
-        "title": "Body Parts",
+        "title": "At the Clinic",
         "format": "narrative",
         "body": [
-          "The head is very important. It holds the brain. My head hurts sometimes.",
-          "The face shows our feelings. We can smile or frown. Wash your face every morning.",
-          "Hair is on our head. She has long hair and it is beautiful.",
-          "Eyes help us see. Close your eyes for a moment to relax.",
-          "Ears help us hear sounds. My left ear is cold today.",
-          "The nose helps us smell. Touch your nose with your finger.",
-          "The mouth is for talking and eating. Open your mouth, please.",
-          "Teeth are in the mouth. Brush your teeth twice a day for health.",
-          "The neck connects the head to the body. Move your neck slowly.",
-          "Shoulders are above the arms. Relax your shoulders after a long day."
+          "I go to a clinic today. The nurse looks at my head and asks if it feels hot.",
+          "She tells me to wash my face and hands before the check.",
+          "My hair is clean because I washed it in the morning.",
+          "The doctor checks my eyes. I can see the big letters on the wall.",
+          "He also checks my ears. I can hear his quiet voice.",
+          "I have a little cold, so I wipe my nose with a tissue.",
+          "The doctor says, 'Open your mouth and say ah.'",
+          "He looks at my teeth and says they are clean.",
+          "Then I turn my neck slowly. It is okay.",
+          "At the end, I roll my shoulders and feel relaxed."
         ]
       },
       "questions": [
         {
-          "q": "What does the head hold?",
-          "choices": ["Eyes", "Brain", "Mouth"],
+          "q": "Who looks at the head first?",
+          "choices": ["Doctor", "Nurse", "Teacher"],
           "answer": ["1"]
         },
         {
-          "q": "What do we do with our face?",
-          "choices": ["Wash it", "Kick it", "Hide it"],
+          "q": "What do you wash before the check?",
+          "choices": ["Face and hands", "Feet", "Hair"],
           "answer": ["0"]
         },
         {
-          "q": "What is on our head?",
-          "choices": ["Hair", "Foot", "Knee"],
-          "answer": ["0"]
-        },
-        {
-          "q": "What do eyes help us do?",
-          "choices": ["Hear", "See", "Smell"],
+          "q": "When did the hair get washed?",
+          "choices": ["At night", "In the morning", "In the evening"],
           "answer": ["1"]
         },
         {
-          "q": "What helps us hear?",
-          "choices": ["Nose", "Ears", "Mouth"],
+          "q": "What does the doctor check to see letters?",
+          "choices": ["Eyes", "Ears", "Mouth"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What does the doctor ask you to open?",
+          "choices": ["Nose", "Mouth", "Bag"],
           "answer": ["1"]
         },
         {
-          "q": "What do we touch with our finger?",
-          "choices": ["Nose", "Leg", "Back"],
+          "q": "What is used to wipe the nose?",
+          "choices": ["Tissue", "Towel", "Book"],
           "answer": ["0"]
         },
         {
-          "q": "What do we brush for health?",
-          "choices": ["Teeth", "Hair", "Nose"],
+          "q": "What part does the doctor say is clean?",
+          "choices": ["Teeth", "Shoulders", "Neck"],
           "answer": ["0"]
         },
         {
-          "q": "What connects the head to the body?",
-          "choices": ["Neck", "Arm", "Shoulder"],
-          "answer": ["0"]
-        },
-        {
-          "q": "What do we relax after a long day?",
-          "choices": ["Shoulders", "Toes", "Fingers"],
-          "answer": ["0"]
-        },
-        {
-          "q": "What part is above the arms?",
-          "choices": ["Neck", "Shoulders", "Legs"],
+          "q": "How do you move your neck?",
+          "choices": ["Quickly", "Slowly", "Not at all"],
           "answer": ["1"]
+        },
+        {
+          "q": "How do you move your shoulders at the end?",
+          "choices": ["Up and down", "Back and down", "Left and right"],
+          "answer": ["1"]
+        },
+        {
+          "q": "Where does the story happen?",
+          "choices": ["At home", "At school", "At the clinic"],
+          "answer": ["2"]
         }
       ]
     },
@@ -307,54 +283,54 @@
       "prompt": "Find and correct the mistake (Present Simple, no final period)",
       "items": [
         {
-          "q": "My head hurt.",
-          "hint": "use hurts + subject",
-          "answer": ["my head hurts"]
+          "q": "My head feel hot.",
+          "hint": "use feels + subject",
+          "answer": ["my head feels hot"]
         },
         {
-          "q": "She wash her face every morning.",
+          "q": "She wash her face at night.",
           "hint": "use washes + subject",
-          "answer": ["she washes her face every morning"]
+          "answer": ["she washes her face at night"]
         },
         {
-          "q": "He have long hair.",
+          "q": "He have short hair.",
           "hint": "use has + subject",
-          "answer": ["he has long hair"]
+          "answer": ["he has short hair"]
         },
         {
-          "q": "They closes their eyes for a moment.",
+          "q": "We closes our eyes during the game.",
           "hint": "use close + subject",
-          "answer": ["they close their eyes for a moment"]
+          "answer": ["we close our eyes during the game"]
         },
         {
-          "q": "My ear are cold.",
+          "q": "My ear are painful.",
           "hint": "use is + subject",
-          "answer": ["my ear is cold"]
+          "answer": ["my ear is painful"]
         },
         {
-          "q": "Touch your noses.",
-          "hint": "use nose in singular",
-          "answer": ["touch your nose"]
+          "q": "Please wipes your nose.",
+          "hint": "use wipe + subject",
+          "answer": ["please wipe your nose"]
         },
         {
-          "q": "Open your mouths, please.",
-          "hint": "use mouth in singular",
-          "answer": ["open your mouth, please"]
+          "q": "He open his mouth wide.",
+          "hint": "use opens + subject",
+          "answer": ["he opens his mouth wide"]
         },
         {
-          "q": "He brush his teeth twice a day.",
+          "q": "He brush his teeth after lunch.",
           "hint": "use brushes + subject",
-          "answer": ["he brushes his teeth twice a day"]
+          "answer": ["he brushes his teeth after lunch"]
         },
         {
-          "q": "She move her neck slowly.",
-          "hint": "use moves + subject",
+          "q": "She move her neck slow.",
+          "hint": "use moves + slowly",
           "answer": ["she moves her neck slowly"]
         },
         {
-          "q": "Relax your shoulder.",
+          "q": "Roll your shoulder back and down.",
           "hint": "use shoulders in plural",
-          "answer": ["relax your shoulders"]
+          "answer": ["roll your shoulders back and down"]
         }
       ]
     },
@@ -365,53 +341,53 @@
       "items": [
         {
           "q": "Arrange the sentence",
-          "tokens": ["my", "head", "hurts"],
-          "answer": "my head hurts"
+          "tokens": ["i", "wear", "a", "hat", "on", "my", "head"],
+          "answer": "i wear a hat on my head"
         },
         {
           "q": "Arrange the sentence",
-          "tokens": ["wash", "your", "face", "every", "morning"],
-          "answer": "wash your face every morning"
+          "tokens": ["wash", "your", "face", "before", "school"],
+          "answer": "wash your face before school"
         },
         {
           "q": "Arrange the sentence",
-          "tokens": ["she", "has", "long", "hair"],
-          "answer": "she has long hair"
+          "tokens": ["she", "brushes", "her", "hair", "every", "day"],
+          "answer": "she brushes her hair every day"
         },
         {
           "q": "Arrange the sentence",
-          "tokens": ["close", "your", "eyes", "for", "a", "moment"],
-          "answer": "close your eyes for a moment"
+          "tokens": ["cover", "your", "eyes", "in", "the", "sun"],
+          "answer": "cover your eyes in the sun"
         },
         {
           "q": "Arrange the sentence",
-          "tokens": ["my", "left", "ear", "is", "cold"],
-          "answer": "my left ear is cold"
+          "tokens": ["my", "right", "ear", "hurts"],
+          "answer": "my right ear hurts"
         },
         {
           "q": "Arrange the sentence",
-          "tokens": ["touch", "your", "nose"],
-          "answer": "touch your nose"
+          "tokens": ["please", "wipe", "your", "nose"],
+          "answer": "please wipe your nose"
         },
         {
           "q": "Arrange the sentence",
-          "tokens": ["open", "your", "mouth", "please"],
-          "answer": "open your mouth please"
+          "tokens": ["do", "not", "talk", "with", "your", "mouth", "full"],
+          "answer": "do not talk with your mouth full"
         },
         {
           "q": "Arrange the sentence",
-          "tokens": ["brush", "your", "teeth", "twice", "a", "day"],
-          "answer": "brush your teeth twice a day"
+          "tokens": ["the", "dentist", "checks", "your", "teeth"],
+          "answer": "the dentist checks your teeth"
         },
         {
           "q": "Arrange the sentence",
-          "tokens": ["move", "your", "neck", "slowly"],
-          "answer": "move your neck slowly"
+          "tokens": ["turn", "your", "neck", "slowly"],
+          "answer": "turn your neck slowly"
         },
         {
           "q": "Arrange the sentence",
-          "tokens": ["relax", "your", "shoulders"],
-          "answer": "relax your shoulders"
+          "tokens": ["roll", "your", "shoulders", "back", "and", "down"],
+          "answer": "roll your shoulders back and down"
         }
       ]
     },
@@ -442,10 +418,7 @@
           "speaker": "Student 1",
           "line": "No, my ear is fine. But my ___ is very stiff. I cannot turn it."
         },
-        {
-          "speaker": "Student 2",
-          "line": "Can you see well with your ___?"
-        },
+        { "speaker": "Student 2", "line": "Can you see well with your ___?" },
         {
           "speaker": "Student 1",
           "line": "Yes, my ___ looks okay in the mirror."
@@ -479,42 +452,18 @@
       "type": "definition-match",
       "prompt": "Match the word with its definition.",
       "pairs": [
-        {
-          "left": "head",
-          "right": "It is the top part of your body."
-        },
-        {
-          "left": "face",
-          "right": "It is the front part of your head."
-        },
+        { "left": "head", "right": "It is the top part of your body." },
+        { "left": "face", "right": "It is the front part of your head." },
         {
           "left": "hair",
           "right": "It grows on the head and can be long or short."
         },
-        {
-          "left": "eye",
-          "right": "It is used to see things around you."
-        },
-        {
-          "left": "ear",
-          "right": "It is used to hear sounds."
-        },
-        {
-          "left": "nose",
-          "right": "It is used to smell and breathe."
-        },
-        {
-          "left": "mouth",
-          "right": "It is used to eat and speak."
-        },
-        {
-          "left": "tooth",
-          "right": "It is hard and helps you chew food."
-        },
-        {
-          "left": "neck",
-          "right": "It connects your head to your body."
-        },
+        { "left": "eye", "right": "It is used to see things around you." },
+        { "left": "ear", "right": "It is used to hear sounds." },
+        { "left": "nose", "right": "It is used to smell and breathe." },
+        { "left": "mouth", "right": "It is used to eat and speak." },
+        { "left": "tooth", "right": "It is hard and helps you chew food." },
+        { "left": "neck", "right": "It connects your head to your body." },
         {
           "left": "shoulder",
           "right": "It is the part where your arm joins your body."
@@ -540,22 +489,10 @@
           "clue": "The part of your body on top of your neck",
           "answers": ["head"]
         },
-        {
-          "clue": "The front part of your head",
-          "answers": ["face"]
-        },
-        {
-          "clue": "The strands that grow on your head",
-          "answers": ["hair"]
-        },
-        {
-          "clue": "The organ you use to see",
-          "answers": ["eye"]
-        },
-        {
-          "clue": "The part of your body that hears",
-          "answers": ["ear"]
-        },
+        { "clue": "The front part of your head", "answers": ["face"] },
+        { "clue": "The strands that grow on your head", "answers": ["hair"] },
+        { "clue": "The organ you use to see", "answers": ["eye"] },
+        { "clue": "The part of your body that hears", "answers": ["ear"] },
         {
           "clue": "The part of your face used for smelling",
           "answers": ["nose"]
@@ -583,46 +520,16 @@
       "type": "scramble",
       "prompt": "Unscramble the word.",
       "items": [
-        {
-          "scrambled": "daeh",
-          "answers": ["head"]
-        },
-        {
-          "scrambled": "ecaf",
-          "answers": ["face"]
-        },
-        {
-          "scrambled": "ihra",
-          "answers": ["hair"]
-        },
-        {
-          "scrambled": "eye",
-          "answers": ["eye"]
-        },
-        {
-          "scrambled": "rae",
-          "answers": ["ear"]
-        },
-        {
-          "scrambled": "osen",
-          "answers": ["nose"]
-        },
-        {
-          "scrambled": "mouht",
-          "answers": ["mouth"]
-        },
-        {
-          "scrambled": "tooth",
-          "answers": ["tooth", "teeth"]
-        },
-        {
-          "scrambled": "knec",
-          "answers": ["neck"]
-        },
-        {
-          "scrambled": "luohsdero",
-          "answers": ["shoulder"]
-        }
+        { "scrambled": "daeh", "answers": ["head"] },
+        { "scrambled": "ecaf", "answers": ["face"] },
+        { "scrambled": "ihra", "answers": ["hair"] },
+        { "scrambled": "eye", "answers": ["eye"] },
+        { "scrambled": "rae", "answers": ["ear"] },
+        { "scrambled": "osen", "answers": ["nose"] },
+        { "scrambled": "mouht", "answers": ["mouth"] },
+        { "scrambled": "tooth", "answers": ["tooth", "teeth"] },
+        { "scrambled": "knec", "answers": ["neck"] },
+        { "scrambled": "luohsdero", "answers": ["shoulder"] }
       ]
     },
     {
@@ -630,46 +537,16 @@
       "type": "wordpairs",
       "prompt": "Match the singular form to the plural form.",
       "pairs": [
-        {
-          "left": "head",
-          "right": "heads"
-        },
-        {
-          "left": "face",
-          "right": "faces"
-        },
-        {
-          "left": "hair",
-          "right": "hairs"
-        },
-        {
-          "left": "eye",
-          "right": "eyes"
-        },
-        {
-          "left": "ear",
-          "right": "ears"
-        },
-        {
-          "left": "nose",
-          "right": "noses"
-        },
-        {
-          "left": "mouth",
-          "right": "mouths"
-        },
-        {
-          "left": "tooth",
-          "right": "teeth"
-        },
-        {
-          "left": "neck",
-          "right": "necks"
-        },
-        {
-          "left": "shoulder",
-          "right": "shoulders"
-        }
+        { "left": "head", "right": "heads" },
+        { "left": "face", "right": "faces" },
+        { "left": "hair", "right": "hairs" },
+        { "left": "eye", "right": "eyes" },
+        { "left": "ear", "right": "ears" },
+        { "left": "nose", "right": "noses" },
+        { "left": "mouth", "right": "mouths" },
+        { "left": "tooth", "right": "teeth" },
+        { "left": "neck", "right": "necks" },
+        { "left": "shoulder", "right": "shoulders" }
       ]
     },
     {
