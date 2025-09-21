@@ -527,7 +527,11 @@
     );
     box.appendChild(removeBtn);
     if (task.title) box.appendChild(el("h3", {}, task.title));
-    switch (task.type) {
+    const rawType = task && task.type;
+    const normalizedType = String(rawType || '')
+      .trim()
+      .toLowerCase();
+    switch (normalizedType) {
       case "mcq":
         renderMCQ(box, task);
         break;
@@ -552,12 +556,53 @@
       case "short":
         renderShort(box, task);
         break;
+      case "roleplay":
+        renderRoleplay(box, task);
+        break;
+      case "dialogue-gap":
+        renderDialogueGap(box, task);
+        break;
+      case "dialogue-order":
+        renderDialogueOrder(box, task);
+        break;
+      case "truefalse":
+        renderTrueFalse(box, task);
+        break;
+      case "definition-match": {
+        const matchTask = {
+          ...task,
+          prompt: task.prompt || "Поєднай слово з визначенням",
+        };
+        renderMatch(box, matchTask);
+        break;
+      }
+      case "synonym-clue":
+        renderSynonymClue(box, task);
+        break;
+      case "scramble":
+        renderScramble(box, task);
+        break;
+      case "wordpairs": {
+        const pairsTask = {
+          ...task,
+          prompt: task.prompt || "Поєднай форму в однині та множині",
+        };
+        renderMatch(box, pairsTask);
+        break;
+      }
+      case "odd-one-out":
+        renderOddOneOut(box, task);
+        break;
       case "writing":
         renderWriting(box, task);
         break;
       default:
         box.appendChild(
-          el("div", { class: "muted" }, `Невідомий тип завдання: ${task.type}`)
+          el(
+            "div",
+            { class: "muted" },
+            `Невідомий тип завдання: ${rawType}`
+          )
         );
     }
     container.appendChild(box);
@@ -867,6 +912,752 @@
         if (!row.contains(info)) row.appendChild(info);
       });
       result.textContent = `Загальний збіг ключових слів: ${sum}/${total}`;
+    });
+    container.appendChild(btn);
+    container.appendChild(result);
+  }
+
+  function renderRoleplay(container, task) {
+    container.appendChild(el('h3', {}, task.prompt || 'Role-play scenario'));
+
+    const scenario = task && typeof task.scenario === 'object' ? task.scenario : {};
+    const infoBox = el('div', {
+      style:
+        'margin:12px 0;padding:14px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc;',
+    });
+    let infoAdded = false;
+
+    if (scenario.setting) {
+      infoBox.appendChild(
+        el('p', { style: 'margin:0 0 6px;font-weight:600;' }, `Локація: ${scenario.setting}`)
+      );
+      infoAdded = true;
+    }
+
+    if (scenario.summary) {
+      infoBox.appendChild(
+        el('p', { style: 'margin:0;color:#334155;' }, scenario.summary)
+      );
+      infoAdded = true;
+    }
+
+    if (infoAdded) {
+      container.appendChild(infoBox);
+    }
+
+    const roles = Array.isArray(scenario.roles) ? scenario.roles : [];
+    if (roles.length) {
+      const rolesWrap = el('div', {
+        style:
+          'display:grid;gap:12px;margin-top:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));',
+      });
+      roles.forEach((role, index) => {
+        const name =
+          (role && role.name) ||
+          `Student ${index + 1}`;
+        const roleBox = el(
+          'div',
+          {
+            style:
+              'padding:14px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;box-shadow:0 1px 0 rgba(148, 163, 184, 0.2);',
+          },
+          el('div', { style: 'font-weight:600;margin-bottom:6px;' }, name)
+        );
+
+        if (role && role.goal) {
+          roleBox.appendChild(
+            el('p', { style: 'margin:0 0 6px;color:#0f172a;' }, `Мета: ${role.goal}`)
+          );
+        }
+
+        const rawDetails =
+          role && Array.isArray(role.details)
+            ? role.details
+            : typeof role?.details === 'string'
+            ? role.details.split(/[;,\n]/)
+            : [];
+        const details = rawDetails
+          .map((item) => String(item || '').trim())
+          .filter(Boolean);
+        if (details.length === 1) {
+          roleBox.appendChild(
+            el('p', { style: 'margin:0;color:#475569;' }, details[0])
+          );
+        } else if (details.length > 1) {
+          const list = el('ul', {
+            style: 'margin:0;padding-left:18px;color:#475569;',
+          });
+          details.forEach((detail) => {
+            list.appendChild(el('li', { style: 'margin:2px 0;' }, detail));
+          });
+          roleBox.appendChild(list);
+        }
+
+        rolesWrap.appendChild(roleBox);
+      });
+      container.appendChild(rolesWrap);
+    }
+
+    const steps = Array.isArray(scenario.steps) ? scenario.steps : [];
+    if (steps.length) {
+      const stepsWrap = el('div', {
+        style:
+          'margin-top:16px;padding:14px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+      });
+      stepsWrap.appendChild(
+        el('h4', {
+          style: 'margin:0 0 6px;font-size:16px;font-weight:600;color:#0f172a;',
+        }, 'Покроковий план діалогу')
+      );
+      const list = el('ol', {
+        style: 'margin:0 0 0 18px;padding:0;color:#475569;',
+      });
+      steps.forEach((step) => {
+        if (!step) return;
+        list.appendChild(el('li', { style: 'margin:4px 0;' }, step));
+      });
+      stepsWrap.appendChild(list);
+      container.appendChild(stepsWrap);
+    }
+
+    const phrases = Array.isArray(task && task.phrases) ? task.phrases : [];
+    if (phrases.length) {
+      container.appendChild(
+        el('h4', {
+          style: 'margin:18px 0 8px;font-size:16px;font-weight:600;color:#0f172a;',
+        }, 'Корисні фрази для діалогу')
+      );
+      const list = el('div', {
+        style: 'display:flex;flex-direction:column;gap:8px;',
+      });
+      phrases.forEach((item) => {
+        const phraseText =
+          typeof item === 'string'
+            ? item
+            : item && (item.phrase || item.text || item.value || '');
+        const translation =
+          item && typeof item === 'object'
+            ? item.translation || item.note || item.ua || item.uk || ''
+            : '';
+        if (!phraseText) return;
+        const id = `phrase-${Math.random().toString(36).slice(2, 8)}`;
+        list.appendChild(
+          el(
+            'label',
+            {
+              for: id,
+              style:
+                'display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+            },
+            el('input', { id, type: 'checkbox', style: 'margin-top:4px;' }),
+            el(
+              'div',
+              {},
+              el('span', { style: 'font-weight:600;color:#0f172a;' }, phraseText),
+              translation
+                ? el(
+                    'span',
+                    {
+                      class: 'muted',
+                      style: 'display:block;margin-top:4px;color:#475569;',
+                    },
+                    translation
+                  )
+                : null
+            )
+          )
+        );
+      });
+      container.appendChild(list);
+    }
+  }
+
+  function renderDialogueGap(container, task) {
+    container.appendChild(
+      el('h3', {}, task.prompt || 'Заповніть пропуски у діалозі')
+    );
+
+    const answers = Array.isArray(task?.answers)
+      ? task.answers.map((item) => normalize(item))
+      : [];
+    const blanks = [];
+    let activeBlank = null;
+    const wordById = new Map();
+
+    function setActive(blank) {
+      if (activeBlank && activeBlank !== blank) {
+        activeBlank.style.boxShadow = 'none';
+      }
+      if (blank && activeBlank !== blank) {
+        blank.style.boxShadow = '0 0 0 2px rgba(37, 99, 235, 0.35)';
+        activeBlank = blank;
+      } else {
+        if (blank) blank.style.boxShadow = 'none';
+        activeBlank = null;
+      }
+    }
+
+    function clearBlank(blank) {
+      if (!blank) return;
+      const assignedId = blank.dataset.buttonId;
+      if (assignedId && wordById.has(assignedId)) {
+        const btn = wordById.get(assignedId);
+        btn.disabled = false;
+        btn.classList.remove('used');
+      }
+      blank.dataset.value = '';
+      blank.dataset.buttonId = '';
+      blank.textContent = '___';
+      blank.style.borderColor = '#cbd5e1';
+      blank.style.background = '#fff';
+      blank.style.boxShadow = 'none';
+    }
+
+    const bank = el('div', {
+      style:
+        'display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;padding:10px;border:1px solid #e2e8f0;border-radius:10px;background:#f8fafc;',
+    });
+    const words = Array.isArray(task?.words) ? task.words : [];
+    words.forEach((word, index) => {
+      const value = String(word || '').trim();
+      if (!value) return;
+      const id = `word-${index}-${Math.random().toString(36).slice(2, 6)}`;
+      const btn = el(
+        'button',
+        {
+          type: 'button',
+          class: 'btn',
+          style:
+            'padding:6px 10px;border:1px solid #94a3b8;border-radius:999px;background:#fff;color:#0f172a;cursor:pointer;font-size:14px;line-height:1;',
+          onclick: () => {
+            const target =
+              activeBlank || blanks.find((blank) => !blank.dataset.value);
+            if (!target) return;
+
+            if (btn.disabled && target.dataset.buttonId !== id) return;
+
+            if (target.dataset.buttonId && target.dataset.buttonId !== id) {
+              const prevBtn = wordById.get(target.dataset.buttonId);
+              if (prevBtn) {
+                prevBtn.disabled = false;
+                prevBtn.classList.remove('used');
+              }
+            }
+
+            btn.disabled = true;
+            btn.classList.add('used');
+            target.dataset.value = value;
+            target.dataset.buttonId = id;
+            target.textContent = value;
+            target.style.borderColor = '#2563eb';
+            target.style.background = '#eef2ff';
+            setActive(null);
+          },
+        },
+        value
+      );
+      btn.dataset.word = value;
+      btn.dataset.id = id;
+      wordById.set(id, btn);
+      bank.appendChild(btn);
+    });
+    if (bank.children.length) {
+      container.appendChild(bank);
+    }
+
+    const dialogueWrap = el('div', {
+      style: 'display:flex;flex-direction:column;gap:10px;',
+    });
+    const dialogue = Array.isArray(task?.dialogue) ? task.dialogue : [];
+    let blankIndex = 0;
+    dialogue.forEach((turn) => {
+      if (!turn) return;
+      const speaker = turn.speaker || turn.role || '';
+      const line = turn.line || turn.text || '';
+      const row = el(
+        'div',
+        {
+          style:
+            'padding:12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;display:flex;gap:10px;align-items:flex-start;',
+        },
+        speaker ? el('strong', { style: 'min-width:90px;' }, `${speaker}:`) : null
+      );
+      const textWrap = el('div', {
+        style: 'display:flex;flex-wrap:wrap;gap:6px;align-items:center;',
+      });
+      const parts = String(line || '').split(/___/);
+      parts.forEach((part, idx) => {
+        if (part) {
+          textWrap.appendChild(el('span', {}, part));
+        }
+        if (idx < parts.length - 1) {
+          const expected = answers[blankIndex] || '';
+          const blank = el(
+            'button',
+            {
+              type: 'button',
+              style:
+                'min-width:52px;padding:4px 10px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#0f172a;cursor:pointer;',
+              onclick: () => {
+                if (activeBlank === blank) {
+                  setActive(null);
+                } else {
+                  setActive(blank);
+                }
+              },
+              ondblclick: () => {
+                clearBlank(blank);
+                setActive(null);
+              },
+            },
+            '___'
+          );
+          blank.dataset.expected = expected;
+          blank.dataset.index = String(blankIndex);
+          blanks.push(blank);
+          blankIndex += 1;
+          textWrap.appendChild(blank);
+        }
+      });
+      row.appendChild(textWrap);
+      dialogueWrap.appendChild(row);
+    });
+
+    container.appendChild(dialogueWrap);
+
+    const actions = el('div', {
+      style: 'margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;',
+    });
+    const checkBtn = el(
+      'button',
+      { type: 'button', class: 'btn primary' },
+      'Перевірити'
+    );
+    const resetBtn = el('button', { type: 'button', class: 'btn' }, 'Скинути');
+    const result = el('div', {
+      style: 'font-weight:600;color:#0f172a;',
+    });
+
+    checkBtn.addEventListener('click', () => {
+      let correct = 0;
+      blanks.forEach((blank) => {
+        const expected = blank.dataset.expected || '';
+        const value = normalize(blank.dataset.value || blank.textContent || '');
+        const ok = expected ? value === expected : Boolean(value);
+        blank.style.borderColor = ok ? '#10b981' : '#ef4444';
+        blank.style.background = ok ? '#ecfdf5' : '#fee2e2';
+        if (ok) correct += 1;
+      });
+      if (blanks.length) {
+        result.textContent = `Результат: ${correct}/${blanks.length}`;
+      } else {
+        result.textContent = '';
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      blanks.forEach((blank) => clearBlank(blank));
+      wordById.forEach((btn) => {
+        btn.disabled = false;
+        btn.classList.remove('used');
+      });
+      result.textContent = '';
+      setActive(null);
+    });
+
+    actions.appendChild(checkBtn);
+    actions.appendChild(resetBtn);
+    actions.appendChild(result);
+    container.appendChild(actions);
+  }
+
+  function renderDialogueOrder(container, task) {
+    container.appendChild(
+      el('h3', {}, task.prompt || 'Упорядкуйте діалог')
+    );
+
+    const lines = Array.isArray(task?.lines)
+      ? task.lines.map((line) => ({
+          speaker: line?.speaker || line?.role || '',
+          text: line?.line || line?.text || '',
+        }))
+      : [];
+    const solution = Array.isArray(task?.solution)
+      ? task.solution.map((value) => Number.parseInt(value, 10))
+      : lines.map((_, index) => index);
+
+    const poolWrap = el('div', {
+      style:
+        'display:flex;flex-direction:column;gap:8px;margin-top:10px;padding:10px;border:1px solid #e2e8f0;border-radius:10px;background:#f8fafc;',
+    });
+    const outWrap = el('div', {
+      style:
+        'margin-top:14px;padding:12px;border:1px dashed #cbd5e1;border-radius:10px;min-height:80px;display:flex;flex-direction:column;gap:8px;',
+    });
+    const used = new Set();
+
+    function makeLabel({ speaker, text }) {
+      const content = speaker ? `${speaker}: ${text}` : text;
+      return content.trim();
+    }
+
+    function removeChip(chip) {
+      if (!chip) return;
+      const index = Number.parseInt(chip.dataset.index || '-1', 10);
+      const sourceId = chip.dataset.buttonId;
+      if (sourceId) {
+        const btn = poolWrap.querySelector(`[data-id="${sourceId}"]`);
+        if (btn) {
+          btn.disabled = false;
+          btn.style.opacity = '1';
+        }
+      }
+      used.delete(index);
+      chip.remove();
+    }
+
+    function appendChip(index, label, sourceId) {
+      const chip = el(
+        'div',
+        {
+          class: 'dialogue-chip',
+          style:
+            'padding:10px;border:1px solid #94a3b8;border-radius:10px;background:#fff;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;',
+          onclick: (event) => {
+            event.stopPropagation();
+            removeChip(chip);
+          },
+        },
+        el('span', {}, label),
+        el('span', { style: 'color:#94a3b8;font-size:12px;' }, '×')
+      );
+      chip.dataset.index = String(index);
+      chip.dataset.buttonId = sourceId;
+      outWrap.appendChild(chip);
+    }
+
+    const shuffledIndices = shuffle(lines.map((_, index) => index));
+    shuffledIndices.forEach((index) => {
+      const line = lines[index];
+      const label = makeLabel(line);
+      const buttonId = `line-${index}-${Math.random().toString(36).slice(2, 6)}`;
+      const btn = el(
+        'button',
+        {
+          type: 'button',
+          class: 'btn',
+          style:
+            'text-align:left;padding:10px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#0f172a;cursor:pointer;',
+          onclick: () => {
+            if (used.has(index)) return;
+            used.add(index);
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            appendChip(index, label, buttonId);
+          },
+          'data-id': buttonId,
+        },
+        label
+      );
+      poolWrap.appendChild(btn);
+    });
+
+    container.appendChild(poolWrap);
+    container.appendChild(outWrap);
+
+    const actions = el('div', {
+      style: 'margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;',
+    });
+    const checkBtn = el(
+      'button',
+      { type: 'button', class: 'btn primary' },
+      'Перевірити'
+    );
+    const resetBtn = el('button', { type: 'button', class: 'btn' }, 'Скинути');
+    const result = el('div', { style: 'font-weight:600;color:#0f172a;' });
+
+    checkBtn.addEventListener('click', () => {
+      const built = Array.from(outWrap.children).map((chip) =>
+        Number.parseInt(chip.dataset.index || '-1', 10)
+      );
+      const expected = solution.slice();
+      const ok =
+        built.length === expected.length &&
+        built.every((value, idx) => value === expected[idx]);
+      outWrap.style.borderColor = ok ? '#10b981' : '#ef4444';
+      result.textContent = ok
+        ? 'Діалог впорядковано правильно!'
+        : `Поточний порядок: ${built.length}/${expected.length} реплік. Перевірте послідовність.`;
+    });
+
+    resetBtn.addEventListener('click', () => {
+      Array.from(outWrap.children).forEach((chip) => removeChip(chip));
+      const buttons = poolWrap.querySelectorAll('button');
+      buttons.forEach((btn) => {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+      });
+      used.clear();
+      outWrap.style.borderColor = '#cbd5e1';
+      result.textContent = '';
+    });
+
+    actions.appendChild(checkBtn);
+    actions.appendChild(resetBtn);
+    actions.appendChild(result);
+    container.appendChild(actions);
+  }
+
+  function renderTrueFalse(container, task) {
+    container.appendChild(el('h3', {}, task.prompt || 'Обери True або False'));
+
+    const rows = [];
+    const items = Array.isArray(task?.items) ? task.items : [];
+    items.forEach((item, index) => {
+      if (!item || !item.statement) return;
+      const row = el(
+        'div',
+        {
+          style:
+            'margin:8px 0;padding:12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+        },
+        el('p', { style: 'margin:0 0 8px;font-weight:600;' }, item.statement)
+      );
+      const name = `${task.id || 'tf'}-${index}`;
+      const expected = Boolean(item.answer);
+      const trueLabel = el(
+        'label',
+        {
+          style: 'display:inline-flex;align-items:center;gap:6px;margin-right:16px;',
+        },
+        el('input', { type: 'radio', name, value: 'true' }),
+        'True'
+      );
+      const falseLabel = el(
+        'label',
+        { style: 'display:inline-flex;align-items:center;gap:6px;' },
+        el('input', { type: 'radio', name, value: 'false' }),
+        'False'
+      );
+      const options = el('div', { style: 'display:flex;align-items:center;' });
+      options.appendChild(trueLabel);
+      options.appendChild(falseLabel);
+      row.appendChild(options);
+      rows.push({ row, name, expected });
+      container.appendChild(row);
+    });
+
+    if (!rows.length) return;
+
+    const actions = el('div', {
+      style: 'margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;',
+    });
+    const btn = el(
+      'button',
+      { type: 'button', class: 'btn primary' },
+      'Перевірити'
+    );
+    const result = el('div', { style: 'font-weight:600;color:#0f172a;' });
+    btn.addEventListener('click', () => {
+      let correct = 0;
+      rows.forEach(({ row, name, expected }) => {
+        const picked = row.querySelector(`input[name="${name}"]:checked`);
+        const ok = picked ? picked.value === String(expected) : false;
+        row.style.borderColor = ok ? '#10b981' : '#ef4444';
+        if (ok) correct += 1;
+      });
+      result.textContent = `Результат: ${correct}/${rows.length}`;
+    });
+    actions.appendChild(btn);
+    actions.appendChild(result);
+    container.appendChild(actions);
+  }
+
+  function renderSynonymClue(container, task) {
+    container.appendChild(
+      el('h3', {}, task.prompt || 'Доберіть слово за описом')
+    );
+
+    const wordBank = Array.isArray(task?.wordBank) ? task.wordBank : [];
+    if (wordBank.length) {
+      const bank = el('div', {
+        style:
+          'margin:8px 0 12px;padding:10px;border:1px solid #e2e8f0;border-radius:10px;background:#f8fafc;display:flex;flex-wrap:wrap;gap:8px;',
+      });
+      wordBank.forEach((word) => {
+        const value = String(word || '').trim();
+        if (!value) return;
+        bank.appendChild(
+          el(
+            'span',
+            {
+              style:
+                'padding:6px 10px;border:1px solid #94a3b8;border-radius:999px;background:#fff;font-size:14px;',
+            },
+            value
+          )
+        );
+      });
+      container.appendChild(bank);
+    }
+
+    const rows = [];
+    const items = Array.isArray(task?.items) ? task.items : [];
+    items.forEach((item) => {
+      if (!item || !item.clue) return;
+      const row = el('div', {
+        style:
+          'margin-bottom:10px;padding:12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+      });
+      row.appendChild(
+        el('p', { style: 'margin:0 0 6px;font-weight:600;' }, item.clue)
+      );
+      const input = el('input', {
+        type: 'text',
+        style:
+          'width:100%;max-width:320px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
+      });
+      row.appendChild(input);
+      const answers = Array.isArray(item?.answers)
+        ? item.answers.map((answer) => normalize(answer))
+        : Array.isArray(item?.answer)
+        ? item.answer.map((answer) => normalize(answer))
+        : item?.answer
+        ? [normalize(item.answer)]
+        : [];
+      rows.push({ row, input, answers });
+      container.appendChild(row);
+    });
+
+    if (!rows.length) return;
+
+    const result = el('div', { style: 'font-weight:600;color:#0f172a;' });
+    const btn = el('button', { type: 'button', class: 'btn primary' }, 'Перевірити');
+    btn.addEventListener('click', () => {
+      let correct = 0;
+      rows.forEach(({ row, input, answers }) => {
+        const value = normalize(input.value);
+        const ok = answers.length ? answers.includes(value) : Boolean(value);
+        row.style.borderColor = ok ? '#10b981' : '#ef4444';
+        if (ok) correct += 1;
+      });
+      result.textContent = `Результат: ${correct}/${rows.length}`;
+    });
+    container.appendChild(btn);
+    container.appendChild(result);
+  }
+
+  function renderScramble(container, task) {
+    container.appendChild(el('h3', {}, task.prompt || 'Розшифруйте слова'));
+
+    const rows = [];
+    const items = Array.isArray(task?.items) ? task.items : [];
+    items.forEach((item) => {
+      if (!item || !item.scrambled) return;
+      const row = el('div', {
+        style:
+          'margin-bottom:10px;padding:12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+      });
+      row.appendChild(
+        el('div', { style: 'margin-bottom:6px;font-weight:600;' }, item.scrambled)
+      );
+      const input = el('input', {
+        type: 'text',
+        style:
+          'width:100%;max-width:260px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
+      });
+      row.appendChild(input);
+      const answers = Array.isArray(item?.answers)
+        ? item.answers.map((value) => normalize(value))
+        : Array.isArray(item?.answer)
+        ? item.answer.map((value) => normalize(value))
+        : item?.answer
+        ? [normalize(item.answer)]
+        : [];
+      rows.push({ row, input, answers });
+      container.appendChild(row);
+    });
+
+    if (!rows.length) return;
+
+    const btn = el('button', { type: 'button', class: 'btn primary' }, 'Перевірити');
+    const result = el('div', { style: 'margin-top:6px;font-weight:600;color:#0f172a;' });
+    btn.addEventListener('click', () => {
+      let correct = 0;
+      rows.forEach(({ row, input, answers }) => {
+        const value = normalize(input.value);
+        const ok = answers.length ? answers.includes(value) : Boolean(value);
+        row.style.borderColor = ok ? '#10b981' : '#ef4444';
+        if (ok) correct += 1;
+      });
+      result.textContent = `Результат: ${correct}/${rows.length}`;
+    });
+    container.appendChild(btn);
+    container.appendChild(result);
+  }
+
+  function renderOddOneOut(container, task) {
+    container.appendChild(
+      el('h3', {}, task.prompt || 'Знайди зайве слово')
+    );
+
+    const blocks = [];
+    const items = Array.isArray(task?.items) ? task.items : [];
+    items.forEach((item, index) => {
+      const options = Array.isArray(item?.options) ? item.options : [];
+      if (!options.length) return;
+      const row = el('div', {
+        style:
+          'margin-bottom:10px;padding:12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+      });
+      row.appendChild(
+        el('div', { style: 'margin-bottom:6px;font-weight:600;' }, `Набір ${index + 1}`)
+      );
+      const groupName = `${task.id || 'odd'}-${index}`;
+      options.forEach((option, optionIndex) => {
+        const id = `${groupName}-${optionIndex}`;
+        row.appendChild(
+          el(
+            'label',
+            {
+              for: id,
+              style: 'display:flex;align-items:center;gap:6px;margin:4px 0;',
+            },
+            el('input', { type: 'radio', name: groupName, value: String(optionIndex), id }),
+            option
+          )
+        );
+      });
+      const explanation = String(item?.explanation || '').trim();
+      if (explanation) {
+        const note = el('div', {
+          class: 'muted',
+          style: 'display:none;margin-top:6px;color:#475569;',
+        });
+        note.textContent = `Пояснення: ${explanation}`;
+        row.appendChild(note);
+      }
+      const answerIndex = normalize(item?.answer || '');
+      blocks.push({ row, groupName, answerIndex });
+      container.appendChild(row);
+    });
+
+    if (!blocks.length) return;
+
+    const btn = el('button', { type: 'button', class: 'btn primary' }, 'Перевірити');
+    const result = el('div', { style: 'margin-top:6px;font-weight:600;color:#0f172a;' });
+    btn.addEventListener('click', () => {
+      let correct = 0;
+      blocks.forEach(({ row, groupName, answerIndex }) => {
+        const picked = row.querySelector(`input[name="${groupName}"]:checked`);
+        const value = normalize(picked ? picked.value : '');
+        const ok = answerIndex ? value === answerIndex : Boolean(value);
+        row.style.borderColor = ok ? '#10b981' : '#ef4444';
+        const note = row.querySelector('.muted');
+        if (note) note.style.display = ok ? 'none' : 'block';
+        if (ok) correct += 1;
+      });
+      result.textContent = `Результат: ${correct}/${blocks.length}`;
     });
     container.appendChild(btn);
     container.appendChild(result);

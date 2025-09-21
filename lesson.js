@@ -1,197 +1,369 @@
-import{l as pe,a as fe}from"./assets/lessons-BF2nmHKJ.js";const ye={BASE_URL:"/english-teacher-platform/",DEV:!1,MODE:"production",PROD:!0,SSR:!1},j=typeof import.meta<"u"&&ye&&"/english-teacher-platform/"||"/";function he(e){const t=j.endsWith("/")?j:`${j}/`,n=String(e||"");return n.startsWith(t)?n:`${t}${n.replace(/^\/+/,"")}`}const T=new URLSearchParams(window.location.search),N=T.get("topic"),ee=T.get("title"),te=T.get("category"),ne=T.get("level"),re=T.get("file"),i=N?pe.find(e=>e.id===N):void 0,U=(i==null?void 0:i.title)??(ee?decodeURIComponent(ee):"Матеріал уроку"),J=(i==null?void 0:i.category)??(te?decodeURIComponent(te):""),D=(i==null?void 0:i.level)??(ne?decodeURIComponent(ne):""),G=(()=>{const e=(i==null?void 0:i.htmlPath)??(re?decodeURIComponent(re):null);return e&&e.startsWith("lessons/")?e:null})();window.lessonContext={id:(i==null?void 0:i.id)??N??null,title:U,category:J,level:D,htmlPath:G};const oe=document.querySelector("[data-lesson-title]"),se=document.querySelector("[data-lesson-category]"),ae=document.querySelector("[data-lesson-level]"),A=document.querySelector("[data-lesson-status]"),ie=document.getElementById("lesson-content");function ge(){const e=document.querySelector('[data-component="copyright-year"]');e&&(e.textContent=String(new Date().getFullYear()))}function Se(){var n;oe&&(oe.textContent=U);const t=(((n=fe[J])==null?void 0:n.label)??"")||J;se&&(se.textContent=t||""),ae&&(ae.textContent=D?`Рівень: ${D}`:""),document.title=`${U} | English Teacher Platform`}async function we(){if(ie){if(!G){A&&(A.textContent="Не вдалося визначити файл з матеріалом. Перейдіть назад та оберіть тему зі списку.");return}try{const e=await fetch(he(G));if(!e.ok)throw new Error(`Не вдалося завантажити файл: ${e.status}`);const t=await e.text();ie.innerHTML=t}catch(e){A&&(A.textContent="Сталася помилка під час завантаження матеріалу. Спробуйте пізніше або поверніться до каталогу."),console.error(e)}}}function $e(){ge(),Se(),we()}$e();const be=async e=>{const n="https://vq1wtq2d2l.execute-api.us-east-2.amazonaws.com/dev"+"/openai";return await fetch(n,{method:"POST",body:JSON.stringify(e),headers:{"Content-Type":"application/json"}}).then(o=>o.json())},ke=async(e,t,n={})=>{const r=ve(e,t,n),o=await be(r);try{return typeof o=="string"?JSON.parse(o):o}catch{const l=typeof o=="string"?o.match(/\{[\s\S]*\}$/):null;if(l)return JSON.parse(l[0]);throw new Error("Не вдалося розпарсити JSON відповіді моделі")}};function ve(e,t,n={}){const r=localStorage.getItem("gptToken");if(!r||(r==null?void 0:r.length)<10){console.warn("⚠️ gptToken відсутній у localStorage");const L=prompt("Enter Your GPT Token");localStorage.setItem("gptToken",L)}const o="gpt-4o-mini",a=String(t||"").trim().toLowerCase(),{system:l,user:f}=Ee(e,a,n);return{token:r,model:o,messages:[{role:"system",content:l},{role:"user",content:f}],temperature:.3,max_tokens:4e3}}function Ee(e,t,n){n.language;const r=Number.isInteger(n.items)?n.items:qe[t]||10,o=n.seedId||xe(e),a=`
-ТИ — генератор навчальних завдань з англійської мови.
-МЕТА: Згенерувати ОДИН блок завдань типу "${t}" по темі "${e}".
-ПОВЕРТАЙ ЛИШЕ ВАЛІДНИЙ JSON. Узгоджуйся рівнем А1–A2.
-Мова інтерфейсу — українська.
-Кодування — UTF-8. Без пояснень, без префіксів, без \`\`\`.
-Верифікуй внутрішню узгодженість (варіанти відповіді відповідають правилу/темі).
-`,l={mcq:{system:`
-${a}
-СХЕМА ВИХОДУ:
+import{l as ge,a as we}from"./assets/lessons-BF2nmHKJ.js";const Ee="modulepreload",be=function(e){return"/english-teacher-platform/"+e},re={},_=function(t,n,o){let r=Promise.resolve();if(n&&n.length>0){document.getElementsByTagName("link");const i=document.querySelector("meta[property=csp-nonce]"),a=(i==null?void 0:i.nonce)||(i==null?void 0:i.getAttribute("nonce"));r=Promise.allSettled(n.map(l=>{if(l=be(l),l in re)return;re[l]=!0;const w=l.endsWith(".css"),$=w?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${l}"]${$}`))return;const m=document.createElement("link");if(m.rel=w?"stylesheet":Ee,w||(m.as="script"),m.crossOrigin="",m.href=l,a&&m.setAttribute("nonce",a),document.head.appendChild(m),w)return new Promise((h,C)=>{m.addEventListener("load",h),m.addEventListener("error",()=>C(new Error(`Unable to preload CSS for ${l}`)))})}))}function s(i){const a=new Event("vite:preloadError",{cancelable:!0});if(a.payload=i,window.dispatchEvent(a),!a.defaultPrevented)throw i}return r.then(i=>{for(const a of i||[])a.status==="rejected"&&s(a.reason);return t().catch(s)})},Se={BASE_URL:"/english-teacher-platform/",DEV:!1,MODE:"production",PROD:!0,SSR:!1},Te={body:()=>_(()=>import("./assets/body-CuWMwF77.js"),[]),"small-talk":()=>_(()=>import("./assets/smallTalk-DDzvHpnt.js"),[]),"problem-solving":()=>_(()=>import("./assets/problemSolving-C-zZWj-W.js"),[]),feedback:()=>_(()=>import("./assets/feedback-CMqLBQCG.js"),[])},D=typeof import.meta<"u"&&Se&&"/english-teacher-platform/"||"/";function $e(e){const t=D.endsWith("/")?D:`${D}/`,n=String(e||"");return n.startsWith(t)?n:`${t}${n.replace(/^\/+/,"")}`}const L=new URLSearchParams(window.location.search),W=L.get("topic"),se=L.get("title"),ae=L.get("category"),ie=L.get("level"),ce=L.get("file"),u=W?ge.find(e=>e.id===W):void 0,F=(u==null?void 0:u.title)??(se?decodeURIComponent(se):"Матеріал уроку"),V=(u==null?void 0:u.category)??(ae?decodeURIComponent(ae):""),G=(u==null?void 0:u.level)??(ie?decodeURIComponent(ie):""),J=(()=>{const e=(u==null?void 0:u.htmlPath)??(ce?decodeURIComponent(ce):null);return e&&e.startsWith("lessons/")?e:null})();window.lessonContext={id:(u==null?void 0:u.id)??W??null,title:F,category:V,level:G,htmlPath:J};const le=document.querySelector("[data-lesson-title]"),de=document.querySelector("[data-lesson-category]"),ue=document.querySelector("[data-lesson-level]"),q=document.querySelector("[data-lesson-status]"),B=document.getElementById("lesson-content");function ve(){const e=document.querySelector('[data-component="copyright-year"]');e&&(e.textContent=String(new Date().getFullYear()))}function ke(){var n;le&&(le.textContent=F);const t=(((n=we[V])==null?void 0:n.label)??"")||V;de&&(de.textContent=t||""),ue&&(ue.textContent=G?`Рівень: ${G}`:""),document.title=`${F} | English Teacher Platform`}async function xe(){if(B){if(!J){q&&(q.textContent="Не вдалося визначити файл з матеріалом. Перейдіть назад та оберіть тему зі списку.");return}try{const e=await fetch($e(J));if(!e.ok)throw new Error(`Не вдалося завантажити файл: ${e.status}`);const t=await e.text();B.innerHTML=t,await Ue(B)}catch(e){q&&(q.textContent="Сталася помилка під час завантаження матеріалу. Спробуйте пізніше або поверніться до каталогу."),console.error(e)}}}function Ce(e,t){if(!e)return;const n=Array.isArray(t)?t:[];if(!n.length)return;e.classList.add("communication__table");const o=document.createElement("table"),r=document.createElement("thead"),s=document.createElement("tr");["Слово","Переклад","Приклад"].forEach(a=>{const l=document.createElement("th");l.textContent=a,s.appendChild(l)}),r.appendChild(s);const i=document.createElement("tbody");n.forEach(a=>{if(!a)return;const l=document.createElement("tr"),w=document.createElement("td");w.textContent=a.word||a.term||"";const $=document.createElement("td");$.textContent=a.translation||a.meaning||"";const m=document.createElement("td");m.textContent=a.example||a.sentence||"",l.appendChild(w),l.appendChild($),l.appendChild(m),i.appendChild(l)}),o.appendChild(r),o.appendChild(i),e.innerHTML="",e.appendChild(o)}async function Ue(e){if(!e)return;const t=e.querySelectorAll("[data-communication-words]");if(t.length){window.communicationVocabularyMap=window.communicationVocabularyMap||{};for(const n of t){const o=n.getAttribute("data-module");if(!o)continue;const r=Te[o];if(typeof r=="function")try{const s=await r(),i=(s==null?void 0:s.default)||(s==null?void 0:s.words)||[];if(!Array.isArray(i)||!i.length)continue;window.communicationVocabularyMap[o]=i,window.communicationCurrentWords=i,Ce(n,i)}catch(s){console.error(`Не вдалося завантажити слова для модуля "${o}"`,s)}}}}function Me(){ve(),ke(),xe()}Me();const Ae=async e=>{const n="https://vq1wtq2d2l.execute-api.us-east-2.amazonaws.com/dev"+"/openai";return await fetch(n,{method:"POST",body:JSON.stringify(e),headers:{"Content-Type":"application/json"}}).then(r=>r.json())},Pe=async(e,t,n={},o=[])=>{const r=Le(e,t,n,o),s=await Ae(r);try{return typeof s=="string"?JSON.parse(s):s}catch{const a=typeof s=="string"?s.match(/\{[\s\S]*\}$/):null;if(a)return JSON.parse(a[0]);throw new Error("Не вдалося розпарсити JSON відповіді моделі")}};function Le(e,t,n={},o=[]){const r=localStorage.getItem("gptToken");if(!r||(r==null?void 0:r.length)<10){console.warn("⚠️ gptToken відсутній у localStorage");const $=prompt("Enter Your GPT Token");localStorage.setItem("gptToken",$)}const s="gpt-4o-mini",i=String(t||"").trim().toLowerCase(),{system:a,user:l}=Re(e,i,n),w=qe(l,o);return{token:r,model:s,messages:[{role:"system",content:a},{role:"user",content:w}],temperature:.3,max_tokens:4e3}}function Re(e,t,n){n.language;const o=Number.isInteger(n.items)?n.items:Oe[t]||10,r=n.seedId||_e(e),s=`
+YOU ARE an ESL task generator.
+GOAL: create ONE task block of type "${t}" on the topic "${e}".
+OUTPUT ONLY VALID JSON. Keep the language level around A1–A2.
+All prompts, questions, answers, hints, and labels must be written in ENGLISH.
+Encoding — UTF-8. No explanations, no prefixes, no code fences.
+Ensure internal consistency so answers match the task logic.
+`,i={mcq:{system:`
+${s}
+OUTPUT SCHEMA:
 {
-  "id": "mcq-${o}-1",
+  "id": "mcq-${r}-1",
   "type": "mcq",
-  "prompt": "<коротка інструкція українською>",
+  "prompt": "Choose the correct option.",
   "items": [
     {
-      "q": "<питання зі зниклою формою>",
-      "choices": ["<варіант0>", "<варіант1>", "<варіант2>"],
-      "answer": ["<index_правильної_відповіді_рядком>"]
+      "q": "<short question with one missing form>",
+      "choices": ["<option0>", "<option1>", "<option2>"],
+      "answer": ["<index_of_correct_choice_as_string>"]
     },
     ...
   ]
 }
 
-ВИМОГИ:
-- ${r} пунктів.
-- Формат як у прикладі нижче.
-- У choices рівно 3 варіанти, лише один правильний.
-- Правильна відповідь — індекс як рядок: "0" | "1" | "2".
-- Питання та варіанти короткі, природні, у темі "${e}".
-- ЖОДНОГО додаткового тексту поза JSON.
+REQUIREMENTS:
+- ${o} items.
+- Follow the schema exactly.
+- Provide exactly 3 answer choices per question with a single correct one.
+- "answer" must be the index of the correct option as a string: "0" | "1" | "2".
+- Keep questions natural, concise, and on the topic "${e}".
+- Return JSON only, no additional commentary.
 
-ПРИКЛАД (АНАЛОГІЧНИЙ; НЕ КОПІЮВАТИ ДОКЛАДНО ЗМІСТ):
+EXAMPLE (FORMAT ONLY; DO NOT COPY CONTENT):
 {
   "id": "mcq-ps-1",
   "type": "mcq",
-  "prompt": "Обери правильну форму (Present Simple)",
+  "prompt": "Choose the correct Present Simple form.",
   "items": [
     { "q": "He usually ___ the bus to work.", "choices": ["take", "takes", "is taking"], "answer": ["1"] },
     { "q": "They ___ coffee in the morning.", "choices": ["have", "haves", "are having"], "answer": ["0"] }
   ]
 }
       `.trim(),user:`
-Тема: ${e}
-Згенеруй блок типу "mcq" строго за СХЕМОЮ ВИХОДУ.
-Кількість пунктів: ${r}.
+Topic: ${e}
+Generate a task block of type "mcq" strictly following the OUTPUT SCHEMA.
+Number of items: ${o}.
       `.trim()},gap:{system:`
-${a}
-СХЕМА ВИХОДУ:
+${s}
+OUTPUT SCHEMA:
 {
-  "id": "gap-${o}-1",
+  "id": "gap-${r}-1",
   "type": "gap",
-  "prompt": "<інструкція>",
+  "prompt": "Fill the gaps with the correct word.",
   "items": [
-    { "q": "<They ___ (work) on Sundays.>", "answer": ["<правильна форма>", "<альтернатива_якщо_є>"] },
+    { "q": "<They ___ (work) on Sundays.>", "answer": ["<correct_form>", "<alternative_if_any>"] },
     ...
   ]
 }
-ВИМОГИ:
-- ${r} пунктів.
-- В полі "answer" завжди масив зі щонайменше одним варіантом.
-- Коротко, рівень А1–A2.
-      `.trim(),user:w(e,"gap",r)},transform:{system:`
-${a}
-СХЕМА ВИХОДУ:
+REQUIREMENTS:
+- ${o} sentences.
+- "answer" must always be an array with at least one valid solution in lowercase.
+- Keep sentences short, level A1–A2, and connected to "${e}".
+      `.trim(),user:d(e,"gap",o)},transform:{system:`
+${s}
+OUTPUT SCHEMA:
 {
-  "id": "transform-${o}-1",
+  "id": "transform-${r}-1",
   "type": "transform",
-  "prompt": "Перетвори на заперечення (Present Simple, без крапки)",
+  "prompt": "Rewrite each sentence in the negative form (no final period).",
   "items": [
     {
       "q": "She likes coffee.",
-      "hint": "використай doesn't; без крапки",
+      "hint": "use doesn't + base verb; no period",
       "answer": ["she doesn't like coffee", "she does not like coffee"]
     }
   ]
 }
-ВИМОГИ:
-- ${r} пунктів.
-- Усі відповіді — без фінальної крапки (якщо так вказано в prompt).
-- Дай корисний "hint".
-      `.trim(),user:w(e,"transform",r)},match:{system:`
-${a}
-СХЕМА ВИХОДУ:
+REQUIREMENTS:
+- ${o} items.
+- Answers must follow the prompt instructions (for example, omit the final period).
+- Provide a helpful English hint for each item.
+      `.trim(),user:d(e,"transform",o)},match:{system:`
+${s}
+OUTPUT SCHEMA:
 {
-  "id": "match-${o}-1",
+  "id": "match-${r}-1",
   "type": "match",
-  "prompt": "Зістав: дієслово → форма 3-ї особи (he/she/it)",
+  "prompt": "Match the base verb with the third person singular form (he/she/it).",
   "pairs": [
     { "left": "go", "right": "goes" },
     ...
   ]
 }
-ВИМОГИ:
-- Кількість пар: ${Math.max(6,Math.min(12,r))}.
-- Однозначні відповідності (без омонімії у межах набору).
-      `.trim(),user:w(e,"match",r)},error:{system:`
-${a}
-СХЕМА ВИХОДУ:
+REQUIREMENTS:
+- ${Math.max(6,Math.min(12,o))} unique pairs.
+- Provide one clear correct match for each pair without duplicates.
+- Use vocabulary related to "${e}".
+      `.trim(),user:d(e,"match",o)},error:{system:`
+${s}
+OUTPUT SCHEMA:
 {
-  "id": "error-${o}-1",
+  "id": "error-${r}-1",
   "type": "error",
-  "prompt": "Знайди й виправ помилку (Present Simple, без крапки)",
+  "prompt": "Find and correct the mistake (Present Simple, no final period).",
   "items": [
-    { "q": "She don't like tea.", "hint": "doesn't + V", "answer": ["she doesn't like tea", "she does not like tea"] }
+    { "q": "She don't like tea.", "hint": "use doesn't + base verb", "answer": ["she doesn't like tea", "she does not like tea"] }
   ]
 }
-ВИМОГИ:
-- ${r} пунктів.
-- У кожному "q" повинна бути типова помилка саме з теми "${e}".
-- "answer" — без фінальної крапки, якщо так зазначено в prompt.
-      `.trim(),user:w(e,"error",r)},order:{system:`
-${a}
-СХЕМА ВИХОДУ:
+REQUIREMENTS:
+- ${o} sentences containing a typical error connected to "${e}".
+- Provide clear English hints.
+- Match the formatting requested in the prompt (for example, omit the period).
+      `.trim(),user:d(e,"error",o)},order:{system:`
+${s}
+OUTPUT SCHEMA:
 {
-  "id": "order-${o}-1",
+  "id": "order-${r}-1",
   "type": "order",
-  "prompt": "Постав слова в правильному порядку",
+  "prompt": "Put the words in the correct order.",
   "items": [
-    { "q": "Впорядкуй речення", "tokens": ["she", "often", "reads", "books"], "answer": "she often reads books" }
+    { "q": "Arrange the sentence", "tokens": ["she", "often", "reads", "books"], "answer": "she often reads books" }
   ]
 }
-ВИМОГИ:
-- ${r} пунктів.
-- "tokens" мають складати саме правильну відповідь.
-- Відповідь без крапки, якщо не потрібно.
-      `.trim(),user:w(e,"order",r)},short:{system:`
-${a}
-СХЕМА ВИХОДУ:
+REQUIREMENTS:
+- ${o} items.
+- Provide tokens that form exactly the correct answer (lowercase, no period unless required by the topic).
+- Use sentences relevant to "${e}".
+      `.trim(),user:d(e,"order",o)},short:{system:`
+${s}
+OUTPUT SCHEMA:
 {
-  "id": "short-${o}-1",
+  "id": "short-${r}-1",
   "type": "short",
-  "prompt": "Короткі відповіді: ${e}",
+  "prompt": "Write short answers about ${e}.",
   "items": [
-    { "q": "Напиши 2–3 речення про свою щоденну рутину.", "keywords": ["i", "usually", "every"] }
+    { "q": "Write 2–3 sentences about your daily routine.", "keywords": ["i", "usually", "every"] }
   ]
 }
-ВИМОГИ:
-- ${Math.min(6,Math.max(3,Math.floor(r/2)))} пунктів (короткі письмові міні-завдання).
-- Ключові слова — підказка, а не жорстка вимога.
-      `.trim(),user:w(e,"short",r)},writing:{system:`
-${a}
-СХЕМА ВИХОДУ:
+REQUIREMENTS:
+- ${Math.min(6,Math.max(3,Math.floor(o/2)))} tasks that invite short written responses.
+- "keywords" act as guidance, not strict scoring rubrics, and must be lowercase English words.
+      `.trim(),user:d(e,"short",o)},writing:{system:`
+${s}
+OUTPUT SCHEMA:
 {
-  "id": "writing-${o}-1",
+  "id": "writing-${r}-1",
   "type": "writing",
-  "prompt": "Міні-письмо по темі ${e}",
-  "description": "<1–2 речення з умовою>",
+  "prompt": "Short writing task about ${e}.",
+  "description": "<1–2 sentences describing the assignment>",
   "checklist": [
-    "<критерій 1>",
-    "<критерій 2>",
-    "<критерій 3>"
+    "<criterion 1>",
+    "<criterion 2>",
+    "<criterion 3>"
   ]
 }
-ВИМОГИ:
-- Чітка інструкція в "description".
-- 4–6 пунктів у "checklist" з конкретними критеріями перевірки.
-      `.trim(),user:w(e,"writing",r)},context:{system:`
-${a}
-СХЕМА ВИХОДУ:
+REQUIREMENTS:
+- Provide a clear English description of the task.
+- Include 4–6 checklist items with concrete evaluation criteria.
+      `.trim(),user:d(e,"writing",o)},roleplay:{system:`
+${s}
+OUTPUT SCHEMA:
 {
-  "id": "context-${o}-1",
+  "id": "roleplay-${r}-1",
+  "type": "roleplay",
+  "prompt": "<short instruction in English>",
+  "scenario": {
+    "setting": "<where the situation takes place>",
+    "summary": "<1–2 sentences describing the task>",
+    "roles": [
+      {
+        "name": "Student 1",
+        "goal": "<goal to achieve>",
+        "details": "<two facts or prompts>"
+      },
+      {
+        "name": "Student 2",
+        "goal": "<goal to achieve>",
+        "details": "<two facts or prompts>"
+      }
+    ],
+    "steps": [
+      "<step 1>",
+      "<step 2>",
+      "<step 3>",
+      "<step 4>"
+    ]
+  },
+  "phrases": [
+    { "phrase": "<useful English phrase>", "translation": "<short explanation or translation in English>" }
+  ]
+}
+REQUIREMENTS:
+- The situation must clearly connect to the topic "${e}".
+- Exactly two roles: Student 1 and Student 2.
+- Provide 3–5 steps describing how the dialogue should develop.
+- Include ${Math.max(6,Math.min(10,o))} useful English phrases with brief English explanations or synonyms.
+- Do not add bullet symbols inside the strings.
+      `.trim(),user:d(e,"roleplay",o)},"dialogue-gap":{system:`
+${s}
+OUTPUT SCHEMA:
+{
+  "id": "dialogue-gap-${r}-1",
+  "type": "dialogue-gap",
+  "prompt": "Fill the blanks in the dialogue using the word bank.",
+  "words": ["<word1>", "<word2>", "<word3>"],
+  "dialogue": [
+    { "speaker": "Student 1", "line": "<Line with one or two ___ blanks>" }
+  ],
+  "answers": ["<correct word 1>", "<correct word 2>"]
+}
+REQUIREMENTS:
+- ${Math.max(4,Math.min(8,o))} turns in the dialogue.
+- Use exactly ${Math.max(4,Math.min(8,o))} blanks "___" across the dialogue.
+- "words" must include every required word once with no extra distractors.
+- "answers" list the correct words in the order the blanks appear (lowercase English).
+- Keep each line short (maximum 12 words) and on the topic "${e}".
+- Do not add extra fields beyond the schema.
+      `.trim(),user:d(e,"dialogue-gap",o)},"dialogue-order":{system:`
+${s}
+OUTPUT SCHEMA:
+{
+  "id": "dialogue-order-${r}-1",
+  "type": "dialogue-order",
+  "prompt": "Arrange the dialogue lines in the correct order.",
+  "lines": [
+    { "speaker": "Student 1", "line": "<Line>" },
+    { "speaker": "Student 2", "line": "<Line>" }
+  ],
+  "solution": [1, 0]
+}
+REQUIREMENTS:
+- ${Math.max(4,Math.min(8,o))} total lines.
+- Each line must contain 6–12 words, sound natural, and stay on the topic "${e}".
+- "solution" is an array of zero-based indices describing the correct order of the lines.
+- Do not add extra fields beyond the schema.
+      `.trim(),user:d(e,"dialogue-order",o)},truefalse:{system:`
+${s}
+OUTPUT SCHEMA:
+{
+  "id": "truefalse-${r}-1",
+  "type": "truefalse",
+  "prompt": "Decide if each statement is true or false.",
+  "items": [
+    { "statement": "<short statement>", "answer": true }
+  ]
+}
+REQUIREMENTS:
+- ${Math.max(6,Math.min(12,o))} statements.
+- "answer" must be strictly true or false.
+- Use simple A1–A2 level sentences in English related to "${e}".
+      `.trim(),user:d(e,"truefalse",o)},"definition-match":{system:`
+${s}
+OUTPUT SCHEMA:
+{
+  "id": "definition-match-${r}-1",
+  "type": "definition-match",
+  "prompt": "Match the word with its definition.",
+  "pairs": [
+    { "left": "<word>", "right": "<short definition>" }
+  ]
+}
+REQUIREMENTS:
+- ${Math.max(6,Math.min(10,o))} pairs.
+- "left" must be a single lowercase word without articles.
+- "right" must be one sentence of up to 14 words.
+- Use vocabulary connected to the topic "${e}".
+      `.trim(),user:d(e,"definition-match",o)},"synonym-clue":{system:`
+${s}
+OUTPUT SCHEMA:
+{
+  "id": "synonym-clue-${r}-1",
+  "type": "synonym-clue",
+  "prompt": "Choose the correct word based on the clue.",
+  "wordBank": ["<word1>", "<word2>", "<word3>"],
+  "items": [
+    { "clue": "<clue>", "answers": ["<correct word>"] }
+  ]
+}
+REQUIREMENTS:
+- ${Math.max(6,Math.min(10,o))} items.
+- Provide a word bank of 6–8 lowercase English words that includes all correct answers.
+- "answers" may contain 1–2 acceptable synonyms, all in lowercase English.
+- Write concise clues; omit the final period if the clue is a fragment.
+      `.trim(),user:d(e,"synonym-clue",o)},scramble:{system:`
+${s}
+OUTPUT SCHEMA:
+{
+  "id": "scramble-${r}-1",
+  "type": "scramble",
+  "prompt": "Unscramble the word.",
+  "items": [
+    { "scrambled": "<jumbled letters>", "answers": ["<correct word>"] }
+  ]
+}
+REQUIREMENTS:
+- ${Math.max(6,Math.min(10,o))} items.
+- "scrambled" must be a shuffled version of an English word from "${e}".
+- "answers" may list 1–2 valid spellings in lowercase English.
+      `.trim(),user:d(e,"scramble",o)},wordpairs:{system:`
+${s}
+OUTPUT SCHEMA:
+{
+  "id": "wordpairs-${r}-1",
+  "type": "wordpairs",
+  "prompt": "Match the singular form to the plural form.",
+  "pairs": [
+    { "left": "<singular>", "right": "<plural>" }
+  ]
+}
+REQUIREMENTS:
+- ${Math.max(6,Math.min(10,o))} pairs.
+- Use accurate singular/plural pairs relevant to "${e}".
+- Do not add extra keys beyond the schema.
+      `.trim(),user:d(e,"wordpairs",o)},"odd-one-out":{system:`
+${s}
+OUTPUT SCHEMA:
+{
+  "id": "odd-one-out-${r}-1",
+  "type": "odd-one-out",
+  "prompt": "Find the odd one out.",
+  "items": [
+    { "options": ["<word1>", "<word2>", "<word3>", "<word4>"], "answer": "2", "explanation": "<reason>" }
+  ]
+}
+REQUIREMENTS:
+- ${Math.max(6,Math.min(10,o))} items.
+- Provide exactly 4 options per item.
+- "answer" must be the index of the odd item as a string ("0"–"3").
+- Include a brief English explanation (up to 10 words) for why the option is odd.
+- Only one option may be different; the rest must relate to "${e}".
+      `.trim(),user:d(e,"odd-one-out",o)},context:{system:`
+${s}
+OUTPUT SCHEMA:
+{
+  "id": "context-${r}-1",
   "type": "context",
-  "prompt": "<інструкція англійською>",
+  "prompt": "<instruction in English>",
   "context": {
-    "title": "<2–4 слова>",
+    "title": "<2–4 words>",
     "format": "dialog" | "narrative",
     "body": []
   },
   "questions": [
     {
-      "q": "<питання>",
-      "choices": ["<варіант0>", "<варіант1>", "<варіант2>"],
-      "answer": ["<index_правильної_відповіді_рядком>"]
+      "q": "<question>",
+      "choices": ["<option0>", "<option1>", "<option2>"],
+      "answer": ["<index_of_correct_choice_as_string>"]
     },
     ...
   ]
 }
 
-ВИМОГИ:
-- ${r} питань для тексту.
-- Текст максимум 200 слів, простими фразами рівня A1.
-- Якщо format = "dialog" — масив об'єктів {"speaker": "...", "line": "..."}.
-- Якщо format = "narrative" — масив рядків, кожен рядок = короткий абзац.
-- Питання перевіряють розуміння тексту.
-- У choices завжди 3 варіанти, лише один правильний.
-- Правильна відповідь — індекс рядком ("0" | "1" | "2").
-- ЖОДНОГО додаткового тексту поза JSON.
+REQUIREMENTS:
+- Provide ${o} comprehension questions for the passage.
+- Keep the text within 200 words using simple A1 English connected to "${e}".
+- If "format" is "dialog", use objects {"speaker": "...", "line": "..."}.
+- If "format" is "narrative", use an array of short paragraph strings.
+- Each question must offer exactly 3 choices and a single correct answer.
+- Return the index of the correct choice as a string ("0" | "1" | "2").
+- Output only JSON, no extra commentary.
 
-ПРИКЛАД (АНАЛОГІЧНИЙ; НЕ КОПІЮВАТИ ЗМІСТ):
+EXAMPLE (FORMAT ONLY; DO NOT COPY CONTENT):
 {
   "id": "context-ps-1",
   "type": "context",
-  "prompt": "Прочитайте діалог та оберіть правильну відповідь.",
+  "prompt": "Read the dialogue and choose the correct answer.",
   "context": {
     "title": "Morning Chat",
     "format": "dialog",
@@ -208,9 +380,13 @@ ${a}
       "answer": ["1"]
     }
   ]
-}`.trim(),user:w(e,"context",r)}},f=l[t];return f||l.mcq}const qe={mcq:10,gap:10,transform:10,match:8,error:10,order:10,short:3,writing:1,context:4};function w(e,t,n){return`Тема: ${e}
-Згенеруй блок типу "${t}" з кількістю пунктів: ${n}. Поверни строго JSON за описаною схемою.`}function xe(e){return String(e||"task").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,6)||"task"}const ce=document.querySelector(".js-practice-section"),s=document.querySelector("[data-practice-generator]"),R=s==null?void 0:s.querySelector("[data-practice-status]"),I=document.querySelector("[data-generator-output]"),x=document.querySelector("[data-generator-json]"),b=document.querySelector("[data-generator-copy]"),k=document.querySelector("[data-generator-download]"),O=s==null?void 0:s.querySelector("[data-types]"),m=s==null?void 0:s.querySelector("[data-types-trigger]"),S=s==null?void 0:s.querySelector("[data-types-panel]"),le=document.querySelector("[data-practice-placeholder]"),p=window.lessonContext||{};let h=p.title||"Generated Practice",g=p.level||"custom";const v=[],B=[];function E(e){e&&e.classList.add("hidden")}function K(e){e&&e.classList.remove("hidden")}function de(e){return!e||e.classList.contains("hidden")}function W(){return localStorage.getItem("hideGenerateSection")==="true"}function H(){W()?(E(ce),E(S),E(I),$()):(K(ce),z(),q())}function F(e){return`${e&&typeof e=="object"&&e.id?String(e.id):String((e==null?void 0:e.type)||"task")}-${Date.now()}-${Math.random().toString(16).slice(2,8)}`}function ue(){return{title:h||p.title||"Generated Practice",level:g||p.level||"custom",tasks:[...v,...B].map(e=>e.data)}}function q(){if(x){if(W()){E(I);return}if(!v.length&&!B.length){x.textContent="",E(I),b&&(b.disabled=!0),k&&(k.disabled=!0);return}x.textContent=JSON.stringify(ue(),null,2),K(I),b&&(b.disabled=!1),k&&(k.disabled=!1)}}function Te(e){const t=F(e);return B.push({key:t,data:e}),q(),t}function Le(e,t){const n=o=>{const a=o.findIndex(l=>e&&l.key===e||l.data===t);return a!==-1?(o.splice(a,1),!0):!1};(n(B)||n(v))&&q()}function Ce(){if(!s)return;const e=s.querySelector('[name="topic"]');if(e&&!e.value){const t=p.title||"Lesson topic";e.value=t}}function u(e,t="idle"){R&&(R.textContent=e,R.dataset.state=t)}function _e(e){return String(e||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,8)}function M(e){return String(e||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")}function V(){return Array.from(s.querySelectorAll('input[name="types"]'))}function Pe(e){const t=e.filter(n=>n.checked).map(n=>{var r,o;return(o=(r=n.nextElementSibling)==null?void 0:r.textContent)==null?void 0:o.trim()}).filter(Boolean);return t.length?t.length<=2?t.join(", "):`${t.slice(0,2).join(", ")} +${t.length-2}`:"Оберіть типи"}function z(){if(!m)return;const e=V();m.textContent=Pe(e)}function $(){!S||!m||de(S)||(E(S),m.setAttribute("aria-expanded","false"))}function Ae(){if(!S||!m)return;if(de(S)){K(S),m.setAttribute("aria-expanded","true");const t=S.querySelector('input[name="types"]');t==null||t.focus({preventScroll:!0})}else $()}function Oe(){const e=!W();localStorage.setItem("hideGenerateSection",String(e)),H(),q()}function Ie(){const e=document.getElementById("practice"),t=e==null?void 0:e.querySelector("#practice-body");if(le&&le.remove(),t&&t.children.length===1){const n=t.firstElementChild;n&&/практика поки відсутня/i.test(n.textContent||"")&&n.remove()}}function Be(){const e=document.getElementById("practice");if(!e)return;const t=e.querySelector("#practice-body");if(t&&!t.querySelector(".practice-dynamic-title")){const n=document.createElement("div");n.className="practice-dynamic-title",n.innerHTML=`
+}`.trim(),user:d(e,"context",o)}},a=i[t];return a||i.mcq}const Oe={mcq:10,gap:10,transform:10,match:8,error:10,order:10,short:3,writing:1,roleplay:8,"dialogue-gap":6,"dialogue-order":6,truefalse:8,"definition-match":8,"synonym-clue":8,scramble:8,wordpairs:8,"odd-one-out":8,context:4};function d(e,t,n){return`Topic: ${e}
+Generate a task block of type "${t}" with ${n} items. Return JSON only that follows the described schema.`}function _e(e){return String(e||"task").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,6)||"task"}function qe(e,t){const n=String(e||"").trim(),o=Ie(t);return o?`${n||"Generate the task block."}
+
+Focus on these vocabulary items:
+${o}`:n||e||""}function Ie(e){if(!Array.isArray(e)||!e.length)return"";const t=e.map((n,o)=>{if(!n)return"";const r=n.word||n.term||n.phrase||n.text||`Item ${o+1}`,s=n.translation||n.meaning||n.ua||n.uk||"",i=n.example||n.sentence||n.usage||n.sample||"";let a=`${o+1}. ${r}`;return s&&(a+=` — ${s}`),i&&(a+=` (Example: ${i})`),a}).filter(Boolean);return t.length?t.join(`
+`):""}const me=document.querySelector(".js-practice-section"),c=document.querySelector("[data-practice-generator]"),j=c==null?void 0:c.querySelector("[data-practice-status]"),N=document.querySelector("[data-generator-output]"),P=document.querySelector("[data-generator-json]"),k=document.querySelector("[data-generator-copy]"),x=document.querySelector("[data-generator-download]"),I=c==null?void 0:c.querySelector("[data-types]"),g=c==null?void 0:c.querySelector("[data-types-trigger]"),T=c==null?void 0:c.querySelector("[data-types-panel]"),he=document.querySelector("[data-practice-placeholder]"),f=window.lessonContext||{};let b=f.title||"Generated Practice",S=f.level||"custom";const U=[],H=[];function M(e){e&&e.classList.add("hidden")}function X(e){e&&e.classList.remove("hidden")}function pe(e){return!e||e.classList.contains("hidden")}function Z(){return localStorage.getItem("hideGenerateSection")==="true"}function K(){Z()?(M(me),M(T),M(N),v()):(X(me),z(),A())}function Y(e){return`${e&&typeof e=="object"&&e.id?String(e.id):String((e==null?void 0:e.type)||"task")}-${Date.now()}-${Math.random().toString(16).slice(2,8)}`}function fe(){return{title:b||f.title||"Generated Practice",level:S||f.level||"custom",tasks:[...U,...H].map(e=>e.data)}}function A(){if(P){if(Z()){M(N);return}if(!U.length&&!H.length){P.textContent="",M(N),k&&(k.disabled=!0),x&&(x.disabled=!0);return}P.textContent=JSON.stringify(fe(),null,2),X(N),k&&(k.disabled=!1),x&&(x.disabled=!1)}}function Ne(e){const t=Y(e);return H.push({key:t,data:e}),A(),t}function He(e,t){const n=r=>{const s=r.findIndex(i=>e&&i.key===e||i.data===t);return s!==-1?(r.splice(s,1),!0):!1};(n(H)||n(U))&&A()}function De(){if(!c)return;const e=c.querySelector('[name="topic"]');if(e&&!e.value){const t=f.title||"Lesson topic";e.value=t}}function y(e,t="idle"){j&&(j.textContent=e,j.dataset.state=t)}function Be(e){return String(e||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,8)}function Q(e){return String(e||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")}function ee(){return Array.from(c.querySelectorAll('input[name="types"]'))}function je(e){const t=e.filter(n=>n.checked).map(n=>{var o,r;return(r=(o=n.nextElementSibling)==null?void 0:o.textContent)==null?void 0:r.trim()}).filter(Boolean);return t.length?t.length<=2?t.join(", "):`${t.slice(0,2).join(", ")} +${t.length-2}`:"Оберіть типи"}function z(){if(!g)return;const e=ee();g.textContent=je(e)}function v(){!T||!g||pe(T)||(M(T),g.setAttribute("aria-expanded","false"))}function Qe(){if(!T||!g)return;if(pe(T)){X(T),g.setAttribute("aria-expanded","true");const t=T.querySelector('input[name="types"]');t==null||t.focus({preventScroll:!0})}else v()}function We(){const e=!Z();localStorage.setItem("hideGenerateSection",String(e)),K(),A()}function Fe(){const e=document.getElementById("practice"),t=e==null?void 0:e.querySelector("#practice-body");if(he&&he.remove(),t&&t.children.length===1){const n=t.firstElementChild;n&&/практика поки відсутня/i.test(n.textContent||"")&&n.remove()}}function Ve(){const e=document.getElementById("practice");if(!e)return;const t=e.querySelector("#practice-body");if(t&&!t.querySelector(".practice-dynamic-title")){const n=document.createElement("div");n.className="practice-dynamic-title",n.innerHTML=`
       <h2>Згенеровані завдання</h2>
-      ${p.level?`<p class="muted">Рівень: ${p.level}</p>`:""}
-    `,t.prepend(n)}}async function je(e){var Y;if(e.preventDefault(),!s)return;const t=s.querySelector('button[type="submit"]'),n=s.querySelector('[name="topic"]'),r=s.querySelector('[name="count"]'),o=V(),a=(Y=n==null?void 0:n.value)==null?void 0:Y.trim(),l=Number.parseInt((r==null?void 0:r.value)||"10",10)||10,f=o.filter(d=>d.checked).map(d=>d.value);if(!a){u("Укажіть тему для генерації завдання.","error"),n==null||n.focus();return}if(!f.length&&typeof $=="function"){u("Оберіть принаймні один тип завдання.","error");return}const L=_e(a)||"task";u(`Генеруємо ${f.length} тип(и) завдань…`,"loading"),t&&(t.disabled=!0,t.dataset.originalText=t.dataset.originalText||t.textContent,t.textContent="Генерація…");try{const d=f.map(c=>ke(a,c,{items:l,language:"uk",seedId:`${L}-${c}`}).then(y=>({type:c,task:y}))),C=await Promise.allSettled(d),_=C.map((c,y)=>c.status==="fulfilled"?{type:f[y],task:c.value.task}:null).filter(Boolean),Q=C.map((c,y)=>c.status==="rejected"?f[y]:null).filter(Boolean);if(!_.length)throw new Error("Не вдалося згенерувати жодного типу завдань");const X=[];_.forEach(({type:c,task:y})=>{const P={...y};P.id||(P.id=`${c}-${L}-${Date.now().toString(36)}${Math.random().toString(36).slice(2,6)}`);const me=Te(P);X.push({task:P,key:me})}),Ie(),window.practice&&typeof window.practice.appendTask=="function"&&(Be(),X.forEach(({task:c,key:y})=>{window.practice.appendTask(c,{key:y})})),$();const Z=_.map(({type:c})=>c).join(", ");Q.length?u(`Згенеровано: ${Z}. Помилки: ${Q.join(", ")}`,"success"):u(`Готово! Додано ${_.length} блок(и): ${Z}.`,"success")}catch(d){console.error(d);const C=d instanceof Error&&d.message?`Помилка: ${d.message}`:"Не вдалося згенерувати завдання. Перевірте токен або спробуйте ще раз.";u(C,"error")}finally{if(t){const d=t.dataset.originalText||"Згенерувати завдання";t.disabled=!1,t.textContent=d}}}async function Re(){if(!x)return;const e=x.textContent;if(e)try{await navigator.clipboard.writeText(e),u("JSON скопійовано у буфер.","success")}catch(t){console.error(t),u("Не вдалося скопіювати JSON. Спробуйте вручну.","error")}}function Me(e){return`${M(p.id)||M(e.title)||M(p.title)||"practice"||"practice"}.json`}async function Ne(){const e=ue(),t=JSON.stringify(e,null,2);if(!t||t==="{}"||t==="[]"){u("Немає даних для завантаження.","error");return}try{const n=new Blob([t],{type:"application/json"}),r=URL.createObjectURL(n),o=document.createElement("a");o.href=r,o.download=Me(e),document.body.appendChild(o),o.click(),document.body.removeChild(o),URL.revokeObjectURL(r),u("Файл завантажено.","success")}catch(n){console.error(n),u("Не вдалося завантажити файл.","error")}}function Ue(){if(s){if(Ce(),s.addEventListener("submit",je),b&&(b.addEventListener("click",Re),b.disabled=!0),k&&(k.addEventListener("click",Ne),k.disabled=!0),m&&S&&O){m.setAttribute("aria-haspopup","true"),m.setAttribute("aria-expanded","false"),m.addEventListener("click",()=>{Ae()});const e=n=>{O.contains(n.target)||$()};document.addEventListener("pointerdown",e);const t=n=>{const r=n.relatedTarget;(!r||!O.contains(r))&&$()};O.addEventListener("focusout",t),document.addEventListener("keydown",n=>{n.key==="Escape"&&($(),m.focus())}),V().forEach(n=>{n.addEventListener("change",()=>{z()})}),z(),s.addEventListener("submit",()=>{$()})}document.addEventListener("practice:taskRemoved",e=>{const t=e.detail||{};Le(t.key,t.task)}),document.addEventListener("practice:dataLoaded",e=>{const t=e.detail;v.length=0,t&&Array.isArray(t.entries)?(h=t.title??h,g=t.level??g,t.entries.forEach(({task:n,key:r})=>{const o=r||F(n);v.push({key:o,data:n})})):t&&Array.isArray(t.tasks)?(h=t.title??h,g=t.level??g,t.tasks.forEach(n=>{const r=n&&n.id?String(n.id):F(n);v.push({key:r,data:n})})):t?(h=t.title??h,g=t.level??g):(h=p.title||h,g=p.level||g),q(),H()}),H(),q(),document.addEventListener("keydown",e=>{e.code&&e.code==="KeyH"&&e.ctrlKey&&e.shiftKey&&(e.preventDefault(),Oe())})}}Ue();
+      ${f.level?`<p class="muted">Рівень: ${f.level}</p>`:""}
+    `,t.prepend(n)}}async function Ge(e){var m;if(e.preventDefault(),!c)return;const t=c.querySelector('button[type="submit"]'),n=c.querySelector('[name="topic"]'),o=c.querySelector('[name="count"]'),r=ee(),s=(m=n==null?void 0:n.value)==null?void 0:m.trim(),i=Number.parseInt((o==null?void 0:o.value)||"10",10)||10,a=r.filter(h=>h.checked).map(h=>h.value);if(!s){y("Укажіть тему для генерації завдання.","error"),n==null||n.focus();return}if(!a.length&&typeof v=="function"){y("Оберіть принаймні один тип завдання.","error");return}const l=Be(s)||"task";y(`Генеруємо ${a.length} тип(и) завдань…`,"loading"),t&&(t.disabled=!0,t.dataset.originalText=t.dataset.originalText||t.textContent,t.textContent="Генерація…");const $=String(f.category||"").toLowerCase()==="communication"&&Array.isArray(window.communicationCurrentWords)&&window.communicationCurrentWords.length?window.communicationCurrentWords:void 0;try{const h=a.map(p=>Pe(s,p,{items:i,language:"en",seedId:`${l}-${p}`},$).then(E=>({type:p,task:E}))),C=await Promise.allSettled(h),R=C.map((p,E)=>p.status==="fulfilled"?{type:a[E],task:p.value.task}:null).filter(Boolean),te=C.map((p,E)=>p.status==="rejected"?a[E]:null).filter(Boolean);if(!R.length)throw new Error("Не вдалося згенерувати жодного типу завдань");const ne=[];R.forEach(({type:p,task:E})=>{const O={...E};O.id||(O.id=`${p}-${l}-${Date.now().toString(36)}${Math.random().toString(36).slice(2,6)}`);const ye=Ne(O);ne.push({task:O,key:ye})}),Fe(),window.practice&&typeof window.practice.appendTask=="function"&&(Ve(),ne.forEach(({task:p,key:E})=>{window.practice.appendTask(p,{key:E})})),v();const oe=R.map(({type:p})=>p).join(", ");te.length?y(`Згенеровано: ${oe}. Помилки: ${te.join(", ")}`,"success"):y(`Готово! Додано ${R.length} блок(и): ${oe}.`,"success")}catch(h){console.error(h);const C=h instanceof Error&&h.message?`Помилка: ${h.message}`:"Не вдалося згенерувати завдання. Перевірте токен або спробуйте ще раз.";y(C,"error")}finally{if(t){const h=t.dataset.originalText||"Згенерувати завдання";t.disabled=!1,t.textContent=h}}}async function Je(){if(!P)return;const e=P.textContent;if(e)try{await navigator.clipboard.writeText(e),y("JSON скопійовано у буфер.","success")}catch(t){console.error(t),y("Не вдалося скопіювати JSON. Спробуйте вручну.","error")}}function Ke(e){return`${Q(f.id)||Q(e.title)||Q(f.title)||"practice"||"practice"}.json`}async function Ye(){const e=fe(),t=JSON.stringify(e,null,2);if(!t||t==="{}"||t==="[]"){y("Немає даних для завантаження.","error");return}try{const n=new Blob([t],{type:"application/json"}),o=URL.createObjectURL(n),r=document.createElement("a");r.href=o,r.download=Ke(e),document.body.appendChild(r),r.click(),document.body.removeChild(r),URL.revokeObjectURL(o),y("Файл завантажено.","success")}catch(n){console.error(n),y("Не вдалося завантажити файл.","error")}}function ze(){if(c){if(De(),c.addEventListener("submit",Ge),k&&(k.addEventListener("click",Je),k.disabled=!0),x&&(x.addEventListener("click",Ye),x.disabled=!0),g&&T&&I){g.setAttribute("aria-haspopup","true"),g.setAttribute("aria-expanded","false"),g.addEventListener("click",()=>{Qe()});const e=n=>{I.contains(n.target)||v()};document.addEventListener("pointerdown",e);const t=n=>{const o=n.relatedTarget;(!o||!I.contains(o))&&v()};I.addEventListener("focusout",t),document.addEventListener("keydown",n=>{n.key==="Escape"&&(v(),g.focus())}),ee().forEach(n=>{n.addEventListener("change",()=>{z()})}),z(),c.addEventListener("submit",()=>{v()})}document.addEventListener("practice:taskRemoved",e=>{const t=e.detail||{};He(t.key,t.task)}),document.addEventListener("practice:dataLoaded",e=>{const t=e.detail;U.length=0,t&&Array.isArray(t.entries)?(b=t.title??b,S=t.level??S,t.entries.forEach(({task:n,key:o})=>{const r=o||Y(n);U.push({key:r,data:n})})):t&&Array.isArray(t.tasks)?(b=t.title??b,S=t.level??S,t.tasks.forEach(n=>{const o=n&&n.id?String(n.id):Y(n);U.push({key:o,data:n})})):t?(b=t.title??b,S=t.level??S):(b=f.title||b,S=f.level||S),A(),K()}),K(),A(),document.addEventListener("keydown",e=>{e.code&&e.code==="KeyH"&&e.ctrlKey&&e.shiftKey&&(e.preventDefault(),We())})}}ze();
 //# sourceMappingURL=lesson.js.map

@@ -122,41 +122,6 @@
       ]
     },
     {
-      "id": "match-body-com-match-1",
-      "type": "match",
-      "prompt": "Зістав: частини тіла → їх назви",
-      "pairs": [
-        {
-          "left": "hand",
-          "right": "рука"
-        },
-        {
-          "left": "foot",
-          "right": "нога"
-        },
-        {
-          "left": "head",
-          "right": "голова"
-        },
-        {
-          "left": "eye",
-          "right": "око"
-        },
-        {
-          "left": "ear",
-          "right": "вухо"
-        },
-        {
-          "left": "mouth",
-          "right": "рот"
-        },
-        {
-          "left": "nose",
-          "right": "ніс"
-        }
-      ]
-    },
-    {
       "id": "error-body-com-error-1",
       "type": "error",
       "prompt": "Знайди й виправ помилку (Present Simple, без крапки)",
@@ -244,92 +209,329 @@
       ]
     },
     {
-      "id": "context-body-com-dialog-1",
-      "type": "context",
-      "prompt": "Прочитай короткий діалог і оберіть правильні відповіді.",
-      "context": {
-        "title": "Morning Warm-up",
-        "format": "dialog",
-        "body": [
-          { "speaker": "Lena", "line": "Hi, Max! Ready for the stretching lesson?" },
-          { "speaker": "Max", "line": "Almost. My arms still feel sleepy." },
-          { "speaker": "Lena", "line": "Let's roll our shoulders and shake our hands." },
-          { "speaker": "Coach", "line": "Good idea! After that we move our heads side to side." },
-          { "speaker": "Max", "line": "Can we also wake up our legs?" },
-          { "speaker": "Coach", "line": "Sure, we will march in place to warm the knees." }
-        ]
-      },
-      "questions": [
+      "id": "writing-body-com-writing-1",
+      "type": "writing",
+      "prompt": "Short writing task about Body Communication Essentials.",
+      "description": "Write 5 sentences using the vocabulary about body parts. Use each word at least once.",
+      "checklist": [
+        "Use at least 5 different body parts in your sentences.",
+        "Each sentence should be clear and correct.",
+        "Use simple vocabulary and grammar.",
+        "Make sure to write complete sentences.",
+        "Check for spelling and punctuation."
+      ]
+    },
+    {
+      "id": "dialogue-gap-body-com-dialogue-gap-1",
+      "type": "dialogue-gap",
+      "prompt": "Fill the blanks in the dialogue using the word bank.",
+      "words": [
+        "head",
+        "face",
+        "eye",
+        "ear",
+        "nose",
+        "mouth",
+        "neck",
+        "shoulder"
+      ],
+      "dialogue": [
         {
-          "q": "Що хоче зробити Лена спочатку?",
-          "choices": [
-            "Пострибати на місці",
-            "Покрутити плечима і потрясти руками",
-            "Повернути голову вперед"
-          ],
-          "answer": ["1"]
+          "speaker": "Student 1",
+          "line": "I have a pain in my ___. "
         },
         {
-          "q": "Чому Макс каже, що його руки ще сплять?",
-          "choices": [
-            "Він пропустив сніданок",
-            "Він не рухав ними вранці",
-            "Він носить рукавички"
-          ],
-          "answer": ["1"]
+          "speaker": "Student 2",
+          "line": "Oh no! Is it your ___?"
         },
         {
-          "q": "Що роблять після того, як рухають плечима?",
-          "choices": [
-            "Махають головою вгору-вниз",
-            "Стоять спокійно",
-            "Повертають голову з боку в бік"
-          ],
-          "answer": ["2"]
+          "speaker": "Student 1",
+          "line": "No, it's my ___."
         },
         {
-          "q": "Як тренер пропонує розбудити ноги?",
-          "choices": [
-            "Бігти по залу",
-            "Марширувати на місці",
-            "Сісти і відпочити"
-          ],
-          "answer": ["1"]
+          "speaker": "Student 2",
+          "line": "Can you see with your ___?"
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Yes, my ___ is fine."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "What about your ___?"
+        },
+        {
+          "speaker": "Student 1",
+          "line": "My ___ hurts when I move."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "You should relax your ___."
+        }
+      ],
+      "answers": [
+        "head",
+        "ear",
+        "neck",
+        "eye",
+        "face",
+        "nose",
+        "shoulder",
+        "neck"
+      ]
+    },
+    {
+      "id": "definition-match-body-com-definition-match-1",
+      "type": "definition-match",
+      "prompt": "Match the word with its definition.",
+      "pairs": [
+        {
+          "left": "head",
+          "right": "It is the top part of your body."
+        },
+        {
+          "left": "face",
+          "right": "It is the front part of your head."
+        },
+        {
+          "left": "hair",
+          "right": "It grows on the head and can be long or short."
+        },
+        {
+          "left": "eye",
+          "right": "It is used to see things around you."
+        },
+        {
+          "left": "ear",
+          "right": "It is used to hear sounds."
+        },
+        {
+          "left": "nose",
+          "right": "It is used to smell and breathe."
+        },
+        {
+          "left": "mouth",
+          "right": "It is used to eat and speak."
+        },
+        {
+          "left": "tooth",
+          "right": "It is hard and helps you chew food."
+        },
+        {
+          "left": "neck",
+          "right": "It connects your head to your body."
+        },
+        {
+          "left": "shoulder",
+          "right": "It is the part where your arm joins your body."
         }
       ]
     },
     {
-      "id": "short-body-com-short-1",
-      "type": "short",
-      "prompt": "Короткі відповіді: Body Communication Essentials. Згенеруй задачі для початківців на рівні A1. Використовуй слова повязані з Body",
+      "id": "synonym-clue-body-com-synonym-clue-1",
+      "type": "synonym-clue",
+      "prompt": "Choose the correct word based on the clue.",
+      "wordBank": [
+        "head",
+        "face",
+        "hair",
+        "eye",
+        "ear",
+        "nose",
+        "mouth",
+        "tooth"
+      ],
       "items": [
         {
-          "q": "Напиши 2–3 речення про свої руки.",
-          "keywords": ["my", "hands", "I", "can"]
+          "clue": "The part of your body on top of your neck",
+          "answers": ["head"]
         },
         {
-          "q": "Опиши, як ти використовуєш свої ноги щодня.",
-          "keywords": ["my", "legs", "I", "walk"]
+          "clue": "The front part of your head",
+          "answers": ["face"]
         },
         {
-          "q": "Напиши про свою голову: що ти думаєш?",
-          "keywords": ["my", "head", "I", "think"]
+          "clue": "The strands that grow on your head",
+          "answers": ["hair"]
         },
         {
-          "q": "Які емоції ти показуєш обличчям?",
-          "keywords": ["face", "show", "feel"]
+          "clue": "The organ you use to see",
+          "answers": ["eye"]
         },
         {
-          "q": "Напиши про свої очі: що ти бачиш?",
-          "keywords": ["my", "eyes", "see"]
+          "clue": "The part of your body that hears",
+          "answers": ["ear"]
         },
         {
-          "q": "Які звуки ти чуєш своїми вухами?",
-          "keywords": ["my", "ears", "hear"]
+          "clue": "The part of your face used for smelling",
+          "answers": ["nose"]
         },
         {
-          "q": "Опиши, як ти відчуваєш щастя своїм тілом.",
-          "keywords": ["body", "feel", "happy"]
+          "clue": "The opening in your face for eating and speaking",
+          "answers": ["mouth"]
+        },
+        {
+          "clue": "The hard part in your mouth used for chewing",
+          "answers": ["tooth"]
+        },
+        {
+          "clue": "The part of your body between your head and shoulders",
+          "answers": ["neck"]
+        },
+        {
+          "clue": "The part of your body that connects your arm to your body",
+          "answers": ["shoulder"]
+        }
+      ]
+    },
+    {
+      "id": "scramble-body-com-scramble-1",
+      "type": "scramble",
+      "prompt": "Unscramble the word.",
+      "items": [
+        {
+          "scrambled": "daeh",
+          "answers": ["head"]
+        },
+        {
+          "scrambled": "ecaf",
+          "answers": ["face"]
+        },
+        {
+          "scrambled": "ihra",
+          "answers": ["hair"]
+        },
+        {
+          "scrambled": "eye",
+          "answers": ["eye"]
+        },
+        {
+          "scrambled": "rae",
+          "answers": ["ear"]
+        },
+        {
+          "scrambled": "osen",
+          "answers": ["nose"]
+        },
+        {
+          "scrambled": "mouht",
+          "answers": ["mouth"]
+        },
+        {
+          "scrambled": "tooth",
+          "answers": ["tooth", "teeth"]
+        },
+        {
+          "scrambled": "knec",
+          "answers": ["neck"]
+        },
+        {
+          "scrambled": "luohsdero",
+          "answers": ["shoulder"]
+        }
+      ]
+    },
+    {
+      "id": "wordpairs-body-com-wordpairs-1",
+      "type": "wordpairs",
+      "prompt": "Match the singular form to the plural form.",
+      "pairs": [
+        {
+          "left": "head",
+          "right": "heads"
+        },
+        {
+          "left": "face",
+          "right": "faces"
+        },
+        {
+          "left": "hair",
+          "right": "hairs"
+        },
+        {
+          "left": "eye",
+          "right": "eyes"
+        },
+        {
+          "left": "ear",
+          "right": "ears"
+        },
+        {
+          "left": "nose",
+          "right": "noses"
+        },
+        {
+          "left": "mouth",
+          "right": "mouths"
+        },
+        {
+          "left": "tooth",
+          "right": "teeth"
+        },
+        {
+          "left": "neck",
+          "right": "necks"
+        },
+        {
+          "left": "shoulder",
+          "right": "shoulders"
+        }
+      ]
+    },
+    {
+      "id": "odd-one-out-body-com-odd-one-out-1",
+      "type": "odd-one-out",
+      "prompt": "Find the odd one out.",
+      "items": [
+        {
+          "options": ["head", "face", "hair", "stomach"],
+          "answer": "3",
+          "explanation": "Stomach is not on the face."
+        },
+        {
+          "options": ["eye", "ear", "nose", "hand"],
+          "answer": "3",
+          "explanation": "Hand is not a facial feature."
+        },
+        {
+          "options": ["mouth", "tooth", "neck", "shoulder"],
+          "answer": "2",
+          "explanation": "Tooth is part of the mouth."
+        },
+        {
+          "options": ["back", "arm", "leg", "eye"],
+          "answer": "3",
+          "explanation": "Eye is not a limb."
+        },
+        {
+          "options": ["finger", "toe", "knee", "hair"],
+          "answer": "3",
+          "explanation": "Hair is not a body part for movement."
+        },
+        {
+          "options": ["foot", "hand", "shoulder", "nose"],
+          "answer": "3",
+          "explanation": "Nose is not a limb."
+        },
+        {
+          "options": ["ear", "eye", "mouth", "stomach"],
+          "answer": "3",
+          "explanation": "Stomach is not a sensory organ."
+        },
+        {
+          "options": ["neck", "back", "arm", "face"],
+          "answer": "3",
+          "explanation": "Face is not a body part for support."
+        },
+        {
+          "options": ["leg", "knee", "toe", "hair"],
+          "answer": "3",
+          "explanation": "Hair is not a joint."
+        },
+        {
+          "options": ["head", "shoulder", "finger", "ear"],
+          "answer": "2",
+          "explanation": "Shoulder is not a sensory part."
         }
       ]
     }
