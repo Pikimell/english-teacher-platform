@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Placement Test — English Teacher Platform</title>
+    <script type="module" crossorigin src="/english-teacher-platform/placement-test.js"></script>
+    <link rel="modulepreload" crossorigin href="/english-teacher-platform/assets/main-APTQdbqf.js">
+    <link rel="stylesheet" crossorigin href="/english-teacher-platform/assets/main-CYR7dYBc.css">
+  </head>
+  <body class="placement-page">
+    <header class="header placement-header">
+      <div class="header__inner">
+        <div class="header__copy">
+          <p class="header__eyebrow">Placement Test</p>
+          <h1>Визначення рівня англійської</h1>
+          <p class="tagline">
+            Пройдіть короткий тест, який охоплює усі рівні CEFR. Ви отримаєте
+            статистику за кожним рівнем та зможете планувати подальше навчання.
+          </p>
+          <div class="header__actions">
+            <a class="button button--light" href="/index.html">На головну</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="placement-main">
+      <section class="placement-intro">
+        <h2>Як працює тест</h2>
+        <ul>
+          <li>Обирайте одну правильну відповідь у кожному запитанні.</li>
+          <li>
+            Після відправлення ви побачите діаграму з кількістю правильних
+            відповідей по рівнях.
+          </li>
+        </ul>
+      </section>
+
+      <form class="placement-form" data-component="placement-form">
+        <div class="placement-form__list" data-component="questions"></div>
+        <div class="placement-form__actions">
+          <button class="button button--primary" type="submit">
+            Показати результат
+          </button>
+          <button class="button button--ghost" type="reset">
+            Скинути відповіді
+          </button>
+        </div>
+      </form>
+
+      <section class="placement-results" data-component="results" hidden>
+        <h2>Ваш результат</h2>
+        <p data-component="results-text"></p>
+        <div
+          class="placement-chart"
+          data-component="results-chart"
+          aria-live="polite"
+        ></div>
+        <ul class="placement-summary" data-component="results-summary"></ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small
+        >&copy; <span data-component="copyright-year"></span> English Teacher
+        Platform</small
+      >
+    </footer>
+
+  </body>
+</html>
