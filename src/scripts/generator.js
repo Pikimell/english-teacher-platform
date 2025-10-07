@@ -92,9 +92,7 @@ function attachToolbar(topic = 'Present Simple') {
     btn.textContent = 'Генерую...';
     status.textContent = '';
     try {
-      const vocabulary = Array.isArray(window.communicationCurrentWords)
-        ? window.communicationCurrentWords
-        : undefined;
+      const vocabulary = [];
       const task = await generateTask(
         topic,
         type,

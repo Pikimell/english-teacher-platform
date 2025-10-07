@@ -263,12 +263,7 @@ async function handleSubmit(event) {
   }
 
   const category = String(defaultContext.category || '').toLowerCase();
-  const shouldAttachVocabulary =
-    (category === 'communication' ||
-      Boolean(window.communicationCurrentModule)) &&
-    Array.isArray(window.communicationCurrentWords) &&
-    window.communicationCurrentWords.length;
-  const vocabulary = shouldAttachVocabulary ? window.communicationCurrentWords : undefined;
+  const vocabulary = undefined;
 
   try {
     const generationPromises = selectedTypes.map(type =>

@@ -1,25 +1,9 @@
 import { lessons, lessonCategories } from '../data/lessons.js';
 import { customLessonPresets } from '../data/custom-lesson-presets.js';
 import { loadCustomLessons } from './custom-lessons-store.js';
-import communicationModuleNames from '../public/scripts/communication/words/_communication-modules.json';
+import { communicationWords } from '../data/communication-words.js';
+import { createWordwallIframe, getWordwallConfigsForLesson } from '../data/wordwall.js';
 
-const communicationWordLoaders = {
-  body: () => import('../public/scripts/communication/words/body.js'),
-  'small-talk': () => import('../public/scripts/communication/words/smallTalk.js'),
-  'problem-solving': () => import('../public/scripts/communication/words/problemSolving.js'),
-  feedback: () => import('../public/scripts/communication/words/feedback.js'),
-};
-
-if (Array.isArray(communicationModuleNames)) {
-  communicationModuleNames.forEach((moduleName) => {
-    if (!moduleName || communicationWordLoaders[moduleName]) return;
-    communicationWordLoaders[moduleName] = () =>
-      import(
-        /* @vite-ignore */
-        `../public/scripts/communication/words/${moduleName}.js`
-      );
-  });
-}
 
 const basePath = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) || '/';
 
@@ -31,8 +15,7 @@ function resolveAssetPath(path) {
 }
 
 const params = new URLSearchParams(window.location.search);
-const normaliseCategoryParam = (value) =>
-  value === 'lexical' ? 'communication' : value;
+const normaliseCategoryParam = (value) => value;
 const topicId = params.get('topic');
 const customLessonId = params.get('custom');
 const fallbackTitle = params.get('title');
@@ -258,6 +241,39 @@ function renderEmptyPracticeState(container) {
   container.appendChild(note);
 }
 
+function createWordwallSection(lessonId) {
+  const configs = getWordwallConfigsForLesson(lessonId);
+  if (!configs.length) return null;
+
+  const section = document.createElement('section');
+  section.className = 'lesson-wordwall';
+
+  const heading = document.createElement('h2');
+  heading.className = 'lesson-wordwall__title';
+  heading.textContent = 'Wordwall';
+  section.appendChild(heading);
+
+  const itemsWrapper = document.createElement('div');
+  itemsWrapper.className = 'lesson-wordwall__items';
+  section.appendChild(itemsWrapper);
+
+  let hasEmbeds = false;
+
+  configs.forEach((config, index) => {
+    const iframe = createWordwallIframe({
+      ...config,
+      title: config.title || `Wordwall вправа ${index + 1}`,
+    });
+    if (!iframe) return;
+    hasEmbeds = true;
+    itemsWrapper.appendChild(iframe);
+  });
+
+  if (!hasEmbeds) return null;
+
+  return section;
+}
+
 async function renderCustomLesson() {
   if (!contentElement) return;
 
@@ -283,8 +299,7 @@ async function renderCustomLesson() {
 
   const categoryOrder = {
     grammar: 0,
-    communication: 1,
-    quick: 2,
+    lexical: 1,
   };
 
   const orderedTopics = topics.slice().sort((a, b) => {
@@ -297,6 +312,11 @@ async function renderCustomLesson() {
   const summary = createSummaryList(orderedTopics);
   if (summary) {
     contentElement.appendChild(summary);
+  }
+
+  const wordwallSection = createWordwallSection(customLesson?.id ?? null);
+  if (wordwallSection) {
+    contentElement.appendChild(wordwallSection);
   }
 
   for (const topic of orderedTopics) {
@@ -398,7 +418,16 @@ async function loadLesson() {
       throw new Error(`Не вдалося завантажити файл: ${response.status}`);
     }
     const markup = await response.text();
-    contentElement.innerHTML = markup;
+    contentElement.innerHTML = '';
+
+    const wordwallSection = createWordwallSection(lesson?.id ?? null);
+    if (wordwallSection) {
+      contentElement.appendChild(wordwallSection);
+    }
+
+    const template = document.createElement('template');
+    template.innerHTML = markup;
+    contentElement.appendChild(template.content);
     await hydrateCommunicationWords(contentElement);
   } catch (error) {
     if (statusElement) {
@@ -453,35 +482,29 @@ function renderCommunicationTable(container, entries) {
   container.appendChild(table);
 }
 
+function resolveCommunicationTopic(container) {
+  if (!container) return null;
+  if (container.dataset.communicationTopic) return container.dataset.communicationTopic;
+  if (container.dataset.topic) return container.dataset.topic;
+  const ancestor = container.closest('[data-communication-topic]');
+  if (ancestor?.dataset.communicationTopic) return ancestor.dataset.communicationTopic;
+  const contextId = window.lessonContext?.id;
+  if (contextId && communicationWords[contextId]) return contextId;
+  return null;
+}
+
 async function hydrateCommunicationWords(root) {
   if (!root) return;
-  const placeholders = root.querySelectorAll('[data-communication-words]');
+  const containers = Array.from(root.querySelectorAll('[data-communication-words]'));
+  if (!containers.length) return;
 
-  window.communicationVocabularyMap = window.communicationVocabularyMap || {};
-  window.communicationCurrentWords = undefined;
-  window.communicationCurrentModule = undefined;
-
-  if (!placeholders.length) return;
-
-  for (const placeholder of placeholders) {
-    const moduleName = placeholder.getAttribute('data-module');
-    if (!moduleName) continue;
-    const loader = communicationWordLoaders[moduleName];
-    if (typeof loader !== 'function') continue;
-    try {
-      const module = await loader();
-      const words = module?.default || module?.words || [];
-      if (!Array.isArray(words) || !words.length) continue;
-
-      window.communicationVocabularyMap[moduleName] = words;
-      window.communicationCurrentWords = words;
-      window.communicationCurrentModule = moduleName;
-
-      renderCommunicationTable(placeholder, words);
-    } catch (error) {
-      console.error(`Не вдалося завантажити слова для модуля "${moduleName}"`, error);
-    }
-  }
+  containers.forEach((container) => {
+    const topicKey = resolveCommunicationTopic(container);
+    if (!topicKey) return;
+    const entries = communicationWords[topicKey] || [];
+    if (!entries.length) return;
+    renderCommunicationTable(container, entries);
+  });
 }
 
 function init() {

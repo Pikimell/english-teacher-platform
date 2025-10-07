@@ -16,34 +16,14 @@ const levelSelect = document.querySelector('[data-filter="level"]');
 const categoryButtons = Array.from(
   document.querySelectorAll('[data-category]')
 );
-const grids = {
-  grammar: document.querySelector('[data-category-grid="grammar"]'),
-  communication: document.querySelector('[data-category-grid="communication"]'),
-  quick: document.querySelector('[data-category-grid="quick"]'),
-};
-const sections = {
-  grammar: document.querySelector('[data-category-section="grammar"]'),
-  communication: document.querySelector(
-    '[data-category-section="communication"]'
-  ),
-  quick: document.querySelector('[data-category-section="quick"]'),
-};
-const emptyMessages = {
-  grammar: document.querySelector('[data-category-empty="grammar"]'),
-  communication: document.querySelector(
-    '[data-category-empty="communication"]'
-  ),
-  quick: document.querySelector('[data-category-empty="quick"]'),
-};
-const customSection = document.querySelector('[data-custom-section]');
-const customGrid = document.querySelector('[data-custom-grid]');
-const customEmpty = document.querySelector('[data-custom-empty]');
+const lessonsSection = document.querySelector('[data-lessons-section]');
+const lessonsGrid = document.querySelector('[data-lessons-grid]');
+const lessonsEmpty = document.querySelector('[data-lessons-empty]');
 const stats = {
   total: document.querySelector('[data-stat-total]'),
   grammar: document.querySelector('[data-stat-grammar]'),
-  communication: document.querySelector('[data-stat-communication]'),
-  quick: document.querySelector('[data-stat-quick]'),
-};
+  lexical: document.querySelector('[data-stat-lexical]'),
+  };
 
 function normaliseValue(value) {
   return value.trim().toLowerCase();
@@ -117,20 +97,19 @@ function summariseCustomLesson(lesson) {
   const grammarCount = selectedTopics.filter(
     item => item.category === 'grammar'
   ).length;
-  const communicationCount = selectedTopics.filter(
-    item => item.category === 'communication'
+  const lexicalCount = selectedTopics.filter(
+    item => item.category === 'lexical'
   ).length;
 
   return {
     topics: selectedTopics,
     levels,
     grammarCount,
-    communicationCount,
+    lexicalCount,
   };
 }
 
-function createCustomLessonCard(lesson) {
-  const meta = summariseCustomLesson(lesson);
+function createCustomLessonCard(lesson, meta = summariseCustomLesson(lesson)) {
   const description =
     lesson.description ||
     meta.topics
@@ -140,12 +119,10 @@ function createCustomLessonCard(lesson) {
   const levelLabel =
     lesson.level ||
     (meta.levels.length ? meta.levels.join(', ') : 'мікси рівнів');
-  const counts = [];
-  if (meta.grammarCount) counts.push(`Граматика: ${meta.grammarCount}`);
-  if (meta.communicationCount)
-    counts.push(`Communication: ${meta.communicationCount}`);
-  const categoryLabel =
-    lesson.source === 'preset' ? 'Готовий комбінований' : 'Мій комбінований';
+  const metaParts = [];
+  if (levelLabel) metaParts.push(`Рівні: ${escapeHtml(levelLabel)}`);
+  if (meta.grammarCount) metaParts.push(`Граматика: ${meta.grammarCount}`);
+  if (meta.lexicalCount) metaParts.push(`Лексика: ${meta.lexicalCount}`);
 
   return `
     <article class="lesson-card lesson-card--custom" data-custom-lesson-id="${
@@ -155,7 +132,12 @@ function createCustomLessonCard(lesson) {
         lesson.id
       )}">
         
-        <h3 class="lesson-card__title">${escapeHtml(lesson.title)}</h3>
+       <h3 class="lesson-card__title">${escapeHtml(lesson.title)}</h3>
+        ${
+          metaParts.length
+            ? `<p class="lesson-card__meta">${metaParts.join(' · ')}</p>`
+            : ''
+        }
         <p class="lesson-card__description">${escapeHtml(
           description || 'Урок містить кілька тем.'
         )}</p>
@@ -202,91 +184,125 @@ function getAllCustomLessons() {
   return Array.from(byId.values());
 }
 
-function renderCustomLessons() {
-  if (!customGrid || !customEmpty) return;
-
+function collectCombinedLessons() {
   const toTime = value => {
     const timestamp = value ? new Date(value).getTime() : 0;
     return Number.isFinite(timestamp) ? timestamp : 0;
   };
 
-  const lessonsToRender = getAllCustomLessons().sort((a, b) => {
-    const timeDiff = toTime(b.createdAt) - toTime(a.createdAt);
-    if (timeDiff !== 0) return timeDiff;
-    return (a.sortIndex || 0) - (b.sortIndex || 0);
+  const customSource = getAllCustomLessons()
+    .slice()
+    .sort((a, b) => {
+      const timeDiff = toTime(b.createdAt) - toTime(a.createdAt);
+      if (timeDiff !== 0) return timeDiff;
+      return (a.sortIndex || 0) - (b.sortIndex || 0);
+    });
+
+  const customItems = customSource.map(lesson => {
+    const meta = summariseCustomLesson(lesson);
+    return {
+      type: 'custom',
+      lesson,
+      meta,
+    };
   });
 
-  if (!lessonsToRender.length) {
-    customGrid.innerHTML = '';
-    customEmpty.hidden = false;
-    if (customSection) customSection.dataset.hasCustom = 'false';
-    return;
+  const catalogItems = lessons.map(lesson => ({
+    type: 'catalog',
+    lesson,
+  }));
+
+  return [...customItems, ...catalogItems];
+}
+
+function lessonMatchesCategory(item) {
+  if (state.category === 'all') return true;
+  if (item.type === 'catalog') {
+    return item.lesson.category === state.category;
+  }
+  return false;
+}
+
+function lessonMatchesLevel(item) {
+  if (state.level === 'all') return true;
+  if (item.type === 'catalog') {
+    return item.lesson.level === state.level;
   }
 
-  customEmpty.hidden = true;
-  customGrid.innerHTML = lessonsToRender.map(createCustomLessonCard).join('');
-  if (customSection) customSection.dataset.hasCustom = 'true';
+  const lessonLevel = item.lesson.level;
+  if (lessonLevel) return lessonLevel === state.level;
+
+  const derivedLevels = item.meta?.levels ?? [];
+  return derivedLevels.includes(state.level);
+}
+
+function collectCustomSearchTokens(lesson, meta) {
+  const topics = meta?.topics ?? [];
+  const topicTokens = topics.flatMap(topic =>
+    [topic.title, topic.description, ...(topic.tags || [])].filter(Boolean)
+  );
+  return [
+    lesson.title,
+    lesson.description,
+    ...(lesson.tags || []),
+    lesson.level,
+    ...topicTokens,
+  ]
+    .filter(Boolean)
+    .map(value => normaliseValue(String(value)));
+}
+
+function lessonMatchesSearch(item, searchTerm) {
+  if (!searchTerm) return true;
+
+  if (item.type === 'catalog') {
+    const haystack = [
+      item.lesson.title,
+      item.lesson.description,
+      ...(item.lesson.tags ?? []),
+    ]
+      .filter(Boolean)
+      .map(value => normaliseValue(String(value)));
+    return haystack.some(value => value.includes(searchTerm));
+  }
+
+  const customTokens = collectCustomSearchTokens(item.lesson, item.meta);
+  return customTokens.some(value => value.includes(searchTerm));
 }
 
 function filterLessons() {
+  const combined = collectCombinedLessons();
   const searchTerm = normaliseValue(state.search);
-  const matches = lessons.filter(lesson => {
-    const matchesCategory =
-      state.category === 'all' || lesson.category === state.category;
-    const matchesLevel = state.level === 'all' || lesson.level === state.level;
-
-    if (!searchTerm) {
-      return matchesCategory && matchesLevel;
-    }
-
-    const haystack = [lesson.title, lesson.description, ...(lesson.tags ?? [])]
-      .filter(Boolean)
-      .map(value => normaliseValue(String(value)));
-
-    const matchesSearch = haystack.some(value => value.includes(searchTerm));
-
-    return matchesCategory && matchesLevel && matchesSearch;
+  return combined.filter(item => {
+    if (!lessonMatchesCategory(item)) return false;
+    if (!lessonMatchesLevel(item)) return false;
+    return lessonMatchesSearch(item, searchTerm);
   });
-
-  return matches.reduce(
-    (acc, lesson) => {
-      if (!acc[lesson.category]) {
-        acc[lesson.category] = [];
-      }
-      acc[lesson.category].push(lesson);
-      return acc;
-    },
-    {
-      grammar: [],
-      communication: [],
-      quick: [],
-    }
-  );
 }
 
 function renderLessons() {
-  const groupedLessons = filterLessons();
+  if (!lessonsGrid || !lessonsEmpty) return;
 
-  Object.entries(groupedLessons).forEach(([category, items]) => {
-    const grid = grids[category];
-    const emptyMessage = emptyMessages[category];
-    const section = sections[category];
+  const items = filterLessons();
 
-    if (!grid || !emptyMessage || !section) return;
+  if (!items.length) {
+    lessonsGrid.innerHTML = '';
+    lessonsEmpty.hidden = false;
+    if (lessonsSection) lessonsSection.dataset.hasResults = 'false';
+    return;
+  }
 
-    grid.innerHTML = items.map(createCardTemplate).join('');
-    const isEmpty = items.length === 0;
-    emptyMessage.hidden = !isEmpty;
-    if (isEmpty) {
-      grid.setAttribute('data-empty', 'true');
-    } else {
-      grid.removeAttribute('data-empty');
-    }
+  const markup = items
+    .map(item =>
+      item.type === 'custom'
+        ? createCustomLessonCard(item.lesson, item.meta)
+        : createCardTemplate(item.lesson)
+    )
+    .join('');
 
-    const shouldHideSection =
-      state.category !== 'all' && state.category !== category;
-    section.hidden = shouldHideSection;
-  });
+  lessonsGrid.innerHTML = markup;
+  lessonsEmpty.hidden = true;
+  if (lessonsSection) lessonsSection.dataset.hasResults = 'true';
 }
 
 function setStats() {
@@ -295,13 +311,9 @@ function setStats() {
     stats.grammar.textContent = String(
       lessons.filter(lesson => lesson.category === 'grammar').length
     );
-  if (stats.communication)
-    stats.communication.textContent = String(
-      lessons.filter(lesson => lesson.category === 'communication').length
-    );
-  if (stats.quick)
-    stats.quick.textContent = String(
-      lessons.filter(lesson => lesson.category === 'quick').length
+  if (stats.lexical)
+    stats.lexical.textContent = String(
+      lessons.filter(lesson => lesson.category === 'lexical').length
     );
 }
 
@@ -336,7 +348,6 @@ function init() {
   setStats();
   updateCategoryButtons();
   renderLessons();
-  renderCustomLessons();
   setCurrentYear();
 
   if (searchInput) {
@@ -352,7 +363,7 @@ function init() {
   });
 
   subscribeToStorage(() => {
-    renderCustomLessons();
+    renderLessons();
   });
 }
 

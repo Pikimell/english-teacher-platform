@@ -22,8 +22,15 @@ function setCurrentYear() {
 }
 
 function normalise(value) {
-  return String(value || '')
+  const stringValue = String(value ?? '');
+  const normalizedValue =
+    typeof stringValue.normalize === 'function'
+      ? stringValue.normalize('NFKD')
+      : stringValue;
+  return normalizedValue
     .toLowerCase()
+    .replace(/[\u2019\u2018\u02bc'`]/g, '')
+    .replace(/[^a-z0-9\u0400-\u04FF]+/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -33,7 +40,7 @@ function createTopicOption(lesson) {
   const label = document.createElement('label');
   label.className = 'checkbox builder-option';
   label.dataset.topicId = lesson.id;
-  label.dataset.searchTokens = normalise(textContent);
+  label.dataset.searchSource = textContent;
   label.innerHTML = `
     <input type="checkbox" name="topics" value="${lesson.id}" data-category="${lesson.category}" />
     <span class="builder-option__content">
@@ -56,29 +63,65 @@ function populateGroups() {
       .sort((a, b) => a.title.localeCompare(b.title, 'uk'))
       .forEach((topic) => fragment.appendChild(createTopicOption(topic)));
 
+    listElement.innerHTML = '';
     listElement.appendChild(fragment);
   });
 }
 
+function buildSearchTokens(value) {
+  return normalise(value)
+    .split(' ')
+    .filter(Boolean);
+}
+
+function getOptionTokens(option) {
+  if (!option) return [];
+
+  if (!option.dataset.searchTokensCache) {
+    const baseText = option.dataset.searchSource || option.textContent || '';
+    const tokens = buildSearchTokens(baseText);
+    option.dataset.searchTokensCache = tokens.join('|');
+  }
+
+  return option.dataset.searchTokensCache.split('|').filter(Boolean);
+}
+
+function setOptionVisibility(option, shouldShow) {
+  option.hidden = !shouldShow;
+  option.classList.toggle('is-hidden', !shouldShow);
+}
+
 function filterGroup(group, query) {
-  const normalizedQuery = normalise(query);
   const options = Array.from(group.querySelectorAll('.builder-option'));
-  if (!normalizedQuery) {
-    options.forEach((option) => {
-      option.hidden = false;
-    });
+  const queryTokens = buildSearchTokens(query);
+
+  if (queryTokens.length === 0) {
+    options.forEach((option) => setOptionVisibility(option, true));
     group.dataset.matches = String(options.length);
+    group.removeAttribute('data-group-empty');
     return;
   }
 
   let matches = 0;
   options.forEach((option) => {
-    const haystack = option.dataset.searchTokens || '';
-    const isMatch = haystack.includes(normalizedQuery);
-    option.hidden = !isMatch;
-    if (isMatch) matches += 1;
+    const optionTokens = getOptionTokens(option);
+    const isMatch = queryTokens.every((token) =>
+      optionTokens.some((optionToken) => optionToken.includes(token)),
+    );
+
+    setOptionVisibility(option, isMatch);
+
+    if (isMatch) {
+      matches += 1;
+    }
   });
+
   group.dataset.matches = String(matches);
+  if (matches === 0) {
+    group.dataset.groupEmpty = 'true';
+  } else {
+    delete group.dataset.groupEmpty;
+  }
 }
 
 function handleSearchInput(event) {
@@ -165,12 +208,12 @@ function describeLessonTopics(topicIds) {
     .map((id) => lessons.find((lesson) => lesson.id === id))
     .filter(Boolean);
   const grammarCount = topics.filter((topic) => topic.category === 'grammar').length;
-  const communicationCount = topics.filter((topic) => topic.category === 'communication').length;
+  const lexicalCount = topics.filter((topic) => topic.category === 'lexical').length;
   const titles = topics.map((topic) => topic.title);
 
   return {
     grammarCount,
-    communicationCount,
+    lexicalCount,
     titles,
   };
 }
@@ -205,7 +248,7 @@ function renderSavedLessons() {
     metaEl.className = 'builder-card__meta';
     const metaParts = [];
     if (meta.grammarCount) metaParts.push(`Граматика: ${meta.grammarCount}`);
-    if (meta.communicationCount) metaParts.push(`Communication: ${meta.communicationCount}`);
+    if (meta.lexicalCount) metaParts.push(`Лексика: ${meta.lexicalCount}`);
     metaEl.textContent = metaParts.join(' · ');
 
     const topics = document.createElement('p');

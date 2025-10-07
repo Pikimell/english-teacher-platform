@@ -1,0 +1,514 @@
+{
+  "title": "Дієслово to be (am / is / are)",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "mcq-to-be-am-mcq-1",
+      "type": "mcq",
+      "prompt": "Choose the correct option.",
+      "items": [
+        {
+          "q": "I ___ a student.",
+          "choices": [
+            "am",
+            "is",
+            "are"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "She ___ my friend.",
+          "choices": [
+            "am",
+            "is",
+            "are"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "They ___ happy.",
+          "choices": [
+            "am",
+            "is",
+            "are"
+          ],
+          "answer": [
+            "2"
+          ]
+        },
+        {
+          "q": "He ___ a teacher.",
+          "choices": [
+            "am",
+            "is",
+            "are"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "We ___ in the park.",
+          "choices": [
+            "am",
+            "is",
+            "are"
+          ],
+          "answer": [
+            "2"
+          ]
+        },
+        {
+          "q": "You ___ my best friend.",
+          "choices": [
+            "am",
+            "is",
+            "are"
+          ],
+          "answer": [
+            "2"
+          ]
+        },
+        {
+          "q": "It ___ a sunny day.",
+          "choices": [
+            "am",
+            "is",
+            "are"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "I ___ not tired.",
+          "choices": [
+            "am",
+            "is",
+            "are"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "The dogs ___ outside.",
+          "choices": [
+            "am",
+            "is",
+            "are"
+          ],
+          "answer": [
+            "2"
+          ]
+        },
+        {
+          "q": "This book ___ interesting.",
+          "choices": [
+            "am",
+            "is",
+            "are"
+          ],
+          "answer": [
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "match-to-be-am-match-1",
+      "type": "match",
+      "prompt": "Match the subject with the correct form of the verb 'to be'.",
+      "pairs": [
+        {
+          "left": "I",
+          "right": "am"
+        },
+        {
+          "left": "he",
+          "right": "is"
+        },
+        {
+          "left": "she",
+          "right": "is"
+        },
+        {
+          "left": "it",
+          "right": "is"
+        },
+        {
+          "left": "we",
+          "right": "are"
+        },
+        {
+          "left": "you (singular)",
+          "right": "are"
+        },
+        {
+          "left": "you (plural)",
+          "right": "are"
+        },
+        {
+          "left": "they",
+          "right": "are"
+        },
+        {
+          "left": "my brother",
+          "right": "is"
+        },
+        {
+          "left": "my friends",
+          "right": "are"
+        }
+      ]
+    },
+    {
+      "id": "short-to-be-am-short-1",
+      "type": "short",
+      "prompt": "Write short answers about Дієслово to be (am / is / are).",
+      "items": [
+        {
+          "q": "I ___ a student.",
+          "keywords": [
+            "i",
+            "a",
+            "student"
+          ]
+        },
+        {
+          "q": "She ___ my friend.",
+          "keywords": [
+            "she",
+            "my",
+            "friend"
+          ]
+        },
+        {
+          "q": "They ___ happy today.",
+          "keywords": [
+            "they",
+            "happy",
+            "today"
+          ]
+        },
+        {
+          "q": "We ___ in the park.",
+          "keywords": [
+            "we",
+            "in",
+            "the",
+            "park"
+          ]
+        },
+        {
+          "q": "He ___ a teacher.",
+          "keywords": [
+            "he",
+            "a",
+            "teacher"
+          ]
+        },
+        {
+          "q": "You ___ my best friend.",
+          "keywords": [
+            "you",
+            "my",
+            "best",
+            "friend"
+          ]
+        },
+        {
+          "q": "It ___ a sunny day.",
+          "keywords": [
+            "it",
+            "a",
+            "sunny",
+            "day"
+          ]
+        },
+        {
+          "q": "I ___ from Ukraine.",
+          "keywords": [
+            "i",
+            "from",
+            "ukraine"
+          ]
+        },
+        {
+          "q": "They ___ at home.",
+          "keywords": [
+            "they",
+            "at",
+            "home"
+          ]
+        },
+        {
+          "q": "She ___ very kind.",
+          "keywords": [
+            "she",
+            "very",
+            "kind"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "writing-to-be-am-writing-1",
+      "type": "writing",
+      "prompt": "Short writing task about Дієслово to be (am / is / are).",
+      "description": "Write 5 sentences using the verb 'to be' (am, is, are). Use it to describe yourself, your family, or your friends.",
+      "checklist": [
+        "Use 'am' correctly for the first person.",
+        "Use 'is' correctly for he, she, or it.",
+        "Use 'are' correctly for you, we, or they.",
+        "Make sure each sentence is complete and clear.",
+        "Check for correct punctuation at the end of each sentence."
+      ]
+    },
+    {
+      "id": "roleplay-to-be-am-roleplay-1",
+      "type": "roleplay",
+      "prompt": "Practice using the verb 'to be' in a conversation.",
+      "scenario": {
+        "setting": "a school classroom",
+        "summary": "You are classmates talking about your families. Use 'am', 'is', and 'are' to describe your family members.",
+        "roles": [
+          {
+            "name": "Student 1",
+            "goal": "Describe your family members.",
+            "details": "You have a brother and a sister. Your brother is 10 years old."
+          },
+          {
+            "name": "Student 2",
+            "goal": "Ask questions about Student 1's family.",
+            "details": "You have a mother and a father. Your mother is a teacher."
+          }
+        ],
+        "steps": [
+          "Student 1 starts by saying who is in their family.",
+          "Student 2 asks about Student 1's brother.",
+          "Student 1 answers using 'is' and gives more details.",
+          "Student 2 shares about their own family.",
+          "Both students ask each other questions about their families."
+        ]
+      },
+      "phrases": [
+        {
+          "phrase": "I am",
+          "translation": "used to describe oneself"
+        },
+        {
+          "phrase": "You are",
+          "translation": "used to describe the other person"
+        },
+        {
+          "phrase": "He is",
+          "translation": "used to describe a male person"
+        },
+        {
+          "phrase": "She is",
+          "translation": "used to describe a female person"
+        },
+        {
+          "phrase": "They are",
+          "translation": "used to describe a group of people"
+        },
+        {
+          "phrase": "My brother is",
+          "translation": "to talk about your brother"
+        },
+        {
+          "phrase": "My sister is",
+          "translation": "to talk about your sister"
+        },
+        {
+          "phrase": "My mother is",
+          "translation": "to talk about your mother"
+        },
+        {
+          "phrase": "My father is",
+          "translation": "to talk about your father"
+        },
+        {
+          "phrase": "We are",
+          "translation": "used to describe a group including yourself"
+        }
+      ]
+    },
+    {
+      "id": "dialogue-order-to-be-am-dialogue-order-1",
+      "type": "dialogue-order",
+      "prompt": "Arrange the dialogue lines in the correct order.",
+      "lines": [
+        {
+          "speaker": "Student 1",
+          "line": "Hello! How are you today?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "I am fine, thank you! And you?"
+        },
+        {
+          "speaker": "Student 1",
+          "line": "I am good too! What is your name?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "My name is Anna. What is yours?"
+        },
+        {
+          "speaker": "Student 1",
+          "line": "I am John. Nice to meet you!"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Nice to meet you too, John!"
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Where are you from, Anna?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "I am from Canada. And you?"
+        }
+      ],
+      "solution": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "id": "truefalse-to-be-am-truefalse-1",
+      "type": "truefalse",
+      "prompt": "Decide if each statement is true or false.",
+      "items": [
+        {
+          "statement": "I am a student.",
+          "answer": true
+        },
+        {
+          "statement": "She are happy.",
+          "answer": false
+        },
+        {
+          "statement": "They are friends.",
+          "answer": true
+        },
+        {
+          "statement": "He is a teacher.",
+          "answer": true
+        },
+        {
+          "statement": "We is ready.",
+          "answer": false
+        },
+        {
+          "statement": "You are my friend.",
+          "answer": true
+        },
+        {
+          "statement": "It am cold today.",
+          "answer": false
+        },
+        {
+          "statement": "The cat is small.",
+          "answer": true
+        },
+        {
+          "statement": "I are tired.",
+          "answer": false
+        },
+        {
+          "statement": "She is my sister.",
+          "answer": true
+        }
+      ]
+    },
+    {
+      "id": "synonym-clue-to-be-am-synonym-clue-1",
+      "type": "synonym-clue",
+      "prompt": "Choose the correct word based on the clue.",
+      "wordBank": [
+        "am",
+        "is",
+        "are",
+        "be",
+        "exist",
+        "live"
+      ],
+      "items": [
+        {
+          "clue": "I ___ happy",
+          "answers": [
+            "am"
+          ]
+        },
+        {
+          "clue": "She ___ a teacher",
+          "answers": [
+            "is"
+          ]
+        },
+        {
+          "clue": "They ___ friends",
+          "answers": [
+            "are"
+          ]
+        },
+        {
+          "clue": "He ___ tall",
+          "answers": [
+            "is"
+          ]
+        },
+        {
+          "clue": "We ___ here",
+          "answers": [
+            "are"
+          ]
+        },
+        {
+          "clue": "I ___ tired",
+          "answers": [
+            "am"
+          ]
+        },
+        {
+          "clue": "It ___ cold today",
+          "answers": [
+            "is"
+          ]
+        },
+        {
+          "clue": "You ___ my best friend",
+          "answers": [
+            "are"
+          ]
+        },
+        {
+          "clue": "She ___ in the garden",
+          "answers": [
+            "is"
+          ]
+        },
+        {
+          "clue": "They ___ happy",
+          "answers": [
+            "are"
+          ]
+        }
+      ]
+    }
+  ]
+}

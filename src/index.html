@@ -13,12 +13,17 @@
           <p class="header__eyebrow">English Teacher Platform</p>
           <h1>Навчальна база для викладачів та студентів</h1>
           <p class="tagline">
-            Знаходьте граматику, комунікативні сценарії та швидкі довідники за кілька кліків.
-            Використовуйте фільтри, щоб перейти до потрібної теми та одразу відкривати конспект.
+            Знаходьте граматику, лексику та комунікативні сценарії за кілька
+            кліків. Використовуйте фільтри, щоб перейти до потрібної теми та
+            одразу відкривати конспект.
           </p>
           <div class="header__actions">
-            <a class="button button--primary" href="./custom-lessons.html">Створити урок</a>
-            <a class="button button--light" href="./placement-test.html">Пройти тест на рівень</a>
+            <a class="button button--primary" href="./custom-lessons.html"
+              >Створити урок</a
+            >
+            <a class="button button--light" href="./placement-test.html"
+              >Пройти тест на рівень</a
+            >
           </div>
         </div>
         <dl class="header__stats">
@@ -31,12 +36,8 @@
             <dd data-stat-grammar>0</dd>
           </div>
           <div>
-            <dt>Communication</dt>
-            <dd data-stat-communication>0</dd>
-          </div>
-          <div>
-            <dt>Швидкий доступ</dt>
-            <dd data-stat-quick>0</dd>
+            <dt>Лексика</dt>
+            <dd data-stat-lexical>0</dd>
           </div>
         </dl>
       </div>
@@ -51,16 +52,34 @@
         <div class="filters__grid">
           <label class="field">
             <span>Пошук</span>
-            <input type="search" placeholder="Наприклад, Present Simple" data-filter="search" />
+            <input
+              type="search"
+              placeholder="Наприклад, Present Simple"
+              data-filter="search"
+            />
           </label>
 
           <div class="field">
             <span>Категорія</span>
-            <div class="chip-group" role="group" aria-label="Фільтр за категорією">
-              <button class="chip chip--filled" type="button" data-category="all" aria-pressed="true">Усі</button>
-              <button class="chip" type="button" data-category="grammar">Граматика</button>
-              <button class="chip" type="button" data-category="communication">Communication</button>
-              <button class="chip" type="button" data-category="quick">Швидкий доступ</button>
+            <div
+              class="chip-group"
+              role="group"
+              aria-label="Фільтр за категорією"
+            >
+              <button
+                class="chip chip--filled"
+                type="button"
+                data-category="all"
+                aria-pressed="true"
+              >
+                Усі
+              </button>
+              <button class="chip" type="button" data-category="grammar">
+                Граматика
+              </button>
+              <button class="chip" type="button" data-category="lexical">
+                Лексика
+              </button>
             </div>
           </div>
 
@@ -79,51 +98,31 @@
         </div>
       </section>
 
-      <section class="catalog" data-custom-section aria-labelledby="custom-heading">
+      <section
+        class="catalog"
+        data-lessons-section
+        aria-labelledby="lessons-heading"
+      >
         <div class="catalog__header">
-          <p class="section-title">Мої уроки</p>
-          <h2 id="custom-heading">Комбіновані уроки</h2>
+          <p class="section-title">База матеріалів</p>
+          <h2 id="lessons-heading">Усі уроки</h2>
           <p class="catalog__description">
-            Тут з’являться уроки, які ви створите у конструкторі. Клікніть, щоб переглянути готові матеріали.
+            Один список для комбінованих уроків, граматики та лексики.
+            Використовуйте пошук і фільтри зверху.
           </p>
         </div>
-        <div class="cards-grid" data-custom-grid aria-live="polite"></div>
-        <p class="catalog__empty" data-custom-empty hidden>Створіть перший урок у конструкторі вище.</p>
-      </section>
-
-      <section class="catalog" data-category-section="grammar" aria-labelledby="grammar-heading">
-        <div class="catalog__header">
-          <p class="section-title">Категорія</p>
-          <h2 id="grammar-heading">Граматика</h2>
-          <p class="catalog__description">Чіткі пояснення правил, таблиць та прикладів для кожного часу чи конструкції.</p>
-        </div>
-        <div class="cards-grid" data-category-grid="grammar" aria-live="polite"></div>
-        <p class="catalog__empty" data-category-empty="grammar" hidden>Немає тем, що відповідають обраним фільтрам.</p>
-      </section>
-
-      <section class="catalog" data-category-section="communication" aria-labelledby="communication-heading">
-        <div class="catalog__header">
-          <p class="section-title">Категорія</p>
-          <h2 id="communication-heading">Communication</h2>
-          <p class="catalog__description">Готові плани занять, діалоги, словники та вправи для розвитку розмовних навичок.</p>
-        </div>
-        <div class="cards-grid" data-category-grid="communication" aria-live="polite"></div>
-        <p class="catalog__empty" data-category-empty="communication" hidden>Немає тем, що відповідають обраним фільтрам.</p>
-      </section>
-
-      <section class="catalog" data-category-section="quick" aria-labelledby="quick-heading">
-        <div class="catalog__header">
-          <p class="section-title">Категорія</p>
-          <h2 id="quick-heading">Швидкий доступ</h2>
-          <p class="catalog__description">Шаблони, довідники та списки, до яких звертаєтесь щодня.</p>
-        </div>
-        <div class="cards-grid" data-category-grid="quick" aria-live="polite"></div>
-        <p class="catalog__empty" data-category-empty="quick" hidden>Немає тем, що відповідають обраним фільтрам.</p>
+        <div class="cards-grid" data-lessons-grid aria-live="polite"></div>
+        <p class="catalog__empty" data-lessons-empty hidden>
+          Знайдені матеріали з’являться тут.
+        </p>
       </section>
     </main>
 
     <footer class="footer">
-      <small>&copy; <span data-component="copyright-year"></span> English Teacher Platform</small>
+      <small
+        >&copy; <span data-component="copyright-year"></span> English Teacher
+        Platform</small
+      >
     </footer>
 
     <script type="module" src="/scripts/main.js"></script>
