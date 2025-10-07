@@ -596,6 +596,9 @@
       case "odd-one-out":
         renderOddOneOut(box, task);
         break;
+      case "open":
+        renderOpen(box, task);
+        break;
       case "writing":
         renderWriting(box, task);
         break;
@@ -973,6 +976,100 @@
     });
     container.appendChild(btn);
     container.appendChild(result);
+  }
+
+  function renderOpen(container, task) {
+    container.appendChild(
+      el('h3', {}, task.prompt || 'Відповіді у вільній формі')
+    );
+
+    const items = Array.isArray(task && task.items)
+      ? task.items.filter(Boolean)
+      : [];
+    if (items.length) {
+      const list = el('div', {
+        style:
+          'display:flex;flex-direction:column;gap:12px;margin-top:12px;',
+      });
+      items.forEach((item, index) => {
+        const entry = el('div', {
+          style:
+            'padding:12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+        });
+        const situation =
+          (item && (item.situation || item.prompt || item.q)) ||
+          `Ситуація ${index + 1}`;
+        entry.appendChild(
+          el(
+            'div',
+            { style: 'margin:0 0 6px;font-weight:600;color:#0f172a;' },
+            situation
+          )
+        );
+
+        const examples = item && Array.isArray(item.example_answers)
+          ? item.example_answers.filter(Boolean)
+          : [];
+        if (examples.length) {
+          entry.appendChild(
+            el(
+              'div',
+              { class: 'muted', style: 'margin:0 0 6px;color:#64748b;' },
+              'Приклад відповіді:'
+            )
+          );
+          const chips = el('div', {
+            style: 'display:flex;flex-wrap:wrap;gap:8px;',
+          });
+          examples.forEach((answer) => {
+            chips.appendChild(
+              el(
+                'span',
+                {
+                  style:
+                    'display:inline-flex;align-items:center;padding:4px 10px;border-radius:9999px;background:#e2e8f0;color:#0f172a;font-size:14px;',
+                },
+                answer
+              )
+            );
+          });
+          entry.appendChild(chips);
+        }
+        list.appendChild(entry);
+      });
+      container.appendChild(list);
+    }
+
+    const criteria =
+      task &&
+      task.scoring &&
+      Array.isArray(task.scoring.criteria)
+        ? task.scoring.criteria.filter(Boolean)
+        : [];
+    if (criteria.length) {
+      const scoringBox = el('div', {
+        style:
+          'margin-top:16px;padding:14px;border:1px dashed #cbd5e1;border-radius:10px;background:#f8fafc;',
+      });
+      scoringBox.appendChild(
+        el(
+          'h4',
+          {
+            style:
+              'margin:0 0 8px;font-size:16px;font-weight:600;color:#0f172a;',
+          },
+          'Критерії оцінювання'
+        )
+      );
+      const list = el('ul', {
+        style: 'margin:0;padding-left:18px;color:#475569;',
+      });
+      criteria.forEach((criterion) => {
+        list.appendChild(el('li', { style: 'margin:4px 0;' }, criterion));
+      });
+      scoringBox.appendChild(list);
+      container.appendChild(scoringBox);
+    }
   }
 
   function renderRoleplay(container, task) {
