@@ -1619,6 +1619,7 @@ dl {
   color: rgba(15, 18, 45, 0.6);
 }
 
+
 .lesson-custom-summary__link:hover,
 .lesson-custom-summary__link:focus-visible {
   border-color: rgba(79, 70, 229, 0.4);

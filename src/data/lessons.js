@@ -706,6 +706,474 @@ export const lessons = [
     ]
   },
   {
+    "id": "a2-present-simple-frequency",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Present Simple with Adverbs of Frequency",
+    "description": "Повторення Present Simple із прислівниками частотності та описом рутин.",
+    "htmlPath": "lessons/grammar/a2-present-simple-frequency.html",
+    "tags": [
+      "present simple",
+      "frequency",
+      "routine"
+    ]
+  },
+  {
+    "id": "a2-present-continuous-plans",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Present Continuous for Now and Plans",
+    "description": "Дії в момент мовлення й заплановані домовленості на майбутнє.",
+    "htmlPath": "lessons/grammar/a2-present-continuous-plans.html",
+    "tags": [
+      "present continuous",
+      "plans",
+      "arrangements"
+    ]
+  },
+  {
+    "id": "a2-past-simple-review",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Past Simple — Regular & Irregular Review",
+    "description": "Повторення правильних і неправильних дієслів у Past Simple.",
+    "htmlPath": "lessons/grammar/a2-past-simple-review.html",
+    "tags": [
+      "past simple",
+      "irregular verbs",
+      "story"
+    ]
+  },
+  {
+    "id": "a2-past-continuous",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Past Continuous — Interrupted Actions",
+    "description": "Минулі тривалі дії, які перериваються іншою подією.",
+    "htmlPath": "lessons/grammar/a2-past-continuous.html",
+    "tags": [
+      "past continuous",
+      "interrupted",
+      "while"
+    ]
+  },
+  {
+    "id": "a2-future-simple-will",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Future Simple (will) — Promises and Predictions",
+    "description": "Will для спонтанних рішень, обіцянок та прогнозів.",
+    "htmlPath": "lessons/grammar/a2-future-simple-will.html",
+    "tags": [
+      "future simple",
+      "will",
+      "predictions"
+    ]
+  },
+  {
+    "id": "a2-be-going-to-intentions",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Be going to — Plans and Intentions",
+    "description": "Конструкція be going to для намірів та очевидних прогнозів.",
+    "htmlPath": "lessons/grammar/a2-be-going-to-intentions.html",
+    "tags": [
+      "be going to",
+      "plans",
+      "intentions"
+    ]
+  },
+  {
+    "id": "a2-present-perfect-simple",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Present Perfect Simple — Life Experience",
+    "description": "Have/has + V3 для досвіду та нещодавніх результатів.",
+    "htmlPath": "lessons/grammar/a2-present-perfect-simple.html",
+    "tags": [
+      "present perfect",
+      "experience",
+      "recent"
+    ]
+  },
+  {
+    "id": "a2-present-perfect-vs-past-simple",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Present Perfect vs Past Simple",
+    "description": "Порівнюємо теперішній доконаний та простий минулий час.",
+    "htmlPath": "lessons/grammar/a2-present-perfect-vs-past-simple.html",
+    "tags": [
+      "present perfect",
+      "past simple",
+      "contrast"
+    ]
+  },
+  {
+    "id": "a2-modal-can-could",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Modal Verbs: Can / Could",
+    "description": "Уміння, можливість та ввічливі прохання з can і could.",
+    "htmlPath": "lessons/grammar/a2-modal-can-could.html",
+    "tags": [
+      "modal verbs",
+      "can",
+      "could"
+    ]
+  },
+  {
+    "id": "a2-modal-may-might",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Modal Verbs: May / Might",
+    "description": "Дозвіл та ймовірність за допомогою may та might.",
+    "htmlPath": "lessons/grammar/a2-modal-may-might.html",
+    "tags": [
+      "modal verbs",
+      "may",
+      "might"
+    ]
+  },
+  {
+    "id": "a2-modal-must-mustnt",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Modal Verbs: Must / Mustn’t",
+    "description": "Сильний обов’язок, правила й заборони зі словами must/mustn’t.",
+    "htmlPath": "lessons/grammar/a2-modal-must-mustnt.html",
+    "tags": [
+      "modal verbs",
+      "must",
+      "rules"
+    ]
+  },
+  {
+    "id": "a2-modal-have-to",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Have to / Don’t have to",
+    "description": "Зовнішня необхідність і відсутність обов’язку.",
+    "htmlPath": "lessons/grammar/a2-modal-have-to.html",
+    "tags": [
+      "have to",
+      "obligation",
+      "necessity"
+    ]
+  },
+  {
+    "id": "a2-modal-should",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Should / Shouldn’t — Advice",
+    "description": "Рекомендації та поради з модальним дієсловом should.",
+    "htmlPath": "lessons/grammar/a2-modal-should.html",
+    "tags": [
+      "modal verbs",
+      "should",
+      "advice"
+    ]
+  },
+  {
+    "id": "a2-countable-uncountable",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Countable vs Uncountable Nouns",
+    "description": "Розрізняємо злічувані та незлічувані іменники, артиклі й лічильні одиниці.",
+    "htmlPath": "lessons/grammar/a2-countable-uncountable.html",
+    "tags": [
+      "nouns",
+      "countable",
+      "uncountable"
+    ]
+  },
+  {
+    "id": "a2-quantifiers-much-many",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Quantifiers: much / many / a lot of / some / any",
+    "description": "Обираємо правильні кількісні слова в твердженнях, запереченнях і питаннях.",
+    "htmlPath": "lessons/grammar/a2-quantifiers-much-many.html",
+    "tags": [
+      "quantifiers",
+      "much",
+      "many"
+    ]
+  },
+  {
+    "id": "a2-quantifiers-few-little",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Few / Little / A few / A little",
+    "description": "Розрізняємо відтінки значень “мало” та “трохи”.",
+    "htmlPath": "lessons/grammar/a2-quantifiers-few-little.html",
+    "tags": [
+      "quantifiers",
+      "few",
+      "little"
+    ]
+  },
+  {
+    "id": "a2-one-ones",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Pronoun Replacements: one / ones",
+    "description": "Як уникати повторення іменників за допомогою one та ones.",
+    "htmlPath": "lessons/grammar/a2-one-ones.html",
+    "tags": [
+      "pronouns",
+      "one",
+      "ones"
+    ]
+  },
+  {
+    "id": "a2-possessive-pronouns",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Possessive Pronouns — mine, yours, etc.",
+    "description": "Повна форма присвійних займенників без іменника.",
+    "htmlPath": "lessons/grammar/a2-possessive-pronouns.html",
+    "tags": [
+      "pronouns",
+      "possessive",
+      "mine"
+    ]
+  },
+  {
+    "id": "a2-indefinite-pronouns",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Indefinite Pronouns — someone / anyone / nobody",
+    "description": "Універсальні займенники для людей та речей.",
+    "htmlPath": "lessons/grammar/a2-indefinite-pronouns.html",
+    "tags": [
+      "pronouns",
+      "indefinite",
+      "someone"
+    ]
+  },
+  {
+    "id": "a2-comparison-adjectives",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Comparative Forms — Irregular Review",
+    "description": "Повторення ступенів порівняння з нерегулярними формами.",
+    "htmlPath": "lessons/grammar/a2-comparison-adjectives.html",
+    "tags": [
+      "comparatives",
+      "irregular",
+      "adjectives"
+    ]
+  },
+  {
+    "id": "a2-as-as",
+    "category": "grammar",
+    "level": "A2",
+    "title": "As … as / Not as … as",
+    "description": "Конструкції для порівняння рівності та нерівності.",
+    "htmlPath": "lessons/grammar/a2-as-as.html",
+    "tags": [
+      "comparison",
+      "as as",
+      "not as"
+    ]
+  },
+  {
+    "id": "a2-degree-modifiers",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Degree Modifiers — Very / Too / Enough",
+    "description": "Підсилюємо або обмежуємо значення прикметників та іменників.",
+    "htmlPath": "lessons/grammar/a2-degree-modifiers.html",
+    "tags": [
+      "degree",
+      "too",
+      "enough"
+    ]
+  },
+  {
+    "id": "a2-adverbs-manner",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Adverbs of Manner",
+    "description": "Формуємо прислівники способу дії та визначаємо їх позицію в реченні.",
+    "htmlPath": "lessons/grammar/a2-adverbs-manner.html",
+    "tags": [
+      "adverbs",
+      "manner",
+      "-ly"
+    ]
+  },
+  {
+    "id": "a2-adjective-order",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Adjective Order — Opinion, Size, Colour",
+    "description": "Природний порядок кількох прикметників перед іменником.",
+    "htmlPath": "lessons/grammar/a2-adjective-order.html",
+    "tags": [
+      "adjectives",
+      "order",
+      "opinion"
+    ]
+  },
+  {
+    "id": "a2-sentence-word-order",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Word Order in Statements and Questions",
+    "description": "Структура SVO у твердженнях і інверсія у запитаннях та запереченнях.",
+    "htmlPath": "lessons/grammar/a2-sentence-word-order.html",
+    "tags": [
+      "word order",
+      "statements",
+      "questions"
+    ]
+  },
+  {
+    "id": "a2-question-words",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Wh- Questions — Information Questions",
+    "description": "Уточнювальні запитання з what, where, when, why, how тощо.",
+    "htmlPath": "lessons/grammar/a2-question-words.html",
+    "tags": [
+      "questions",
+      "wh",
+      "information"
+    ]
+  },
+  {
+    "id": "a2-short-answers",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Short Answers — Yes, I have / No, I haven’t",
+    "description": "Природні скорочені відповіді на загальні питання.",
+    "htmlPath": "lessons/grammar/a2-short-answers.html",
+    "tags": [
+      "answers",
+      "short",
+      "speaking"
+    ]
+  },
+  {
+    "id": "a2-conjunctions",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Coordinating and Subordinating Conjunctions",
+    "description": "Використання because, so, although, but, and, or у складених реченнях.",
+    "htmlPath": "lessons/grammar/a2-conjunctions.html",
+    "tags": [
+      "conjunctions",
+      "because",
+      "although"
+    ]
+  },
+  {
+    "id": "a2-imperatives",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Imperatives — Commands and Instructions",
+    "description": "Наказовий спосіб для інструкцій, попереджень і пропозицій.",
+    "htmlPath": "lessons/grammar/a2-imperatives.html",
+    "tags": [
+      "imperatives",
+      "commands",
+      "instructions"
+    ]
+  },
+  {
+    "id": "a2-infinitive",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Infinitive with to — Plans and Decisions",
+    "description": "Вживання to-infinitive після дієслів і прикметників.",
+    "htmlPath": "lessons/grammar/a2-infinitive.html",
+    "tags": [
+      "infinitive",
+      "to",
+      "plans"
+    ]
+  },
+  {
+    "id": "a2-gerund",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Gerund after Common Verbs",
+    "description": "Використання -ing після певних дієслів та сталих виразів.",
+    "htmlPath": "lessons/grammar/a2-gerund.html",
+    "tags": [
+      "gerund",
+      "-ing",
+      "verbs"
+    ]
+  },
+  {
+    "id": "a2-too-enough-structures",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Too / Enough Structures",
+    "description": "Конструкції із too та enough з прикметниками, прислівниками та іменниками.",
+    "htmlPath": "lessons/grammar/a2-too-enough-structures.html",
+    "tags": [
+      "too",
+      "enough",
+      "structures"
+    ]
+  },
+  {
+    "id": "a2-comparatives-long",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Comparatives with Long Adjectives",
+    "description": "Порівняння з more/less для довгих прикметників.",
+    "htmlPath": "lessons/grammar/a2-comparatives-long.html",
+    "tags": [
+      "comparatives",
+      "long adjectives",
+      "more"
+    ]
+  },
+  {
+    "id": "a2-superlatives-long",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Superlatives with Long Adjectives",
+    "description": "Створення найвищого ступеня з the most / the least.",
+    "htmlPath": "lessons/grammar/a2-superlatives-long.html",
+    "tags": [
+      "superlatives",
+      "long adjectives",
+      "most"
+    ]
+  },
+  {
+    "id": "a2-used-to",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Used to — Past Habits",
+    "description": "Використання used to для опису минулих звичок і станів.",
+    "htmlPath": "lessons/grammar/a2-used-to.html",
+    "tags": [
+      "used to",
+      "past habits",
+      "contrast"
+    ]
+  },
+  {
+    "id": "a2-adverbials-frequency-time",
+    "category": "grammar",
+    "level": "A2",
+    "title": "Adverbials of Frequency and Time",
+    "description": "Вирази частоти й часу: once a week, in the morning, at night тощо.",
+    "htmlPath": "lessons/grammar/a2-adverbials-frequency-time.html",
+    "tags": [
+      "adverbials",
+      "frequency",
+      "time"
+    ]
+  },
+  {
     "id": "small-talk-starters",
     "category": "communication",
     "level": "A2",

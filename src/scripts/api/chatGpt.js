@@ -223,13 +223,14 @@ OUTPUT SCHEMA:
   "type": "gap",
   "prompt": "Fill the gaps with the correct word.",
   "items": [
-    { "q": "<They ___ (work) on Sundays.>", "answer": ["<correct_form>", "<alternative_if_any>"] },
+    { "q": "They ___ (work) on Sundays.", "answer": ["correct_form", "alternative_if_any"] },
     ...
   ]
 }
 REQUIREMENTS:
 - ${itemsCount} sentences.
-- "answer" must always be an array with at least one valid solution in lowercase.
+- "q" must be a clean English sentence. Do NOT wrap it in angle brackets, quotes, or markdown — use only plain text with a single blank shown as ___ (three underscores).
+- "answer" must be an array with at least one valid solution in lowercase (no angle brackets).
 - Keep sentences short, level A1–A2, and connected to "${topic}".
       `.trim(),
       user: oneLineUser(topic, 'gap', itemsCount),

@@ -171,10 +171,10 @@ function createSummaryList(topics) {
   heading.textContent = 'Склад уроку';
   wrapper.appendChild(heading);
 
-  const list = document.createElement('ul');
+  const list = document.createElement('ol');
   list.className = 'lesson-custom-summary__list';
 
-  topics.forEach((topic) => {
+  topics.forEach((topic, index) => {
     const item = document.createElement('li');
     item.className = 'lesson-custom-summary__item';
     const categoryLabel = lessonCategories[topic.category]?.label ?? topic.category;
@@ -185,7 +185,7 @@ function createSummaryList(topics) {
     link.dataset.topicAnchor = anchorId;
 
     const title = document.createElement('strong');
-    title.textContent = topic.title;
+    title.textContent = `${index + 1}. ${topic.title}`;
     const meta = document.createElement('span');
     meta.textContent = `${categoryLabel} · ${topic.level}`;
 
@@ -282,8 +282,8 @@ async function renderCustomLesson() {
   }
 
   const categoryOrder = {
-    communication: 0,
-    grammar: 1,
+    grammar: 0,
+    communication: 1,
     quick: 2,
   };
 
