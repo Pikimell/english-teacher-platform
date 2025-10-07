@@ -232,10 +232,12 @@ async function handleSubmit(event) {
   const submitButton = form.querySelector('button[type="submit"]');
   const topicInput = form.querySelector('[name="topic"]');
   const countInput = form.querySelector('[name="count"]');
+  const instructionsInput = form.querySelector('[name="instructions"]');
   const typeInputs = getTypeInputs();
 
   const topic = topicInput?.value?.trim();
   const count = Number.parseInt(countInput?.value || '10', 10) || 10;
+  const additionalInstructions = instructionsInput?.value?.trim() || '';
   const selectedTypes = typeInputs
     .filter(input => input.checked)
     .map(input => input.value);
@@ -260,8 +262,10 @@ async function handleSubmit(event) {
     submitButton.textContent = 'Генерація…';
   }
 
+  const category = String(defaultContext.category || '').toLowerCase();
   const shouldAttachVocabulary =
-    String(defaultContext.category || '').toLowerCase() === 'communication' &&
+    (category === 'communication' ||
+      Boolean(window.communicationCurrentModule)) &&
     Array.isArray(window.communicationCurrentWords) &&
     window.communicationCurrentWords.length;
   const vocabulary = shouldAttachVocabulary ? window.communicationCurrentWords : undefined;
@@ -275,6 +279,9 @@ async function handleSubmit(event) {
           items: count,
           language: 'en',
           seedId: `${seedBase}-${type}`,
+          ...(additionalInstructions
+            ? { additionalInstructions }
+            : {}),
         },
         vocabulary,
       ).then(task => ({ type, task }))

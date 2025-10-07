@@ -1,6 +1,7 @@
 import { lessons, lessonCategories } from '../data/lessons.js';
 import { customLessonPresets } from '../data/custom-lesson-presets.js';
 import { loadCustomLessons } from './custom-lessons-store.js';
+import communicationModuleNames from '../public/scripts/communication/words/_communication-modules.json';
 
 const communicationWordLoaders = {
   body: () => import('../public/scripts/communication/words/body.js'),
@@ -8,6 +9,17 @@ const communicationWordLoaders = {
   'problem-solving': () => import('../public/scripts/communication/words/problemSolving.js'),
   feedback: () => import('../public/scripts/communication/words/feedback.js'),
 };
+
+if (Array.isArray(communicationModuleNames)) {
+  communicationModuleNames.forEach((moduleName) => {
+    if (!moduleName || communicationWordLoaders[moduleName]) return;
+    communicationWordLoaders[moduleName] = () =>
+      import(
+        /* @vite-ignore */
+        `../public/scripts/communication/words/${moduleName}.js`
+      );
+  });
+}
 
 const basePath = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) || '/';
 
@@ -19,10 +31,12 @@ function resolveAssetPath(path) {
 }
 
 const params = new URLSearchParams(window.location.search);
+const normaliseCategoryParam = (value) =>
+  value === 'lexical' ? 'communication' : value;
 const topicId = params.get('topic');
 const customLessonId = params.get('custom');
 const fallbackTitle = params.get('title');
-const fallbackCategory = params.get('category');
+const fallbackCategory = normaliseCategoryParam(params.get('category'));
 const fallbackLevel = params.get('level');
 const fallbackFile = params.get('file');
 
@@ -442,9 +456,12 @@ function renderCommunicationTable(container, entries) {
 async function hydrateCommunicationWords(root) {
   if (!root) return;
   const placeholders = root.querySelectorAll('[data-communication-words]');
-  if (!placeholders.length) return;
 
   window.communicationVocabularyMap = window.communicationVocabularyMap || {};
+  window.communicationCurrentWords = undefined;
+  window.communicationCurrentModule = undefined;
+
+  if (!placeholders.length) return;
 
   for (const placeholder of placeholders) {
     const moduleName = placeholder.getAttribute('data-module');
@@ -458,6 +475,7 @@ async function hydrateCommunicationWords(root) {
 
       window.communicationVocabularyMap[moduleName] = words;
       window.communicationCurrentWords = words;
+      window.communicationCurrentModule = moduleName;
 
       renderCommunicationTable(placeholder, words);
     } catch (error) {

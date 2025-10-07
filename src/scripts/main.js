@@ -19,7 +19,6 @@ const categoryButtons = Array.from(
 const grids = {
   grammar: document.querySelector('[data-category-grid="grammar"]'),
   communication: document.querySelector('[data-category-grid="communication"]'),
-  lexical: document.querySelector('[data-category-grid="lexical"]'),
   quick: document.querySelector('[data-category-grid="quick"]'),
 };
 const sections = {
@@ -27,7 +26,6 @@ const sections = {
   communication: document.querySelector(
     '[data-category-section="communication"]'
   ),
-  lexical: document.querySelector('[data-category-section="lexical"]'),
   quick: document.querySelector('[data-category-section="quick"]'),
 };
 const emptyMessages = {
@@ -35,7 +33,6 @@ const emptyMessages = {
   communication: document.querySelector(
     '[data-category-empty="communication"]'
   ),
-  lexical: document.querySelector('[data-category-empty="lexical"]'),
   quick: document.querySelector('[data-category-empty="quick"]'),
 };
 const customSection = document.querySelector('[data-custom-section]');
@@ -45,7 +42,6 @@ const stats = {
   total: document.querySelector('[data-stat-total]'),
   grammar: document.querySelector('[data-stat-grammar]'),
   communication: document.querySelector('[data-stat-communication]'),
-  lexical: document.querySelector('[data-stat-lexical]'),
   quick: document.querySelector('[data-stat-quick]'),
 };
 
@@ -124,16 +120,12 @@ function summariseCustomLesson(lesson) {
   const communicationCount = selectedTopics.filter(
     item => item.category === 'communication'
   ).length;
-  const lexicalCount = selectedTopics.filter(
-    item => item.category === 'lexical'
-  ).length;
 
   return {
     topics: selectedTopics,
     levels,
     grammarCount,
     communicationCount,
-    lexicalCount,
   };
 }
 
@@ -151,8 +143,7 @@ function createCustomLessonCard(lesson) {
   const counts = [];
   if (meta.grammarCount) counts.push(`Граматика: ${meta.grammarCount}`);
   if (meta.communicationCount)
-    counts.push(`Комунікація: ${meta.communicationCount}`);
-  if (meta.lexicalCount) counts.push(`Лексика: ${meta.lexicalCount}`);
+    counts.push(`Communication: ${meta.communicationCount}`);
   const categoryLabel =
     lesson.source === 'preset' ? 'Готовий комбінований' : 'Мій комбінований';
 
@@ -268,7 +259,6 @@ function filterLessons() {
     {
       grammar: [],
       communication: [],
-      lexical: [],
       quick: [],
     }
   );
@@ -308,10 +298,6 @@ function setStats() {
   if (stats.communication)
     stats.communication.textContent = String(
       lessons.filter(lesson => lesson.category === 'communication').length
-    );
-  if (stats.lexical)
-    stats.lexical.textContent = String(
-      lessons.filter(lesson => lesson.category === 'lexical').length
     );
   if (stats.quick)
     stats.quick.textContent = String(

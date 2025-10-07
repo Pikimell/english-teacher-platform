@@ -5,11 +5,7 @@ export const lessonCategories = {
   },
   "communication": {
     "id": "communication",
-    "label": "Комунікація"
-  },
-  "lexical": {
-    "id": "lexical",
-    "label": "Лексика"
+    "label": "Communication"
   },
   "quick": {
     "id": "quick",
@@ -20,6 +16,19 @@ export const lessonCategories = {
 export const lessonLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
 export const lessons = [
+  {
+    "id": "verb-to-be",
+    "category": "grammar",
+    "level": "A1",
+    "title": "To be — am / is / are",
+    "description": "Ствердження, заперечення та питання з дієсловом to be.",
+    "htmlPath": "lessons/grammar/verb-to-be.html",
+    "tags": [
+      "to be",
+      "am/is/are",
+      "basics"
+    ]
+  },
   {
     "id": "articles-a-an-the-zero",
     "category": "grammar",
@@ -216,6 +225,19 @@ export const lessons = [
     ]
   },
   {
+    "id": "future-simple-will",
+    "category": "grammar",
+    "level": "A1",
+    "title": "Future Simple — will",
+    "description": "Спонтанні рішення, обіцянки та прогнози з will.",
+    "htmlPath": "lessons/grammar/future-simple-will.html",
+    "tags": [
+      "future",
+      "will",
+      "simple"
+    ]
+  },
+  {
     "id": "be-going-to",
     "category": "grammar",
     "level": "A2",
@@ -252,6 +274,19 @@ export const lessons = [
       "have got",
       "possession",
       "family"
+    ]
+  },
+  {
+    "id": "have-has",
+    "category": "grammar",
+    "level": "A1",
+    "title": "Have / Has — володіння",
+    "description": "Вживання have/has у ствердженнях, запереченнях та питаннях.",
+    "htmlPath": "lessons/grammar/have-has.html",
+    "tags": [
+      "have",
+      "has",
+      "possession"
     ]
   },
   {
@@ -320,6 +355,32 @@ export const lessons = [
     ]
   },
   {
+    "id": "can-cant-basics",
+    "category": "grammar",
+    "level": "A1",
+    "title": "Can / Can’t — базові вміння",
+    "description": "Ствердження, заперечення й питання з модальним can.",
+    "htmlPath": "lessons/grammar/can-cant-basics.html",
+    "tags": [
+      "modals",
+      "can",
+      "ability"
+    ]
+  },
+  {
+    "id": "must-basics",
+    "category": "grammar",
+    "level": "A1",
+    "title": "Must / Mustn’t — прості обов’язки",
+    "description": "Обов’язок, заборона та різниця з don’t have to.",
+    "htmlPath": "lessons/grammar/must-basics.html",
+    "tags": [
+      "modals",
+      "must",
+      "obligation"
+    ]
+  },
+  {
     "id": "ordinal-numbers",
     "category": "grammar",
     "level": "A1",
@@ -372,6 +433,45 @@ export const lessons = [
     ]
   },
   {
+    "id": "past-simple-regular",
+    "category": "grammar",
+    "level": "A1",
+    "title": "Past Simple — регулярні дієслова",
+    "description": "Закінчення -ed: правопис, вимова та приклади.",
+    "htmlPath": "lessons/grammar/past-simple-regular.html",
+    "tags": [
+      "past simple",
+      "regular verbs",
+      "-ed"
+    ]
+  },
+  {
+    "id": "past-simple-irregular",
+    "category": "grammar",
+    "level": "A1",
+    "title": "Past Simple — нерегулярні дієслова",
+    "description": "Топ-дієслова без закінчення -ed та тренування з прикладами.",
+    "htmlPath": "lessons/grammar/past-simple-irregular.html",
+    "tags": [
+      "past simple",
+      "irregular verbs",
+      "v2"
+    ]
+  },
+  {
+    "id": "past-simple-questions-negative",
+    "category": "grammar",
+    "level": "A1",
+    "title": "Past Simple — запитання та заперечення",
+    "description": "Did/didn’t у питаннях і запереченнях, короткі відповіді.",
+    "htmlPath": "lessons/grammar/past-simple-questions-negative.html",
+    "tags": [
+      "past simple",
+      "questions",
+      "did"
+    ]
+  },
+  {
     "id": "past-simple-vs-present-perfect",
     "category": "grammar",
     "level": "B1",
@@ -421,6 +521,19 @@ export const lessons = [
       "tenses",
       "present",
       "progressive"
+    ]
+  },
+  {
+    "id": "present-simple-vs-present-continuous",
+    "category": "grammar",
+    "level": "A1",
+    "title": "Present Simple vs Present Continuous",
+    "description": "Чим відрізняються рутини від дій, що відбуваються зараз.",
+    "htmlPath": "lessons/grammar/present-simple-vs-present-continuous.html",
+    "tags": [
+      "present simple",
+      "present continuous",
+      "comparison"
     ]
   },
   {
@@ -554,6 +667,19 @@ export const lessons = [
     ]
   },
   {
+    "id": "word-order-basics",
+    "category": "grammar",
+    "level": "A1",
+    "title": "Word Order — базовий порядок слів",
+    "description": "Ствердження, заперечення та питання у простому реченні.",
+    "htmlPath": "lessons/grammar/word-order-basics.html",
+    "tags": [
+      "word order",
+      "sentence",
+      "questions"
+    ]
+  },
+  {
     "id": "wh-questions",
     "category": "grammar",
     "level": "A1",
@@ -617,7 +743,7 @@ export const lessons = [
   },
   {
     "id": "numbers-dates-time",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Числа, дати та час",
     "description": "Слова і фрази для лічби, календаря та запиту часу.",
@@ -630,7 +756,7 @@ export const lessons = [
   },
   {
     "id": "colours-and-shapes",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Кольори та форми",
     "description": "Базові прикметники для опису кольорів і простих геометричних фігур.",
@@ -643,7 +769,7 @@ export const lessons = [
   },
   {
     "id": "days-months-seasons",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Дні тижня, місяці, пори року",
     "description": "Назви календарних одиниць і ключові фрази для розкладів.",
@@ -656,7 +782,7 @@ export const lessons = [
   },
   {
     "id": "feelings-and-emotions",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Почуття та емоції",
     "description": "Прості слова для опису настрою, стану та базових емоційних реакцій.",
@@ -669,7 +795,7 @@ export const lessons = [
   },
   {
     "id": "personal-information",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Особиста інформація",
     "description": "Лексика для знайомства: імʼя, вік, країна, адреса та контактні дані.",
@@ -682,7 +808,7 @@ export const lessons = [
   },
   {
     "id": "family-and-friends",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Сімʼя та друзі",
     "description": "Слова для опису членів родини, дружніх стосунків та родинних звʼязків.",
@@ -695,7 +821,7 @@ export const lessons = [
   },
   {
     "id": "describing-people",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Опис людей",
     "description": "Ключові слова для зовнішності, одягу та простих характеристик характеру.",
@@ -708,7 +834,7 @@ export const lessons = [
   },
   {
     "id": "home-and-household",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Дім та побут",
     "description": "Назви кімнат, побутових предметів та основних домашніх занять.",
@@ -721,7 +847,7 @@ export const lessons = [
   },
   {
     "id": "city-and-places",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Місто та місця",
     "description": "Словник для орієнтування у місті: магазини, заклади, транспорт.",
@@ -734,7 +860,7 @@ export const lessons = [
   },
   {
     "id": "school-and-learning",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Школа та навчання",
     "description": "Лексика про шкільні предмети, класну кімнату та розклад уроків.",
@@ -747,7 +873,7 @@ export const lessons = [
   },
   {
     "id": "food-and-drinks",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Їжа та напої",
     "description": "Прості назви продуктів, страв і напоїв для замовлення чи покупки.",
@@ -760,7 +886,7 @@ export const lessons = [
   },
   {
     "id": "shopping-and-money",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Покупки та гроші",
     "description": "Вирази для магазину, одягу, цін та базових транзакцій.",
@@ -773,7 +899,7 @@ export const lessons = [
   },
   {
     "id": "daily-routines",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Щоденні справи",
     "description": "Фрази для опису ранкових, денних та вечірніх звичок.",
@@ -786,7 +912,7 @@ export const lessons = [
   },
   {
     "id": "free-time-and-hobbies",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Вільний час і хобі",
     "description": "Лексика для розмов про інтереси, дозвілля та плани на вихідні.",
@@ -799,7 +925,7 @@ export const lessons = [
   },
   {
     "id": "sports-basics",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Спорт",
     "description": "Основні види спорту, інвентар та прості дієслова для рухливих занять.",
@@ -812,7 +938,7 @@ export const lessons = [
   },
   {
     "id": "animals-and-pets",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Тварини",
     "description": "Домашні, фермерські та дикі тварини із базовими характеристиками.",
@@ -825,7 +951,7 @@ export const lessons = [
   },
   {
     "id": "nature-and-weather",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Природа та погода",
     "description": "Слова для опису погоди, природних явищ та пейзажів.",
@@ -838,7 +964,7 @@ export const lessons = [
   },
   {
     "id": "body-and-health",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Тіло та здоровʼя",
     "description": "Частини тіла, прості симптоми та фрази для візиту до лікаря.",
@@ -851,7 +977,7 @@ export const lessons = [
   },
   {
     "id": "jobs-and-professions",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Професії та робота",
     "description": "Назви професій, місць роботи та ключові обовʼязки.",
@@ -864,7 +990,7 @@ export const lessons = [
   },
   {
     "id": "technology-and-gadgets",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Технології та гаджети",
     "description": "Базові пристрої, програми та дії для щоденного користування.",
@@ -877,7 +1003,7 @@ export const lessons = [
   },
   {
     "id": "holidays-and-traditions",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Свята та традиції",
     "description": "Лексика для опису святкувань, подарунків та сімейних традицій.",
@@ -890,7 +1016,7 @@ export const lessons = [
   },
   {
     "id": "travel-and-transport",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Подорожі та транспорт",
     "description": "Слова для бронювання, поїздок і користування громадським транспортом.",
@@ -903,7 +1029,7 @@ export const lessons = [
   },
   {
     "id": "directions-and-location",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Напрямки та розташування",
     "description": "Фрази для пояснення маршруту та опису розташування обʼєктів.",
@@ -916,7 +1042,7 @@ export const lessons = [
   },
   {
     "id": "rooms-and-furniture",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Кімнати та меблі",
     "description": "Словник для опису кімнат, меблів та предметів інтерʼєру.",
@@ -929,7 +1055,7 @@ export const lessons = [
   },
   {
     "id": "environment-and-surroundings",
-    "category": "lexical",
+    "category": "communication",
     "level": "A1",
     "title": "Довкілля та оточення",
     "description": "Базові контрасти місто/село, країна/місто та опис природного середовища.",

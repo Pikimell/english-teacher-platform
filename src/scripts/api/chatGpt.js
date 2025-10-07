@@ -629,13 +629,18 @@ EXAMPLE (FORMAT ONLY; DO NOT COPY CONTENT):
     },
   };
 
-  const tpl = templates[type];
-  if (!tpl) {
-    // fallback на mcq, якщо передали невідомий тип
-    return templates.mcq;
+  const baseTemplate = templates[type] || templates.mcq;
+  const extraInstructions =
+    (opts.additionalInstructions || opts.extraInstructions || '').trim();
+
+  if (!extraInstructions) {
+    return baseTemplate;
   }
 
-  return tpl;
+  return {
+    system: baseTemplate.system,
+    user: `${baseTemplate.user}\n\nAdditional teacher instructions:\n${extraInstructions}`,
+  };
 }
 
 // ---- Helpers ----------------------------------------------------------------
@@ -679,17 +684,36 @@ function appendVocabularyToPrompt(userContent, vocabulary) {
   const formattedList = formatVocabularyList(vocabulary);
   if (!formattedList) return trimmed || userContent || '';
   const base = trimmed || 'Generate the task block.';
-  return `${base}\n\nFocus on these vocabulary items:\n${formattedList}`;
+  return `${base}
+
+STRICT VOCABULARY REQUIREMENTS (communication lesson):
+1. Treat the target expressions below as the ONLY lexical focus for the task. Every generated item and every correct answer must contain at least one of these expressions verbatim (you may adapt grammar but keep the core phrase).
+2. Do not introduce alternative key phrases or synonyms outside this list; supporting words like articles or pronouns are fine, but the highlighted expression must come from the list.
+3. When offering distractors or incorrect options, keep them realistic yet stay close to the topic; never invent brand-new key phrases outside the set.
+4. The Ukrainian translations are reference only – the final task must remain fully in English.
+
+Target vocabulary:\n${formattedList}`;
 }
 
 function formatVocabularyList(list) {
   if (!Array.isArray(list) || !list.length) return '';
+  const extractEnglishExample = (value) => {
+    if (!value) return '';
+    const dashIdx = value.indexOf(' — ');
+    const enDashIdx = value.indexOf(' – ');
+    const hyphenIdx = value.indexOf(' - ');
+    const candidates = [dashIdx, enDashIdx, hyphenIdx].filter((idx) => idx >= 0);
+    const cutIndex = candidates.length ? Math.min(...candidates) : -1;
+    const result = cutIndex >= 0 ? value.slice(0, cutIndex) : value;
+    return result.trim();
+  };
   const lines = list
     .map((entry, index) => {
       if (!entry) return '';
       const word = entry.word || entry.term || entry.phrase || entry.text || `Item ${index + 1}`;
       const translation = entry.translation || entry.meaning || entry.ua || entry.uk || '';
-      const example = entry.example || entry.sentence || entry.usage || entry.sample || '';
+      const rawExample = entry.example || entry.sentence || entry.usage || entry.sample || '';
+      const example = extractEnglishExample(rawExample);
       let line = `${index + 1}. ${word}`;
       if (translation) line += ` — ${translation}`;
       if (example) line += ` (Example: ${example})`;

@@ -166,13 +166,11 @@ function describeLessonTopics(topicIds) {
     .filter(Boolean);
   const grammarCount = topics.filter((topic) => topic.category === 'grammar').length;
   const communicationCount = topics.filter((topic) => topic.category === 'communication').length;
-  const lexicalCount = topics.filter((topic) => topic.category === 'lexical').length;
   const titles = topics.map((topic) => topic.title);
 
   return {
     grammarCount,
     communicationCount,
-    lexicalCount,
     titles,
   };
 }
@@ -207,8 +205,7 @@ function renderSavedLessons() {
     metaEl.className = 'builder-card__meta';
     const metaParts = [];
     if (meta.grammarCount) metaParts.push(`Граматика: ${meta.grammarCount}`);
-    if (meta.communicationCount) metaParts.push(`Комунікація: ${meta.communicationCount}`);
-    if (meta.lexicalCount) metaParts.push(`Лексика: ${meta.lexicalCount}`);
+    if (meta.communicationCount) metaParts.push(`Communication: ${meta.communicationCount}`);
     metaEl.textContent = metaParts.join(' · ');
 
     const topics = document.createElement('p');
