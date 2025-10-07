@@ -3,133 +3,45 @@
   "level": "A2",
   "tasks": [
     {
-      "id": "mcq-like-lov-1",
+      "id": "mcq-1",
       "type": "mcq",
-      "prompt": "Обери правильну форму (Like / Love / Hate + Ving)",
+      "prompt": "Вибери форму",
       "items": [
         {
-          "q": "I really ___ swimming.",
-          "choices": ["like", "likes", "is liking"],
-          "answer": ["0"]
-        },
-        {
-          "q": "She ___ playing the piano.",
-          "choices": ["love", "loves", "is loving"],
+          "q": "I enjoy ___ (read).",
+          "choices": ["to read", "reading"],
           "answer": ["1"]
         },
         {
-          "q": "They ___ watching movies.",
-          "choices": ["hate", "hates", "is hating"],
+          "q": "She hates ___ (get) up early.",
+          "choices": ["getting", "to getting"],
           "answer": ["0"]
-        },
-        {
-          "q": "He ___ reading books.",
-          "choices": ["like", "likes", "is liking"],
-          "answer": ["1"]
-        },
-        {
-          "q": "We ___ dancing at parties.",
-          "choices": ["love", "loves", "is loving"],
-          "answer": ["0"]
-        },
-        {
-          "q": "You ___ cooking dinner.",
-          "choices": ["hate", "hates", "is hating"],
-          "answer": ["0"]
-        },
-        {
-          "q": "I ___ going to the gym.",
-          "choices": ["like", "likes", "is liking"],
-          "answer": ["0"]
-        },
-        {
-          "q": "She ___ drawing pictures.",
-          "choices": ["love", "loves", "is loving"],
-          "answer": ["1"]
-        },
-        {
-          "q": "They ___ playing soccer.",
-          "choices": ["hate", "hates", "is hating"],
-          "answer": ["0"]
-        },
-        {
-          "q": "He ___ listening to music.",
-          "choices": ["like", "likes", "is liking"],
-          "answer": ["1"]
         }
       ]
     },
     {
-      "id": "gap-like-lov-1",
+      "id": "gap-1",
       "type": "gap",
-      "prompt": "Заповніть пропуски правильними формами дієслів.",
+      "prompt": "to V / Ving",
       "items": [
-        { "q": "I ___ (like) swimming in the sea.", "answer": ["like"] },
-        { "q": "She ___ (love) dancing at parties.", "answer": ["loves"] },
-        { "q": "They ___ (hate) studying for exams.", "answer": ["hate"] },
-        { "q": "He ___ (like) playing football.", "answer": ["likes"] },
-        { "q": "We ___ (love) cooking together.", "answer": ["love"] },
-        { "q": "You ___ (hate) waiting in line.", "answer": ["hate"] },
-        { "q": "I ___ (like) reading books.", "answer": ["like"] },
-        { "q": "She ___ (love) traveling to new places.", "answer": ["loves"] },
-        { "q": "They ___ (hate) cleaning their rooms.", "answer": ["hate"] },
-        { "q": "He ___ (like) listening to music.", "answer": ["likes"] }
+        {
+          "q": "I like ___ (cook) Italian food.",
+          "answer": ["cooking"]
+        },
+        {
+          "q": "They love ___ (travel).",
+          "answer": ["travelling", "traveling"]
+        }
       ]
     },
     {
-      "id": "order-like-lov-1",
-      "type": "order",
-      "prompt": "Постав слова в правильному порядку",
+      "id": "short-1",
+      "type": "short",
+      "prompt": "Зроби 3 речення з like/love/hate + Ving",
       "items": [
         {
-          "q": "Впорядкуй речення",
-          "tokens": ["she", "loves", "swimming"],
-          "answer": "she loves swimming"
-        },
-        {
-          "q": "Впорядкуй речення",
-          "tokens": ["they", "hate", "cleaning"],
-          "answer": "they hate cleaning"
-        },
-        {
-          "q": "Впорядкуй речення",
-          "tokens": ["he", "likes", "playing", "football"],
-          "answer": "he likes playing football"
-        },
-        {
-          "q": "Впорядкуй речення",
-          "tokens": ["we", "love", "watching", "movies"],
-          "answer": "we love watching movies"
-        },
-        {
-          "q": "Впорядкуй речення",
-          "tokens": ["I", "like", "reading", "books"],
-          "answer": "I like reading books"
-        },
-        {
-          "q": "Впорядкуй речення",
-          "tokens": ["she", "hates", "doing", "homework"],
-          "answer": "she hates doing homework"
-        },
-        {
-          "q": "Впорядкуй речення",
-          "tokens": ["they", "love", "traveling"],
-          "answer": "they love traveling"
-        },
-        {
-          "q": "Впорядкуй речення",
-          "tokens": ["he", "likes", "cooking"],
-          "answer": "he likes cooking"
-        },
-        {
-          "q": "Впорядкуй речення",
-          "tokens": ["we", "hate", "waiting"],
-          "answer": "we hate waiting"
-        },
-        {
-          "q": "Впорядкуй речення",
-          "tokens": ["I", "love", "dancing"],
-          "answer": "I love dancing"
+          "q": "Будь-які.",
+          "keywords": ["like", "love", "hate", "-ing"]
         }
       ]
     }

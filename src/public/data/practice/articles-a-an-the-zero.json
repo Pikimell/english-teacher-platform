@@ -1,121 +1,176 @@
 {
   "title": "Артиклі — a/an, the, zero article",
-  "level": "A1",
+  "level": "A2",
   "tasks": [
     {
-      "id": "mcq-a-an-the-1",
+      "id": "mcq-1",
       "type": "mcq",
-      "prompt": "Обери правильну форму артикля.",
+      "prompt": "Обери артикль",
       "items": [
         {
-          "q": "I saw ___ elephant at the zoo.",
-          "choices": [
-            "a",
-            "an",
-            "the"
-          ],
-          "answer": [
-            "1"
-          ]
+          "q": "He is ___ engineer.",
+          "choices": ["a", "an", "the"],
+          "answer": ["1"]
         },
         {
-          "q": "She is ___ doctor.",
-          "choices": [
-            "a",
-            "an",
-            "the"
-          ],
-          "answer": [
-            "1"
-          ]
+          "q": "___ sun rises in the east.",
+          "choices": ["A", "An", "The"],
+          "answer": ["2"]
+        }
+      ]
+    },
+    {
+      "id": "mcq-2",
+      "type": "mcq",
+      "prompt": "A/An/The/— у контексті",
+      "items": [
+        {
+          "q": "She is ___ honest person.",
+          "choices": ["a", "an", "the"],
+          "answer": ["1"]
         },
         {
-          "q": "This is ___ book I told you about.",
-          "choices": [
-            "a",
-            "an",
-            "the"
-          ],
-          "answer": [
-            "2"
-          ]
+          "q": "___ dogs are friendly animals.",
+          "choices": ["The", "—", "A"],
+          "answer": ["1"]
         },
         {
-          "q": "He wants to be ___ engineer.",
-          "choices": [
-            "a",
-            "an",
-            "the"
-          ],
-          "answer": [
-            "1"
-          ]
+          "q": "Pass me ___ salt, please.",
+          "choices": ["the", "a", "an"],
+          "answer": ["0"]
         },
         {
-          "q": "I need ___ apple from the fridge.",
-          "choices": [
-            "a",
-            "an",
-            "the"
-          ],
-          "answer": [
-            "1"
-          ]
+          "q": "He is playing ___ piano.",
+          "choices": ["the", "a", "—"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "gap-1",
+      "type": "gap",
+      "prompt": "Встав a/an/the або —",
+      "items": [
+        {
+          "q": "I play ___ guitar.",
+          "answer": ["the"]
         },
         {
-          "q": "Do you have ___ pen?",
-          "choices": [
-            "a",
-            "an",
-            "the"
-          ],
-          "answer": [
-            "0"
-          ]
+          "q": "___ coffee is hot.",
+          "answer": ["the"]
         },
         {
-          "q": "She is reading ___ interesting story.",
-          "choices": [
-            "a",
-            "an",
-            "the"
-          ],
-          "answer": [
-            "1"
-          ]
+          "q": "I drink ___ coffee every morning.",
+          "answer": ["—", "", "no article"]
+        }
+      ]
+    },
+    {
+      "id": "gap-2",
+      "type": "gap",
+      "prompt": "Встав правильний артикль або —",
+      "items": [
+        {
+          "q": "We went to ___ cinema last night.",
+          "answer": ["the"]
         },
         {
-          "q": "I have ___ idea.",
-          "choices": [
-            "a",
-            "an",
-            "the"
-          ],
-          "answer": [
-            "1"
-          ]
+          "q": "She has ___ idea.",
+          "answer": ["an"]
         },
         {
-          "q": "Can you pass me ___ salt, please?",
-          "choices": [
-            "a",
-            "an",
-            "the"
-          ],
-          "answer": [
-            "2"
-          ]
+          "q": "___ Mount Everest is very high.",
+          "answer": ["—", "", "no article"]
         },
         {
-          "q": "There is ___ cat on the roof.",
-          "choices": [
-            "a",
-            "an",
-            "the"
-          ],
-          "answer": [
-            "0"
-          ]
+          "q": "I love ___ coffee in the morning.",
+          "answer": ["—", "", "no article"]
+        },
+        {
+          "q": "Close ___ door, please.",
+          "answer": ["the"]
+        }
+      ]
+    },
+    {
+      "id": "error-1",
+      "type": "error",
+      "prompt": "Виправ артиклі",
+      "items": [
+        {
+          "q": "She is the engineer.",
+          "answer": ["she is an engineer."]
+        },
+        {
+          "q": "I saw a sun in the sky.",
+          "answer": ["i saw the sun in the sky."]
+        }
+      ]
+    },
+    {
+      "id": "order-1",
+      "type": "order",
+      "prompt": "Побудуй речення з артиклями",
+      "items": [
+        {
+          "tokens": ["the", "cat", "is", "on", "the", "sofa"],
+          "answer": "the cat is on the sofa"
+        },
+        {
+          "tokens": ["she", "is", "an", "artist"],
+          "answer": "she is an artist"
+        }
+      ]
+    },
+    {
+      "id": "short-1",
+      "type": "short",
+      "prompt": "Стисло: коли zero article?",
+      "items": [
+        {
+          "q": "Приклади.",
+          "keywords": ["plural", "uncountable", "general"]
+        }
+      ]
+    },
+    {
+      "id": "mcq-3",
+      "type": "mcq",
+      "prompt": "Додаткові завдання",
+      "items": [
+        {
+          "q": "We live near ___ sea.",
+          "choices": ["the", "—"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ life is short.",
+          "choices": ["—", "The"],
+          "answer": ["0"]
+        },
+        {
+          "q": "He is ___ best player in the team.",
+          "choices": ["the", "a"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "match-1",
+      "type": "match",
+      "prompt": "Співстав правило та приклад",
+      "pairs": [
+        {
+          "left": "First mention",
+          "right": "a/an"
+        },
+        {
+          "left": "Unique objects",
+          "right": "the"
+        },
+        {
+          "left": "General/uncountable",
+          "right": "zero article"
         }
       ]
     }

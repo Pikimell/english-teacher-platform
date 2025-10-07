@@ -7,6 +7,10 @@ export const lessonCategories = {
     "id": "communication",
     "label": "Комунікація"
   },
+  "lexical": {
+    "id": "lexical",
+    "label": "Лексика"
+  },
   "quick": {
     "id": "quick",
     "label": "Швидкий доступ"
@@ -609,6 +613,331 @@ export const lessons = [
     "tags": [
       "soft skills",
       "business"
+    ]
+  },
+  {
+    "id": "numbers-dates-time",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Числа, дати та час",
+    "description": "Слова і фрази для лічби, календаря та запиту часу.",
+    "htmlPath": "lessons/lexical/numbers-dates-time.html",
+    "tags": [
+      "numbers",
+      "dates",
+      "time"
+    ]
+  },
+  {
+    "id": "colours-and-shapes",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Кольори та форми",
+    "description": "Базові прикметники для опису кольорів і простих геометричних фігур.",
+    "htmlPath": "lessons/lexical/colours-and-shapes.html",
+    "tags": [
+      "colors",
+      "shapes",
+      "adjectives"
+    ]
+  },
+  {
+    "id": "days-months-seasons",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Дні тижня, місяці, пори року",
+    "description": "Назви календарних одиниць і ключові фрази для розкладів.",
+    "htmlPath": "lessons/lexical/days-months-seasons.html",
+    "tags": [
+      "calendar",
+      "days",
+      "seasons"
+    ]
+  },
+  {
+    "id": "feelings-and-emotions",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Почуття та емоції",
+    "description": "Прості слова для опису настрою, стану та базових емоційних реакцій.",
+    "htmlPath": "lessons/lexical/feelings-and-emotions.html",
+    "tags": [
+      "feelings",
+      "emotions",
+      "adjectives"
+    ]
+  },
+  {
+    "id": "personal-information",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Особиста інформація",
+    "description": "Лексика для знайомства: імʼя, вік, країна, адреса та контактні дані.",
+    "htmlPath": "lessons/lexical/personal-information.html",
+    "tags": [
+      "introductions",
+      "personal",
+      "details"
+    ]
+  },
+  {
+    "id": "family-and-friends",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Сімʼя та друзі",
+    "description": "Слова для опису членів родини, дружніх стосунків та родинних звʼязків.",
+    "htmlPath": "lessons/lexical/family-and-friends.html",
+    "tags": [
+      "family",
+      "friends",
+      "relationships"
+    ]
+  },
+  {
+    "id": "describing-people",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Опис людей",
+    "description": "Ключові слова для зовнішності, одягу та простих характеристик характеру.",
+    "htmlPath": "lessons/lexical/describing-people.html",
+    "tags": [
+      "appearance",
+      "clothes",
+      "character"
+    ]
+  },
+  {
+    "id": "home-and-household",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Дім та побут",
+    "description": "Назви кімнат, побутових предметів та основних домашніх занять.",
+    "htmlPath": "lessons/lexical/home-and-household.html",
+    "tags": [
+      "home",
+      "household",
+      "rooms"
+    ]
+  },
+  {
+    "id": "city-and-places",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Місто та місця",
+    "description": "Словник для орієнтування у місті: магазини, заклади, транспорт.",
+    "htmlPath": "lessons/lexical/city-and-places.html",
+    "tags": [
+      "city",
+      "places",
+      "town"
+    ]
+  },
+  {
+    "id": "school-and-learning",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Школа та навчання",
+    "description": "Лексика про шкільні предмети, класну кімнату та розклад уроків.",
+    "htmlPath": "lessons/lexical/school-and-learning.html",
+    "tags": [
+      "school",
+      "classroom",
+      "subjects"
+    ]
+  },
+  {
+    "id": "food-and-drinks",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Їжа та напої",
+    "description": "Прості назви продуктів, страв і напоїв для замовлення чи покупки.",
+    "htmlPath": "lessons/lexical/food-and-drinks.html",
+    "tags": [
+      "food",
+      "drinks",
+      "meals"
+    ]
+  },
+  {
+    "id": "shopping-and-money",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Покупки та гроші",
+    "description": "Вирази для магазину, одягу, цін та базових транзакцій.",
+    "htmlPath": "lessons/lexical/shopping-and-money.html",
+    "tags": [
+      "shopping",
+      "money",
+      "store"
+    ]
+  },
+  {
+    "id": "daily-routines",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Щоденні справи",
+    "description": "Фрази для опису ранкових, денних та вечірніх звичок.",
+    "htmlPath": "lessons/lexical/daily-routines.html",
+    "tags": [
+      "routine",
+      "daily",
+      "habits"
+    ]
+  },
+  {
+    "id": "free-time-and-hobbies",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Вільний час і хобі",
+    "description": "Лексика для розмов про інтереси, дозвілля та плани на вихідні.",
+    "htmlPath": "lessons/lexical/free-time-and-hobbies.html",
+    "tags": [
+      "hobbies",
+      "leisure",
+      "activities"
+    ]
+  },
+  {
+    "id": "sports-basics",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Спорт",
+    "description": "Основні види спорту, інвентар та прості дієслова для рухливих занять.",
+    "htmlPath": "lessons/lexical/sports-basics.html",
+    "tags": [
+      "sports",
+      "games",
+      "exercise"
+    ]
+  },
+  {
+    "id": "animals-and-pets",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Тварини",
+    "description": "Домашні, фермерські та дикі тварини із базовими характеристиками.",
+    "htmlPath": "lessons/lexical/animals-and-pets.html",
+    "tags": [
+      "animals",
+      "pets",
+      "wildlife"
+    ]
+  },
+  {
+    "id": "nature-and-weather",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Природа та погода",
+    "description": "Слова для опису погоди, природних явищ та пейзажів.",
+    "htmlPath": "lessons/lexical/nature-and-weather.html",
+    "tags": [
+      "nature",
+      "weather",
+      "seasons"
+    ]
+  },
+  {
+    "id": "body-and-health",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Тіло та здоровʼя",
+    "description": "Частини тіла, прості симптоми та фрази для візиту до лікаря.",
+    "htmlPath": "lessons/lexical/body-and-health.html",
+    "tags": [
+      "body",
+      "health",
+      "doctor"
+    ]
+  },
+  {
+    "id": "jobs-and-professions",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Професії та робота",
+    "description": "Назви професій, місць роботи та ключові обовʼязки.",
+    "htmlPath": "lessons/lexical/jobs-and-professions.html",
+    "tags": [
+      "jobs",
+      "work",
+      "career"
+    ]
+  },
+  {
+    "id": "technology-and-gadgets",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Технології та гаджети",
+    "description": "Базові пристрої, програми та дії для щоденного користування.",
+    "htmlPath": "lessons/lexical/technology-and-gadgets.html",
+    "tags": [
+      "technology",
+      "gadgets",
+      "devices"
+    ]
+  },
+  {
+    "id": "holidays-and-traditions",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Свята та традиції",
+    "description": "Лексика для опису святкувань, подарунків та сімейних традицій.",
+    "htmlPath": "lessons/lexical/holidays-and-traditions.html",
+    "tags": [
+      "holidays",
+      "traditions",
+      "celebrations"
+    ]
+  },
+  {
+    "id": "travel-and-transport",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Подорожі та транспорт",
+    "description": "Слова для бронювання, поїздок і користування громадським транспортом.",
+    "htmlPath": "lessons/lexical/travel-and-transport.html",
+    "tags": [
+      "travel",
+      "transport",
+      "trips"
+    ]
+  },
+  {
+    "id": "directions-and-location",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Напрямки та розташування",
+    "description": "Фрази для пояснення маршруту та опису розташування обʼєктів.",
+    "htmlPath": "lessons/lexical/directions-and-location.html",
+    "tags": [
+      "directions",
+      "location",
+      "map"
+    ]
+  },
+  {
+    "id": "rooms-and-furniture",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Кімнати та меблі",
+    "description": "Словник для опису кімнат, меблів та предметів інтерʼєру.",
+    "htmlPath": "lessons/lexical/rooms-and-furniture.html",
+    "tags": [
+      "rooms",
+      "furniture",
+      "home"
+    ]
+  },
+  {
+    "id": "environment-and-surroundings",
+    "category": "lexical",
+    "level": "A1",
+    "title": "Довкілля та оточення",
+    "description": "Базові контрасти місто/село, країна/місто та опис природного середовища.",
+    "htmlPath": "lessons/lexical/environment-and-surroundings.html",
+    "tags": [
+      "environment",
+      "surroundings",
+      "places"
     ]
   },
   {
