@@ -496,7 +496,8 @@
     container.appendChild(result);
   }
 
-  function renderTask(container, task, taskKey) {
+  function renderTask(container, task, taskKey, options = {}) {
+    const { showRemove = true } = options;
     const keyBase = taskKey || (task && task.id ? String(task.id) : `task-${Math.random().toString(16).slice(2, 8)}`);
     const box = el("section", {
       style: "position:relative;margin:18px 0 26px;",
@@ -504,28 +505,30 @@
       "data-task-key": keyBase,
     });
     // Subtle remove button (top-right), hidden until hover/focus
-    const removeBtn = el(
-      "button",
-      {
-        type: "button",
-        title: "Видалити завдання",
-        "aria-label": "Видалити завдання",
-        style:
-          "position:absolute;top:6px;right:6px;border:none;background:transparent;color:#94a3b8;cursor:pointer;padding:2px;line-height:1;font-size:14px;opacity:0.6;",
-        onmouseenter: () => (removeBtn.style.opacity = "1"),
-        onmouseleave: () => (removeBtn.style.opacity = "0.6"),
-        onclick: () => {
-          document.dispatchEvent(
-            new CustomEvent("practice:taskRemoved", {
-              detail: { key: keyBase, task },
-            })
-          );
-          box.remove();
+    if (showRemove) {
+      const removeBtn = el(
+        "button",
+        {
+          type: "button",
+          title: "Видалити завдання",
+          "aria-label": "Видалити завдання",
+          style:
+            "position:absolute;top:6px;right:6px;border:none;background:transparent;color:#94a3b8;cursor:pointer;padding:2px;line-height:1;font-size:14px;opacity:0.6;",
+          onmouseenter: () => (removeBtn.style.opacity = "1"),
+          onmouseleave: () => (removeBtn.style.opacity = "0.6"),
+          onclick: () => {
+            document.dispatchEvent(
+              new CustomEvent("practice:taskRemoved", {
+                detail: { key: keyBase, task },
+              })
+            );
+            box.remove();
+          },
         },
-      },
-      "✕"
-    );
-    box.appendChild(removeBtn);
+        "✕"
+      );
+      box.appendChild(removeBtn);
+    }
     if (task.title) box.appendChild(el("h3", {}, task.title));
     const rawType = task && task.type;
     const normalizedType = String(rawType || '')
@@ -614,7 +617,62 @@
     const root = ensurePracticeContainer();
     if (!root || !task) return;
     const body = root.querySelector('#practice-body') || root;
-    renderTask(body, task, meta.key);
+    const allowRemove = meta.showRemove !== false;
+    renderTask(body, task, meta.key, { showRemove: allowRemove });
+  };
+
+  window.practice.renderTaskList = function (target, tasks, options = {}) {
+    if (!target) return null;
+    const entries = Array.isArray(tasks) ? tasks.filter(Boolean) : [];
+    const {
+      title,
+      level,
+      description,
+      keyPrefix = 'inline',
+      showEmptyNote = false,
+      showRemove = false,
+    } = options;
+
+    if (!entries.length) {
+      if (showEmptyNote) {
+        const note = el('p', { class: 'muted practice-inline__empty' }, 'Практика для цієї теми поки відсутня.');
+        target.appendChild(note);
+      }
+      return null;
+    }
+
+    const wrapper = el('section', { class: 'practice-inline' });
+
+    if (title || level || description) {
+      const header = el('header', { class: 'practice-inline__header' });
+      if (title) {
+        header.appendChild(el('h3', { class: 'practice-inline__title' }, title));
+      }
+      if (level) {
+        header.appendChild(el('span', { class: 'practice-inline__badge' }, level));
+      }
+      if (description) {
+        header.appendChild(el('p', { class: 'practice-inline__description muted' }, description));
+      }
+      wrapper.appendChild(header);
+    }
+
+    entries.forEach((task, index) => {
+      const key = `${keyPrefix}-${index}`;
+      renderTask(wrapper, task, key, { showRemove });
+    });
+
+    target.appendChild(wrapper);
+    document.dispatchEvent(
+      new CustomEvent('practice:inlineRendered', {
+        detail: {
+          tasks: entries,
+          container: target,
+          options,
+        },
+      }),
+    );
+    return wrapper;
   };
 
   async function fetchPracticeCandidate(path) {
@@ -1719,6 +1777,23 @@
       body = el("div", { id: "practice-body" });
       root.appendChild(body);
     }
+    const context = window.lessonContext || {};
+    if (context.isCustomLesson) {
+      const placeholder = root.querySelector('[data-practice-placeholder]');
+      if (placeholder) {
+        placeholder.textContent =
+          'Практика для кожної теми розміщена одразу після теорії. Тут можете згенерувати додаткові завдання.';
+      }
+      if (body) {
+        body.innerHTML = '<p class="muted">Згенеруйте додаткові вправи або додайте власні завдання.</p>';
+      }
+      document.dispatchEvent(new CustomEvent('practice:dataLoaded', { detail: null }));
+      document.dispatchEvent(
+        new CustomEvent('practice:rendered', { detail: { ok: false, reason: 'custom-lesson' } }),
+      );
+      return;
+    }
+
     loadData().then((data) => {
       if (!data) {
         document.dispatchEvent(new CustomEvent('practice:dataLoaded', { detail: null }));

@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>English Teacher Platform</title>
     <script type="module" crossorigin src="/english-teacher-platform/index.js"></script>
-    <link rel="modulepreload" crossorigin href="/english-teacher-platform/assets/main-APTQdbqf.js">
-    <link rel="modulepreload" crossorigin href="/english-teacher-platform/assets/lessons-CxblGRou.js">
-    <link rel="stylesheet" crossorigin href="/english-teacher-platform/assets/main-CYR7dYBc.css">
+    <link rel="modulepreload" crossorigin href="/english-teacher-platform/assets/main-Dnzr3yj7.js">
+    <link rel="modulepreload" crossorigin href="/english-teacher-platform/assets/custom-lessons-store-BSttwj8q.js">
+    <link rel="modulepreload" crossorigin href="/english-teacher-platform/assets/custom-lesson-presets-B74WAqg2.js">
+    <link rel="stylesheet" crossorigin href="/english-teacher-platform/assets/main-CimiYGiv.css">
   </head>
   <body>
     <header class="header">
@@ -20,7 +21,8 @@
             Використовуйте фільтри, щоб перейти до потрібної теми та одразу відкривати конспект.
           </p>
           <div class="header__actions">
-            <a class="button button--light" href="/placement-test.html">Пройти тест на рівень</a>
+            <a class="button button--primary" href="./custom-lessons.html">Створити урок</a>
+            <a class="button button--light" href="./placement-test.html">Пройти тест на рівень</a>
           </div>
         </div>
         <dl class="header__stats">
@@ -35,6 +37,10 @@
           <div>
             <dt>Комунікація</dt>
             <dd data-stat-communication>0</dd>
+          </div>
+          <div>
+            <dt>Лексика</dt>
+            <dd data-stat-lexical>0</dd>
           </div>
           <div>
             <dt>Швидкий доступ</dt>
@@ -62,6 +68,7 @@
               <button class="chip chip--filled" type="button" data-category="all" aria-pressed="true">Усі</button>
               <button class="chip" type="button" data-category="grammar">Граматика</button>
               <button class="chip" type="button" data-category="communication">Комунікація</button>
+              <button class="chip" type="button" data-category="lexical">Лексика</button>
               <button class="chip" type="button" data-category="quick">Швидкий доступ</button>
             </div>
           </div>
@@ -79,6 +86,18 @@
             </select>
           </label>
         </div>
+      </section>
+
+      <section class="catalog" data-custom-section aria-labelledby="custom-heading">
+        <div class="catalog__header">
+          <p class="section-title">Мої уроки</p>
+          <h2 id="custom-heading">Комбіновані уроки</h2>
+          <p class="catalog__description">
+            Тут з’являться уроки, які ви створите у конструкторі. Клікніть, щоб переглянути готові матеріали.
+          </p>
+        </div>
+        <div class="cards-grid" data-custom-grid aria-live="polite"></div>
+        <p class="catalog__empty" data-custom-empty hidden>Створіть перший урок у конструкторі вище.</p>
       </section>
 
       <section class="catalog" data-category-section="grammar" aria-labelledby="grammar-heading">
@@ -99,6 +118,16 @@
         </div>
         <div class="cards-grid" data-category-grid="communication" aria-live="polite"></div>
         <p class="catalog__empty" data-category-empty="communication" hidden>Немає тем, що відповідають обраним фільтрам.</p>
+      </section>
+
+      <section class="catalog" data-category-section="lexical" aria-labelledby="lexical-heading">
+        <div class="catalog__header">
+          <p class="section-title">Категорія</p>
+          <h2 id="lexical-heading">Лексика</h2>
+          <p class="catalog__description">Словники та міні-конспекти для розширення базового словникового запасу.</p>
+        </div>
+        <div class="cards-grid" data-category-grid="lexical" aria-live="polite"></div>
+        <p class="catalog__empty" data-category-empty="lexical" hidden>Немає тем, що відповідають обраним фільтрам.</p>
       </section>
 
       <section class="catalog" data-category-section="quick" aria-labelledby="quick-heading">
