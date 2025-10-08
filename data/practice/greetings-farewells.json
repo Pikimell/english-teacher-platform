@@ -38,11 +38,6 @@
           "answer": ["0"]
         },
         {
-          "q": "You want to ask 'How are you?' What do you say?",
-          "choices": ["How are you?", "See you tomorrow", "Take care"],
-          "answer": ["0"]
-        },
-        {
           "q": "Someone says 'How are you?' What do you say?",
           "choices": ["I'm fine, thanks.", "See you later.", "Good morning!"],
           "answer": ["0"]
