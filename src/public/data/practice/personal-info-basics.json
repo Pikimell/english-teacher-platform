@@ -452,6 +452,35 @@
           "right": "passports"
         }
       ]
+    },
+    {
+      "id": "open-task-open-1",
+      "type": "open",
+      "prompt": "Answer the questions about yourself! 😊",
+      "items": [
+        {
+          "situation": "What is your name? 😊"
+        },
+        {
+          "situation": "How old are you? 🎂"
+        },
+        {
+          "situation": "Which country are you from? 🌍"
+        },
+        {
+          "situation": "What is your nationality? 🇺🇦"
+        },
+        {
+          "situation": "Can you tell me about your favorite country? 🗺️"
+        }
+      ],
+      "scoring": {
+        "criteria": [
+          "Provide clear answers to all questions.",
+          "Use complete sentences.",
+          "Include personal details."
+        ]
+      }
     }
   ]
 }

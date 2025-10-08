@@ -1,0 +1,430 @@
+{
+  "title": "Артиклі (a / an / the)",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "transform-a-an-the-transform-1",
+      "type": "transform",
+      "prompt": "Rewrite each sentence using the correct article (a / an / the) where needed.",
+      "items": [
+        {
+          "q": "I see ___ cat.",
+          "hint": "Use 'a' before consonant sounds",
+          "answer": ["I see a cat"]
+        },
+        {
+          "q": "She wants ___ apple.",
+          "hint": "Use 'an' before vowel sounds",
+          "answer": ["She wants an apple"]
+        },
+        {
+          "q": "This is ___ book.",
+          "hint": "Use 'the' for something specific",
+          "answer": ["This is the book"]
+        },
+        {
+          "q": "He is ___ engineer.",
+          "hint": "Use 'an' before vowel sounds",
+          "answer": ["He is an engineer"]
+        },
+        {
+          "q": "I have ___ dog.",
+          "hint": "Use 'a' before consonant sounds",
+          "answer": ["I have a dog"]
+        },
+        {
+          "q": "Can you pass me ___ salt?",
+          "hint": "Use 'the' for something specific",
+          "answer": ["Can you pass me the salt"]
+        },
+        {
+          "q": "She is ___ artist.",
+          "hint": "Use 'an' before vowel sounds",
+          "answer": ["She is an artist"]
+        },
+        {
+          "q": "There is ___ tree in the park.",
+          "hint": "Use 'a' before consonant sounds",
+          "answer": ["There is a tree in the park"]
+        },
+        {
+          "q": "I want to be ___ doctor.",
+          "hint": "Use 'a' before consonant sounds",
+          "answer": ["I want to be a doctor"]
+        },
+        {
+          "q": "This is ___ interesting movie.",
+          "hint": "Use 'an' before vowel sounds",
+          "answer": ["This is an interesting movie"]
+        }
+      ]
+    },
+    {
+      "id": "context-a-an-the-context-1",
+      "type": "context",
+      "prompt": "Read the story and choose the correct answer.",
+      "context": {
+        "title": "A Day at the Zoo",
+        "format": "narrative",
+        "body": [
+          "Today, I went to the zoo. I saw a lion and an elephant.",
+          "The lion was sleeping under a tree. It looked very big.",
+          "An elephant was drinking water from a pond. It was very happy.",
+          "I also saw a monkey. The monkey was eating a banana.",
+          "There was a bird in a cage. The bird was singing a song.",
+          "I had a great time at the zoo. I want to go back again.",
+          "I took a picture of the lion and the elephant.",
+          "The monkey made me laugh. It was very funny.",
+          "I bought a toy elephant for my friend.",
+          "It was a wonderful day at the zoo!"
+        ]
+      },
+      "questions": [
+        {
+          "q": "What animal was sleeping?",
+          "choices": ["A monkey", "A lion", "An elephant"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What was the elephant drinking?",
+          "choices": ["Water", "Juice", "Milk"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What did the monkey eat?",
+          "choices": ["An apple", "A banana", "A sandwich"],
+          "answer": ["1"]
+        },
+        {
+          "q": "Where was the bird?",
+          "choices": ["In a tree", "In a cage", "On the ground"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What did I buy for my friend?",
+          "choices": ["A toy lion", "A toy elephant", "A toy monkey"],
+          "answer": ["1"]
+        },
+        {
+          "q": "How did the elephant look?",
+          "choices": ["Sad", "Happy", "Angry"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What did I take a picture of?",
+          "choices": ["The monkey", "The lion and the elephant", "The bird"],
+          "answer": ["1"]
+        },
+        {
+          "q": "Was the day at the zoo good?",
+          "choices": ["Yes", "No", "Maybe"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What was the monkey like?",
+          "choices": ["Funny", "Boring", "Scary"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Did I want to go back to the zoo?",
+          "choices": ["Yes", "No", "I don't know"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "error-a-an-the-error-1",
+      "type": "error",
+      "prompt": "Find and correct the mistake (Present Simple, no final period).",
+      "items": [
+        {
+          "q": "I have cat.",
+          "hint": "add an article before cat",
+          "answer": ["I have a cat"]
+        },
+        {
+          "q": "She is teacher.",
+          "hint": "add an article before teacher",
+          "answer": ["She is a teacher"]
+        },
+        {
+          "q": "He wants apple.",
+          "hint": "add an article before apple",
+          "answer": ["He wants an apple"]
+        },
+        {
+          "q": "They are in park.",
+          "hint": "add an article before park",
+          "answer": ["They are in the park"]
+        },
+        {
+          "q": "This is interesting book.",
+          "hint": "add an article before book",
+          "answer": ["This is an interesting book"]
+        },
+        {
+          "q": "I saw elephant at zoo.",
+          "hint": "add articles before elephant and zoo",
+          "answer": ["I saw an elephant at the zoo"]
+        },
+        {
+          "q": "She wants to be doctor.",
+          "hint": "add an article before doctor",
+          "answer": ["She wants to be a doctor"]
+        },
+        {
+          "q": "We need information about city.",
+          "hint": "add an article before city",
+          "answer": ["We need information about the city"]
+        },
+        {
+          "q": "He is artist.",
+          "hint": "add an article before artist",
+          "answer": ["He is an artist"]
+        },
+        {
+          "q": "I bought book yesterday.",
+          "hint": "add an article before book",
+          "answer": ["I bought a book yesterday"]
+        }
+      ]
+    },
+    {
+      "id": "short-a-an-the-short-1",
+      "type": "short",
+      "prompt": "Write short answers about Артиклі (a / an / the).",
+      "items": [
+        {
+          "q": "Write about a pet you have or want.",
+          "keywords": ["i", "have", "want"]
+        },
+        {
+          "q": "Describe a favorite food you like to eat.",
+          "keywords": ["my", "favorite", "is"]
+        },
+        {
+          "q": "Tell about an interesting book you read.",
+          "keywords": ["the", "book", "is"]
+        },
+        {
+          "q": "Write about a place you visit often.",
+          "keywords": ["i", "usually", "go"]
+        },
+        {
+          "q": "Describe an activity you do on weekends.",
+          "keywords": ["i", "like", "to"]
+        },
+        {
+          "q": "Tell about a friend you enjoy spending time with.",
+          "keywords": ["my", "friend", "is"]
+        },
+        {
+          "q": "Write about a hobby you have.",
+          "keywords": ["i", "enjoy", "doing"]
+        },
+        {
+          "q": "Describe a city you want to visit.",
+          "keywords": ["i", "want", "to"]
+        },
+        {
+          "q": "Tell about a movie you saw recently.",
+          "keywords": ["the", "movie", "was"]
+        },
+        {
+          "q": "Write about an object in your room.",
+          "keywords": ["there", "is", "a"]
+        }
+      ]
+    },
+    {
+      "id": "roleplay-a-an-the-roleplay-1",
+      "type": "roleplay",
+      "prompt": "Practice using articles 'a', 'an', and 'the' in a conversation.",
+      "scenario": {
+        "setting": "a cafe",
+        "summary": "You are ordering food and drinks. Use articles correctly in your conversation.",
+        "roles": [
+          {
+            "name": "Student 1",
+            "goal": "Order food and drinks correctly.",
+            "details": "You want to order a sandwich and a coffee. Remember to use articles."
+          },
+          {
+            "name": "Student 2",
+            "goal": "Take the order and ask questions.",
+            "details": "You will ask about the food and drinks. Use articles in your questions."
+          }
+        ],
+        "steps": [
+          "Student 1 greets Student 2 and asks for the menu.",
+          "Student 2 offers a sandwich and a coffee, using articles.",
+          "Student 1 orders a sandwich and a coffee, using 'a' and 'the'.",
+          "Student 2 confirms the order and asks if Student 1 wants anything else.",
+          "Student 1 replies and thanks Student 2."
+        ]
+      },
+      "phrases": [
+        {
+          "phrase": "Can I have a menu?",
+          "translation": "Asking for the list of food and drinks."
+        },
+        {
+          "phrase": "I would like a sandwich.",
+          "translation": "Expressing a desire for one sandwich."
+        },
+        {
+          "phrase": "Do you have an apple?",
+          "translation": "Asking if there is one apple available."
+        },
+        {
+          "phrase": "What is the special today?",
+          "translation": "Inquiring about the special dish."
+        },
+        {
+          "phrase": "I want the coffee, please.",
+          "translation": "Requesting a specific coffee."
+        },
+        {
+          "phrase": "Is there a dessert menu?",
+          "translation": "Asking if there is a menu for desserts."
+        },
+        {
+          "phrase": "Can I get an orange juice?",
+          "translation": "Requesting one orange juice."
+        },
+        {
+          "phrase": "How much is the sandwich?",
+          "translation": "Asking for the price of the sandwich."
+        },
+        {
+          "phrase": "Thank you for your help.",
+          "translation": "Expressing gratitude for assistance."
+        },
+        {
+          "phrase": "I also want a salad.",
+          "translation": "Adding a salad to the order."
+        }
+      ]
+    },
+    {
+      "id": "dialogue-gap-a-an-the-dialogue-gap-1",
+      "type": "dialogue-gap",
+      "prompt": "Fill the blanks in the dialogue using the word bank.",
+      "words": [
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "an",
+        "an",
+        "an",
+        "an",
+        "an",
+        "the",
+        "the",
+        "the",
+        "the",
+        "the",
+        "one"
+      ],
+      "dialogue": [
+        { "speaker": "Student 1", "line": "Do you have ___ apple?" },
+        {
+          "speaker": "Student 2",
+          "line": "Yes, I have ___ apple. Do you want ___?"
+        },
+        { "speaker": "Student 1", "line": "No, I want ___ orange." },
+        { "speaker": "Student 2", "line": "I have ___ orange too!" },
+        { "speaker": "Student 1", "line": "What is ___ best fruit?" },
+        { "speaker": "Student 2", "line": "I think ___ banana is the best." },
+        { "speaker": "Student 1", "line": "I like ___ bananas!" },
+        { "speaker": "Student 2", "line": "Let's eat ___ banana together!" },
+        {
+          "speaker": "Student 1",
+          "line": "Do you have ___ pear or ___ peach?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Only ___ peach, but I can buy ___ pear later."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Good idea! ___ market near our school sells them."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Yes, I saw ___ basket of fresh pears there."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Maybe we can also get ___ watermelon for lunch."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Perfect! ___ watermelon is my favorite summer fruit."
+        }
+      ],
+      "answers": [
+        "an",
+        "an",
+        "one",
+        "an",
+        "the",
+        "a",
+        "the",
+        "a",
+        "a",
+        "an",
+        "a",
+        "an",
+        "a",
+        "the",
+        "a",
+        "the",
+        "the"
+      ]
+    },
+    {
+      "id": "dialogue-order-a-an-the-dialogue-order-1",
+      "type": "dialogue-order",
+      "prompt": "Arrange the dialogue lines in the correct order.",
+      "lines": [
+        {
+          "speaker": "Student 1",
+          "line": "I saw a cat in the garden yesterday."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Oh really? Was it a big cat?"
+        },
+        {
+          "speaker": "Student 1",
+          "line": "No, it was small and very cute."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Did you feed it an apple?"
+        },
+        {
+          "speaker": "Student 1",
+          "line": "No, I gave it some fish."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "That sounds nice! I love cats."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Do you have a cat at home?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Yes, I have a black cat named Luna."
+        }
+      ],
+      "solution": [0, 1, 2, 3, 4, 5, 6, 7]
+    }
+  ]
+}

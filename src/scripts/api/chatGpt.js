@@ -19,7 +19,7 @@ export const getAnswer = async body => {
 /**
  * Генерує один блок завдання під конкретний typeQuestion (mcq/gap/...)
  * @param {string} topic - наприклад: "Present Simple"
- * @param {string} typeQuestion - один з: mcq, gap, transform, match, error, order, short, writing, roleplay, context, dialogue-gap, dialogue-order, truefalse, definition-match, synonym-clue, scramble, wordpairs, odd-one-out
+ * @param {string} typeQuestion - один з: mcq, gap, transform, match, error, order, short, open, writing, roleplay, context, dialogue-gap, dialogue-order, truefalse, definition-match, synonym-clue, scramble, wordpairs, odd-one-out
  * @param {object} opts - { language: 'en', items: 10, seedId: 'ps' } etc.
  * @param {Array<object>} vocabulary - опційний масив слів для фокусування ({ word, translation, example })
  * @returns {Promise<object>} JSON блоку завдання
@@ -343,6 +343,36 @@ REQUIREMENTS:
       user: oneLineUser(topic, 'short', itemsCount),
     },
 
+    open: {
+      system: `
+${commonRules}
+OUTPUT SCHEMA:
+{
+  "id": "open-${seedId}-1",
+  "type": "open",
+  "prompt": "<brief classroom instruction in English>",
+  "items": [
+    { "situation": "<open-ended question or scenario related to the topic>" }
+  ],
+  "scoring": {
+    "criteria": [
+      "<criterion 1>",
+      "<criterion 2>",
+      "<criterion 3>"
+    ]
+  }
+}
+REQUIREMENTS:
+- ${Math.max(3, Math.min(10, itemsCount))} unique items that require free-form answers.
+- Keep each "situation" within 8–14 words, focused on real-life communication linked to "${topic}".
+- Maintain an A1–A2 learner level and avoid simple yes/no prompts.
+- Provide exactly 3 concise scoring criteria phrased for teachers (e.g., "Use two past time expressions").
+- Optionally add "example_answers" arrays (1–3 short samples) to model good responses.
+- Output JSON only with no surrounding commentary.
+      `.trim(),
+      user: oneLineUser(topic, 'open', itemsCount),
+    },
+
     writing: {
       system: `
 ${commonRules}
@@ -424,8 +454,8 @@ OUTPUT SCHEMA:
 REQUIREMENTS:
 - ${Math.max(4, Math.min(8, itemsCount))} turns in the dialogue.
 - Use exactly ${Math.max(4, Math.min(8, itemsCount))} blanks "___" across the dialogue.
-- "words" must include every required word once with no extra distractors.
-- "answers" list the correct words in the order the blanks appear (lowercase English).
+- "words" must list one entry per blank (repeat words when a blank uses the same word) and contain no unused distractors.
+- "answers" must be the same length as "words", list the correct words in blank order, and use only lowercase English words present in "words".
 - Keep each line short (maximum 12 words) and on the topic "${topic}".
 - Do not add extra fields beyond the schema.
       `.trim(),
@@ -653,6 +683,7 @@ const defaultItemsByType = {
   error: 10,
   order: 10,
   short: 3,
+  open: 4,
   writing: 1,
   roleplay: 8,
   'dialogue-gap': 6,
