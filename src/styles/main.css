@@ -342,14 +342,24 @@ dl {
   text-decoration: none;
   background: linear-gradient(
     145deg,
-    rgba(167, 139, 250, 0.35),
-    rgba(251, 113, 133, 0.2)
+    rgba(139, 250, 193, 0.35),
+    rgba(113, 216, 251, 0.2)
   );
   color: var(--text);
   border: 1px solid rgba(37, 99, 235, 0.15);
   border-radius: inherit;
   min-height: 260px;
   height: 100%;
+}
+
+/* Highlight lexical (vocabulary) cards with a distinct gradient */
+.lesson-card[data-category='lexical'] .lesson-card__link {
+  background: linear-gradient(
+    150deg,
+    rgb(239 244 114 / 28%),
+    rgb(21 250 233 / 16%)
+  );
+  border-color: rgba(244, 114, 182, 0.28);
 }
 
 .lesson-card__meta {
@@ -1568,18 +1578,30 @@ dl {
   gap: 1.25rem;
   padding: 2rem;
   min-height: 220px;
-  background: linear-gradient(165deg, rgba(79, 70, 229, 0.14), rgba(59, 130, 246, 0.1));
+  background: linear-gradient(
+    165deg,
+    rgba(79, 70, 229, 0.14),
+    rgba(59, 130, 246, 0.1)
+  );
   border: 1px solid rgba(79, 70, 229, 0.2);
   box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
 }
 
 .lesson-card--custom[data-custom-source='local'] .lesson-card__link {
-  background: linear-gradient(165deg, rgba(22, 163, 74, 0.16), rgba(59, 130, 246, 0.08));
+  background: linear-gradient(
+    165deg,
+    rgba(22, 163, 74, 0.16),
+    rgba(59, 130, 246, 0.08)
+  );
   border-color: rgba(22, 163, 74, 0.22);
 }
 
 .lesson-card--custom[data-custom-source='preset'] .lesson-card__link {
-  background: linear-gradient(165deg, rgba(99, 102, 241, 0.18), rgba(14, 165, 233, 0.1));
+  background: linear-gradient(
+    165deg,
+    rgba(99, 102, 241, 0.18),
+    rgba(14, 165, 233, 0.1)
+  );
   border-color: rgba(99, 102, 241, 0.24);
 }
 
@@ -1656,7 +1678,6 @@ dl {
   font-size: 14px;
   color: rgba(15, 18, 45, 0.6);
 }
-
 
 .lesson-custom-summary__link:hover,
 .lesson-custom-summary__link:focus-visible {

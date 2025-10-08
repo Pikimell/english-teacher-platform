@@ -1,0 +1,457 @@
+{
+  "title": "Ім’я, вік, країна, національність",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "transform-task-transform-1",
+      "type": "transform",
+      "prompt": "Rewrite each sentence in the negative form (no final period).",
+      "items": [
+        {
+          "q": "My name is Anna.",
+          "hint": "use is not; no period",
+          "answer": ["my name is not Anna"]
+        },
+        {
+          "q": "He is 25 years old.",
+          "hint": "use is not; no period",
+          "answer": ["he is not 25 years old"]
+        },
+        {
+          "q": "She is from Canada.",
+          "hint": "use is not; no period",
+          "answer": ["she is not from Canada"]
+        },
+        {
+          "q": "They are French.",
+          "hint": "use are not; no period",
+          "answer": ["they are not French"]
+        },
+        {
+          "q": "I am a teacher.",
+          "hint": "use am not; no period",
+          "answer": ["I am not a teacher"]
+        },
+        {
+          "q": "We are from Italy.",
+          "hint": "use are not; no period",
+          "answer": ["we are not from Italy"]
+        },
+        {
+          "q": "His name is John.",
+          "hint": "use is not; no period",
+          "answer": ["his name is not John"]
+        },
+        {
+          "q": "She is 30 years old.",
+          "hint": "use is not; no period",
+          "answer": ["she is not 30 years old"]
+        },
+        {
+          "q": "They are Spanish.",
+          "hint": "use are not; no period",
+          "answer": ["they are not Spanish"]
+        },
+        {
+          "q": "I am from Germany.",
+          "hint": "use am not; no period",
+          "answer": ["I am not from Germany"]
+        }
+      ]
+    },
+    {
+      "id": "context-task-context-1",
+      "type": "context",
+      "prompt": "Read the text and answer the questions.",
+      "context": {
+        "title": "Meet Anna",
+        "format": "narrative",
+        "body": [
+          "Anna is a girl. She is 10 years old. Anna is from Ukraine. Her nationality is Ukrainian.",
+          "Anna has a friend. His name is Tom. Tom is 11 years old. He is from the USA. His nationality is American.",
+          "Anna and Tom like to play together. They play soccer in the park. They are happy.",
+          "Anna speaks Ukrainian and a little English. Tom speaks English and a little Ukrainian.",
+          "They both want to learn more languages. Anna wants to learn Spanish. Tom wants to learn French."
+        ]
+      },
+      "questions": [
+        {
+          "q": "How old is Anna?",
+          "choices": ["10", "11", "12"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Where is Anna from?",
+          "choices": ["USA", "Ukraine", "France"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What is Anna's nationality?",
+          "choices": ["American", "Ukrainian", "Spanish"],
+          "answer": ["1"]
+        },
+        {
+          "q": "How old is Tom?",
+          "choices": ["10", "11", "12"],
+          "answer": ["1"]
+        },
+        {
+          "q": "Where is Tom from?",
+          "choices": ["Ukraine", "USA", "Canada"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What is Tom's nationality?",
+          "choices": ["Ukrainian", "American", "French"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What do Anna and Tom like to do?",
+          "choices": ["Read books", "Play soccer", "Watch TV"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What languages does Anna speak?",
+          "choices": [
+            "Ukrainian and English",
+            "English and French",
+            "Spanish and Ukrainian"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "What language does Tom want to learn?",
+          "choices": ["Spanish", "French", "Ukrainian"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What does Anna want to learn?",
+          "choices": ["French", "Spanish", "English"],
+          "answer": ["1"]
+        }
+      ]
+    },
+    {
+      "id": "roleplay-task-roleplay-1",
+      "type": "roleplay",
+      "prompt": "Introduce yourself and get to know your new colleague.",
+      "scenario": {
+        "setting": "an office meeting",
+        "summary": "You have just met a new colleague at work. Talk about your names, countries, nationalities, and ages to get to know each other better.",
+        "roles": [
+          {
+            "name": "Employee 1",
+            "goal": "Introduce yourself and ask about Employee 2.",
+            "details": "You are 30 years old and from Ukraine. You work in the marketing department."
+          },
+          {
+            "name": "Employee 2",
+            "goal": "Introduce yourself and ask about Employee 1.",
+            "details": "You are 28 years old and from Spain. You work in the IT department."
+          }
+        ],
+        "steps": [
+          "Employee 1 greets and introduces themselves (name, job, age).",
+          "Employee 1 asks Employee 2 about their name and job.",
+          "Employee 2 answers and shares their country and nationality.",
+          "Employee 2 asks Employee 1 about their country and nationality.",
+          "Both thank each other and say goodbye politely."
+        ]
+      },
+      "phrases": [
+        {
+          "phrase": "What is your name?",
+          "translation": "Asking someone for their name."
+        },
+        {
+          "phrase": "Nice to meet you!",
+          "translation": "A polite greeting when meeting someone new."
+        },
+        {
+          "phrase": "I work in the [department] department.",
+          "translation": "Talking about your job or position."
+        },
+        {
+          "phrase": "Where are you from?",
+          "translation": "Asking about someone's country."
+        },
+        {
+          "phrase": "I am from [country].",
+          "translation": "Saying your country."
+        },
+        {
+          "phrase": "What is your nationality?",
+          "translation": "Asking about someone's nationality."
+        },
+        {
+          "phrase": "I am [nationality].",
+          "translation": "Stating your nationality."
+        },
+        {
+          "phrase": "How old are you?",
+          "translation": "Asking someone's age."
+        },
+        {
+          "phrase": "I am [age] years old.",
+          "translation": "Telling your age."
+        },
+        {
+          "phrase": "Have a nice day!",
+          "translation": "A polite way to end a short conversation."
+        }
+      ]
+    },
+    {
+      "id": "dialogue-gap-task-dialogue-gap-1",
+      "type": "dialogue-gap",
+      "prompt": "Fill the blanks in the dialogue using the word bank.",
+      "words": [
+        "name",
+        "age",
+        "country",
+        "nationality",
+        "name",
+        "twenty",
+        "nationality"
+      ],
+      "dialogue": [
+        {
+          "speaker": "Student 1",
+          "line": "Hello! What is your ___?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "My ___ is Anna."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Nice to meet you, Anna! How old are you?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "I am ___ years old."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Where are you from?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "I am from a small ___."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "What is your ___?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "I am Ukrainian. My ___ is Ukrainian."
+        }
+      ],
+      "answers": [
+        "name",
+        "name",
+        "twenty",
+        "country",
+        "nationality",
+        "nationality"
+      ]
+    },
+    {
+      "id": "definition-match-task-definition-match-1",
+      "type": "definition-match",
+      "prompt": "Match the word with its definition.",
+      "pairs": [
+        {
+          "left": "name",
+          "right": "It is what people call you."
+        },
+        {
+          "left": "age",
+          "right": "It tells how many years you have lived."
+        },
+        {
+          "left": "country",
+          "right": "It is a place where people live."
+        },
+        {
+          "left": "nationality",
+          "right": "It shows which country you belong to."
+        },
+        {
+          "left": "person",
+          "right": "It is an individual human being."
+        },
+        {
+          "left": "city",
+          "right": "It is a large town with many people."
+        },
+        {
+          "left": "language",
+          "right": "It is a system of communication."
+        },
+        {
+          "left": "passport",
+          "right": "It is a document for international travel."
+        },
+        {
+          "left": "birth",
+          "right": "It is the time when you come into the world."
+        },
+        {
+          "left": "citizen",
+          "right": "It is a person who belongs to a country."
+        }
+      ]
+    },
+    {
+      "id": "synonym-clue-task-synonym-clue-1",
+      "type": "synonym-clue",
+      "prompt": "Choose the correct word based on the clue.",
+      "wordBank": [
+        "person",
+        "age",
+        "nationality",
+        "name",
+        "citizen",
+        "country"
+      ],
+      "items": [
+        {
+          "clue": "a person's title",
+          "answers": ["name"]
+        },
+        {
+          "clue": "how old someone is",
+          "answers": ["age"]
+        },
+        {
+          "clue": "place where someone lives",
+          "answers": ["country"]
+        },
+        {
+          "clue": "the group you belong to",
+          "answers": ["nationality"]
+        },
+        {
+          "clue": "someone from a specific nation",
+          "answers": ["citizen"]
+        },
+        {
+          "clue": "a human being",
+          "answers": ["person"]
+        },
+        {
+          "clue": "the name of a nation",
+          "answers": ["country"]
+        },
+        {
+          "clue": "the number of years lived",
+          "answers": ["age"]
+        },
+        {
+          "clue": "the identity of a person",
+          "answers": ["name"]
+        },
+        {
+          "clue": "the status of being a member of a nation",
+          "answers": ["nationality"]
+        }
+      ]
+    },
+    {
+      "id": "scramble-task-scramble-1",
+      "type": "scramble",
+      "prompt": "Unscramble the words about personal information.",
+      "items": [
+        {
+          "scrambled": "nmae",
+          "answers": ["name"]
+        },
+        {
+          "scrambled": "gae",
+          "answers": ["age"]
+        },
+        {
+          "scrambled": "nctoyru",
+          "answers": ["country"]
+        },
+        {
+          "scrambled": "naitonality",
+          "answers": ["nationality"]
+        },
+        {
+          "scrambled": "ytci",
+          "answers": ["city"]
+        },
+        {
+          "scrambled": "haenmtoow",
+          "answers": ["hometown"]
+        },
+        {
+          "scrambled": "ekanmcin",
+          "answers": ["nickname"]
+        },
+        {
+          "scrambled": "elam",
+          "answers": ["male"]
+        },
+        {
+          "scrambled": "meafel",
+          "answers": ["female"]
+        },
+        {
+          "scrambled": "egauangl",
+          "answers": ["language"]
+        }
+      ]
+    },
+    {
+      "id": "wordpairs-task-wordpairs-1",
+      "type": "wordpairs",
+      "prompt": "Match the singular form to the plural form.",
+      "pairs": [
+        {
+          "left": "name",
+          "right": "names"
+        },
+        {
+          "left": "age",
+          "right": "ages"
+        },
+        {
+          "left": "country",
+          "right": "countries"
+        },
+        {
+          "left": "nationality",
+          "right": "nationalities"
+        },
+        {
+          "left": "person",
+          "right": "people"
+        },
+        {
+          "left": "city",
+          "right": "cities"
+        },
+        {
+          "left": "friend",
+          "right": "friends"
+        },
+        {
+          "left": "child",
+          "right": "children"
+        },
+        {
+          "left": "language",
+          "right": "languages"
+        },
+        {
+          "left": "passport",
+          "right": "passports"
+        }
+      ]
+    }
+  ]
+}
