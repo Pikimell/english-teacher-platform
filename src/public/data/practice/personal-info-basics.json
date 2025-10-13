@@ -305,57 +305,78 @@
       ]
     },
     {
-      "id": "synonym-clue-task-synonym-clue-1",
+      "id": "synonym-clue-task-a1-level-2",
       "type": "synonym-clue",
       "prompt": "Choose the correct word based on the clue.",
       "wordBank": [
         "person",
-        "age",
-        "nationality",
         "name",
-        "citizen",
-        "country"
+        "first name",
+        "last name",
+        "full name",
+        "nickname",
+        "age",
+        "years old",
+        "country",
+        "city",
+        "hometown",
+        "place of birth",
+        "address",
+        "nationality",
+        "native language",
+        "foreign language",
+        "job / occupation",
+        "student",
+        "teacher",
+        "grade",
+        "single",
+        "married",
+        "male",
+        "female",
+        "speak",
+        "introduce yourself",
+        "citizen"
       ],
       "items": [
         {
-          "clue": "a person's title",
-          "answers": ["name"]
+          "clue": "you study at school",
+          "answers": ["student"]
         },
         {
-          "clue": "how old someone is",
-          "answers": ["age"]
+          "clue": "you teach in a school",
+          "answers": ["teacher"]
         },
         {
-          "clue": "place where someone lives",
-          "answers": ["country"]
+          "clue": "your class in school (e.g., 5A)",
+          "answers": ["grade"]
         },
         {
-          "clue": "the group you belong to",
-          "answers": ["nationality"]
+          "clue": "not married",
+          "answers": ["single"]
         },
         {
-          "clue": "someone from a specific nation",
+          "clue": "has a husband or wife",
+          "answers": ["married"]
+        },
+        {
+          "clue": "a boy or a man",
+          "answers": ["male"]
+        },
+        {
+          "clue": "a girl or a woman",
+          "answers": ["female"]
+        },
+        {
+          "clue": "use words in a language",
+          "answers": ["speak"]
+        },
+        {
+          "clue": "say your name, age, and city",
+          "answers": ["introduce yourself"]
+        },
+        {
+          "clue": "a person from a country (has a passport)",
           "answers": ["citizen"]
-        },
-        {
-          "clue": "a human being",
-          "answers": ["person"]
-        },
-        {
-          "clue": "the name of a nation",
-          "answers": ["country"]
-        },
-        {
-          "clue": "the number of years lived",
-          "answers": ["age"]
-        },
-        {
-          "clue": "the identity of a person",
-          "answers": ["name"]
-        },
-        {
-          "clue": "the status of being a member of a nation",
-          "answers": ["nationality"]
         }
       ]
     },
@@ -365,7 +386,7 @@
       "prompt": "Unscramble the words about personal information.",
       "items": [
         {
-          "scrambled": "nmae",
+          "scrambled": "enma",
           "answers": ["name"]
         },
         {
@@ -377,7 +398,7 @@
           "answers": ["country"]
         },
         {
-          "scrambled": "naitonality",
+          "scrambled": "litynanaito",
           "answers": ["nationality"]
         },
         {

@@ -254,58 +254,12 @@
         }
       ]
     },
-    {
-      "id": "definition-match-task-definition-match-1",
-      "type": "definition-match",
-      "prompt": "Match each pronoun with its correct definition.",
-      "pairs": [
-        {
-          "left": "I",
-          "right": "Used by the speaker to talk about themselves."
-        },
-        {
-          "left": "you",
-          "right": "Used to talk to one or more people."
-        },
-        {
-          "left": "he",
-          "right": "Used for a boy or a man."
-        },
-        {
-          "left": "she",
-          "right": "Used for a girl or a woman."
-        },
-        {
-          "left": "it",
-          "right": "Used for a thing or an animal."
-        },
-        {
-          "left": "we",
-          "right": "Means the speaker and at least one other person."
-        },
-        {
-          "left": "they",
-          "right": "Used for two or more people or things."
-        },
-        {
-          "left": "me",
-          "right": "The object form of 'I'."
-        },
-        {
-          "left": "him",
-          "right": "The object form of 'he'."
-        },
-        {
-          "left": "her",
-          "right": "The object form of 'she'."
-        }
-      ]
-    },
+
     {
       "id": "synonym-clue-task-synonym-clue-1",
       "type": "synonym-clue",
       "prompt": "Read each clue and choose the correct pronoun from the word bank.",
-      "wordBank": ["I", "you", "he", "she", "we", "they"],
+      "wordBank": ["he", "she", "I", "we", "you", "they"],
       "items": [
         {
           "clue": "The person who is speaking.",
