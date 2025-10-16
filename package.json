@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "sudo vite",
-    "build": "vite build --base=/english-teacher-platform/",
+    "build": "vite build",
     "preview": "vite preview",
     "push": "git cmp 'update'"
   },
