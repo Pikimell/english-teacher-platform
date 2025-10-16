@@ -1,0 +1,291 @@
+{
+  "title": "Особові займенники",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "mcq-task-mcq-1",
+      "type": "mcq",
+      "prompt": "Choose the correct pronoun to complete each sentence.",
+      "items": [
+        {
+          "q": "___ am happy today.",
+          "choices": ["I", "He", "They"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ are my friends from school.",
+          "choices": ["They", "She", "It"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ is my English teacher.",
+          "choices": ["He", "We", "You"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ are very kind to me.",
+          "choices": ["You", "It", "He"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ is my sister, Anna.",
+          "choices": ["She", "They", "We"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ are playing football in the park.",
+          "choices": ["We", "He", "It"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ is a very good book.",
+          "choices": ["It", "They", "You"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ is my best friend, Tom.",
+          "choices": ["He", "They", "We"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ are from Ukraine.",
+          "choices": ["We", "She", "He"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "roleplay-task-roleplay-1",
+      "type": "roleplay",
+      "prompt": "Practice using personal pronouns in a conversation.",
+      "scenario": {
+        "setting": "a coffee shop",
+        "summary": "You are sitting in a coffee shop and talking about your friends and family. Use personal pronouns to describe them naturally.",
+        "roles": [
+          {
+            "name": "Student 1",
+            "goal": "Talk about your friends and family using personal pronouns.",
+            "details": "You are relaxing in a café. You have two friends and one sister. Their names are Anna, Mike, and Kate."
+          },
+          {
+            "name": "Student 2",
+            "goal": "Ask questions about Student 1’s friends and family.",
+            "details": "You are Student 1’s friend. You want to know more about Anna, Mike, and Kate — ask about what they like doing."
+          }
+        ],
+        "steps": [
+          "Student 1 starts: 'I have a friend named Anna. She loves coffee too!'",
+          "Student 2 asks: 'What does she like to do in her free time?'",
+          "Student 1 replies: 'She likes to play soccer.'",
+          "Student 2 continues: 'And what about Mike?'",
+          "Student 1 answers: 'He works at a café. He is very friendly.'",
+          "Student 2 asks: 'Do you have any brothers or sisters?'",
+          "Student 1 finishes: 'Yes, my sister Kate loves to read and write stories.'"
+        ]
+      },
+      "phrases": [
+        {
+          "phrase": "I have",
+          "translation": "to show possession"
+        },
+        {
+          "phrase": "She likes",
+          "translation": "to describe a female person's interests"
+        },
+        {
+          "phrase": "He is",
+          "translation": "to describe a male person"
+        },
+        {
+          "phrase": "They are",
+          "translation": "to describe a group of people"
+        },
+        {
+          "phrase": "What about",
+          "translation": "to ask for more information"
+        },
+        {
+          "phrase": "My friend",
+          "translation": "to refer to a person you know"
+        },
+        {
+          "phrase": "Her name is",
+          "translation": "to introduce a female person"
+        },
+        {
+          "phrase": "His name is",
+          "translation": "to introduce a male person"
+        },
+        {
+          "phrase": "I like",
+          "translation": "to express your own interests"
+        },
+        {
+          "phrase": "We are",
+          "translation": "to describe a group including yourself"
+        }
+      ]
+    },
+    {
+      "id": "dialogue-gap-task-dialogue-gap-1",
+      "type": "dialogue-gap",
+      "prompt": "Complete the dialogue using the correct pronouns from the word bank.",
+      "words": ["I", "you", "he", "she", "I", "we", "they", "it", "me"],
+      "dialogue": [
+        {
+          "speaker": "Student 1",
+          "line": "Hi! ___ am happy today."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Hi! ___ am happy too."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Look at Tom. ___ is very funny!"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Yes, and Anna — ___ is nice too."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Do ___ want to play football?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Sure! ___ can play together."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "What about Bella and Mark?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "___ can join us!"
+        }
+      ],
+      "answers": ["I", "I", "He", "She", "you", "we", "they"]
+    },
+    {
+      "id": "dialogue-order-task-dialogue-order-1",
+      "type": "dialogue-order",
+      "prompt": "Arrange the dialogue lines in the correct order.",
+      "lines": [
+        {
+          "speaker": "Student 1",
+          "line": "Hi! I’m happy to see you today."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Hi! Me too. How are you?"
+        },
+        {
+          "speaker": "Student 1",
+          "line": "I’m good, thank you. What do you want to do?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "I have a new game at home."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "That sounds fun! Can we play together?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Of course! We can play at my house."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Great! Let’s go now."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Okay, let’s go!"
+        }
+      ],
+      "solution": [0, 1, 2, 3, 4, 5, 6, 7]
+    },
+    {
+      "id": "truefalse-task-truefalse-1",
+      "type": "truefalse",
+      "prompt": "Read each sentence and decide if it is correct (true) or incorrect (false).",
+      "items": [
+        {
+          "statement": "‘I’ is used when you talk about yourself.",
+          "answer": true
+        },
+        {
+          "statement": "‘He’ is used for a girl or a woman.",
+          "answer": false
+        },
+        {
+          "statement": "‘They’ can mean two or more people.",
+          "answer": true
+        },
+        {
+          "statement": "‘She’ is used when you talk about your brother.",
+          "answer": false
+        },
+        {
+          "statement": "‘We’ means you and at least one more person.",
+          "answer": true
+        },
+        {
+          "statement": "‘You’ can mean one person or many people.",
+          "answer": true
+        },
+        {
+          "statement": "‘It’ is often used for things or animals.",
+          "answer": true
+        },
+        {
+          "statement": "‘Me’ is used when you are the subject of the sentence.",
+          "answer": false
+        },
+        {
+          "statement": "‘Him’ is used for a boy or a man.",
+          "answer": true
+        },
+        {
+          "statement": "‘Us’ means only one person.",
+          "answer": false
+        }
+      ]
+    },
+
+    {
+      "id": "synonym-clue-task-synonym-clue-1",
+      "type": "synonym-clue",
+      "prompt": "Read each clue and choose the correct pronoun from the word bank.",
+      "wordBank": ["he", "she", "I", "we", "you", "they"],
+      "items": [
+        {
+          "clue": "The person who is speaking.",
+          "answers": ["I"]
+        },
+        {
+          "clue": "The person you are talking to.",
+          "answers": ["you"]
+        },
+        {
+          "clue": "A boy or a man.",
+          "answers": ["he"]
+        },
+        {
+          "clue": "A girl or a woman.",
+          "answers": ["she"]
+        },
+        {
+          "clue": "The speaker and one or more other people.",
+          "answers": ["we"]
+        },
+        {
+          "clue": "Two or more people not including the speaker.",
+          "answers": ["they"]
+        }
+      ]
+    }
+  ]
+}

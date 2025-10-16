@@ -1,0 +1,516 @@
+{
+  "title": "Greetings and Farewells",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "mcq-task-1",
+      "type": "mcq",
+      "prompt": "What do you say to your friend?",
+      "items": [
+        {
+          "q": "You see your friend on the street. What do you say?",
+          "choices": ["Hello", "Good night", "Goodbye"],
+          "answer": ["0"]
+        },
+        {
+          "q": "You see a colleague in the afternoon. What do you say?",
+          "choices": ["Good afternoon", "Hi there", "Good evening"],
+          "answer": ["0"]
+        },
+        {
+          "q": "You leave a meeting. You will see them again soon. What do you say?",
+          "choices": ["See you later", "Nice to meet you", "Good morning"],
+          "answer": ["0"]
+        },
+        {
+          "q": "You meet someone new. What do you say?",
+          "choices": ["Goodbye", "Nice to meet you", "See you soon"],
+          "answer": ["1"]
+        },
+        {
+          "q": "You finish a phone call. What do you say?",
+          "choices": ["Goodbye", "Good morning", "Take care"],
+          "answer": ["0"]
+        },
+        {
+          "q": "You are going to sleep. What do you say?",
+          "choices": ["Good night", "Good evening", "Good afternoon"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Someone says 'How are you?' What do you say?",
+          "choices": ["I'm fine, thanks.", "See you later.", "Good morning!"],
+          "answer": ["0"]
+        },
+        {
+          "q": "A guest comes to your home. What do you say?",
+          "choices": ["Welcome", "Goodbye", "Good night"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Your friend goes to work in the morning. What do you say?",
+          "choices": ["Have a nice day!", "Good night!", "See you yesterday!"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "gap-task-1",
+      "type": "gap",
+      "prompt": "Fill in the blanks with the right word.",
+      "items": [
+        {
+          "q": "Hello, my name ___ Anna and I’m from London.",
+          "answer": ["is"]
+        },
+        { "q": "Goodbye! See you ___ soon at the café.", "answer": ["later"] },
+        { "q": "How ___ you doing today?", "answer": ["are"] },
+        { "q": "Nice to ___ you at the party last night!", "answer": ["meet"] },
+        { "q": "I am fine, ___ you? How was your day?", "answer": ["and"] },
+        { "q": "Good morning! Have a ___ day at work!", "answer": ["nice"] },
+        {
+          "q": "What is your ___? I forgot to ask earlier.",
+          "answer": ["name"]
+        },
+        {
+          "q": "See you ___! Don’t forget the meeting tomorrow.",
+          "answer": ["tomorrow"]
+        },
+        { "q": "Good evening! How was your ___ at school?", "answer": ["day"] },
+        { "q": "Take care and ___ well during your trip!", "answer": ["stay"] }
+      ]
+    },
+    {
+      "id": "situation-task-1",
+      "type": "mcq",
+      "prompt": "When do you say these phrases? Choose the best answer.",
+      "items": [
+        {
+          "q": "When do you say 'Good morning!'?",
+          "choices": [
+            "When you meet someone early in the day",
+            "When you are going to bed",
+            "When leaving school in the afternoon"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "When do you say 'Good night!'?",
+          "choices": [
+            "When arriving at work",
+            "When going to sleep at night",
+            "When having breakfast"
+          ],
+          "answer": ["1"]
+        },
+        {
+          "q": "When do you say 'See you later!'?",
+          "choices": [
+            "When you expect to meet again soon",
+            "When meeting someone for the first time",
+            "When answering a phone call"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "When do you say 'Take care!'?",
+          "choices": [
+            "When greeting someone",
+            "When saying goodbye and wishing well",
+            "When answering the phone"
+          ],
+          "answer": ["1"]
+        },
+        {
+          "q": "When do you say 'Welcome!'?",
+          "choices": [
+            "When someone arrives at your home",
+            "When someone leaves your home",
+            "When finishing lunch"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "When do you say 'Nice to meet you!'?",
+          "choices": [
+            "When meeting someone for the first time",
+            "When going home after work",
+            "When feeling tired"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "When do you ask 'How are you?'?",
+          "choices": [
+            "To ask about someone’s feelings",
+            "To say goodbye",
+            "To introduce yourself"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "When do you say 'Goodbye!'?",
+          "choices": [
+            "When starting a conversation",
+            "When ending a conversation",
+            "When asking a question"
+          ],
+          "answer": ["1"]
+        },
+        {
+          "q": "When do you say 'Hello!'?",
+          "choices": [
+            "When starting a phone call",
+            "When finishing dinner",
+            "When going to bed"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "When do you say 'Have a nice day!'?",
+          "choices": [
+            "When someone is leaving your office",
+            "When someone arrives at your office",
+            "When someone is upset"
+          ],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "context-task-1",
+      "type": "context",
+      "prompt": "Read the conversation and choose the right answer.",
+      "context": {
+        "title": "Friendly Greetings",
+        "format": "dialog",
+        "body": [
+          { "speaker": "Anna", "line": "Hello, Tom! How are you?" },
+          { "speaker": "Tom", "line": "Hi, Anna! I’m good, thank you!" },
+          { "speaker": "Anna", "line": "What are you doing today?" },
+          { "speaker": "Tom", "line": "I’m going to the park." },
+          { "speaker": "Anna", "line": "That sounds fun! Can I come?" },
+          { "speaker": "Tom", "line": "Of course! Let’s go together." },
+          { "speaker": "Anna", "line": "Great! See you in ten minutes." },
+          { "speaker": "Tom", "line": "See you soon!" }
+        ]
+      },
+      "questions": [
+        {
+          "q": "What does Anna say first?",
+          "choices": ["Goodbye, Tom!", "Hello, Tom!", "See you later!"],
+          "answer": ["1"]
+        },
+        {
+          "q": "How does Tom feel?",
+          "choices": ["Sad", "Good", "Tired"],
+          "answer": ["1"]
+        },
+        {
+          "q": "Where is Tom going?",
+          "choices": ["To the store", "To the park", "To school"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What does Anna want to do?",
+          "choices": ["Go to the park with Tom", "Stay home", "Go to school"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What does Tom say to Anna?",
+          "choices": ["Go to the park together", "Go home", "Go shopping"],
+          "answer": ["0"]
+        },
+        {
+          "q": "How many minutes before they meet?",
+          "choices": ["Five minutes", "Ten minutes", "Fifteen minutes"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What does Anna say at the end?",
+          "choices": ["Goodbye!", "See you soon!", "Take care!"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What is this conversation about?",
+          "choices": [
+            "Shopping",
+            "Friendly greetings and plans",
+            "School work"
+          ],
+          "answer": ["1"]
+        },
+        {
+          "q": "What does Tom say when Anna wants to come?",
+          "choices": ["No, thank you", "Of course!", "Maybe later"],
+          "answer": ["1"]
+        },
+        {
+          "q": "How does Anna feel?",
+          "choices": ["Happy", "Angry", "Bored"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "scramble-task-1",
+      "type": "scramble",
+      "prompt": "Unscramble the letters. Make greetings or goodbyes.",
+      "items": [
+        { "scrambled": "elohl", "answers": ["hello"] },
+        { "scrambled": "gyboedo", "answers": ["goodbye"] },
+        { "scrambled": "ninmgor", "answers": ["morning"] },
+        { "scrambled": "gtnih", "answers": ["night"] },
+        { "scrambled": "eyh", "answers": ["hey"] },
+        { "scrambled": "elwmcoe", "answers": ["welcome"] },
+        { "scrambled": "bey", "answers": ["bye"] },
+        { "scrambled": "ese", "answers": ["see"] },
+        { "scrambled": "oyu", "answers": ["you"] },
+        { "scrambled": "etlar", "answers": ["later"] }
+      ]
+    },
+    {
+      "id": "response-task-1",
+      "type": "mcq",
+      "prompt": "What do you say next? Choose the best answer.",
+      "items": [
+        {
+          "q": "Good morning!",
+          "choices": ["Good night!", "Good morning!", "See you!"],
+          "answer": ["1"]
+        },
+        {
+          "q": "How are you?",
+          "choices": ["I’m fine, thank you.", "Goodbye!", "Welcome!"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Nice to meet you.",
+          "choices": [
+            "See you later!",
+            "Nice to meet you, too.",
+            "Good night!"
+          ],
+          "answer": ["1"]
+        },
+        {
+          "q": "See you tomorrow!",
+          "choices": ["How are you?", "See you!", "Good morning!"],
+          "answer": ["1"]
+        },
+        {
+          "q": "Hello!",
+          "choices": ["Hello!", "Good night!", "Take care!"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Have a nice day!",
+          "choices": ["Good evening!", "You too!", "Goodbye!"],
+          "answer": ["1"]
+        },
+        {
+          "q": "Take care!",
+          "choices": ["Welcome!", "You too!", "Good morning!"],
+          "answer": ["1"]
+        },
+        {
+          "q": "Good evening!",
+          "choices": ["Good evening!", "Good afternoon!", "Good morning!"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Welcome!",
+          "choices": ["Thank you!", "See you later!", "How are you?"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Goodbye!",
+          "choices": ["Bye!", "Good morning!", "Hello!"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "roleplay-task-1",
+      "type": "roleplay",
+      "prompt": "Practice greetings and goodbyes with a partner at school.",
+      "scenario": {
+        "setting": "A school hallway",
+        "summary": "You meet your friend in the hallway. You greet each other, chat briefly, and say goodbye.",
+        "roles": [
+          {
+            "name": "Student 1",
+            "goal": "Greet Student 2 warmly and say goodbye politely.",
+            "details": "You are happy to see your friend and are on your way to class."
+          },
+          {
+            "name": "Student 2",
+            "goal": "Respond to Student 1’s greeting and say goodbye.",
+            "details": "You are also happy to see your friend and are going to a different class."
+          }
+        ],
+        "steps": [
+          "Student 1 greets Student 2 with a friendly phrase.",
+          "Student 2 responds to the greeting naturally.",
+          "They talk briefly about their plans for the day.",
+          "Student 1 says they have to leave for class.",
+          "Student 2 wishes Student 1 goodbye and good luck."
+        ]
+      },
+      "phrases": [
+        { "phrase": "Hello!", "translation": "A common greeting." },
+        {
+          "phrase": "How are you?",
+          "translation": "A way to ask about someone’s well-being."
+        },
+        {
+          "phrase": "I’m fine, thank you.",
+          "translation": "A polite response to ‘How are you?’"
+        },
+        {
+          "phrase": "What are you doing?",
+          "translation": "A way to ask about someone’s plans or activities."
+        },
+        {
+          "phrase": "I have to go now.",
+          "translation": "A polite way to say you need to leave."
+        },
+        {
+          "phrase": "See you later!",
+          "translation": "A friendly way to say goodbye."
+        },
+        { "phrase": "Goodbye!", "translation": "A common farewell." },
+        {
+          "phrase": "Take care!",
+          "translation": "A way to wish someone well when parting."
+        },
+        {
+          "phrase": "Nice to see you!",
+          "translation": "A friendly greeting when meeting someone."
+        },
+        {
+          "phrase": "Have a good day!",
+          "translation": "A way to wish someone a pleasant day."
+        }
+      ]
+    },
+    {
+      "id": "warmup-task-1",
+      "type": "open",
+      "prompt": "Warm-up: Give two ways to say hello in each situation.",
+      "items": [
+        {
+          "situation": "You meet your colleague in the morning before work starts"
+        },
+        {
+          "situation": "You see your friend after a long time at a café"
+        },
+        {
+          "situation": "You start a Zoom lesson with your teacher and classmates"
+        },
+        {
+          "situation": "You meet your neighbour in the evening while walking"
+        }
+      ],
+      "scoring": {
+        "criteria": [
+          "Appropriate greeting for the time and situation",
+          "Polite and friendly tone",
+          "Use of simple, clear A1/A2 phrases"
+        ]
+      }
+    },
+    {
+      "id": "choose-greeting-task-1",
+      "type": "open",
+      "prompt": "Choose the right greeting or goodbye. The teacher says a situation. You say the best greeting or goodbye.",
+      "items": [
+        {
+          "situation": "You meet your boss at 9 a.m. in the office corridor"
+        },
+        {
+          "situation": "You talk to a friend on the phone in the evening"
+        },
+        {
+          "situation": "You leave a shop after shopping"
+        },
+        {
+          "situation": "You go to sleep after a long day"
+        }
+      ],
+      "scoring": {
+        "criteria": [
+          "Correct greeting or farewell for the context",
+          "Natural everyday usage",
+          "Clear pronunciation (optional for speaking practice)"
+        ]
+      }
+    },
+    {
+      "id": "finish-phrase-task-1",
+      "type": "open",
+      "prompt": "Finish the phrase: complete each sentence naturally.",
+      "items": [
+        { "situation": "Hello, my name is …" },
+        { "situation": "Nice to …" },
+        { "situation": "How … you?" },
+        { "situation": "I’m …, thank you." },
+        { "situation": "See you …" },
+        { "situation": "Good …!" },
+        { "situation": "Have a … day!" },
+        { "situation": "It’s … to see you." },
+        { "situation": "Take …!" },
+        { "situation": "Goodbye, …!" }
+      ],
+      "scoring": {
+        "criteria": [
+          "Correct and natural ending for the phrase",
+          "Basic grammar accuracy",
+          "Appropriate for A1 level"
+        ]
+      }
+    },
+    {
+      "id": "goodbye-chain-task-1",
+      "type": "open",
+      "prompt": "Goodbye chain: In a group, each student says a different farewell. Do not repeat any phrase.",
+      "items": [{ "situation": "Hello" }, { "situation": "Bye" }],
+      "examples": [
+        "Bye",
+        "See you",
+        "See you later",
+        "Take care",
+        "Have a good day",
+        "Good night",
+        "Catch you later"
+      ],
+      "scoring": {
+        "criteria": [
+          "No repeated farewells",
+          "Clear pronunciation",
+          "Natural everyday phrases"
+        ]
+      }
+    },
+    {
+      "id": "extra-speaking-challenge-task-1",
+      "type": "open",
+      "prompt": "Extra speaking challenge: Answer the questions. Use examples from your life.",
+      "items": [
+        { "situation": "When do you usually say 'Good morning'?" },
+        { "situation": "What do you say to your friends when you leave?" },
+        {
+          "situation": "What is the difference between 'Good night' and 'Good evening'?"
+        },
+        { "situation": "Do you say 'Hi' to strangers? Why or why not?" }
+      ],
+      "scoring": {
+        "criteria": [
+          "Short and clear answers",
+          "Correct use of greeting phrases",
+          "A1/A2 level grammar and vocabulary"
+        ]
+      }
+    }
+  ]
+}

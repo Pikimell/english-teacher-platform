@@ -1,0 +1,336 @@
+{
+  "title": "Алфавіт і правопис (spelling)",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "mcq-spelling-mcq-1",
+      "type": "mcq",
+      "prompt": "Choose the correct option.",
+      "items": [
+        {
+          "q": "The first letter of the alphabet is ___.",
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "How do you spell the word for a fruit that is red and round? It is ___.",
+          "choices": [
+            "apple",
+            "aple",
+            "appl"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "The last letter of the alphabet is ___.",
+          "choices": [
+            "Y",
+            "Z",
+            "X"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "Which letter comes after D? It is ___.",
+          "choices": [
+            "E",
+            "F",
+            "C"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "How do you spell the color of the sky? It is ___.",
+          "choices": [
+            "blue",
+            "blu",
+            "bloo"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "The letter that sounds like 'ess' is ___.",
+          "choices": [
+            "S",
+            "T",
+            "R"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "Which letter comes before M? It is ___.",
+          "choices": [
+            "L",
+            "N",
+            "K"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "How do you spell the word for a large animal that says 'moo'? It is ___.",
+          "choices": [
+            "cow",
+            "caw",
+            "coo"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "The letter that sounds like 'jay' is ___.",
+          "choices": [
+            "J",
+            "G",
+            "H"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "Which letter comes after T? It is ___.",
+          "choices": [
+            "U",
+            "V",
+            "S"
+          ],
+          "answer": [
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "match-spelling-match-1",
+      "type": "match",
+      "prompt": "Match the letter with its correct spelling.",
+      "pairs": [
+        {
+          "left": "A",
+          "right": "ay"
+        },
+        {
+          "left": "B",
+          "right": "bee"
+        },
+        {
+          "left": "C",
+          "right": "cee"
+        },
+        {
+          "left": "D",
+          "right": "dee"
+        },
+        {
+          "left": "E",
+          "right": "ee"
+        },
+        {
+          "left": "F",
+          "right": "ef"
+        },
+        {
+          "left": "G",
+          "right": "gee"
+        },
+        {
+          "left": "H",
+          "right": "aitch"
+        },
+        {
+          "left": "I",
+          "right": "eye"
+        },
+        {
+          "left": "J",
+          "right": "jay"
+        }
+      ]
+    },
+    {
+      "id": "dialogue-gap-spelling-dialogue-gap-1",
+      "type": "dialogue-gap",
+      "prompt": "Fill the blanks in the dialogue using the word bank.",
+      "words": [
+        "letter",
+        "spell",
+        "word",
+        "name",
+        "write",
+        "alphabet",
+        "sound",
+        "correct"
+      ],
+      "dialogue": [
+        {
+          "speaker": "Student 1",
+          "line": "What is the first ___ of the alphabet?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "The first ___ is A."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Can you ___ your ___?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Sure! My ___ is Anna."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "How do you ___ 'Anna'?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "A-N-N-A. Is that ___?"
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Yes, that is ___!"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "I love the ___!"
+        }
+      ],
+      "answers": [
+        "letter",
+        "spell",
+        "name",
+        "write",
+        "word",
+        "correct",
+        "sound",
+        "alphabet"
+      ]
+    },
+    {
+      "id": "odd-one-out-spelling-odd-one-out-1",
+      "type": "odd-one-out",
+      "prompt": "Find the odd one out.",
+      "items": [
+        {
+          "options": [
+            "apple",
+            "banana",
+            "grape",
+            "car"
+          ],
+          "answer": "3",
+          "explanation": "Car is not a fruit."
+        },
+        {
+          "options": [
+            "cat",
+            "dog",
+            "fish",
+            "run"
+          ],
+          "answer": "3",
+          "explanation": "Run is not an animal."
+        },
+        {
+          "options": [
+            "red",
+            "blue",
+            "green",
+            "fast"
+          ],
+          "answer": "3",
+          "explanation": "Fast is not a color."
+        },
+        {
+          "options": [
+            "house",
+            "tree",
+            "car",
+            "quickly"
+          ],
+          "answer": "3",
+          "explanation": "Quickly is not a noun."
+        },
+        {
+          "options": [
+            "book",
+            "pen",
+            "table",
+            "jump"
+          ],
+          "answer": "3",
+          "explanation": "Jump is not an object."
+        },
+        {
+          "options": [
+            "sing",
+            "dance",
+            "play",
+            "happy"
+          ],
+          "answer": "3",
+          "explanation": "Happy is not an action."
+        },
+        {
+          "options": [
+            "elephant",
+            "tiger",
+            "lion",
+            "swiftly"
+          ],
+          "answer": "3",
+          "explanation": "Swiftly is not an animal."
+        },
+        {
+          "options": [
+            "circle",
+            "square",
+            "triangle",
+            "quick"
+          ],
+          "answer": "3",
+          "explanation": "Quick is not a shape."
+        },
+        {
+          "options": [
+            "water",
+            "juice",
+            "milk",
+            "swiftly"
+          ],
+          "answer": "3",
+          "explanation": "Swiftly is not a drink."
+        },
+        {
+          "options": [
+            "teacher",
+            "student",
+            "school",
+            "quickly"
+          ],
+          "answer": "3",
+          "explanation": "Quickly is not a person."
+        }
+      ]
+    }
+  ]
+}
