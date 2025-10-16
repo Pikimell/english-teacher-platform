@@ -1,8 +1,13 @@
 // Lightweight practice renderer for topic pages
 
 import { addHomework } from '@api/homework.js';
-import { getUsers } from '@api/user.js';
 import { auth } from '@features/auth/auth.js';
+import {
+  closeActiveSharePanel,
+  createShareControl,
+  isSharePanelActive,
+  setShareAvailability,
+} from '@features/helpers/share-panel.js';
 
 // Convention: for page /X/indexN.html → fetch /X/practice/indexN.json
 const practiceAPI = (function () {
@@ -68,266 +73,9 @@ const practiceAPI = (function () {
       .replace(/\s+/g, ' ');
   }
 
-  const shareState = {
-    users: null,
-    request: null,
-    active: null,
-  };
-
-  function fetchStudents() {
-    if (shareState.users) return Promise.resolve(shareState.users);
-    if (shareState.request) return shareState.request;
-
-    shareState.request = getUsers()
-      .then(data => {
-        const items = Array.isArray(data?.items) ? data.items : [];
-        shareState.users = items;
-        return items;
-      })
-      .catch(error => {
-        console.error('Не вдалося завантажити список студентів', error);
-        throw error;
-      })
-      .finally(() => {
-        shareState.request = null;
-      });
-    return shareState.request;
-  }
-
-  function formatStudentName(student) {
-    if (!student || typeof student !== 'object') return 'Невідомий студент';
-    const possibleFirst =
-      student.firstName || student.firstname || student.nameFirst || '';
-    const possibleLast =
-      student.lastName || student.lastname || student.nameLast || '';
-    const full = [possibleFirst, possibleLast]
-      .map(part => String(part || '').trim())
-      .filter(Boolean)
-      .join(' ');
-    const display =
-      full ||
-      student.displayName ||
-      student.fullName ||
-      student.username ||
-      student.email ||
-      (student.id ? `ID ${student.id}` : '');
-    return display || 'Без імені';
-  }
-
-  function closeActiveSharePanel() {
-    if (!shareState.active) return;
-    const { panel, button } = shareState.active;
-    panel.style.display = 'none';
-    panel.dataset.open = 'false';
-    button.setAttribute('aria-expanded', 'false');
-    shareState.active = null;
-  }
-
-  const shareControls = new Set();
-  let canShareTasks = false;
-
-  function applyShareVisibility(control) {
-    const { button, panel } = control;
-    if (!button || !panel) return;
-    if (!button.isConnected && !panel.isConnected) {
-      shareControls.delete(control);
-      return;
-    }
-    if (canShareTasks) {
-      button.hidden = false;
-      return;
-    }
-    button.hidden = true;
-    panel.style.display = 'none';
-    panel.dataset.open = 'false';
-  }
-
-  function registerShareControl(button, panel) {
-    const control = { button, panel };
-    shareControls.add(control);
-    applyShareVisibility(control);
-    return () => {
-      shareControls.delete(control);
-    };
-  }
-
-  function setShareAvailability(isAllowed) {
-    const next = Boolean(isAllowed);
-    if (canShareTasks === next) return;
-    canShareTasks = next;
-    if (!canShareTasks) {
-      closeActiveSharePanel();
-    }
-    shareControls.forEach(control => applyShareVisibility(control));
-  }
-
   auth.subscribe(({ user }) => {
     setShareAvailability(auth.isAdmin(user));
   });
-
-  function handleOutsideShareClick(event) {
-    if (!shareState.active) return;
-    const { panel, button } = shareState.active;
-    const target = event.target;
-    if (panel.contains(target) || button.contains(target)) return;
-    closeActiveSharePanel();
-  }
-
-  function handleShareKeydown(event) {
-    if (event.key === 'Escape') {
-      closeActiveSharePanel();
-    }
-  }
-
-  function renderStudentOptions(panel, students, task) {
-    panel.innerHTML = '';
-    if (!students.length) {
-      panel.appendChild(
-        el(
-          'div',
-          {
-            class: 'muted',
-            style: 'font-size:13px;text-align:center;padding:12px 8px;',
-          },
-          'Список студентів порожній'
-        )
-      );
-      return;
-    }
-    const list = el('ul', {
-      style:
-        'list-style:none;margin:0;padding:0;max-height:220px;overflow:auto;',
-    });
-    students.forEach(student => {
-      const button = el(
-        'button',
-        {
-          type: 'button',
-          style:
-            'width:100%;background:transparent;border:none;text-align:left;padding:8px 10px;border-radius:8px;cursor:pointer;display:flex;flex-direction:column;gap:2px;',
-          onmouseenter: () => {
-            button.style.backgroundColor = '#f1f5f9';
-          },
-          onmouseleave: () => {
-            button.style.backgroundColor = 'transparent';
-          },
-          onclick: () => {
-            const lessonId = window.location.search.slice(8);
-            const lessonName = document.querySelector('h1').textContent;
-
-            console.log(lessonId);
-
-            const homework = {
-              lessonId,
-              userEmail: student.email,
-              lessonName,
-              homeworkType: 'task',
-              homeworkData: JSON.stringify(task),
-            };
-
-            addHomework(homework);
-
-            closeActiveSharePanel();
-          },
-        },
-        el(
-          'span',
-          { style: 'font-size:14px;font-weight:600;color:#0f172a;' },
-          formatStudentName(student)
-        ),
-        student.email
-          ? el(
-              'span',
-              { class: 'muted', style: 'font-size:12px;color:#475569;' },
-              student.email
-            )
-          : null
-      );
-      const item = el('li', { style: 'margin:0;padding:0;' }, button);
-      list.appendChild(item);
-    });
-    panel.appendChild(list);
-  }
-
-  function createSharePanel() {
-    return el('div', {
-      class: 'practice-share-panel',
-      role: 'dialog',
-      'aria-label': 'Надсилання завдання студенту',
-      style:
-        'position:absolute;top:38px;right:0;min-width:240px;max-width:280px;border:1px solid #e2e8f0;border-radius:12px;background:#fff;box-shadow:0 18px 40px rgba(15,23,42,0.18);padding:8px;z-index:30;display:none;',
-      'data-open': 'false',
-    });
-  }
-
-  function toggleSharePanel(button, panel, task) {
-    const isOpen = panel.dataset.open === 'true';
-    if (isOpen) {
-      closeActiveSharePanel();
-      return;
-    }
-    if (shareState.active && shareState.active.panel !== panel) {
-      closeActiveSharePanel();
-    }
-    panel.dataset.open = 'true';
-    panel.style.display = 'block';
-    button.setAttribute('aria-expanded', 'true');
-    panel.innerHTML = '';
-    panel.appendChild(
-      el(
-        'div',
-        {
-          class: 'muted',
-          style: 'font-size:13px;padding:12px 8px;text-align:center;',
-        },
-        'Завантаження…'
-      )
-    );
-    shareState.active = { panel, button };
-    fetchStudents()
-      .then(students => {
-        renderStudentOptions(panel, students, task);
-      })
-      .catch(() => {
-        panel.innerHTML = '';
-        panel.appendChild(
-          el(
-            'div',
-            {
-              style:
-                'color:#ef4444;font-size:13px;text-align:center;padding:12px 8px;',
-            },
-            'Не вдалося завантажити студентів. Спробуйте ще раз.'
-          )
-        );
-      });
-  }
-
-  function createShareButton(task) {
-    const panel = createSharePanel();
-    const button = el(
-      'button',
-      {
-        type: 'button',
-        class: 'practice-share-trigger for-admin js-share-homework-btn',
-        title: 'Надіслати студенту',
-        'aria-haspopup': 'dialog',
-        'aria-expanded': 'false',
-        style:
-          'border:none;background:#2563eb;color:#fff;padding:4px 10px;border-radius:999px;font-size:12px;line-height:1;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,0.24);',
-        onclick: event => {
-          event.preventDefault();
-          toggleSharePanel(button, panel, task);
-        },
-      },
-      'Надіслати'
-    );
-    return { button, panel };
-  }
-
-  document.addEventListener('click', handleOutsideShareClick);
-  document.addEventListener('keydown', handleShareKeydown);
-
   // Subtle hint toggle: hidden by default, shown on small button click
   function makeHint(hintText) {
     const wrap = el('div', { class: 'hint-wrap', style: 'margin-top:6px;' });
@@ -761,8 +509,28 @@ const practiceAPI = (function () {
         'position:absolute;top:6px;right:6px;display:flex;gap:6px;align-items:center;z-index:5;',
     });
 
-    const { button: shareBtn, panel: sharePanel } = createShareButton(task);
-    const unregisterShareControl = registerShareControl(shareBtn, sharePanel);
+    const {
+      button: shareBtn,
+      panel: sharePanel,
+      unregister: unregisterShareControl,
+    } = createShareControl({
+      context: task,
+      onShare: ({ student, context }) => {
+        const lessonId = window.location.search.slice(8);
+        const heading = document.querySelector('h1');
+        const lessonName = heading ? heading.textContent : '';
+
+        const homework = {
+          lessonId,
+          userEmail: student.email,
+          lessonName,
+          homeworkType: 'task',
+          homeworkData: JSON.stringify(context),
+        };
+
+        return addHomework(homework);
+      },
+    });
 
     controls.appendChild(shareBtn);
     // Subtle remove button (top-right), hidden until hover/focus
@@ -773,12 +541,13 @@ const practiceAPI = (function () {
           type: 'button',
           title: 'Видалити завдання',
           'aria-label': 'Видалити завдання',
+          class: 'for-admin',
           style:
             'border:none;background:transparent;color:#94a3b8;cursor:pointer;padding:2px;line-height:1;font-size:14px;opacity:0.6;',
           onmouseenter: () => (removeBtn.style.opacity = '1'),
           onmouseleave: () => (removeBtn.style.opacity = '0.6'),
           onclick: () => {
-            if (shareState.active && shareState.active.panel === sharePanel) {
+            if (isSharePanelActive(sharePanel)) {
               closeActiveSharePanel();
             }
             document.dispatchEvent(

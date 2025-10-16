@@ -170,10 +170,18 @@ async function loadHomework(lessonId) {
   const resContainer = document.createElement('div');
 
   for (const item of items) {
-    if (item.homeworkType !== 'task') continue;
-    const data = JSON.parse(item.homeworkData);
-    const node = createPracticeTaskElement(data);
-    resContainer.appendChild(node);
+    console.log(item);
+
+    if (item.homeworkType === 'task') {
+      try {
+        const data = JSON.parse(item.homeworkData);
+        const node = createPracticeTaskElement(data);
+        resContainer.appendChild(node);
+      } catch {}
+    } else if (item.homeworkType === 'theory') {
+      const data = item.homeworkData;
+      resContainer.insertAdjacentHTML(data);
+    }
   }
 
   const container = document.querySelector('.js-homework-content');
