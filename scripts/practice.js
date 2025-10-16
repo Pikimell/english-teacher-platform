@@ -1237,7 +1237,6 @@
       : [];
     const blanks = [];
     let activeBlank = null;
-    const wordById = new Map();
 
     function setActive(blank) {
       if (activeBlank && activeBlank !== blank) {
@@ -1254,14 +1253,7 @@
 
     function clearBlank(blank) {
       if (!blank) return;
-      const assignedId = blank.dataset.buttonId;
-      if (assignedId && wordById.has(assignedId)) {
-        const btn = wordById.get(assignedId);
-        btn.disabled = false;
-        btn.classList.remove('used');
-      }
       blank.dataset.value = '';
-      blank.dataset.buttonId = '';
       blank.textContent = '___';
       blank.style.borderColor = '#cbd5e1';
       blank.style.background = '#fff';
@@ -1273,10 +1265,18 @@
         'display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;padding:10px;border:1px solid #e2e8f0;border-radius:10px;background:#f8fafc;',
     });
     const words = Array.isArray(task?.words) ? task.words : [];
-    words.forEach((word, index) => {
+    const seenWords = new Set();
+    const uniqueWords = [];
+    words.forEach((word) => {
       const value = String(word || '').trim();
       if (!value) return;
-      const id = `word-${index}-${Math.random().toString(36).slice(2, 6)}`;
+      const signature = normalize(value);
+      if (seenWords.has(signature)) return;
+      seenWords.add(signature);
+      uniqueWords.push(value);
+    });
+
+    uniqueWords.forEach((value) => {
       const btn = el(
         'button',
         {
@@ -1289,20 +1289,7 @@
               activeBlank || blanks.find((blank) => !blank.dataset.value);
             if (!target) return;
 
-            if (btn.disabled && target.dataset.buttonId !== id) return;
-
-            if (target.dataset.buttonId && target.dataset.buttonId !== id) {
-              const prevBtn = wordById.get(target.dataset.buttonId);
-              if (prevBtn) {
-                prevBtn.disabled = false;
-                prevBtn.classList.remove('used');
-              }
-            }
-
-            btn.disabled = true;
-            btn.classList.add('used');
             target.dataset.value = value;
-            target.dataset.buttonId = id;
             target.textContent = value;
             target.style.borderColor = '#2563eb';
             target.style.background = '#eef2ff';
@@ -1312,8 +1299,6 @@
         value
       );
       btn.dataset.word = value;
-      btn.dataset.id = id;
-      wordById.set(id, btn);
       bank.appendChild(btn);
     });
     if (bank.children.length) {
@@ -1354,6 +1339,11 @@
               style:
                 'min-width:52px;padding:4px 10px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#0f172a;cursor:pointer;',
               onclick: () => {
+                if (blank.dataset.value) {
+                  clearBlank(blank);
+                  setActive(blank);
+                  return;
+                }
                 if (activeBlank === blank) {
                   setActive(null);
                 } else {
@@ -1412,10 +1402,6 @@
 
     resetBtn.addEventListener('click', () => {
       blanks.forEach((blank) => clearBlank(blank));
-      wordById.forEach((btn) => {
-        btn.disabled = false;
-        btn.classList.remove('used');
-      });
       result.textContent = '';
       setActive(null);
     });
