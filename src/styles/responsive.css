@@ -1,0 +1,94 @@
+/* Shared responsive adjustments */
+@media (max-width: 900px) {
+  .header,
+  .main,
+  .lesson-main,
+  .lesson-header {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .filters,
+  .catalog,
+  .lesson-content {
+    padding: 2.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .header__auth {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .header__profile {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .header__profile-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .header__profile-name,
+  .header__profile-email {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .header__signout {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding-top: 2.75rem;
+    padding-bottom: 2.25rem;
+  }
+
+  .header__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filters__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-card__link {
+    padding: 1.5rem;
+    height: 100%;
+  }
+
+  .lesson-header {
+    padding-top: 2.25rem;
+  }
+
+  .lesson-content {
+    padding: 1.9rem;
+  }
+
+  .lesson-practice {
+    padding: 2rem;
+  }
+
+  .practice-generator {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .practice-generator__output-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .practice-generator__output-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,15 @@
+.is-user .for-admin {
+  display: none !important;
+}
+
+.is-anonym .for-admin {
+  display: none !important;
+}
+
+.is-anonym .for-user {
+  display: none !important;
+}
+
+.is-admin .for-user {
+  display: none !important;
+}

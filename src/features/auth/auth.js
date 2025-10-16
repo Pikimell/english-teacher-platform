@@ -1,6 +1,7 @@
 import { loginUser } from '@api/authorization.js';
 import { refs } from '@features/layout/dom-refs.js';
 
+const admins = ['volodkaposhta@gmail.com', 'nreznik451@gmail.com'];
 const STORAGE_KEY = 'english-teacher.google-user';
 const AUTH_STATE_KEY = 'english-teacher.google-auth-state';
 
@@ -15,6 +16,8 @@ const signOutButton = document.querySelector('[data-auth-signout]');
 let currentUser = null;
 let isInitialised = false;
 const subscribers = new Set();
+let hasHydratedFromStorage = false;
+let hasBoundStorageListener = false;
 
 function decodeJwtPayload(token) {
   try {
@@ -138,6 +141,25 @@ function setCurrentUser(user, reason) {
   notifySubscribers(reason);
 }
 
+function ensureStorageListener() {
+  if (hasBoundStorageListener) return;
+  if (typeof window === 'undefined' || !window.addEventListener) return;
+  window.addEventListener('storage', handleStorageEvent);
+  hasBoundStorageListener = true;
+}
+
+function ensureHydratedFromStorage() {
+  if (hasHydratedFromStorage) return;
+  if (typeof window === 'undefined') return;
+  hasHydratedFromStorage = true;
+  ensureStorageListener();
+  syncFromStorage({
+    persist: false,
+    applyUi: false,
+    reason: 'hydrated',
+  });
+}
+
 function toggleProfileVisibility(isVisible) {
   if (profileContainer) {
     profileContainer.hidden = !isVisible;
@@ -239,7 +261,7 @@ function handleSignOut(reason = 'signed-out') {
 }
 
 function syncFromStorage(options = {}) {
-  const { persist = false } = options;
+  const { persist = false, applyUi = true, reason = 'synced' } = options;
   const storedUser = loadStoredUser();
   const validStoredUser = isStoredUserValid(storedUser) ? storedUser : null;
   const isExpired = validStoredUser?.expiresAt
@@ -247,15 +269,37 @@ function syncFromStorage(options = {}) {
     : false;
 
   if (validStoredUser && !isExpired) {
-    showUser(validStoredUser, {
-      persist,
-      reason: 'synced',
-    });
+    if (applyUi) {
+      showUser(validStoredUser, {
+        persist,
+        reason,
+      });
+    } else {
+      const record = serialiseUser(validStoredUser);
+      setCurrentUser(record, reason);
+      if (persist) {
+        persistAuthState({
+          status: 'signed-in',
+          user: record,
+          updatedAt: Date.now(),
+        });
+      }
+    }
   } else {
     if (isExpired || storedUser) {
       clearStoredUser();
     }
-    hideUser({ persist, reason: 'synced' });
+    if (applyUi) {
+      hideUser({ persist, reason });
+    } else {
+      setCurrentUser(null, reason);
+      if (persist) {
+        persistAuthState({
+          status: 'signed-out',
+          updatedAt: Date.now(),
+        });
+      }
+    }
   }
 }
 
@@ -274,6 +318,7 @@ function initGoogleAuth() {
   if (isInitialised) return;
   isInitialised = true;
 
+  ensureHydratedFromStorage();
   window.handleGoogleCredential = handleCredentialResponse;
 
   if (signOutButton && !signOutButton.dataset.authInitialised) {
@@ -282,13 +327,14 @@ function initGoogleAuth() {
   }
 
   syncFromStorage({ persist: false });
-  window.addEventListener('storage', handleStorageEvent);
+  ensureStorageListener();
 }
 
 function subscribe(listener) {
   if (typeof listener !== 'function') {
     return () => {};
   }
+  ensureHydratedFromStorage();
   subscribers.add(listener);
   listener(createSnapshot(), currentUser ? 'signed-in' : 'signed-out');
   return () => {
@@ -303,18 +349,47 @@ function refreshAuthState() {
 export const auth = {
   init: initGoogleAuth,
   isInitialised: () => isInitialised,
-  isSignedIn: () => Boolean(currentUser),
-  getUser: () => cloneUser(currentUser),
-  getCredential: () => currentUser?.credential ?? null,
+  isSignedIn: () => {
+    ensureHydratedFromStorage();
+    return Boolean(currentUser);
+  },
+  getUser: () => {
+    ensureHydratedFromStorage();
+    return cloneUser(currentUser);
+  },
+  getCredential: () => {
+    ensureHydratedFromStorage();
+    return currentUser?.credential ?? null;
+  },
   signOut: () => handleSignOut(),
   subscribe,
   refresh: refreshAuthState,
-  getSnapshot: createSnapshot,
+  getSnapshot: () => {
+    ensureHydratedFromStorage();
+    return createSnapshot();
+  },
   isAdmin: user => {
+    if (!user) {
+      ensureHydratedFromStorage();
+    }
     const data = user || currentUser;
-    const admins = ['volodkaposhta@gmail.com', 'nreznik451@gmail.com'];
+
     return admins.includes(data?.email);
   },
 };
 
 export { initGoogleAuth };
+
+auth.subscribe(({ isSignedIn, user }) => {
+  console.log(user);
+
+  if (isSignedIn) {
+    if (admins.includes(user.email)) {
+      document.body.classList.add('is-admin');
+    } else {
+      document.body.classList.add('is-user');
+    }
+  } else {
+    document.body.classList.add('is-anonym');
+  }
+});

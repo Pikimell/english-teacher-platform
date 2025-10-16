@@ -2,6 +2,7 @@
 
 import { addHomework } from '@api/homework.js';
 import { getUsers } from '@api/user.js';
+import { auth } from '@features/auth/auth.js';
 
 // Convention: for page /X/indexN.html → fetch /X/practice/indexN.json
 (function () {
@@ -120,6 +121,48 @@ import { getUsers } from '@api/user.js';
     button.setAttribute('aria-expanded', 'false');
     shareState.active = null;
   }
+
+  const shareControls = new Set();
+  let canShareTasks = false;
+
+  function applyShareVisibility(control) {
+    const { button, panel } = control;
+    if (!button || !panel) return;
+    if (!button.isConnected && !panel.isConnected) {
+      shareControls.delete(control);
+      return;
+    }
+    if (canShareTasks) {
+      button.hidden = false;
+      return;
+    }
+    button.hidden = true;
+    panel.style.display = 'none';
+    panel.dataset.open = 'false';
+  }
+
+  function registerShareControl(button, panel) {
+    const control = { button, panel };
+    shareControls.add(control);
+    applyShareVisibility(control);
+    return () => {
+      shareControls.delete(control);
+    };
+  }
+
+  function setShareAvailability(isAllowed) {
+    const next = Boolean(isAllowed);
+    if (canShareTasks === next) return;
+    canShareTasks = next;
+    if (!canShareTasks) {
+      closeActiveSharePanel();
+    }
+    shareControls.forEach(control => applyShareVisibility(control));
+  }
+
+  auth.subscribe(({ user }) => {
+    setShareAvailability(auth.isAdmin(user));
+  });
 
   function handleOutsideShareClick(event) {
     if (!shareState.active) return;
@@ -265,7 +308,7 @@ import { getUsers } from '@api/user.js';
       'button',
       {
         type: 'button',
-        class: 'practice-share-trigger',
+        class: 'practice-share-trigger for-admin js-share-homework-btn',
         title: 'Надіслати студенту',
         'aria-haspopup': 'dialog',
         'aria-expanded': 'false',
@@ -716,7 +759,10 @@ import { getUsers } from '@api/user.js';
       style:
         'position:absolute;top:6px;right:6px;display:flex;gap:6px;align-items:center;z-index:5;',
     });
+
     const { button: shareBtn, panel: sharePanel } = createShareButton(task);
+    const unregisterShareControl = registerShareControl(shareBtn, sharePanel);
+
     controls.appendChild(shareBtn);
     // Subtle remove button (top-right), hidden until hover/focus
     if (showRemove) {
@@ -739,6 +785,7 @@ import { getUsers } from '@api/user.js';
                 detail: { key: keyBase, task },
               })
             );
+            unregisterShareControl();
             box.remove();
           },
         },
