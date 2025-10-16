@@ -24,7 +24,7 @@
     </header>
 
     <main class="homework-page">
-      <section class="homework-section">
+      <aside class="homework-sidebar">
         <p class="muted" data-homework-status hidden>
           Увійдіть, щоб переглянути призначені домашні роботи.
         </p>
@@ -34,7 +34,12 @@
           role="list"
           aria-live="polite"
         ></div>
-        <div class="lesson-homework-data"></div>
+      </aside>
+
+      <section class="homework-content">
+        <div
+          class="lesson-homework-data lesson-topic__practice js-homework-content"
+        ></div>
       </section>
     </main>
 

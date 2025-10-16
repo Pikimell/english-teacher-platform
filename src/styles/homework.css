@@ -1,24 +1,42 @@
-/* Homework list styling */
+/* Homework layout */
 .homework-page {
-  padding: 0 16px 64px;
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+  gap: 32px;
+  align-items: flex-start;
+  max-width: 1200px;
+  width: 100%;
+  margin: 32px auto 72px;
+  padding: 0 clamp(16px, 4vw, 32px);
+  box-sizing: border-box;
 }
 
-.homework-section {
-  max-width: 90vw;
-  margin: 32px auto 0;
+.homework-sidebar {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
+  padding: 24px 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #fff;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
+}
+
+.homework-sidebar .muted {
+  margin: 0;
 }
 
 .homework-list {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
-  gap: 18px;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 10px;
+  gap: 16px;
+}
+
+.homework-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
 }
 
 .homework-card {
@@ -30,6 +48,14 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.homework-card:hover,
+.homework-card:focus-within {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.14);
 }
 
 .homework-card__title {
@@ -58,10 +84,14 @@
   align-items: center;
   gap: 6px;
   padding: 8px 14px;
+  border: none;
   border-radius: 999px;
   background: rgba(51, 65, 255, 0.12);
   color: var(--color-primary, #3341ff);
   font-weight: 600;
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
   text-decoration: none;
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -75,4 +105,19 @@
 }
 
 .lesson-homework-data {
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .homework-page {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin: 24px auto 56px;
+    padding: 0 16px 56px;
+  }
+
+  .homework-sidebar {
+    position: static;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  }
 }

@@ -20,5 +20,6 @@ export const getUserHomeworkLessons = async userEmail => {
   const res = await axios.post('/homework/lessons', params);
   const { data } = res;
 
+  data.items = data.items.reverse();
   return data.items;
 };

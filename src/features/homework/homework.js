@@ -1,6 +1,8 @@
 import { auth } from '@features/auth/auth.js';
 import { getUserHomeworkLessons } from '@api/homework.js';
 import { getUserHomework } from '../../api/homework';
+import { createPracticeTaskElement } from '@features/practice/practice.js';
+import { refs } from '@features/layout/dom-refs.js';
 
 const statusElement = document.querySelector('[data-homework-status]');
 const listElement = document.querySelector('[data-homework-list]');
@@ -157,6 +159,24 @@ if (statusElement && listElement) {
 async function loadHomework(lessonId) {
   const user = auth.getUser();
   const userEmail = user.email;
-  const res = await getUserHomework({ userEmail, lessonId, limit: 1000 });
-  console.log(res);
+  const res = await getUserHomework({
+    userEmail,
+    lessonId,
+    limit: 1000,
+  });
+
+  const items = res.items;
+
+  const resContainer = document.createElement('div');
+
+  for (const item of items) {
+    if (item.homeworkType !== 'task') continue;
+    const data = JSON.parse(item.homeworkData);
+    const node = createPracticeTaskElement(data);
+    resContainer.appendChild(node);
+  }
+
+  const container = document.querySelector('.js-homework-content');
+
+  container.innerHTML = resContainer.innerHTML;
 }

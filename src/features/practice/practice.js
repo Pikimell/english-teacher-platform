@@ -5,7 +5,7 @@ import { getUsers } from '@api/user.js';
 import { auth } from '@features/auth/auth.js';
 
 // Convention: for page /X/indexN.html → fetch /X/practice/indexN.json
-(function () {
+const practiceAPI = (function () {
   const basePath =
     (typeof import.meta !== 'undefined' &&
       import.meta.env &&
@@ -19,6 +19,7 @@ import { auth } from '@features/auth/auth.js';
     if (rawPath.startsWith(normalizedBase)) return rawPath;
     return `${normalizedBase}${rawPath.replace(/^\/+/, '')}`;
   }
+
   function derivePracticePath() {
     try {
       const url = new URL(window.location.href);
@@ -874,19 +875,19 @@ import { auth } from '@features/auth/auth.js';
         );
     }
     container.appendChild(box);
+    return box;
   }
 
   // Expose minimal public API for dynamic appends
-  window.practice = window.practice || {};
-  window.practice.appendTask = function (task, meta = {}) {
+  function appendTask(task, meta = {}) {
     const root = ensurePracticeContainer();
     if (!root || !task) return;
     const body = root.querySelector('#practice-body') || root;
     const allowRemove = meta.showRemove !== false;
     renderTask(body, task, meta.key, { showRemove: allowRemove });
-  };
+  }
 
-  window.practice.renderTaskList = function (target, tasks, options = {}) {
+  function renderTaskList(target, tasks, options = {}) {
     if (!target) return null;
     const entries = Array.isArray(tasks) ? tasks.filter(Boolean) : [];
     const {
@@ -948,7 +949,17 @@ import { auth } from '@features/auth/auth.js';
       })
     );
     return wrapper;
-  };
+  }
+
+  function createTaskElement(task, meta = {}) {
+    if (!task) return null;
+    const fragment = document.createDocumentFragment();
+    const allowRemove = meta.showRemove !== false;
+    const element = renderTask(fragment, task, meta.key, {
+      showRemove: allowRemove,
+    });
+    return element;
+  }
 
   async function fetchPracticeCandidate(path) {
     if (!path) return null;
@@ -2254,7 +2265,24 @@ import { auth } from '@features/auth/auth.js';
   }
 
   document.addEventListener('DOMContentLoaded', init);
+
+  window.practice = window.practice || {};
+  Object.assign(window.practice, {
+    appendTask,
+    renderTaskList,
+    createTaskElement,
+  });
+
+  return {
+    appendTask,
+    renderTaskList,
+    createTaskElement,
+  };
 })();
+
+export const createPracticeTaskElement = practiceAPI.createTaskElement;
+export const appendPracticeTask = practiceAPI.appendTask;
+export const renderPracticeTaskList = practiceAPI.renderTaskList;
 
 document.addEventListener('click', e => {
   const div = e.target.closest('.text-block');

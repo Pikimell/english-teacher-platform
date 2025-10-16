@@ -1,5 +1,4 @@
 import { loginUser } from '@api/authorization.js';
-import { refs } from '@features/layout/dom-refs.js';
 
 const admins = ['volodkaposhta@gmail.com', 'nreznik451@gmail.com'];
 const STORAGE_KEY = 'english-teacher.google-user';
