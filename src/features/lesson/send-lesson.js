@@ -60,16 +60,25 @@ function attachShareToTopic(topic) {
     triggerStyle:
       'border:none;background:#2563eb;color:#fff;padding:4px 12px;border-radius:999px;font-size:12px;line-height:1;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,0.24);',
     onShare: ({ student, context }) => {
+      const container = document.createElement('div'); //lesson-topic__share-controls //practice-share-panel
+      container.innerHTML = context.outerHTML;
+
       const lessonId = window.location.search.slice(8);
       const heading = document.querySelector('h1');
       const lessonName = heading ? heading.textContent : '';
+
+      const el1 = container.querySelector('.lesson-topic__share-controls');
+      const el2 = container.querySelector('.practice-share-panel');
+
+      el1.remove();
+      el2.remove();
 
       const homework = {
         lessonId,
         userEmail: student.email,
         lessonName,
         homeworkType: 'theory',
-        homeworkData: context.outerHTML,
+        homeworkData: container.innerHTML,
       };
 
       return addHomework(homework);

@@ -180,7 +180,7 @@ async function loadHomework(lessonId) {
       } catch {}
     } else if (item.homeworkType === 'theory') {
       const data = item.homeworkData;
-      resContainer.insertAdjacentHTML(data);
+      resContainer.insertAdjacentHTML('afterbegin', data);
     }
   }
 
