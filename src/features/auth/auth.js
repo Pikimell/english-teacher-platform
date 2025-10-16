@@ -1,5 +1,5 @@
-import { loginUser } from './api/authorization';
-import { refs } from './global-refs';
+import { loginUser } from '@api/authorization.js';
+import { refs } from '@features/layout/dom-refs.js';
 
 const STORAGE_KEY = 'english-teacher.google-user';
 const AUTH_STATE_KEY = 'english-teacher.google-auth-state';

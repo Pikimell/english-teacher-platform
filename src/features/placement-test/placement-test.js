@@ -1,4 +1,4 @@
-import { placementLevels, placementQuestions } from '../data/placement-test.js';
+import { placementLevels, placementQuestions } from '@data/placement-test.js';
 
 const form = document.querySelector('[data-component="placement-form"]');
 const questionContainer = document.querySelector('[data-component="questions"]');

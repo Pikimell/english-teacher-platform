@@ -1,5 +1,5 @@
-import { auth } from './auth';
-import { refs } from './global-refs';
+import { auth } from '@features/auth/auth.js';
+import { refs } from '@features/layout/dom-refs.js';
 
 auth.subscribe(({ isSignedIn, user }) => {
   if (!isSignedIn) {

@@ -1,5 +1,5 @@
 // UI to generate a new practice task via ChatGPT and append to the page
-import { generateTask } from './api/chatGpt.js';
+import { generateTask } from '@api/chatGpt.js';
 
 function el(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);

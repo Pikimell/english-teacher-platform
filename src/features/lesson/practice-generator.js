@@ -1,4 +1,4 @@
-import { generateTask } from './api/chatGpt.js';
+import { generateTask } from '@api/chatGpt.js';
 
 const adminWrapper = document.querySelector('.js-practice-section');
 const form = document.querySelector('[data-practice-generator]');

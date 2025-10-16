@@ -1,11 +1,11 @@
-import { lessons, lessonCategories } from '../data/lessons.js';
-import { customLessonPresets } from '../data/custom-lesson-presets.js';
+import { lessons, lessonCategories } from '@data/lessons.js';
+import { customLessonPresets } from '@data/custom-lesson-presets.js';
 import {
   loadCustomLessons,
   subscribeToStorage,
-} from './custom-lessons-store.js';
-import { auth } from './auth.js';
-import './header-actions.js';
+} from '@features/custom-lessons/custom-lessons-store.js';
+import { auth } from '@features/auth/auth.js';
+import '@features/layout/header-actions.js';
 
 const state = {
   search: '',

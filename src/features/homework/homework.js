@@ -1,5 +1,5 @@
-import { auth } from './auth.js';
-import { getUserHomeworkLessons } from './api/homework.js';
+import { auth } from '@features/auth/auth.js';
+import { getUserHomeworkLessons } from '@api/homework.js';
 
 const statusElement = document.querySelector('[data-homework-status]');
 const listElement = document.querySelector('[data-homework-list]');

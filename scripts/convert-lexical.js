@@ -2,9 +2,9 @@
 
 /**
  * Utility script to convert lexical lesson tables into word modules.
- * 1. Reads each HTML file in src/public/lessons/lexical.
+ * 1. Reads each HTML file in public/lessons/lexical.
  * 2. Extracts table rows (word / translation / example).
- * 3. Generates JS modules under src/public/scripts/communication/words.
+ * 3. Generates JS modules under src/data/generated/communication/words.
  * 4. Replaces the table markup with a communication-style placeholder.
  */
 
@@ -13,12 +13,12 @@ import path from 'node:path';
 import url from 'node:url';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
-const lessonsDir = path.join(ROOT, 'src', 'public', 'lessons', 'lexical');
+const lessonsDir = path.join(ROOT, 'public', 'lessons', 'lexical');
 const outputDir = path.join(
   ROOT,
   'src',
-  'public',
-  'scripts',
+  'data',
+  'generated',
   'communication',
   'words'
 );
@@ -67,6 +67,8 @@ export default words;
 };
 
 const moduleNames = [];
+
+fs.mkdirSync(outputDir, { recursive: true });
 
 fs.readdirSync(lessonsDir)
   .filter(fileName => fileName.endsWith('.html'))
@@ -119,8 +121,8 @@ if (moduleNames.length) {
   const listPath = path.join(
     ROOT,
     'src',
-    'public',
-    'scripts',
+    'data',
+    'generated',
     'communication',
     'words',
     '_communication-modules.json'

@@ -1,9 +1,11 @@
-import { lessons, lessonCategories } from '../data/lessons.js';
-import { customLessonPresets } from '../data/custom-lesson-presets.js';
-import { loadCustomLessons } from './custom-lessons-store.js';
-import { communicationWords } from '../data/communication-words.js';
-import { createWordwallIframe, getWordwallConfigsForLesson } from '../data/wordwall.js';
-
+import { lessons, lessonCategories } from '@data/lessons.js';
+import { customLessonPresets } from '@data/custom-lesson-presets.js';
+import { loadCustomLessons } from '@features/custom-lessons/custom-lessons-store.js';
+import { communicationWords } from '@data/communication-words.js';
+import {
+  createWordwallIframe,
+  getWordwallConfigsForLesson,
+} from '@data/wordwall.js';
 
 const basePath = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) || '/';
 

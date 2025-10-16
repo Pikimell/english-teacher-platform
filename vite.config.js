@@ -11,7 +11,17 @@ export default defineConfig(({ command }) => {
       [command === 'serve' ? 'global' : '_global']: {},
     },
     root: 'src',
-    publicDir: resolve(__dirname, 'src/public'),
+    publicDir: resolve(__dirname, 'public'),
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src'),
+        '@api': resolve(__dirname, 'src/api'),
+        '@components': resolve(__dirname, 'src/components'),
+        '@data': resolve(__dirname, 'src/data'),
+        '@features': resolve(__dirname, 'src/features'),
+        '@styles': resolve(__dirname, 'src/styles'),
+      },
+    },
     build: {
       sourcemap: true,
       rollupOptions: {

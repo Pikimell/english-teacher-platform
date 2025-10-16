@@ -1,10 +1,10 @@
-import { lessons } from '../data/lessons.js';
+import { lessons } from '@data/lessons.js';
 import {
   loadCustomLessons,
   createCustomLesson,
   deleteCustomLesson,
   subscribeToStorage,
-} from './custom-lessons-store.js';
+} from '@features/custom-lessons/custom-lessons-store.js';
 
 const form = document.querySelector('[data-builder-form]');
 const statusElement = document.querySelector('[data-builder-status]');
