@@ -1,0 +1,152 @@
+import { auth } from './auth.js';
+import { getUserHomeworkLessons } from './api/homework.js';
+
+const statusElement = document.querySelector('[data-homework-status]');
+const listElement = document.querySelector('[data-homework-list]');
+
+if (statusElement && listElement) {
+  let activeRequestId = 0;
+
+  function setStatus(message) {
+    statusElement.textContent = message || '';
+    statusElement.hidden = !message;
+  }
+
+  function clearList() {
+    listElement.innerHTML = '';
+  }
+
+  function resolveLessonUrl(lesson) {
+    if (!lesson || typeof lesson !== 'object') return null;
+    if (typeof lesson.url === 'string' && lesson.url) return lesson.url;
+    if (typeof lesson.link === 'string' && lesson.link) return lesson.link;
+
+    const params = new URLSearchParams();
+    const lessonId = lesson.lessonId || lesson.topicId || lesson.id || null;
+    const htmlPath = lesson.htmlPath || lesson.lessonPath || null;
+    const category = lesson.category || lesson.lessonCategory || null;
+    const level = lesson.level || lesson.lessonLevel || null;
+    const title = lesson.title || lesson.lessonTitle || lesson.name || null;
+
+    if (lessonId) params.set('topic', lessonId);
+    if (category) params.set('category', category);
+    if (level) params.set('level', level);
+    if (title) params.set('title', title);
+    if (htmlPath) params.set('file', htmlPath);
+
+    if (!params.has('topic')) return null;
+    return `lesson.html?${params.toString()}`;
+  }
+
+  function formatDueDate(lesson) {
+    const due =
+      lesson?.dueDate ||
+      lesson?.deadline ||
+      lesson?.due_at ||
+      lesson?.dueAt ||
+      null;
+    if (!due) return null;
+    const date = new Date(due);
+    if (Number.isNaN(date.getTime())) return null;
+    try {
+      return new Intl.DateTimeFormat('uk-UA', {
+        dateStyle: 'medium',
+      }).format(date);
+    } catch (error) {
+      return date.toLocaleDateString('uk-UA');
+    }
+  }
+
+  function createLessonCard(lesson) {
+    const card = document.createElement('article');
+    card.className = 'homework-card';
+    card.setAttribute('role', 'listitem');
+
+    const title = document.createElement('h3');
+    title.className = 'homework-card__title';
+    title.textContent =
+      lesson?.title || lesson?.name || lesson?.lessonTitle || 'Урок без назви';
+    card.appendChild(title);
+
+    const dueDateLabel = formatDueDate(lesson);
+    if (dueDateLabel) {
+      const due = document.createElement('p');
+      due.className = 'homework-card__meta';
+      due.textContent = `Строк: ${dueDateLabel}`;
+      card.appendChild(due);
+    }
+
+    const description =
+      lesson?.description ||
+      lesson?.lessonDescription ||
+      lesson?.summary ||
+      '';
+    if (description) {
+      const body = document.createElement('p');
+      body.className = 'homework-card__description';
+      body.textContent = description;
+      card.appendChild(body);
+    }
+
+    const lessonUrl = resolveLessonUrl(lesson);
+    if (lessonUrl) {
+      const link = document.createElement('a');
+      link.className = 'homework-card__link';
+      link.href = lessonUrl;
+      link.textContent = 'Відкрити урок';
+      card.appendChild(link);
+    }
+
+    return card;
+  }
+
+  function renderLessons(lessons) {
+    clearList();
+    if (!Array.isArray(lessons) || !lessons.length) {
+      setStatus('Домашніх робіт поки немає.');
+      return;
+    }
+
+    setStatus('');
+    const fragment = document.createDocumentFragment();
+    lessons.forEach(lesson => {
+      fragment.appendChild(createLessonCard(lesson));
+    });
+
+    listElement.appendChild(fragment);
+  }
+
+  async function loadLessonsForUser(user) {
+    if (!user || !user.email) {
+      setStatus('Увійдіть, щоб переглянути призначені домашні роботи.');
+      clearList();
+      return;
+    }
+
+    const requestId = ++activeRequestId;
+    setStatus('Завантаження домашніх робіт…');
+    clearList();
+
+    try {
+      const lessons = await getUserHomeworkLessons(user.email);
+      if (requestId !== activeRequestId) return;
+      const list =
+        Array.isArray(lessons?.items) ? lessons.items : Array.isArray(lessons) ? lessons : [];
+      renderLessons(list);
+    } catch (error) {
+      if (requestId !== activeRequestId) return;
+      console.error('Не вдалося завантажити домашні роботи', error);
+      setStatus('Не вдалося завантажити домашні роботи. Спробуйте пізніше.');
+      clearList();
+    }
+  }
+
+  auth.subscribe(snapshot => {
+    if (!snapshot.isSignedIn) {
+      setStatus('Увійдіть, щоб переглянути призначені домашні роботи.');
+      clearList();
+      return;
+    }
+    loadLessonsForUser(snapshot.user);
+  });
+}

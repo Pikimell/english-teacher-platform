@@ -1887,6 +1887,76 @@ dl {
   font-size: 14px;
 }
 
+.homework-page {
+  padding: 0 16px 64px;
+}
+
+.homework-section {
+  max-width: 760px;
+  margin: 32px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.homework-list {
+  display: grid;
+  gap: 18px;
+}
+
+.homework-card {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 18px;
+  background: #fff;
+  padding: 20px 24px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.homework-card__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(15, 18, 45, 0.95);
+}
+
+.homework-card__meta {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(15, 18, 45, 0.6);
+}
+
+.homework-card__description {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(15, 18, 45, 0.8);
+}
+
+.homework-card__link {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(51, 65, 255, 0.12);
+  color: var(--color-primary, #3341ff);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.homework-card__link:hover,
+.homework-card__link:focus-visible {
+  background: rgba(51, 65, 255, 0.2);
+  box-shadow: 0 12px 24px rgba(51, 65, 255, 0.18);
+  transform: translateY(-1px);
+  outline: none;
+}
+
 @media (max-width: 768px) {
   .builder__main {
     margin: 24px auto 64px;
