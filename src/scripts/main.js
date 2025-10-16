@@ -4,6 +4,7 @@ import {
   loadCustomLessons,
   subscribeToStorage,
 } from './custom-lessons-store.js';
+import { auth } from './auth.js';
 
 const state = {
   search: '',
@@ -24,6 +25,8 @@ const stats = {
   grammar: document.querySelector('[data-stat-grammar]'),
   lexical: document.querySelector('[data-stat-lexical]'),
   };
+
+auth.init();
 
 function normaliseValue(value) {
   return value.trim().toLowerCase();
