@@ -1,16 +1,12 @@
 // Lightweight practice renderer for topic pages
-
-import { addHomework } from '../../scripts/api/homework';
-import { getUsers } from '../../scripts/api/user';
-
 // Convention: for page /X/indexN.html → fetch /X/practice/indexN.json
 (function () {
   const scriptUrl = (() => {
     if (document.currentScript && document.currentScript.src) {
       return document.currentScript.src;
     }
-    const fallback = Array.from(document.querySelectorAll('script[src]')).find(
-      script => script.src.includes('scripts/practice.js')
+    const fallback = Array.from(document.querySelectorAll('script[src]')).find((script) =>
+      script.src.includes('scripts/practice.js'),
     );
     return fallback?.src || window.location.href;
   })();
@@ -22,10 +18,7 @@ import { getUsers } from '../../scripts/api/user';
       const normalizedPath = pathname.endsWith('/') ? pathname : `${pathname}/`;
       return `${url.origin}${normalizedPath}`;
     } catch (error) {
-      console.warn(
-        'Не вдалося визначити базовий шлях, використовується /',
-        error
-      );
+      console.warn('Не вдалося визначити базовий шлях, використовується /', error);
       return '/';
     }
   })();
@@ -39,12 +32,12 @@ import { getUsers } from '../../scripts/api/user';
   function derivePracticePath() {
     try {
       const url = new URL(window.location.href);
-      const parts = url.pathname.split('/');
+      const parts = url.pathname.split("/");
       let file = parts.pop();
-      if (!file || !/\.html?$/i.test(file)) file = 'index.html';
-      const json = file.replace(/\.html?$/i, '.json');
-      parts.push('practice', json);
-      return parts.join('/');
+      if (!file || !/\.html?$/i.test(file)) file = "index.html";
+      const json = file.replace(/\.html?$/i, ".json");
+      parts.push("practice", json);
+      return parts.join("/");
     } catch (e) {
       return null;
     }
@@ -53,16 +46,16 @@ import { getUsers } from '../../scripts/api/user';
   function el(tag, attrs = {}, ...children) {
     const node = document.createElement(tag);
     for (const [k, v] of Object.entries(attrs || {})) {
-      if (k === 'class') node.className = v;
-      else if (k === 'html') node.innerHTML = v;
-      else if (k.startsWith('on') && typeof v === 'function')
+      if (k === "class") node.className = v;
+      else if (k === "html") node.innerHTML = v;
+      else if (k.startsWith("on") && typeof v === "function")
         node.addEventListener(k.slice(2), v);
       else node.setAttribute(k, v);
     }
     for (const ch of children) {
       if (ch == null) continue;
       node.appendChild(
-        typeof ch === 'string' ? document.createTextNode(ch) : ch
+        typeof ch === "string" ? document.createTextNode(ch) : ch
       );
     }
     return node;
@@ -78,257 +71,36 @@ import { getUsers } from '../../scripts/api/user';
   }
 
   function normalize(s) {
-    return String(s || '')
+    return String(s || "")
       .trim()
       .toLowerCase()
-      .replace(/\s+/g, ' ');
+      .replace(/\s+/g, " ");
   }
-
-  const shareState = {
-    users: null,
-    request: null,
-    active: null,
-  };
-
-  function fetchStudents() {
-    if (shareState.users) return Promise.resolve(shareState.users);
-    if (shareState.request) return shareState.request;
-
-    shareState.request = getUsers()
-      .then(data => {
-        const items = Array.isArray(data?.items) ? data.items : [];
-        shareState.users = items;
-        return items;
-      })
-      .catch(error => {
-        console.error('Не вдалося завантажити список студентів', error);
-        throw error;
-      })
-      .finally(() => {
-        shareState.request = null;
-      });
-    return shareState.request;
-  }
-
-  function formatStudentName(student) {
-    if (!student || typeof student !== 'object') return 'Невідомий студент';
-    const possibleFirst =
-      student.firstName || student.firstname || student.nameFirst || '';
-    const possibleLast =
-      student.lastName || student.lastname || student.nameLast || '';
-    const full = [possibleFirst, possibleLast]
-      .map(part => String(part || '').trim())
-      .filter(Boolean)
-      .join(' ');
-    const display =
-      full ||
-      student.displayName ||
-      student.fullName ||
-      student.username ||
-      student.email ||
-      (student.id ? `ID ${student.id}` : '');
-    return display || 'Без імені';
-  }
-
-  function closeActiveSharePanel() {
-    if (!shareState.active) return;
-    const { panel, button } = shareState.active;
-    panel.style.display = 'none';
-    panel.dataset.open = 'false';
-    button.setAttribute('aria-expanded', 'false');
-    shareState.active = null;
-  }
-
-  function handleOutsideShareClick(event) {
-    if (!shareState.active) return;
-    const { panel, button } = shareState.active;
-    const target = event.target;
-    if (panel.contains(target) || button.contains(target)) return;
-    closeActiveSharePanel();
-  }
-
-  function handleShareKeydown(event) {
-    if (event.key === 'Escape') {
-      closeActiveSharePanel();
-    }
-  }
-
-  function renderStudentOptions(panel, students, task) {
-    panel.innerHTML = '';
-    if (!students.length) {
-      panel.appendChild(
-        el(
-          'div',
-          {
-            class: 'muted',
-            style: 'font-size:13px;text-align:center;padding:12px 8px;',
-          },
-          'Список студентів порожній'
-        )
-      );
-      return;
-    }
-    const list = el('ul', {
-      style:
-        'list-style:none;margin:0;padding:0;max-height:220px;overflow:auto;',
-    });
-    students.forEach(student => {
-      const button = el(
-        'button',
-        {
-          type: 'button',
-          style:
-            'width:100%;background:transparent;border:none;text-align:left;padding:8px 10px;border-radius:8px;cursor:pointer;display:flex;flex-direction:column;gap:2px;',
-          onmouseenter: () => {
-            button.style.backgroundColor = '#f1f5f9';
-          },
-          onmouseleave: () => {
-            button.style.backgroundColor = 'transparent';
-          },
-          onclick: () => {
-            const lessonId = window.location.search.slice(8);
-            const lessonName = document.querySelector('h1').textContent;
-
-            console.log(lessonId);
-
-            const homework = {
-              lessonId,
-              userEmail: student.email,
-              lessonName,
-              homeworkType: 'task',
-              homeworkData: JSON.stringify(task),
-            };
-
-            addHomework(homework);
-
-            closeActiveSharePanel();
-          },
-        },
-        el(
-          'span',
-          { style: 'font-size:14px;font-weight:600;color:#0f172a;' },
-          formatStudentName(student)
-        ),
-        student.email
-          ? el(
-              'span',
-              { class: 'muted', style: 'font-size:12px;color:#475569;' },
-              student.email
-            )
-          : null
-      );
-      const item = el('li', { style: 'margin:0;padding:0;' }, button);
-      list.appendChild(item);
-    });
-    panel.appendChild(list);
-  }
-
-  function createSharePanel() {
-    return el('div', {
-      class: 'practice-share-panel',
-      role: 'dialog',
-      'aria-label': 'Надсилання завдання студенту',
-      style:
-        'position:absolute;top:38px;right:0;min-width:240px;max-width:280px;border:1px solid #e2e8f0;border-radius:12px;background:#fff;box-shadow:0 18px 40px rgba(15,23,42,0.18);padding:8px;z-index:30;display:none;',
-      'data-open': 'false',
-    });
-  }
-
-  function toggleSharePanel(button, panel, task) {
-    const isOpen = panel.dataset.open === 'true';
-    if (isOpen) {
-      closeActiveSharePanel();
-      return;
-    }
-    if (shareState.active && shareState.active.panel !== panel) {
-      closeActiveSharePanel();
-    }
-    panel.dataset.open = 'true';
-    panel.style.display = 'block';
-    button.setAttribute('aria-expanded', 'true');
-    panel.innerHTML = '';
-    panel.appendChild(
-      el(
-        'div',
-        {
-          class: 'muted',
-          style: 'font-size:13px;padding:12px 8px;text-align:center;',
-        },
-        'Завантаження…'
-      )
-    );
-    shareState.active = { panel, button };
-    fetchStudents()
-      .then(students => {
-        renderStudentOptions(panel, students, task);
-      })
-      .catch(() => {
-        panel.innerHTML = '';
-        panel.appendChild(
-          el(
-            'div',
-            {
-              style:
-                'color:#ef4444;font-size:13px;text-align:center;padding:12px 8px;',
-            },
-            'Не вдалося завантажити студентів. Спробуйте ще раз.'
-          )
-        );
-      });
-  }
-
-  function createShareButton(task) {
-    const panel = createSharePanel();
-    const button = el(
-      'button',
-      {
-        type: 'button',
-        class: 'practice-share-trigger',
-        title: 'Надіслати студенту',
-        'aria-haspopup': 'dialog',
-        'aria-expanded': 'false',
-        style:
-          'border:none;background:#2563eb;color:#fff;padding:4px 10px;border-radius:999px;font-size:12px;line-height:1;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,0.24);',
-        onclick: event => {
-          event.preventDefault();
-          toggleSharePanel(button, panel, task);
-        },
-      },
-      'Надіслати'
-    );
-    return { button, panel };
-  }
-
-  document.addEventListener('click', handleOutsideShareClick);
-  document.addEventListener('keydown', handleShareKeydown);
 
   // Subtle hint toggle: hidden by default, shown on small button click
   function makeHint(hintText) {
-    const wrap = el('div', { class: 'hint-wrap', style: 'margin-top:6px;' });
+    const wrap = el("div", { class: "hint-wrap", style: "margin-top:6px;" });
     const btn = el(
-      'button',
+      "button",
       {
-        type: 'button',
-        class: 'hint-toggle',
-        'aria-label': 'Показати підказку',
-        title: 'Підказка',
+        type: "button",
+        class: "hint-toggle",
+        "aria-label": "Показати підказку",
+        title: "Підказка",
         style:
-          'border:none;background:transparent;color:#94a3b8;cursor:pointer;padding:0;font-size:14px;line-height:1;',
+          "border:none;background:transparent;color:#94a3b8;cursor:pointer;padding:0;font-size:14px;line-height:1;",
       },
-      '?'
+      "?"
     );
     const box = el(
-      'div',
-      {
-        class: 'hint-box muted',
-        style: 'display:none;margin-top:6px;color:#475569;',
-      },
+      "div",
+      { class: "hint-box muted", style: "display:none;margin-top:6px;color:#475569;" },
       `Підказка: ${hintText}`
     );
-    btn.addEventListener('click', () => {
-      const isHidden = box.style.display === 'none';
-      box.style.display = isHidden ? 'block' : 'none';
-      btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    btn.addEventListener("click", () => {
+      const isHidden = box.style.display === "none";
+      box.style.display = isHidden ? "block" : "none";
+      btn.setAttribute("aria-expanded", isHidden ? "true" : "false");
     });
     wrap.appendChild(btn);
     wrap.appendChild(box);
@@ -337,50 +109,50 @@ import { getUsers } from '../../scripts/api/user';
 
   function renderMCQ(container, task) {
     container.appendChild(
-      el('h3', {}, task.prompt || 'Choose the correct option')
+      el("h3", {}, task.prompt || "Choose the correct option")
     );
     const blocks = [];
     (task.items || []).forEach((item, idx) => {
-      const name = `${task.id || 'mcq'}-${idx}`;
+      const name = `${task.id || "mcq"}-${idx}`;
       const allowMulti = Array.isArray(item.answer) && item.answer.length > 1;
       const block = el(
-        'div',
+        "div",
         {
-          class: 'mcq-item',
+          class: "mcq-item",
           style:
-            'margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+            "margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;",
         },
         el(
-          'div',
-          { class: 'q', style: 'margin-bottom:8px;font-weight:600;' },
+          "div",
+          { class: "q", style: "margin-bottom:8px;font-weight:600;" },
           item.q
         )
       );
       (item.choices || []).forEach((choice, cIdx) => {
         const id = `${name}-${cIdx}`;
         const lbl = el(
-          'label',
+          "label",
           {
             for: id,
-            style: 'display:flex;align-items:center;gap:8px;margin:4px 0;',
+            style: "display:flex;align-items:center;gap:8px;margin:4px 0;",
           },
-          el('input', {
-            type: allowMulti ? 'checkbox' : 'radio',
+          el("input", {
+            type: allowMulti ? "checkbox" : "radio",
             name,
             id,
             value: String(cIdx),
           }),
-          el('span', {}, choice)
+          el("span", {}, choice)
         );
         block.appendChild(lbl);
       });
       if (item.explanation) {
         block.appendChild(
           el(
-            'div',
+            "div",
             {
-              class: 'exp muted',
-              style: 'display:none;margin-top:6px;color:#475569;',
+              class: "exp muted",
+              style: "display:none;margin-top:6px;color:#475569;",
             },
             item.explanation
           )
@@ -389,16 +161,16 @@ import { getUsers } from '../../scripts/api/user';
       blocks.push({ block, item, name });
       container.appendChild(block);
     });
-    const result = el('div', {
-      class: 'result',
-      style: 'margin-top:8px;font-weight:600;',
+    const result = el("div", {
+      class: "result",
+      style: "margin-top:8px;font-weight:600;",
     });
     const btn = el(
-      'button',
-      { type: 'button', class: 'btn primary', style: 'margin-top:8px;' },
-      'Перевірити'
+      "button",
+      { type: "button", class: "btn primary", style: "margin-top:8px;" },
+      "Перевірити"
     );
-    btn.addEventListener('click', () => {
+    btn.addEventListener("click", () => {
       let correct = 0;
       blocks.forEach(({ block, item, name }) => {
         const answers = Array.isArray(item.answer)
@@ -408,16 +180,16 @@ import { getUsers } from '../../scripts/api/user';
           block.querySelectorAll(`input[name='${name}']`)
         );
         const picked = inputs
-          .filter(i => i.checked)
-          .map(i => i.value)
+          .filter((i) => i.checked)
+          .map((i) => i.value)
           .sort();
         const expected = answers.slice().sort();
         const ok =
           picked.length === expected.length &&
           picked.every((v, i) => v === expected[i]);
-        block.style.borderColor = ok ? '#10b981' : '#ef4444';
-        const exp = block.querySelector('.exp');
-        if (exp) exp.style.display = ok ? 'none' : 'block';
+        block.style.borderColor = ok ? "#10b981" : "#ef4444";
+        const exp = block.querySelector(".exp");
+        if (exp) exp.style.display = ok ? "none" : "block";
         if (ok) correct++;
       });
       result.textContent = `Результат: ${correct}/${blocks.length}`;
@@ -427,25 +199,25 @@ import { getUsers } from '../../scripts/api/user';
   }
 
   function renderGap(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Fill the gaps'));
+    container.appendChild(el("h3", {}, task.prompt || "Fill the gaps"));
     const items = [];
     (task.items || []).forEach((it, idx) => {
-      const row = el('div', {
+      const row = el("div", {
         style:
-          'margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+          "margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;",
       });
-      const parts = String(it.q || '').split(/___/);
-      const input = el('input', {
-        type: 'text',
-        style: 'padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
+      const parts = String(it.q || "").split(/___/);
+      const input = el("input", {
+        type: "text",
+        style: "padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;",
       });
       if (parts.length > 1) {
-        row.appendChild(el('span', {}, parts[0]));
+        row.appendChild(el("span", {}, parts[0]));
         row.appendChild(input);
-        row.appendChild(el('span', {}, parts.slice(1).join('___')));
+        row.appendChild(el("span", {}, parts.slice(1).join("___")));
       } else {
         row.appendChild(
-          el('div', { style: 'margin-bottom:6px;font-weight:600;' }, it.q)
+          el("div", { style: "margin-bottom:6px;font-weight:600;" }, it.q)
         );
         row.appendChild(input);
       }
@@ -453,22 +225,22 @@ import { getUsers } from '../../scripts/api/user';
       items.push({
         row,
         input,
-        answers: (it.answer || []).map(a => normalize(a)),
+        answers: (it.answer || []).map((a) => normalize(a)),
       });
       container.appendChild(row);
     });
-    const result = el('div', { style: 'margin-top:8px;font-weight:600;' });
+    const result = el("div", { style: "margin-top:8px;font-weight:600;" });
     const btn = el(
-      'button',
-      { type: 'button', class: 'btn primary', style: 'margin-top:8px;' },
-      'Перевірити'
+      "button",
+      { type: "button", class: "btn primary", style: "margin-top:8px;" },
+      "Перевірити"
     );
-    btn.addEventListener('click', () => {
+    btn.addEventListener("click", () => {
       let correct = 0;
       items.forEach(({ row, input, answers }) => {
         const val = normalize(input.value);
         const ok = answers.includes(val);
-        row.style.borderColor = ok ? '#10b981' : '#ef4444';
+        row.style.borderColor = ok ? "#10b981" : "#ef4444";
         if (ok) correct++;
       });
       result.textContent = `Результат: ${correct}/${items.length}`;
@@ -478,42 +250,42 @@ import { getUsers } from '../../scripts/api/user';
   }
 
   function renderMatch(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Match pairs'));
+    container.appendChild(el("h3", {}, task.prompt || "Match pairs"));
     const pairs = task.pairs || [];
-    const rights = shuffle(pairs.map(p => p.right));
+    const rights = shuffle(pairs.map((p) => p.right));
     const rows = [];
-    pairs.forEach(p => {
+    pairs.forEach((p) => {
       const select = el(
-        'select',
+        "select",
         {
-          style: 'padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
+          style: "padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;",
         },
-        el('option', { value: '' }, '— обери —'),
-        ...rights.map(r => el('option', { value: r }, r))
+        el("option", { value: "" }, "— обери —"),
+        ...rights.map((r) => el("option", { value: r }, r))
       );
       const row = el(
-        'div',
+        "div",
         {
           style:
-            'display:flex;align-items:center;gap:10px;margin:8px 0;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+            "display:flex;align-items:center;gap:10px;margin:8px 0;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;",
         },
-        el('div', { style: 'min-width:160px;font-weight:600;' }, p.left),
+        el("div", { style: "min-width:160px;font-weight:600;" }, p.left),
         select
       );
       rows.push({ row, select, right: p.right });
       container.appendChild(row);
     });
-    const result = el('div', { style: 'margin-top:8px;font-weight:600;' });
+    const result = el("div", { style: "margin-top:8px;font-weight:600;" });
     const btn = el(
-      'button',
-      { type: 'button', class: 'btn primary', style: 'margin-top:8px;' },
-      'Перевірити'
+      "button",
+      { type: "button", class: "btn primary", style: "margin-top:8px;" },
+      "Перевірити"
     );
-    btn.addEventListener('click', () => {
+    btn.addEventListener("click", () => {
       let correct = 0;
       rows.forEach(({ row, select, right }) => {
         const ok = select.value === right;
-        row.style.borderColor = ok ? '#10b981' : '#ef4444';
+        row.style.borderColor = ok ? "#10b981" : "#ef4444";
         if (ok) correct++;
       });
       result.textContent = `Результат: ${correct}/${rows.length}`;
@@ -542,10 +314,12 @@ import { getUsers } from '../../scripts/api/user';
     }
 
     if (format === 'dialog') {
-      body.forEach(turn => {
+      body.forEach((turn) => {
         if (!turn) return;
         const speaker =
-          typeof turn === 'object' && turn.speaker ? `${turn.speaker}:` : '';
+          typeof turn === 'object' && turn.speaker
+            ? `${turn.speaker}:`
+            : '';
         const line =
           typeof turn === 'object' && 'line' in turn
             ? turn.line
@@ -574,7 +348,11 @@ import { getUsers } from '../../scripts/api/user';
             : '';
         if (!text) return;
         textWrap.appendChild(
-          el('p', { style: index ? 'margin:8px 0 0;' : 'margin:0;' }, text)
+          el(
+            'p',
+            { style: index ? 'margin:8px 0 0;' : 'margin:0;' },
+            text
+          )
         );
       });
     }
@@ -608,7 +386,7 @@ import { getUsers } from '../../scripts/api/user';
       if (Array.isArray(question.choices) && question.choices.length) {
         const name = `${task.id || 'context'}-${idx}`;
         const allowMulti = answers.length > 1;
-        const expectedIsIndex = answers.every(value => /^\d+$/.test(value));
+        const expectedIsIndex = answers.every((value) => /^\d+$/.test(value));
         question.choices.forEach((choice, cIdx) => {
           const id = `${name}-${cIdx}`;
           block.appendChild(
@@ -637,10 +415,10 @@ import { getUsers } from '../../scripts/api/user';
               block.querySelectorAll(`input[name='${name}']`)
             );
             const picked = inputs
-              .filter(input => input.checked)
-              .map(input => input.value);
+              .filter((input) => input.checked)
+              .map((input) => input.value);
             if (!expectedIsIndex) {
-              return picked.map(index =>
+              return picked.map((index) =>
                 normalize(question.choices[Number(index)] || '')
               );
             }
@@ -648,7 +426,7 @@ import { getUsers } from '../../scripts/api/user';
           },
           expected: expectedIsIndex
             ? answers
-            : answers.map(answer => normalize(answer)),
+            : answers.map((answer) => normalize(answer)),
         });
       } else {
         const input = el('textarea', {
@@ -661,7 +439,7 @@ import { getUsers } from '../../scripts/api/user';
           block,
           type: 'text',
           input,
-          expected: answers.map(answer => normalize(answer)),
+          expected: answers.map((answer) => normalize(answer)),
         });
       }
 
@@ -692,7 +470,7 @@ import { getUsers } from '../../scripts/api/user';
 
     button.addEventListener('click', () => {
       let correct = 0;
-      blocks.forEach(entry => {
+      blocks.forEach((entry) => {
         let ok = false;
         if (entry.type === 'choices') {
           const picked = entry.getPicked().sort();
@@ -720,128 +498,117 @@ import { getUsers } from '../../scripts/api/user';
 
   function renderTask(container, task, taskKey, options = {}) {
     const { showRemove = true } = options;
-    const keyBase =
-      taskKey ||
-      (task && task.id
-        ? String(task.id)
-        : `task-${Math.random().toString(16).slice(2, 8)}`);
-    const box = el('section', {
-      style: 'position:relative;margin:18px 0 26px;',
-      'data-task-id': task && task.id ? String(task.id) : '',
-      'data-task-key': keyBase,
+    const keyBase = taskKey || (task && task.id ? String(task.id) : `task-${Math.random().toString(16).slice(2, 8)}`);
+    const box = el("section", {
+      style: "position:relative;margin:18px 0 26px;",
+      "data-task-id": task && task.id ? String(task.id) : "",
+      "data-task-key": keyBase,
     });
-    const controls = el('div', {
-      style:
-        'position:absolute;top:6px;right:6px;display:flex;gap:6px;align-items:center;z-index:5;',
-    });
-    const { button: shareBtn, panel: sharePanel } = createShareButton(task);
-    controls.appendChild(shareBtn);
     // Subtle remove button (top-right), hidden until hover/focus
     if (showRemove) {
       const removeBtn = el(
-        'button',
+        "button",
         {
-          type: 'button',
-          title: 'Видалити завдання',
-          'aria-label': 'Видалити завдання',
+          type: "button",
+          title: "Видалити завдання",
+          "aria-label": "Видалити завдання",
           style:
-            'border:none;background:transparent;color:#94a3b8;cursor:pointer;padding:2px;line-height:1;font-size:14px;opacity:0.6;',
-          onmouseenter: () => (removeBtn.style.opacity = '1'),
-          onmouseleave: () => (removeBtn.style.opacity = '0.6'),
+            "position:absolute;top:6px;right:6px;border:none;background:transparent;color:#94a3b8;cursor:pointer;padding:2px;line-height:1;font-size:14px;opacity:0.6;",
+          onmouseenter: () => (removeBtn.style.opacity = "1"),
+          onmouseleave: () => (removeBtn.style.opacity = "0.6"),
           onclick: () => {
-            if (shareState.active && shareState.active.panel === sharePanel) {
-              closeActiveSharePanel();
-            }
             document.dispatchEvent(
-              new CustomEvent('practice:taskRemoved', {
+              new CustomEvent("practice:taskRemoved", {
                 detail: { key: keyBase, task },
               })
             );
             box.remove();
           },
         },
-        '✕'
+        "✕"
       );
-      controls.appendChild(removeBtn);
+      box.appendChild(removeBtn);
     }
-    box.appendChild(controls);
-    box.appendChild(sharePanel);
-    if (task.title) box.appendChild(el('h3', {}, task.title));
+    if (task.title) box.appendChild(el("h3", {}, task.title));
     const rawType = task && task.type;
     const normalizedType = String(rawType || '')
       .trim()
       .toLowerCase();
     switch (normalizedType) {
-      case 'mcq':
+      case "mcq":
         renderMCQ(box, task);
         break;
-      case 'gap':
+      case "gap":
         renderGap(box, task);
         break;
-      case 'match':
+      case "match":
         renderMatch(box, task);
         break;
-      case 'context':
+      case "context":
         renderContext(box, task);
         break;
-      case 'transform':
+      case "transform":
         renderTransform(box, task);
         break;
-      case 'error':
+      case "error":
         renderError(box, task);
         break;
-      case 'order':
+      case "order":
         renderOrder(box, task);
         break;
-      case 'short':
+      case "short":
         renderShort(box, task);
         break;
-      case 'roleplay':
+      case "roleplay":
         renderRoleplay(box, task);
         break;
-      case 'dialogue-gap':
+      case "dialogue-gap":
         renderDialogueGap(box, task);
         break;
-      case 'dialogue-order':
+      case "dialogue-order":
         renderDialogueOrder(box, task);
         break;
-      case 'truefalse':
+      case "truefalse":
         renderTrueFalse(box, task);
         break;
-      case 'definition-match': {
+      case "definition-match": {
         const matchTask = {
           ...task,
-          prompt: task.prompt || 'Поєднай слово з визначенням',
+          prompt: task.prompt || "Поєднай слово з визначенням",
         };
         renderMatch(box, matchTask);
         break;
       }
-      case 'synonym-clue':
+      case "synonym-clue":
         renderSynonymClue(box, task);
         break;
-      case 'scramble':
+      case "scramble":
         renderScramble(box, task);
         break;
-      case 'wordpairs': {
+      case "wordpairs": {
         const pairsTask = {
           ...task,
-          prompt: task.prompt || 'Поєднай форму в однині та множині',
+          prompt: task.prompt || "Поєднай форму в однині та множині",
         };
         renderMatch(box, pairsTask);
         break;
       }
-      case 'odd-one-out':
+      case "odd-one-out":
         renderOddOneOut(box, task);
         break;
-      case 'open':
+      case "open":
         renderOpen(box, task);
         break;
-      case 'writing':
+      case "writing":
         renderWriting(box, task);
         break;
       default:
         box.appendChild(
-          el('div', { class: 'muted' }, `Невідомий тип завдання: ${rawType}`)
+          el(
+            "div",
+            { class: "muted" },
+            `Невідомий тип завдання: ${rawType}`
+          )
         );
     }
     container.appendChild(box);
@@ -871,11 +638,7 @@ import { getUsers } from '../../scripts/api/user';
 
     if (!entries.length) {
       if (showEmptyNote) {
-        const note = el(
-          'p',
-          { class: 'muted practice-inline__empty' },
-          'Практика для цієї теми поки відсутня.'
-        );
+        const note = el('p', { class: 'muted practice-inline__empty' }, 'Практика для цієї теми поки відсутня.');
         target.appendChild(note);
       }
       return null;
@@ -886,19 +649,13 @@ import { getUsers } from '../../scripts/api/user';
     if (title || level || description) {
       const header = el('header', { class: 'practice-inline__header' });
       if (title) {
-        header.appendChild(
-          el('h3', { class: 'practice-inline__title' }, title)
-        );
+        header.appendChild(el('h3', { class: 'practice-inline__title' }, title));
       }
       if (level) {
-        header.appendChild(
-          el('span', { class: 'practice-inline__badge' }, level)
-        );
+        header.appendChild(el('span', { class: 'practice-inline__badge' }, level));
       }
       if (description) {
-        header.appendChild(
-          el('p', { class: 'practice-inline__description muted' }, description)
-        );
+        header.appendChild(el('p', { class: 'practice-inline__description muted' }, description));
       }
       wrapper.appendChild(header);
     }
@@ -916,7 +673,7 @@ import { getUsers } from '../../scripts/api/user';
           container: target,
           options,
         },
-      })
+      }),
     );
     return wrapper;
   };
@@ -977,42 +734,42 @@ import { getUsers } from '../../scripts/api/user';
   // ============ Extra renderers (moved inside closure) ============
   function renderTransform(container, task) {
     container.appendChild(
-      el('h3', {}, task.prompt || 'Transform the sentence')
+      el("h3", {}, task.prompt || "Transform the sentence")
     );
     const items = [];
-    (task.items || []).forEach(it => {
-      const row = el('div', {
+    (task.items || []).forEach((it) => {
+      const row = el("div", {
         style:
-          'margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+          "margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;",
       });
       row.appendChild(
-        el('div', { style: 'margin-bottom:6px;font-weight:600;' }, it.q)
+        el("div", { style: "margin-bottom:6px;font-weight:600;" }, it.q)
       );
-      const input = el('input', {
-        type: 'text',
+      const input = el("input", {
+        type: "text",
         style:
-          'width:100%;max-width:640px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
+          "width:100%;max-width:640px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;",
       });
       row.appendChild(input);
       if (it.hint) row.appendChild(makeHint(it.hint));
       items.push({
         row,
         input,
-        answers: (it.answer || []).map(a => normalize(a)),
+        answers: (it.answer || []).map((a) => normalize(a)),
       });
       container.appendChild(row);
     });
-    const result = el('div', { style: 'margin-top:8px;font-weight:600;' });
+    const result = el("div", { style: "margin-top:8px;font-weight:600;" });
     const btn = el(
-      'button',
-      { type: 'button', class: 'btn primary', style: 'margin-top:8px;' },
-      'Перевірити'
+      "button",
+      { type: "button", class: "btn primary", style: "margin-top:8px;" },
+      "Перевірити"
     );
-    btn.addEventListener('click', () => {
+    btn.addEventListener("click", () => {
       let correct = 0;
       items.forEach(({ row, input, answers }) => {
         const ok = answers.includes(normalize(input.value));
-        row.style.borderColor = ok ? '#10b981' : '#ef4444';
+        row.style.borderColor = ok ? "#10b981" : "#ef4444";
         if (ok) correct++;
       });
       result.textContent = `Результат: ${correct}/${items.length}`;
@@ -1023,42 +780,42 @@ import { getUsers } from '../../scripts/api/user';
 
   function renderError(container, task) {
     container.appendChild(
-      el('h3', {}, task.prompt || 'Find and correct the error')
+      el("h3", {}, task.prompt || "Find and correct the error")
     );
     const items = [];
-    (task.items || []).forEach(it => {
-      const row = el('div', {
+    (task.items || []).forEach((it) => {
+      const row = el("div", {
         style:
-          'margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+          "margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;",
       });
       row.appendChild(
-        el('div', { style: 'margin-bottom:6px;font-weight:600;' }, it.q)
+        el("div", { style: "margin-bottom:6px;font-weight:600;" }, it.q)
       );
-      const input = el('input', {
-        type: 'text',
+      const input = el("input", {
+        type: "text",
         style:
-          'width:100%;max-width:640px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
+          "width:100%;max-width:640px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;",
       });
       row.appendChild(input);
       if (it.hint) row.appendChild(makeHint(it.hint));
       items.push({
         row,
         input,
-        answers: (it.answer || []).map(a => normalize(a)),
+        answers: (it.answer || []).map((a) => normalize(a)),
       });
       container.appendChild(row);
     });
-    const result = el('div', { style: 'margin-top:8px;font-weight:600;' });
+    const result = el("div", { style: "margin-top:8px;font-weight:600;" });
     const btn = el(
-      'button',
-      { type: 'button', class: 'btn primary', style: 'margin-top:8px;' },
-      'Перевірити'
+      "button",
+      { type: "button", class: "btn primary", style: "margin-top:8px;" },
+      "Перевірити"
     );
-    btn.addEventListener('click', () => {
+    btn.addEventListener("click", () => {
       let correct = 0;
       items.forEach(({ row, input, answers }) => {
         const ok = answers.includes(normalize(input.value));
-        row.style.borderColor = ok ? '#10b981' : '#ef4444';
+        row.style.borderColor = ok ? "#10b981" : "#ef4444";
         if (ok) correct++;
       });
       result.textContent = `Результат: ${correct}/${items.length}`;
@@ -1069,47 +826,47 @@ import { getUsers } from '../../scripts/api/user';
 
   function renderOrder(container, task) {
     container.appendChild(
-      el('h3', {}, task.prompt || 'Put the words in order')
+      el("h3", {}, task.prompt || "Put the words in order")
     );
     const blocks = [];
     (task.items || []).forEach((it, idx) => {
       const correctStr = normalize(
-        Array.isArray(it.answer) ? it.answer.join(' ') : it.answer
+        Array.isArray(it.answer) ? it.answer.join(" ") : it.answer
       );
       const pool = shuffle((it.tokens || []).slice());
-      const row = el('div', {
+      const row = el("div", {
         style:
-          'margin:10px 0;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+          "margin:10px 0;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;",
       });
-      const poolWrap = el('div', {
-        style: 'display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;',
+      const poolWrap = el("div", {
+        style: "display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;",
       });
-      const outWrap = el('div', {
+      const outWrap = el("div", {
         style:
-          'display:flex;flex-wrap:wrap;gap:6px;min-height:36px;padding:6px;border:1px dashed #cbd5e1;border-radius:8px;background:#f8fafc;',
+          "display:flex;flex-wrap:wrap;gap:6px;min-height:36px;padding:6px;border:1px dashed #cbd5e1;border-radius:8px;background:#f8fafc;",
       });
       const used = new Set();
       function makeBtn(word, i) {
         const b = el(
-          'button',
+          "button",
           {
-            type: 'button',
+            type: "button",
             style:
-              'padding:4px 8px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;cursor:pointer;',
+              "padding:4px 8px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;cursor:pointer;",
           },
           word
         );
-        b.addEventListener('click', () => {
+        b.addEventListener("click", () => {
           if (used.has(i)) return;
           used.add(i);
           b.style.opacity = 0.5;
           outWrap.appendChild(
             el(
-              'span',
+              "span",
               {
-                class: 'chip',
+                class: "chip",
                 style:
-                  'padding:4px 8px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;',
+                  "padding:4px 8px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;",
               },
               word
             )
@@ -1118,19 +875,19 @@ import { getUsers } from '../../scripts/api/user';
         return b;
       }
       pool.forEach((w, i) => poolWrap.appendChild(makeBtn(w, `${idx}-${i}`)));
-      const actions = el('div', {
-        style: 'margin-top:6px;display:flex;gap:8px;',
+      const actions = el("div", {
+        style: "margin-top:6px;display:flex;gap:8px;",
       });
-      const reset = el('button', { type: 'button', class: 'btn' }, 'Скинути');
-      reset.addEventListener('click', () => {
+      const reset = el("button", { type: "button", class: "btn" }, "Скинути");
+      reset.addEventListener("click", () => {
         used.clear();
-        outWrap.innerHTML = '';
-        Array.from(poolWrap.children).forEach(ch => (ch.style.opacity = 1));
-        row.style.borderColor = '#e5e7eb';
+        outWrap.innerHTML = "";
+        Array.from(poolWrap.children).forEach((ch) => (ch.style.opacity = 1));
+        row.style.borderColor = "#e5e7eb";
       });
       actions.appendChild(reset);
       row.appendChild(
-        el('div', { style: 'margin-bottom:6px;font-weight:600;' }, it.q || '')
+        el("div", { style: "margin-bottom:6px;font-weight:600;" }, it.q || "")
       );
       row.appendChild(poolWrap);
       row.appendChild(outWrap);
@@ -1138,22 +895,22 @@ import { getUsers } from '../../scripts/api/user';
       blocks.push({ row, outWrap, correctStr });
       container.appendChild(row);
     });
-    const result = el('div', { style: 'margin-top:8px;font-weight:600;' });
+    const result = el("div", { style: "margin-top:8px;font-weight:600;" });
     const btn = el(
-      'button',
-      { type: 'button', class: 'btn primary', style: 'margin-top:8px;' },
-      'Перевірити'
+      "button",
+      { type: "button", class: "btn primary", style: "margin-top:8px;" },
+      "Перевірити"
     );
-    btn.addEventListener('click', () => {
+    btn.addEventListener("click", () => {
       let correct = 0;
       blocks.forEach(({ row, outWrap, correctStr }) => {
         const built = normalize(
-          Array.from(outWrap.querySelectorAll('.chip'))
-            .map(n => n.textContent)
-            .join(' ')
+          Array.from(outWrap.querySelectorAll(".chip"))
+            .map((n) => n.textContent)
+            .join(" ")
         );
         const ok = built === correctStr;
-        row.style.borderColor = ok ? '#10b981' : '#ef4444';
+        row.style.borderColor = ok ? "#10b981" : "#ef4444";
         if (ok) correct++;
       });
       result.textContent = `Результат: ${correct}/${blocks.length}`;
@@ -1163,54 +920,54 @@ import { getUsers } from '../../scripts/api/user';
   }
 
   function renderShort(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Short answer'));
+    container.appendChild(el("h3", {}, task.prompt || "Short answer"));
     const items = [];
-    (task.items || []).forEach(it => {
-      const row = el('div', {
+    (task.items || []).forEach((it) => {
+      const row = el("div", {
         style:
-          'margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+          "margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;",
       });
       row.appendChild(
-        el('div', { style: 'margin-bottom:6px;font-weight:600;' }, it.q)
+        el("div", { style: "margin-bottom:6px;font-weight:600;" }, it.q)
       );
-      const input = el('textarea', {
+      const input = el("textarea", {
         rows: 3,
         style:
-          'width:100%;max-width:720px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
+          "width:100%;max-width:720px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;",
       });
       row.appendChild(input);
       items.push({
         row,
         input,
-        keywords: (it.keywords || []).map(k => normalize(k)),
+        keywords: (it.keywords || []).map((k) => normalize(k)),
       });
       container.appendChild(row);
     });
-    const result = el('div', { style: 'margin-top:8px;font-weight:600;' });
+    const result = el("div", { style: "margin-top:8px;font-weight:600;" });
     const btn = el(
-      'button',
-      { type: 'button', class: 'btn primary', style: 'margin-top:8px;' },
-      'Перевірити'
+      "button",
+      { type: "button", class: "btn primary", style: "margin-top:8px;" },
+      "Перевірити"
     );
-    btn.addEventListener('click', () => {
+    btn.addEventListener("click", () => {
       let sum = 0,
         total = 0;
       items.forEach(({ row, input, keywords }) => {
         const text = normalize(input.value);
-        const matched = keywords.filter(k => text.includes(k)).length;
+        const matched = keywords.filter((k) => text.includes(k)).length;
         sum += matched;
         total += keywords.length;
         row.style.borderColor =
           matched === keywords.length
-            ? '#10b981'
+            ? "#10b981"
             : matched > 0
-            ? '#f59e0b'
-            : '#ef4444';
+            ? "#f59e0b"
+            : "#ef4444";
         const info =
-          row.querySelector('.short-info') ||
-          el('div', {
-            class: 'short-info',
-            style: 'margin-top:6px;color:#475569;',
+          row.querySelector(".short-info") ||
+          el("div", {
+            class: "short-info",
+            style: "margin-top:6px;color:#475569;",
           });
         info.textContent = `Збіги ключових слів: ${matched}/${keywords.length}`;
         if (!row.contains(info)) row.appendChild(info);
@@ -1231,7 +988,8 @@ import { getUsers } from '../../scripts/api/user';
       : [];
     if (items.length) {
       const list = el('div', {
-        style: 'display:flex;flex-direction:column;gap:12px;margin-top:12px;',
+        style:
+          'display:flex;flex-direction:column;gap:12px;margin-top:12px;',
       });
       items.forEach((item, index) => {
         const entry = el('div', {
@@ -1249,10 +1007,9 @@ import { getUsers } from '../../scripts/api/user';
           )
         );
 
-        const examples =
-          item && Array.isArray(item.example_answers)
-            ? item.example_answers.filter(Boolean)
-            : [];
+        const examples = item && Array.isArray(item.example_answers)
+          ? item.example_answers.filter(Boolean)
+          : [];
         if (examples.length) {
           entry.appendChild(
             el(
@@ -1264,7 +1021,7 @@ import { getUsers } from '../../scripts/api/user';
           const chips = el('div', {
             style: 'display:flex;flex-wrap:wrap;gap:8px;',
           });
-          examples.forEach(answer => {
+          examples.forEach((answer) => {
             chips.appendChild(
               el(
                 'span',
@@ -1284,7 +1041,9 @@ import { getUsers } from '../../scripts/api/user';
     }
 
     const criteria =
-      task && task.scoring && Array.isArray(task.scoring.criteria)
+      task &&
+      task.scoring &&
+      Array.isArray(task.scoring.criteria)
         ? task.scoring.criteria.filter(Boolean)
         : [];
     if (criteria.length) {
@@ -1305,7 +1064,7 @@ import { getUsers } from '../../scripts/api/user';
       const list = el('ul', {
         style: 'margin:0;padding-left:18px;color:#475569;',
       });
-      criteria.forEach(criterion => {
+      criteria.forEach((criterion) => {
         list.appendChild(el('li', { style: 'margin:4px 0;' }, criterion));
       });
       scoringBox.appendChild(list);
@@ -1316,8 +1075,7 @@ import { getUsers } from '../../scripts/api/user';
   function renderRoleplay(container, task) {
     container.appendChild(el('h3', {}, task.prompt || 'Role-play scenario'));
 
-    const scenario =
-      task && typeof task.scenario === 'object' ? task.scenario : {};
+    const scenario = task && typeof task.scenario === 'object' ? task.scenario : {};
     const infoBox = el('div', {
       style:
         'margin:12px 0;padding:14px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc;',
@@ -1326,11 +1084,7 @@ import { getUsers } from '../../scripts/api/user';
 
     if (scenario.setting) {
       infoBox.appendChild(
-        el(
-          'p',
-          { style: 'margin:0 0 6px;font-weight:600;' },
-          `Локація: ${scenario.setting}`
-        )
+        el('p', { style: 'margin:0 0 6px;font-weight:600;' }, `Локація: ${scenario.setting}`)
       );
       infoAdded = true;
     }
@@ -1353,7 +1107,9 @@ import { getUsers } from '../../scripts/api/user';
           'display:grid;gap:12px;margin-top:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));',
       });
       roles.forEach((role, index) => {
-        const name = (role && role.name) || `Student ${index + 1}`;
+        const name =
+          (role && role.name) ||
+          `Student ${index + 1}`;
         const roleBox = el(
           'div',
           {
@@ -1365,11 +1121,7 @@ import { getUsers } from '../../scripts/api/user';
 
         if (role && role.goal) {
           roleBox.appendChild(
-            el(
-              'p',
-              { style: 'margin:0 0 6px;color:#0f172a;' },
-              `Мета: ${role.goal}`
-            )
+            el('p', { style: 'margin:0 0 6px;color:#0f172a;' }, `Мета: ${role.goal}`)
           );
         }
 
@@ -1380,7 +1132,7 @@ import { getUsers } from '../../scripts/api/user';
             ? role.details.split(/[;,\n]/)
             : [];
         const details = rawDetails
-          .map(item => String(item || '').trim())
+          .map((item) => String(item || '').trim())
           .filter(Boolean);
         if (details.length === 1) {
           roleBox.appendChild(
@@ -1390,7 +1142,7 @@ import { getUsers } from '../../scripts/api/user';
           const list = el('ul', {
             style: 'margin:0;padding-left:18px;color:#475569;',
           });
-          details.forEach(detail => {
+          details.forEach((detail) => {
             list.appendChild(el('li', { style: 'margin:2px 0;' }, detail));
           });
           roleBox.appendChild(list);
@@ -1408,19 +1160,14 @@ import { getUsers } from '../../scripts/api/user';
           'margin-top:16px;padding:14px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
       });
       stepsWrap.appendChild(
-        el(
-          'h4',
-          {
-            style:
-              'margin:0 0 6px;font-size:16px;font-weight:600;color:#0f172a;',
-          },
-          'Покроковий план діалогу'
-        )
+        el('h4', {
+          style: 'margin:0 0 6px;font-size:16px;font-weight:600;color:#0f172a;',
+        }, 'Покроковий план діалогу')
       );
       const list = el('ol', {
         style: 'margin:0 0 0 18px;padding:0;color:#475569;',
       });
-      steps.forEach(step => {
+      steps.forEach((step) => {
         if (!step) return;
         list.appendChild(el('li', { style: 'margin:4px 0;' }, step));
       });
@@ -1431,19 +1178,14 @@ import { getUsers } from '../../scripts/api/user';
     const phrases = Array.isArray(task && task.phrases) ? task.phrases : [];
     if (phrases.length) {
       container.appendChild(
-        el(
-          'h4',
-          {
-            style:
-              'margin:18px 0 8px;font-size:16px;font-weight:600;color:#0f172a;',
-          },
-          'Корисні фрази для діалогу'
-        )
+        el('h4', {
+          style: 'margin:18px 0 8px;font-size:16px;font-weight:600;color:#0f172a;',
+        }, 'Корисні фрази для діалогу')
       );
       const list = el('div', {
         style: 'display:flex;flex-direction:column;gap:8px;',
       });
-      phrases.forEach(item => {
+      phrases.forEach((item) => {
         const phraseText =
           typeof item === 'string'
             ? item
@@ -1466,11 +1208,7 @@ import { getUsers } from '../../scripts/api/user';
             el(
               'div',
               {},
-              el(
-                'span',
-                { style: 'font-weight:600;color:#0f172a;' },
-                phraseText
-              ),
+              el('span', { style: 'font-weight:600;color:#0f172a;' }, phraseText),
               translation
                 ? el(
                     'span',
@@ -1495,7 +1233,7 @@ import { getUsers } from '../../scripts/api/user';
     );
 
     const answers = Array.isArray(task?.answers)
-      ? task.answers.map(item => normalize(item))
+      ? task.answers.map((item) => normalize(item))
       : [];
     const blanks = [];
     let activeBlank = null;
@@ -1529,7 +1267,7 @@ import { getUsers } from '../../scripts/api/user';
     const words = Array.isArray(task?.words) ? task.words : [];
     const seenWords = new Set();
     const uniqueWords = [];
-    words.forEach(word => {
+    words.forEach((word) => {
       const value = String(word || '').trim();
       if (!value) return;
       const signature = normalize(value);
@@ -1538,7 +1276,7 @@ import { getUsers } from '../../scripts/api/user';
       uniqueWords.push(value);
     });
 
-    uniqueWords.forEach(value => {
+    uniqueWords.forEach((value) => {
       const btn = el(
         'button',
         {
@@ -1548,7 +1286,7 @@ import { getUsers } from '../../scripts/api/user';
             'padding:6px 10px;border:1px solid #94a3b8;border-radius:999px;background:#fff;color:#0f172a;cursor:pointer;font-size:14px;line-height:1;',
           onclick: () => {
             const target =
-              activeBlank || blanks.find(blank => !blank.dataset.value);
+              activeBlank || blanks.find((blank) => !blank.dataset.value);
             if (!target) return;
 
             target.dataset.value = value;
@@ -1572,7 +1310,7 @@ import { getUsers } from '../../scripts/api/user';
     });
     const dialogue = Array.isArray(task?.dialogue) ? task.dialogue : [];
     let blankIndex = 0;
-    dialogue.forEach(turn => {
+    dialogue.forEach((turn) => {
       if (!turn) return;
       const speaker = turn.speaker || turn.role || '';
       const line = turn.line || turn.text || '';
@@ -1582,9 +1320,7 @@ import { getUsers } from '../../scripts/api/user';
           style:
             'padding:12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;display:flex;gap:10px;align-items:flex-start;',
         },
-        speaker
-          ? el('strong', { style: 'min-width:90px;' }, `${speaker}:`)
-          : null
+        speaker ? el('strong', { style: 'min-width:90px;' }, `${speaker}:`) : null
       );
       const textWrap = el('div', {
         style: 'display:flex;flex-wrap:wrap;gap:6px;align-items:center;',
@@ -1635,8 +1371,7 @@ import { getUsers } from '../../scripts/api/user';
     container.appendChild(dialogueWrap);
 
     const actions = el('div', {
-      style:
-        'margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;',
+      style: 'margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;',
     });
     const checkBtn = el(
       'button',
@@ -1650,7 +1385,7 @@ import { getUsers } from '../../scripts/api/user';
 
     checkBtn.addEventListener('click', () => {
       let correct = 0;
-      blanks.forEach(blank => {
+      blanks.forEach((blank) => {
         const expected = blank.dataset.expected || '';
         const value = normalize(blank.dataset.value || blank.textContent || '');
         const ok = expected ? value === expected : Boolean(value);
@@ -1666,7 +1401,7 @@ import { getUsers } from '../../scripts/api/user';
     });
 
     resetBtn.addEventListener('click', () => {
-      blanks.forEach(blank => clearBlank(blank));
+      blanks.forEach((blank) => clearBlank(blank));
       result.textContent = '';
       setActive(null);
     });
@@ -1678,16 +1413,18 @@ import { getUsers } from '../../scripts/api/user';
   }
 
   function renderDialogueOrder(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Упорядкуйте діалог'));
+    container.appendChild(
+      el('h3', {}, task.prompt || 'Упорядкуйте діалог')
+    );
 
     const lines = Array.isArray(task?.lines)
-      ? task.lines.map(line => ({
+      ? task.lines.map((line) => ({
           speaker: line?.speaker || line?.role || '',
           text: line?.line || line?.text || '',
         }))
       : [];
     const solution = Array.isArray(task?.solution)
-      ? task.solution.map(value => Number.parseInt(value, 10))
+      ? task.solution.map((value) => Number.parseInt(value, 10))
       : lines.map((_, index) => index);
 
     const poolWrap = el('div', {
@@ -1727,7 +1464,7 @@ import { getUsers } from '../../scripts/api/user';
           class: 'dialogue-chip',
           style:
             'padding:10px;border:1px solid #94a3b8;border-radius:10px;background:#fff;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;',
-          onclick: event => {
+          onclick: (event) => {
             event.stopPropagation();
             removeChip(chip);
           },
@@ -1741,12 +1478,10 @@ import { getUsers } from '../../scripts/api/user';
     }
 
     const shuffledIndices = shuffle(lines.map((_, index) => index));
-    shuffledIndices.forEach(index => {
+    shuffledIndices.forEach((index) => {
       const line = lines[index];
       const label = makeLabel(line);
-      const buttonId = `line-${index}-${Math.random()
-        .toString(36)
-        .slice(2, 6)}`;
+      const buttonId = `line-${index}-${Math.random().toString(36).slice(2, 6)}`;
       const btn = el(
         'button',
         {
@@ -1772,8 +1507,7 @@ import { getUsers } from '../../scripts/api/user';
     container.appendChild(outWrap);
 
     const actions = el('div', {
-      style:
-        'margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;',
+      style: 'margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;',
     });
     const checkBtn = el(
       'button',
@@ -1784,7 +1518,7 @@ import { getUsers } from '../../scripts/api/user';
     const result = el('div', { style: 'font-weight:600;color:#0f172a;' });
 
     checkBtn.addEventListener('click', () => {
-      const built = Array.from(outWrap.children).map(chip =>
+      const built = Array.from(outWrap.children).map((chip) =>
         Number.parseInt(chip.dataset.index || '-1', 10)
       );
       const expected = solution.slice();
@@ -1798,9 +1532,9 @@ import { getUsers } from '../../scripts/api/user';
     });
 
     resetBtn.addEventListener('click', () => {
-      Array.from(outWrap.children).forEach(chip => removeChip(chip));
+      Array.from(outWrap.children).forEach((chip) => removeChip(chip));
       const buttons = poolWrap.querySelectorAll('button');
-      buttons.forEach(btn => {
+      buttons.forEach((btn) => {
         btn.disabled = false;
         btn.style.opacity = '1';
       });
@@ -1835,8 +1569,7 @@ import { getUsers } from '../../scripts/api/user';
       const trueLabel = el(
         'label',
         {
-          style:
-            'display:inline-flex;align-items:center;gap:6px;margin-right:16px;',
+          style: 'display:inline-flex;align-items:center;gap:6px;margin-right:16px;',
         },
         el('input', { type: 'radio', name, value: 'true' }),
         'True'
@@ -1858,8 +1591,7 @@ import { getUsers } from '../../scripts/api/user';
     if (!rows.length) return;
 
     const actions = el('div', {
-      style:
-        'margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;',
+      style: 'margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;',
     });
     const btn = el(
       'button',
@@ -1893,7 +1625,7 @@ import { getUsers } from '../../scripts/api/user';
         style:
           'margin:8px 0 12px;padding:10px;border:1px solid #e2e8f0;border-radius:10px;background:#f8fafc;display:flex;flex-wrap:wrap;gap:8px;',
       });
-      wordBank.forEach(word => {
+      wordBank.forEach((word) => {
         const value = String(word || '').trim();
         if (!value) return;
         bank.appendChild(
@@ -1912,7 +1644,7 @@ import { getUsers } from '../../scripts/api/user';
 
     const rows = [];
     const items = Array.isArray(task?.items) ? task.items : [];
-    items.forEach(item => {
+    items.forEach((item) => {
       if (!item || !item.clue) return;
       const row = el('div', {
         style:
@@ -1928,9 +1660,9 @@ import { getUsers } from '../../scripts/api/user';
       });
       row.appendChild(input);
       const answers = Array.isArray(item?.answers)
-        ? item.answers.map(answer => normalize(answer))
+        ? item.answers.map((answer) => normalize(answer))
         : Array.isArray(item?.answer)
-        ? item.answer.map(answer => normalize(answer))
+        ? item.answer.map((answer) => normalize(answer))
         : item?.answer
         ? [normalize(item.answer)]
         : [];
@@ -1941,11 +1673,7 @@ import { getUsers } from '../../scripts/api/user';
     if (!rows.length) return;
 
     const result = el('div', { style: 'font-weight:600;color:#0f172a;' });
-    const btn = el(
-      'button',
-      { type: 'button', class: 'btn primary' },
-      'Перевірити'
-    );
+    const btn = el('button', { type: 'button', class: 'btn primary' }, 'Перевірити');
     btn.addEventListener('click', () => {
       let correct = 0;
       rows.forEach(({ row, input, answers }) => {
@@ -1965,18 +1693,14 @@ import { getUsers } from '../../scripts/api/user';
 
     const rows = [];
     const items = Array.isArray(task?.items) ? task.items : [];
-    items.forEach(item => {
+    items.forEach((item) => {
       if (!item || !item.scrambled) return;
       const row = el('div', {
         style:
           'margin-bottom:10px;padding:12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
       });
       row.appendChild(
-        el(
-          'div',
-          { style: 'margin-bottom:6px;font-weight:600;' },
-          item.scrambled
-        )
+        el('div', { style: 'margin-bottom:6px;font-weight:600;' }, item.scrambled)
       );
       const input = el('input', {
         type: 'text',
@@ -1985,9 +1709,9 @@ import { getUsers } from '../../scripts/api/user';
       });
       row.appendChild(input);
       const answers = Array.isArray(item?.answers)
-        ? item.answers.map(value => normalize(value))
+        ? item.answers.map((value) => normalize(value))
         : Array.isArray(item?.answer)
-        ? item.answer.map(value => normalize(value))
+        ? item.answer.map((value) => normalize(value))
         : item?.answer
         ? [normalize(item.answer)]
         : [];
@@ -1997,14 +1721,8 @@ import { getUsers } from '../../scripts/api/user';
 
     if (!rows.length) return;
 
-    const btn = el(
-      'button',
-      { type: 'button', class: 'btn primary' },
-      'Перевірити'
-    );
-    const result = el('div', {
-      style: 'margin-top:6px;font-weight:600;color:#0f172a;',
-    });
+    const btn = el('button', { type: 'button', class: 'btn primary' }, 'Перевірити');
+    const result = el('div', { style: 'margin-top:6px;font-weight:600;color:#0f172a;' });
     btn.addEventListener('click', () => {
       let correct = 0;
       rows.forEach(({ row, input, answers }) => {
@@ -2020,7 +1738,9 @@ import { getUsers } from '../../scripts/api/user';
   }
 
   function renderOddOneOut(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Знайди зайве слово'));
+    container.appendChild(
+      el('h3', {}, task.prompt || 'Знайди зайве слово')
+    );
 
     const blocks = [];
     const items = Array.isArray(task?.items) ? task.items : [];
@@ -2032,11 +1752,7 @@ import { getUsers } from '../../scripts/api/user';
           'margin-bottom:10px;padding:12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
       });
       row.appendChild(
-        el(
-          'div',
-          { style: 'margin-bottom:6px;font-weight:600;' },
-          `Набір ${index + 1}`
-        )
+        el('div', { style: 'margin-bottom:6px;font-weight:600;' }, `Набір ${index + 1}`)
       );
       const groupName = `${task.id || 'odd'}-${index}`;
       options.forEach((option, optionIndex) => {
@@ -2048,12 +1764,7 @@ import { getUsers } from '../../scripts/api/user';
               for: id,
               style: 'display:flex;align-items:center;gap:6px;margin:4px 0;',
             },
-            el('input', {
-              type: 'radio',
-              name: groupName,
-              value: String(optionIndex),
-              id,
-            }),
+            el('input', { type: 'radio', name: groupName, value: String(optionIndex), id }),
             option
           )
         );
@@ -2074,14 +1785,8 @@ import { getUsers } from '../../scripts/api/user';
 
     if (!blocks.length) return;
 
-    const btn = el(
-      'button',
-      { type: 'button', class: 'btn primary' },
-      'Перевірити'
-    );
-    const result = el('div', {
-      style: 'margin-top:6px;font-weight:600;color:#0f172a;',
-    });
+    const btn = el('button', { type: 'button', class: 'btn primary' }, 'Перевірити');
+    const result = el('div', { style: 'margin-top:6px;font-weight:600;color:#0f172a;' });
     btn.addEventListener('click', () => {
       let correct = 0;
       blocks.forEach(({ row, groupName, answerIndex }) => {
@@ -2101,45 +1806,45 @@ import { getUsers } from '../../scripts/api/user';
 
   function renderWriting(container, task) {
     container.appendChild(
-      el('h3', {}, task.prompt || 'Writing/Speaking prompt')
+      el("h3", {}, task.prompt || "Writing/Speaking prompt")
     );
     if (task.description)
-      container.appendChild(el('p', { class: 'muted' }, task.description));
-    const list = el('div', { style: 'margin-top:8px;' });
-    (task.checklist || []).forEach(ch => {
+      container.appendChild(el("p", { class: "muted" }, task.description));
+    const list = el("div", { style: "margin-top:8px;" });
+    (task.checklist || []).forEach((ch) => {
       const id = Math.random().toString(36).slice(2);
       const row = el(
-        'label',
+        "label",
         {
           for: id,
-          style: 'display:flex;align-items:center;gap:8px;margin:6px 0;',
+          style: "display:flex;align-items:center;gap:8px;margin:6px 0;",
         },
-        el('input', { id, type: 'checkbox' }),
-        el('span', {}, ch)
+        el("input", { id, type: "checkbox" }),
+        el("span", {}, ch)
       );
       list.appendChild(row);
     });
     container.appendChild(list);
     const btn = el(
-      'button',
-      { type: 'button', class: 'btn primary', style: 'margin-top:8px;' },
-      'Позначити як перевірено'
+      "button",
+      { type: "button", class: "btn primary", style: "margin-top:8px;" },
+      "Позначити як перевірено"
     );
-    const note = el('div', { class: 'muted', style: 'margin-top:6px;' });
-    btn.addEventListener('click', () => {
+    const note = el("div", { class: "muted", style: "margin-top:6px;" });
+    btn.addEventListener("click", () => {
       note.textContent =
-        'Готово! Перевір список і за бажанням відправ наставнику.';
+        "Готово! Перевір список і за бажанням відправ наставнику.";
     });
     container.appendChild(btn);
     container.appendChild(note);
   }
 
   function ensurePracticeContainer() {
-    let root = document.getElementById('practice');
+    let root = document.getElementById("practice");
     if (!root && /\/grammar\//.test(location.pathname)) {
-      const wrap = el('div', { class: 'container' });
-      wrap.appendChild(el('hr', { class: 'sep' }));
-      root = el('section', { id: 'practice' });
+      const wrap = el("div", { class: "container" });
+      wrap.appendChild(el("hr", { class: "sep" }));
+      root = el("section", { id: "practice" });
       wrap.appendChild(root);
       document.body.appendChild(wrap);
     }
@@ -2150,9 +1855,9 @@ import { getUsers } from '../../scripts/api/user';
     const root = ensurePracticeContainer();
     if (!root) return;
     // Ensure stable inner container so external toolbars are not wiped
-    let body = root.querySelector('#practice-body');
+    let body = root.querySelector("#practice-body");
     if (!body) {
-      body = el('div', { id: 'practice-body' });
+      body = el("div", { id: "practice-body" });
       root.appendChild(body);
     }
     const context = window.lessonContext || {};
@@ -2163,29 +1868,20 @@ import { getUsers } from '../../scripts/api/user';
           'Практика для кожної теми розміщена одразу після теорії. Тут можете згенерувати додаткові завдання.';
       }
       if (body) {
-        body.innerHTML =
-          '<p class="muted">Згенеруйте додаткові вправи або додайте власні завдання.</p>';
+        body.innerHTML = '<p class="muted">Згенеруйте додаткові вправи або додайте власні завдання.</p>';
       }
+      document.dispatchEvent(new CustomEvent('practice:dataLoaded', { detail: null }));
       document.dispatchEvent(
-        new CustomEvent('practice:dataLoaded', { detail: null })
-      );
-      document.dispatchEvent(
-        new CustomEvent('practice:rendered', {
-          detail: { ok: false, reason: 'custom-lesson' },
-        })
+        new CustomEvent('practice:rendered', { detail: { ok: false, reason: 'custom-lesson' } }),
       );
       return;
     }
 
-    loadData().then(data => {
+    loadData().then((data) => {
       if (!data) {
-        document.dispatchEvent(
-          new CustomEvent('practice:dataLoaded', { detail: null })
-        );
+        document.dispatchEvent(new CustomEvent('practice:dataLoaded', { detail: null }));
         body.innerHTML = '<p class="muted">Практика поки відсутня.</p>';
-        document.dispatchEvent(
-          new CustomEvent('practice:rendered', { detail: { ok: false } })
-        );
+        document.dispatchEvent(new CustomEvent('practice:rendered', { detail: { ok: false } }));
         return;
       }
       body.innerHTML = '';
@@ -2218,20 +1914,18 @@ import { getUsers } from '../../scripts/api/user';
       );
 
       entries.forEach(({ task, key }) => renderTask(body, task, key));
-      document.dispatchEvent(
-        new CustomEvent('practice:rendered', { detail: { ok: true } })
-      );
+      document.dispatchEvent(new CustomEvent('practice:rendered', { detail: { ok: true } }));
     });
   }
 
-  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener("DOMContentLoaded", init);
 })();
 
-document.addEventListener('click', e => {
-  const div = e.target.closest('.text-block');
+document.addEventListener("click", (e) => {
+  const div = e.target.closest(".text-block");
   if (div) {
     const html = div.innerHTML;
     navigator.clipboard.writeText(`<div class="text-block">${html}</div>`);
-    console.log('Скопійовано');
+    console.log("Скопійовано");
   }
 });

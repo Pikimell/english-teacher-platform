@@ -3,105 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tatty English</title>
-    <script src="https://accounts.google.com/gsi/client" async></script>
-    <script type="module" crossorigin src="/assets/main-1VYSZ_bt.js"></script>
-    <script type="module" crossorigin src="/assets/custom-lessons-store-BKMVZjuV.js"></script>
-    <script type="module" crossorigin src="/assets/custom-lesson-presets-BlE7b2P4.js"></script>
-    <script type="module" crossorigin src="/assets/vendor-CWxt7QI6.js"></script>
-    <script type="module" crossorigin src="/assets/main-CbyGX8Wu.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main-C_YflxnX.css">
+    <title>English Teacher Platform v2</title>
+    <script type="module" crossorigin src="/english-teacher-platform/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/english-teacher-platform/assets/main-ClRbC28d.js">
+    <link rel="modulepreload" crossorigin href="/english-teacher-platform/assets/custom-lessons-store-BKMVZjuV.js">
+    <link rel="modulepreload" crossorigin href="/english-teacher-platform/assets/custom-lesson-presets-BlE7b2P4.js">
+    <link rel="stylesheet" crossorigin href="/english-teacher-platform/assets/main-DWMCV7u_.css">
   </head>
   <body>
     <header class="header">
-  <div class="header__auth" data-auth-root>
-    <div
-      id="g_id_onload"
-      data-client_id="9928794645-dgtulqh9knt6n5t6gn69i8oc5kpt2mdo.apps.googleusercontent.com"
-      data-context="signin"
-      data-ux_mode="popup"
-      data-login_uri="http://localhost:5173/index.html"
-      data-auto_select="true"
-      data-itp_support="true"
-      data-callback="handleGoogleCredential"
-    ></div>
-    <div data-auth-signin>
-      <div
-        class="g_id_signin"
-        data-type="standard"
-        data-shape="pill"
-        data-theme="outline"
-        data-text="signin"
-        data-size="large"
-        data-locale="uk"
-        data-logo_alignment="left"
-      ></div>
-    </div>
-    <div class="header__profile" data-auth-profile hidden>
-      <img
-        class="header__avatar"
-        data-user-avatar
-        alt="Google profile avatar"
-        loading="lazy"
-      />
-      <div class="header__profile-info">
-        <span class="header__profile-name" data-user-name></span>
-        <span class="header__profile-email" data-user-email></span>
+      <div class="header__inner">
+        <div class="header__copy">
+          <p class="header__eyebrow">Tatty English</p>
+          <h1>Навчальна база для викладачів та студентів</h1>
+          <p class="tagline">
+            Знаходьте граматику, лексику та комунікативні сценарії за кілька
+            кліків. Використовуйте фільтри, щоб перейти до потрібної теми та
+            одразу відкривати конспект.
+          </p>
+          <div class="header__actions">
+            <a class="button button--primary" href="./custom-lessons.html"
+              >Створити урок</a
+            >
+            <a class="button button--light" href="./placement-test.html"
+              >Пройти тест на рівень</a
+            >
+          </div>
+        </div>
+        <dl class="header__stats">
+          <div>
+            <dt>Уроків загалом</dt>
+            <dd data-stat-total>0</dd>
+          </div>
+          <div>
+            <dt>Граматика</dt>
+            <dd data-stat-grammar>0</dd>
+          </div>
+          <div>
+            <dt>Лексика</dt>
+            <dd data-stat-lexical>0</dd>
+          </div>
+        </dl>
       </div>
-      <button
-        type="button"
-        class="button button--light header__signout"
-        data-auth-signout
-      >
-        Вийти
-      </button>
-    </div>
-  </div>
-
-  <div class="header__inner">
-    <div class="header__copy">
-      <p class="header__eyebrow">Tatty English</p>
-      <h1>English Platform</h1>
-      <p class="tagline">
-        Тут немає вчителів, є команда. Ми всі на одному шляху — до cool English,
-        до впевненості, до себе. Без тиску. Без сорому. Just learn, speak and
-        shine ✨
-      </p>
-      <div class="header__actions">
-        <a
-          class="button button--primary js-create-lesson-btn"
-          href="./custom-lessons.html"
-          hidden
-          >Створити урок</a
-        >
-        <a
-          class="button button--primary js-homework-btn"
-          href="./homework.html"
-          hidden
-          >Homework</a
-        >
-        <a class="button button--light" href="./placement-test.html"
-          >Пройти тест на рівень</a
-        >
-      </div>
-    </div>
-    <dl class="header__stats">
-      <div>
-        <dt>Уроків загалом</dt>
-        <dd data-stat-total>0</dd>
-      </div>
-      <div>
-        <dt>Граматика</dt>
-        <dd data-stat-grammar>0</dd>
-      </div>
-      <div>
-        <dt>Лексика</dt>
-        <dd data-stat-lexical>0</dd>
-      </div>
-    </dl>
-  </div>
-</header>
-
+    </header>
 
     <main class="main">
       <section class="filters" aria-labelledby="filters-title">
