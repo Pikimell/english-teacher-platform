@@ -1,2 +1,0 @@
-import{i as o}from"./custom-lesson-presets-B4NuEc3i.js";const a=async r=>(await o.post("/homework",r)).data,i=async r=>{const e={};r&&(e.userEmail=r,e.email=r);const n=await o.get("/homework/lessons",{params:e}),{data:s}=n;return Array.isArray(s)?s:Array.isArray(s==null?void 0:s.items)?s.items:Array.isArray(s==null?void 0:s.lessons)?s.lessons:[]};export{a,i as g};
-//# sourceMappingURL=homework-Pg0SBuxt.js.map
