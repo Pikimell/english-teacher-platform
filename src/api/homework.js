@@ -1,8 +1,7 @@
 import axios from './axiosInstance.js';
 
-export const getUserHomework = async useremail => {
-  const params = {};
-  const res = await axios.get('/homework', { params });
+export const getUserHomework = async data => {
+  const res = await axios.post('/homework/list', data);
   return res.data;
 };
 
@@ -12,15 +11,14 @@ export const addHomework = async homework => {
 };
 
 export const getUserHomeworkLessons = async userEmail => {
-  const params = {};
-  if (userEmail) {
-    params.userEmail = userEmail;
-    params.email = userEmail;
-  }
-  const res = await axios.get('/homework/lessons', { params });
+  const params = {
+    page: 1,
+    limit: 100,
+    userEmail,
+  };
+
+  const res = await axios.post('/homework/lessons', params);
   const { data } = res;
-  if (Array.isArray(data)) return data;
-  if (Array.isArray(data?.items)) return data.items;
-  if (Array.isArray(data?.lessons)) return data.lessons;
-  return [];
+
+  return data.items;
 };

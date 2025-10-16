@@ -2,6 +2,10 @@ import { auth } from '@features/auth/auth.js';
 import { refs } from '@features/layout/dom-refs.js';
 
 auth.subscribe(({ isSignedIn, user }) => {
+  if (!refs.headerActions.createBtn || !refs.headerActions.createBtn) {
+    return;
+  }
+
   if (!isSignedIn) {
     refs.headerActions.createBtn.hidden = true;
     refs.headerActions.homework.hidden = true;

@@ -13,3 +13,7 @@
 .is-admin .for-user {
   display: none !important;
 }
+
+.is-anonym .for-logined {
+  display: none !important;
+}

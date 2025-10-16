@@ -1,5 +1,6 @@
 import { auth } from '@features/auth/auth.js';
 import { getUserHomeworkLessons } from '@api/homework.js';
+import { getUserHomework } from '../../api/homework';
 
 const statusElement = document.querySelector('[data-homework-status]');
 const listElement = document.querySelector('[data-homework-list]');
@@ -61,11 +62,11 @@ if (statusElement && listElement) {
     const card = document.createElement('article');
     card.className = 'homework-card';
     card.setAttribute('role', 'listitem');
+    card.dataset.id = lesson?.lessonId;
 
     const title = document.createElement('h3');
     title.className = 'homework-card__title';
-    title.textContent =
-      lesson?.title || lesson?.name || lesson?.lessonTitle || 'Урок без назви';
+    title.textContent = lesson?.lessonName;
     card.appendChild(title);
 
     const dueDateLabel = formatDueDate(lesson);
@@ -77,10 +78,7 @@ if (statusElement && listElement) {
     }
 
     const description =
-      lesson?.description ||
-      lesson?.lessonDescription ||
-      lesson?.summary ||
-      '';
+      lesson?.description || lesson?.lessonDescription || lesson?.summary || '';
     if (description) {
       const body = document.createElement('p');
       body.className = 'homework-card__description';
@@ -90,18 +88,21 @@ if (statusElement && listElement) {
 
     const lessonUrl = resolveLessonUrl(lesson);
     if (lessonUrl) {
-      const link = document.createElement('a');
+      const link = document.createElement('button');
       link.className = 'homework-card__link';
-      link.href = lessonUrl;
-      link.textContent = 'Відкрити урок';
+      link.textContent = 'відкрити';
       card.appendChild(link);
+      card.addEventListener('click', () => {
+        loadHomework(lesson?.lessonId);
+      });
     }
 
     return card;
   }
 
   function renderLessons(lessons) {
-    clearList();
+    console.log(lessons);
+
     if (!Array.isArray(lessons) || !lessons.length) {
       setStatus('Домашніх робіт поки немає.');
       return;
@@ -130,10 +131,12 @@ if (statusElement && listElement) {
     try {
       const lessons = await getUserHomeworkLessons(user.email);
       if (requestId !== activeRequestId) return;
-      const list =
-        Array.isArray(lessons?.items) ? lessons.items : Array.isArray(lessons) ? lessons : [];
+      const list = lessons;
+      console.log(list);
+
       renderLessons(list);
     } catch (error) {
+      console.log(error);
       if (requestId !== activeRequestId) return;
       console.error('Не вдалося завантажити домашні роботи', error);
       setStatus('Не вдалося завантажити домашні роботи. Спробуйте пізніше.');
@@ -149,4 +152,11 @@ if (statusElement && listElement) {
     }
     loadLessonsForUser(snapshot.user);
   });
+}
+
+async function loadHomework(lessonId) {
+  const user = auth.getUser();
+  const userEmail = user.email;
+  const res = await getUserHomework({ userEmail, lessonId, limit: 1000 });
+  console.log(res);
 }
