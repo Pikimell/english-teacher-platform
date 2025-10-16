@@ -22,6 +22,16 @@ export const lessonWordwalls = {
       url: 'https://wordwall.net/embed/110f5ab8bba8415eadefd09fb52c4e87?themeId=65&templateId=30&fontStackId=12',
     },
   ],
+  'custom-no3-b9fd7e6c': [
+    {
+      id: '110f5ab8bba8415eadefd09fb52c4e87',
+      themeId: '65',
+      templateId: '30',
+      fontStackId: '12',
+      title: 'Wordwall вправа для особових займенників',
+      url: 'https://wordwall.net/embed/110f5ab8bba8415eadefd09fb52c4e87?themeId=65&templateId=30&fontStackId=12',
+    },
+  ],
 };
 
 function buildBaseUrl(config) {
