@@ -1,3 +1,6 @@
+import { loginUser } from './api/authorization';
+import { refs } from './global-refs';
+
 const STORAGE_KEY = 'english-teacher.google-user';
 const AUTH_STATE_KEY = 'english-teacher.google-auth-state';
 
@@ -220,6 +223,7 @@ function handleCredentialResponse(response) {
     expiresAt: payload.exp ? payload.exp * 1000 : null,
   };
 
+  loginUser(user);
   storeUser(user);
   showUser(user);
 }
@@ -306,6 +310,11 @@ export const auth = {
   subscribe,
   refresh: refreshAuthState,
   getSnapshot: createSnapshot,
+  isAdmin: user => {
+    const data = user || currentUser;
+    const admins = ['volodkaposhta@gmail.com', 'nreznik451@gmail.com'];
+    return admins.includes(data?.email);
+  },
 };
 
 export { initGoogleAuth };

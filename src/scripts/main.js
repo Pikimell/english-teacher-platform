@@ -5,6 +5,7 @@ import {
   subscribeToStorage,
 } from './custom-lessons-store.js';
 import { auth } from './auth.js';
+import './header-actions.js';
 
 const state = {
   search: '',
@@ -24,7 +25,7 @@ const stats = {
   total: document.querySelector('[data-stat-total]'),
   grammar: document.querySelector('[data-stat-grammar]'),
   lexical: document.querySelector('[data-stat-lexical]'),
-  };
+};
 
 auth.init();
 
