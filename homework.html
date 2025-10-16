@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tatty English</title>
     <script src="https://accounts.google.com/gsi/client" async></script>
-    <script type="module" crossorigin src="/assets/main-DXzobtgI.js"></script>
-    <script type="module" crossorigin src="/assets/custom-lessons-store-BKMVZjuV.js"></script>
-    <script type="module" crossorigin src="/assets/custom-lesson-presets-BlE7b2P4.js"></script>
-    <script type="module" crossorigin src="/assets/vendor-CWxt7QI6.js"></script>
-    <script type="module" crossorigin src="/assets/main-DJMe9782.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main-rnhfSZ-m.css">
+    <script type="module" crossorigin src="/homework.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/main-1VYSZ_bt.js">
+    <link rel="modulepreload" crossorigin href="/assets/custom-lessons-store-BKMVZjuV.js">
+    <link rel="modulepreload" crossorigin href="/assets/custom-lesson-presets-BlE7b2P4.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-CWxt7QI6.js">
+    <link rel="modulepreload" crossorigin href="/assets/main-CbyGX8Wu.js">
+    <link rel="stylesheet" crossorigin href="/assets/main-C_YflxnX.css">
   </head>
   <body>
     <header class="lesson-header">
@@ -24,7 +25,19 @@
       </div>
     </header>
 
-    <main></main>
+    <main class="homework-page">
+      <section class="homework-section">
+        <p class="muted" data-homework-status hidden>
+          Увійдіть, щоб переглянути призначені домашні роботи.
+        </p>
+        <div
+          class="homework-list"
+          data-homework-list
+          role="list"
+          aria-live="polite"
+        ></div>
+      </section>
+    </main>
 
     <footer class="footer">
       <small
