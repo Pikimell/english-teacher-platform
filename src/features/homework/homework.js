@@ -103,8 +103,6 @@ if (statusElement && listElement) {
   }
 
   function renderLessons(lessons) {
-    console.log(lessons);
-
     if (!Array.isArray(lessons) || !lessons.length) {
       setStatus('Домашніх робіт поки немає.');
       return;
@@ -134,7 +132,6 @@ if (statusElement && listElement) {
       const lessons = await getUserHomeworkLessons(user.email);
       if (requestId !== activeRequestId) return;
       const list = lessons;
-      console.log(list);
 
       renderLessons(list);
     } catch (error) {
@@ -172,8 +169,6 @@ async function loadHomework(lessonId) {
   const resContainer = document.createElement('div');
 
   for (const item of items) {
-    console.log(item);
-
     if (item.homeworkType === 'task') {
       try {
         const data = JSON.parse(item.homeworkData);
@@ -181,7 +176,9 @@ async function loadHomework(lessonId) {
         node.id = item._id;
         uploadAnswers(node, item.answers);
         resContainer.appendChild(node);
-      } catch {}
+      } catch (err) {
+        console.log(err);
+      }
     } else if (item.homeworkType === 'theory') {
       const data = item.homeworkData;
       resContainer.insertAdjacentHTML('afterbegin', data);

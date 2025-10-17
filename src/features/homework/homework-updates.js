@@ -19,12 +19,16 @@ containerElem.addEventListener('change', e => {
 
 export function uploadAnswers(container, answers) {
   for (const answer of answers) {
-    const elemId = answer.inputId;
-    const elem = container.querySelector(`#${elemId}`);
-    if (answer.type !== 'checkbox' && answer.type != 'radio') {
-      elem.setAttribute('value', answer.value);
-    } else {
-      elem.setAttribute('checked', true);
+    try {
+      const elemId = answer.inputId;
+      const elem = container.querySelector(`#${elemId}`);
+      if (answer.type !== 'checkbox' && answer.type != 'radio') {
+        elem.setAttribute('value', answer.value);
+      } else {
+        elem.setAttribute('checked', true);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 }

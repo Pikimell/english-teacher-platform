@@ -64,8 +64,6 @@ export const addAnswer = async answer => {
   let userCache = cache[keys[0]];
 
   if (!userCache) {
-    console.log('new Answer');
-
     const data = {
       taskId: answer.taskId,
       answers: [answer],
@@ -77,7 +75,6 @@ export const addAnswer = async answer => {
 };
 export const updateHomework = async ({ taskId, ...homework }) => {
   const res = await axios.patch(`/homework/${taskId}`, homework);
-  console.log(res.data);
 
   return res.data;
 };

@@ -12,7 +12,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import url from 'node:url';
 
-const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
+const ROOT = path.resolve(
+  path.dirname(url.fileURLToPath(import.meta.url)),
+  '..'
+);
 const lessonsDir = path.join(ROOT, 'public', 'lessons', 'lexical');
 const outputDir = path.join(
   ROOT,
@@ -86,7 +89,9 @@ fs.readdirSync(lessonsDir)
       .map(rowMatch => {
         const rowHtml = rowMatch[0];
         const wordMatch = rowHtml.match(/<th[^>]*>([\s\S]*?)<\/th>/i);
-        const cellMatches = [...rowHtml.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)];
+        const cellMatches = [
+          ...rowHtml.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi),
+        ];
         if (!wordMatch || cellMatches.length < 2) {
           return null;
         }

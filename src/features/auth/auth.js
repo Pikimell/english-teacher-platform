@@ -380,8 +380,6 @@ export const auth = {
 export { initGoogleAuth };
 
 auth.subscribe(({ isSignedIn, user }) => {
-  console.log(user);
-
   if (isSignedIn) {
     if (admins.includes(user.email)) {
       document.body.classList.add('is-admin');

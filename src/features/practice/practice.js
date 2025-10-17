@@ -1692,7 +1692,10 @@ const practiceAPI = (function () {
       const falseId = uniqueInputId(`${name}-false`);
       const falseLabel = el(
         'label',
-        { for: falseId, style: 'display:inline-flex;align-items:center;gap:6px;' },
+        {
+          for: falseId,
+          style: 'display:inline-flex;align-items:center;gap:6px;',
+        },
         el('input', { type: 'radio', name, value: 'false', id: falseId }),
         'False'
       );
