@@ -165,7 +165,9 @@ async function loadHomework(lessonId) {
     limit: 1000,
   });
 
-  const items = res.items;
+  const items = [...res.items].sort((a, b) => {
+    return a.homeworkType === 'task';
+  });
 
   const resContainer = document.createElement('div');
 
@@ -176,6 +178,7 @@ async function loadHomework(lessonId) {
       try {
         const data = JSON.parse(item.homeworkData);
         const node = createPracticeTaskElement(data);
+        node.id = item._id;
         resContainer.appendChild(node);
       } catch {}
     } else if (item.homeworkType === 'theory') {
