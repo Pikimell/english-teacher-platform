@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tatty English — Домашні роботи студентів</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <link
+      rel="icon"
+      href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/United-kingdom_flag_icon_round.svg/768px-United-kingdom_flag_icon_round.svg.png"
+    />
+  </head>
+  <body>
+    <header class="lesson-header">
+      <a class="lesson-header__back" href="index.html">&larr; На головну</a>
+      <div>
+        <p class="lesson-header__eyebrow">Адміністративна панель</p>
+        <h1 class="lesson-header__title">Домашні роботи студентів</h1>
+        <p class="lesson-header__meta">
+          <span>Оберіть студента, щоб переглянути призначені уроки</span>
+        </p>
+      </div>
+    </header>
+
+    <main class="homework-page">
+      <aside class="homework-sidebar">
+        <label class="field">
+          <span>Студент</span>
+          <select
+            class="teacher-homework__select"
+            data-student-select
+            aria-label="Оберіть студента"
+            disabled
+          >
+            <option value="">Завантаження списку студентів…</option>
+          </select>
+        </label>
+        <p class="muted" data-student-hint hidden>
+          Оберіть студента, щоб переглянути доступні уроки.
+        </p>
+        <p class="muted" data-homework-status hidden></p>
+        <div
+          class="homework-list"
+          data-homework-list
+          role="list"
+          aria-live="polite"
+        ></div>
+      </aside>
+
+      <section class="homework-content lesson-content">
+        <div
+          class="lesson-homework-data lesson-topic__practice js-homework-content"
+        ></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small
+        >&copy; <span data-component="copyright-year"></span> English Teacher
+        Platform</small
+      >
+    </footer>
+
+    <script type="module" src="/features/catalog/catalog.js"></script>
+    <script type="module" src="/features/homework/teacher-homework.js"></script>
+  </body>
+</html>

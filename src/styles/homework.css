@@ -104,6 +104,11 @@
   outline: none;
 }
 
+.homework-card--active {
+  border-color: rgba(51, 65, 255, 0.4);
+  box-shadow: 0 20px 42px rgba(51, 65, 255, 0.16);
+}
+
 .lesson-homework-data {
   width: 100%;
 }

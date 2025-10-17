@@ -5,7 +5,6 @@ import {
   subscribeToStorage,
 } from '@features/custom-lessons/custom-lessons-store.js';
 import { auth } from '@features/auth/auth.js';
-import '@features/layout/header-actions.js';
 
 const state = {
   search: '',
