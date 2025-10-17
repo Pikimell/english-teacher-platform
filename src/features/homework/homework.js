@@ -186,6 +186,6 @@ async function loadHomework(lessonId) {
   }
 
   const container = document.querySelector('.js-homework-content');
-
-  container.innerHTML = resContainer.innerHTML;
+  container.innerHTML = '';
+  container.append(...resContainer.children);
 }
