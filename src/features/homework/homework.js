@@ -1,8 +1,8 @@
 import { auth } from '@features/auth/auth.js';
 import { getUserHomeworkLessons } from '@api/homework.js';
-import { getUserHomework } from '../../api/homework';
+import { getUserHomework } from '@api/homework.js';
 import { createPracticeTaskElement } from '@features/practice/practice.js';
-import { refs } from '@features/layout/dom-refs.js';
+import { uploadAnswers } from '@features/homework/homework-updates.js';
 
 const statusElement = document.querySelector('[data-homework-status]');
 const listElement = document.querySelector('[data-homework-list]');
@@ -179,6 +179,7 @@ async function loadHomework(lessonId) {
         const data = JSON.parse(item.homeworkData);
         const node = createPracticeTaskElement(data);
         node.id = item._id;
+        uploadAnswers(node, item.answers);
         resContainer.appendChild(node);
       } catch {}
     } else if (item.homeworkType === 'theory') {

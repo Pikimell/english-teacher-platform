@@ -73,6 +73,17 @@ const practiceAPI = (function () {
       .replace(/\s+/g, ' ');
   }
 
+  let inputIdCounter = 0;
+  function uniqueInputId(prefix = 'practice-input') {
+    inputIdCounter += 1;
+    const base =
+      String(prefix || 'practice-input')
+        .trim()
+        .replace(/[^a-z0-9_-]+/gi, '-')
+        .replace(/^-+|-+$/g, '') || 'practice-input';
+    return `${base}-${inputIdCounter}`;
+  }
+
   auth.subscribe(({ user }) => {
     setShareAvailability(auth.isAdmin(user));
   });
@@ -131,7 +142,7 @@ const practiceAPI = (function () {
         )
       );
       (item.choices || []).forEach((choice, cIdx) => {
-        const id = `${name}-${cIdx}`;
+        const id = uniqueInputId(`${name}-${cIdx}`);
         const lbl = el(
           'label',
           {
@@ -209,8 +220,10 @@ const practiceAPI = (function () {
           'margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
       });
       const parts = String(it.q || '').split(/___/);
+      const inputId = uniqueInputId(`${task.id || 'gap'}-${idx}`);
       const input = el('input', {
         type: 'text',
+        id: inputId,
         style: 'padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
       });
       if (parts.length > 1) {
@@ -256,10 +269,12 @@ const practiceAPI = (function () {
     const pairs = task.pairs || [];
     const rights = shuffle(pairs.map(p => p.right));
     const rows = [];
-    pairs.forEach(p => {
+    pairs.forEach((p, index) => {
+      const selectId = uniqueInputId(`${task.id || 'match'}-${index}`);
       const select = el(
         'select',
         {
+          id: selectId,
           style: 'padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
         },
         el('option', { value: '' }, '— обери —'),
@@ -271,7 +286,11 @@ const practiceAPI = (function () {
           style:
             'display:flex;align-items:center;gap:10px;margin:8px 0;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
         },
-        el('div', { style: 'min-width:160px;font-weight:600;' }, p.left),
+        el(
+          'label',
+          { for: selectId, style: 'min-width:160px;font-weight:600;' },
+          p.left
+        ),
         select
       );
       rows.push({ row, select, right: p.right });
@@ -360,17 +379,18 @@ const practiceAPI = (function () {
 
     const blocks = [];
     questions.forEach((question, idx) => {
+      const prompt = el(
+        'div',
+        { style: 'margin-bottom:8px;font-weight:600;' },
+        question.q || `Питання ${idx + 1}`
+      );
       const block = el(
         'div',
         {
           style:
             'margin-bottom:12px;padding:12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
         },
-        el(
-          'div',
-          { style: 'margin-bottom:8px;font-weight:600;' },
-          question.q || `Питання ${idx + 1}`
-        )
+        prompt
       );
 
       const answers = Array.isArray(question.answer)
@@ -384,7 +404,7 @@ const practiceAPI = (function () {
         const allowMulti = answers.length > 1;
         const expectedIsIndex = answers.every(value => /^\d+$/.test(value));
         question.choices.forEach((choice, cIdx) => {
-          const id = `${name}-${cIdx}`;
+          const id = uniqueInputId(`${name}-${cIdx}`);
           block.appendChild(
             el(
               'label',
@@ -425,11 +445,16 @@ const practiceAPI = (function () {
             : answers.map(answer => normalize(answer)),
         });
       } else {
+        const promptId = uniqueInputId(`${task.id || 'context-label'}-${idx}`);
+        prompt.setAttribute('id', promptId);
+        const inputId = uniqueInputId(`${task.id || 'context-text'}-${idx}`);
         const input = el('textarea', {
+          id: inputId,
           rows: 2,
           style:
             'width:100%;max-width:640px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
         });
+        input.setAttribute('aria-labelledby', promptId);
         block.appendChild(input);
         blocks.push({
           block,
@@ -789,7 +814,7 @@ const practiceAPI = (function () {
       el('h3', {}, task.prompt || 'Transform the sentence')
     );
     const items = [];
-    (task.items || []).forEach(it => {
+    (task.items || []).forEach((it, idx) => {
       const row = el('div', {
         style:
           'margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
@@ -797,8 +822,10 @@ const practiceAPI = (function () {
       row.appendChild(
         el('div', { style: 'margin-bottom:6px;font-weight:600;' }, it.q)
       );
+      const inputId = uniqueInputId(`${task.id || 'transform'}-${idx}`);
       const input = el('input', {
         type: 'text',
+        id: inputId,
         style:
           'width:100%;max-width:640px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
       });
@@ -835,7 +862,7 @@ const practiceAPI = (function () {
       el('h3', {}, task.prompt || 'Find and correct the error')
     );
     const items = [];
-    (task.items || []).forEach(it => {
+    (task.items || []).forEach((it, idx) => {
       const row = el('div', {
         style:
           'margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
@@ -843,8 +870,10 @@ const practiceAPI = (function () {
       row.appendChild(
         el('div', { style: 'margin-bottom:6px;font-weight:600;' }, it.q)
       );
+      const inputId = uniqueInputId(`${task.id || 'error'}-${idx}`);
       const input = el('input', {
         type: 'text',
+        id: inputId,
         style:
           'width:100%;max-width:640px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
       });
@@ -974,19 +1003,27 @@ const practiceAPI = (function () {
   function renderShort(container, task) {
     container.appendChild(el('h3', {}, task.prompt || 'Short answer'));
     const items = [];
-    (task.items || []).forEach(it => {
+    (task.items || []).forEach((it, index) => {
       const row = el('div', {
         style:
           'margin-bottom:10px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
       });
-      row.appendChild(
-        el('div', { style: 'margin-bottom:6px;font-weight:600;' }, it.q)
+      const prompt = el(
+        'div',
+        { style: 'margin-bottom:6px;font-weight:600;' },
+        it.q
       );
+      row.appendChild(prompt);
+      const promptId = uniqueInputId(`${task.id || 'short-label'}-${index}`);
+      prompt.setAttribute('id', promptId);
+      const inputId = uniqueInputId(`${task.id || 'short-text'}-${index}`);
       const input = el('textarea', {
+        id: inputId,
         rows: 3,
         style:
           'width:100%;max-width:720px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
       });
+      input.setAttribute('aria-labelledby', promptId);
       row.appendChild(input);
       items.push({
         row,
@@ -1252,7 +1289,7 @@ const practiceAPI = (function () {
       const list = el('div', {
         style: 'display:flex;flex-direction:column;gap:8px;',
       });
-      phrases.forEach(item => {
+      phrases.forEach((item, index) => {
         const phraseText =
           typeof item === 'string'
             ? item
@@ -1262,7 +1299,7 @@ const practiceAPI = (function () {
             ? item.translation || item.note || item.ua || item.uk || ''
             : '';
         if (!phraseText) return;
-        const id = `phrase-${Math.random().toString(36).slice(2, 8)}`;
+        const id = uniqueInputId(`phrase-${index}`);
         list.appendChild(
           el(
             'label',
@@ -1641,19 +1678,22 @@ const practiceAPI = (function () {
       );
       const name = `${task.id || 'tf'}-${index}`;
       const expected = Boolean(item.answer);
+      const trueId = uniqueInputId(`${name}-true`);
       const trueLabel = el(
         'label',
         {
+          for: trueId,
           style:
             'display:inline-flex;align-items:center;gap:6px;margin-right:16px;',
         },
-        el('input', { type: 'radio', name, value: 'true' }),
+        el('input', { type: 'radio', name, value: 'true', id: trueId }),
         'True'
       );
+      const falseId = uniqueInputId(`${name}-false`);
       const falseLabel = el(
         'label',
-        { style: 'display:inline-flex;align-items:center;gap:6px;' },
-        el('input', { type: 'radio', name, value: 'false' }),
+        { for: falseId, style: 'display:inline-flex;align-items:center;gap:6px;' },
+        el('input', { type: 'radio', name, value: 'false', id: falseId }),
         'False'
       );
       const options = el('div', { style: 'display:flex;align-items:center;' });
@@ -1721,7 +1761,7 @@ const practiceAPI = (function () {
 
     const rows = [];
     const items = Array.isArray(task?.items) ? task.items : [];
-    items.forEach(item => {
+    items.forEach((item, index) => {
       if (!item || !item.clue) return;
       const row = el('div', {
         style:
@@ -1730,8 +1770,10 @@ const practiceAPI = (function () {
       row.appendChild(
         el('p', { style: 'margin:0 0 6px;font-weight:600;' }, item.clue)
       );
+      const inputId = uniqueInputId(`${task.id || 'synonym'}-${index}`);
       const input = el('input', {
         type: 'text',
+        id: inputId,
         style:
           'width:100%;max-width:320px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
       });
@@ -1774,7 +1816,7 @@ const practiceAPI = (function () {
 
     const rows = [];
     const items = Array.isArray(task?.items) ? task.items : [];
-    items.forEach(item => {
+    items.forEach((item, index) => {
       if (!item || !item.scrambled) return;
       const row = el('div', {
         style:
@@ -1787,8 +1829,10 @@ const practiceAPI = (function () {
           item.scrambled
         )
       );
+      const inputId = uniqueInputId(`${task.id || 'scramble'}-${index}`);
       const input = el('input', {
         type: 'text',
+        id: inputId,
         style:
           'width:100%;max-width:260px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
       });
@@ -1849,7 +1893,7 @@ const practiceAPI = (function () {
       );
       const groupName = `${task.id || 'odd'}-${index}`;
       options.forEach((option, optionIndex) => {
-        const id = `${groupName}-${optionIndex}`;
+        const id = uniqueInputId(`${groupName}-${optionIndex}`);
         row.appendChild(
           el(
             'label',
@@ -1915,8 +1959,8 @@ const practiceAPI = (function () {
     if (task.description)
       container.appendChild(el('p', { class: 'muted' }, task.description));
     const list = el('div', { style: 'margin-top:8px;' });
-    (task.checklist || []).forEach(ch => {
-      const id = Math.random().toString(36).slice(2);
+    (task.checklist || []).forEach((ch, index) => {
+      const id = uniqueInputId(`${task.id || 'check'}-${index}`);
       const row = el(
         'label',
         {
