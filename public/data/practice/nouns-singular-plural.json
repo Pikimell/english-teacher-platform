@@ -1,0 +1,551 @@
+{
+  "title": "Іменники: однина і множина",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "match-task-match-1",
+      "type": "match",
+      "prompt": "Match the singular noun with its plural form.",
+      "pairs": [
+        {
+          "left": "cat",
+          "right": "cats"
+        },
+        {
+          "left": "dog",
+          "right": "dogs"
+        },
+        {
+          "left": "book",
+          "right": "books"
+        },
+        {
+          "left": "apple",
+          "right": "apples"
+        },
+        {
+          "left": "child",
+          "right": "children"
+        },
+        {
+          "left": "city",
+          "right": "cities"
+        },
+        {
+          "left": "baby",
+          "right": "babies"
+        },
+        {
+          "left": "party",
+          "right": "parties"
+        },
+        {
+          "left": "leaf",
+          "right": "leaves"
+        },
+        {
+          "left": "mouse",
+          "right": "mice"
+        }
+      ]
+    },
+    {
+      "id": "context-task-context-1",
+      "type": "context",
+      "prompt": "Read the story and choose the correct answer.",
+      "context": {
+        "title": "At the Park",
+        "format": "narrative",
+        "body": [
+          "Anna and her brother Tom go to the park. They see many trees and flowers.",
+          "Anna has one ball. Tom has two balls. They play with the balls.",
+          "There are three ducks in the pond. The ducks swim happily.",
+          "Anna picks one flower. Tom picks two flowers. They smell the flowers.",
+          "They sit on a bench and eat one sandwich each.",
+          "After eating, they see five children playing.",
+          "The children have many toys. Some toys are cars, and some are dolls.",
+          "Anna and Tom join the children. They play with the toys.",
+          "At the end of the day, they go home with happy faces.",
+          "Anna says, 'I love the park!' Tom agrees."
+        ]
+      },
+      "questions": [
+        {
+          "q": "How many balls does Anna have?",
+          "choices": ["One ball", "Two balls", "Three balls"],
+          "answer": ["0"]
+        },
+        {
+          "q": "How many ducks are in the pond?",
+          "choices": ["One duck", "Three ducks", "Five ducks"],
+          "answer": ["1"]
+        },
+        {
+          "q": "How many flowers does Tom pick?",
+          "choices": ["One flower", "Two flowers", "Three flowers"],
+          "answer": ["1"]
+        },
+        {
+          "q": "How many sandwiches do Anna and Tom eat?",
+          "choices": ["One sandwich", "Two sandwiches", "One each"],
+          "answer": ["2"]
+        },
+        {
+          "q": "How many children do they see playing?",
+          "choices": ["Three children", "Five children", "Seven children"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What do the children have?",
+          "choices": ["Many toys", "Few toys", "No toys"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What types of toys do the children have?",
+          "choices": ["Cars and dolls", "Balls and bikes", "Books and games"],
+          "answer": ["0"]
+        },
+        {
+          "q": "How does Anna feel about the park?",
+          "choices": ["She loves it", "She hates it", "She is bored"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What do Anna and Tom do at the park?",
+          "choices": ["They play", "They sleep", "They read"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What do Anna and Tom smell?",
+          "choices": ["Flowers", "Sandwiches", "Toys"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "order-task-order-1",
+      "type": "order",
+      "prompt": "Put the words in the correct order.",
+      "items": [
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "cats", "are", "sleeping", "on", "the", "sofa"],
+          "answer": "the cats are sleeping on the sofa"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "dog", "is", "playing", "in", "the", "garden"],
+          "answer": "the dog is playing in the garden"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "birds", "are", "singing", "in", "the", "trees"],
+          "answer": "the birds are singing in the trees"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "child", "is", "playing", "with", "his", "friends"],
+          "answer": "the child is playing with his friends"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "apples", "are", "on", "the", "kitchen", "table"],
+          "answer": "the apples are on the kitchen table"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "man", "is", "walking", "to", "the", "bus", "stop"],
+          "answer": "the man is walking to the bus stop"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "women", "are", "working", "in", "the", "office"],
+          "answer": "the women are working in the office"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": [
+            "the",
+            "car",
+            "is",
+            "parked",
+            "next",
+            "to",
+            "the",
+            "house"
+          ],
+          "answer": "the car is parked next to the house"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "children", "love", "to", "eat", "ice", "cream"],
+          "answer": "the children love to eat ice cream"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": [
+            "the",
+            "books",
+            "on",
+            "the",
+            "shelf",
+            "are",
+            "very",
+            "interesting"
+          ],
+          "answer": "the books on the shelf are very interesting"
+        }
+      ]
+    },
+    {
+      "id": "short-task-short-1",
+      "type": "short",
+      "prompt": "Write short answers about Іменники: однина і множина.",
+      "items": [
+        {
+          "q": "What do you usually eat for breakfast? Write 1–2 sentences.",
+          "keywords": ["i", "usually", "eat"]
+        },
+        {
+          "q": "Write about your favorite animals. What are they?",
+          "keywords": ["my", "favorite", "animals"]
+        },
+        {
+          "q": "Describe your family. How many people are there?",
+          "keywords": ["my", "family", "people"]
+        },
+        {
+          "q": "What do you see in your room? List 3 things.",
+          "keywords": ["i", "see", "things"]
+        },
+        {
+          "q": "What fruits do you like? Write 2–3 sentences.",
+          "keywords": ["i", "like", "fruits"]
+        },
+        {
+          "q": "What is your favorite book? Why do you like it?",
+          "keywords": ["my", "favorite", "book"]
+        },
+        {
+          "q": "Write about your hobbies. What do you do in your free time?",
+          "keywords": ["i", "do", "hobbies"]
+        },
+        {
+          "q": "What clothes do you wear in winter? List 2–3 items.",
+          "keywords": ["i", "wear", "clothes"]
+        },
+        {
+          "q": "What games do you play with friends? Write 1–2 sentences.",
+          "keywords": ["i", "play", "games"]
+        },
+        {
+          "q": "Describe your school. How many classrooms are there?",
+          "keywords": ["my", "school", "classrooms"]
+        }
+      ]
+    },
+    {
+      "id": "open-task-open-1",
+      "type": "open",
+      "prompt": "Answer the questions about singular and plural nouns.",
+      "items": [
+        {
+          "situation": "What is the plural of 'cat'?"
+        },
+        {
+          "situation": "Name one fruit and its plural form."
+        },
+        {
+          "situation": "How do you say 'child' in plural?"
+        },
+        {
+          "situation": "What is the singular form of 'books'?"
+        },
+        {
+          "situation": "Give an example of one animal and its plural."
+        },
+        {
+          "situation": "What is the plural of 'city'?"
+        },
+        {
+          "situation": "Name a vegetable and its plural form."
+        },
+        {
+          "situation": "How do you say 'man' in plural?"
+        },
+        {
+          "situation": "What is the singular form of 'mice'?"
+        },
+        {
+          "situation": "Give an example of one flower and its plural."
+        }
+      ],
+      "scoring": {
+        "criteria": [
+          "Provide correct singular or plural forms.",
+          "Use clear and simple language.",
+          "Answer all questions."
+        ]
+      }
+    },
+    {
+      "id": "writing-task-writing-1",
+      "type": "writing",
+      "prompt": "Short writing task about Іменники: однина і множина.",
+      "description": "Write 5 sentences using singular and plural nouns. Make sure to show the difference between them.",
+      "checklist": [
+        "Sentences include at least one singular noun.",
+        "Sentences include at least one plural noun.",
+        "Correct use of singular and plural forms.",
+        "Sentences are clear and easy to understand.",
+        "There are no spelling mistakes."
+      ]
+    },
+    {
+      "id": "mcq-task-mcq-1",
+      "type": "mcq",
+      "prompt": "Choose the correct option.",
+      "items": [
+        {
+          "q": "One ___ is on the table.",
+          "choices": ["book", "books", "bookes"],
+          "answer": ["0"]
+        },
+        {
+          "q": "I see two ___ in the park.",
+          "choices": ["dog", "dogs", "doges"],
+          "answer": ["1"]
+        },
+        {
+          "q": "There is a ___ in the sky.",
+          "choices": ["star", "stars", "starz"],
+          "answer": ["0"]
+        },
+        {
+          "q": "She has three ___ in her bag.",
+          "choices": ["apple", "apples", "appl"],
+          "answer": ["1"]
+        },
+        {
+          "q": "This is my ___ friend.",
+          "choices": ["cat", "cats", "cates"],
+          "answer": ["0"]
+        },
+        {
+          "q": "I like the ___ on the wall.",
+          "choices": ["picture", "pictures", "picturs"],
+          "answer": ["0"]
+        },
+        {
+          "q": "There are many ___ in the garden.",
+          "choices": ["flower", "flowers", "floweres"],
+          "answer": ["1"]
+        },
+        {
+          "q": "He has one ___ in his hand.",
+          "choices": ["pen", "pens", "penes"],
+          "answer": ["0"]
+        },
+        {
+          "q": "We see five ___ at the zoo.",
+          "choices": ["lion", "lions", "lionz"],
+          "answer": ["1"]
+        },
+        {
+          "q": "That is a ___ bird.",
+          "choices": ["beautiful", "beautifulls", "beautifull"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "gap-task-gap-1",
+      "type": "gap",
+      "prompt": "Fill the gaps with the correct word.",
+      "items": [
+        {
+          "q": "I have one ___ (cat).",
+          "answer": ["cat"]
+        },
+        {
+          "q": "She has two ___ (dog).",
+          "answer": ["dogs"]
+        },
+        {
+          "q": "There is a ___ (book) on the table.",
+          "answer": ["book"]
+        },
+        {
+          "q": "We see three ___ (bird) in the tree.",
+          "answer": ["birds"]
+        },
+        {
+          "q": "He wants a ___ (toy).",
+          "answer": ["toy"]
+        },
+        {
+          "q": "They have many ___ (apple).",
+          "answer": ["apples"]
+        },
+        {
+          "q": "This is my ___ (friend).",
+          "answer": ["friend"]
+        },
+        {
+          "q": "I can count five ___ (car).",
+          "answer": ["cars"]
+        },
+        {
+          "q": "She needs a ___ (pen).",
+          "answer": ["pen"]
+        },
+        {
+          "q": "We bought two ___ (chair).",
+          "answer": ["chairs"]
+        }
+      ]
+    },
+    {
+      "id": "transform-task-transform-1",
+      "type": "transform",
+      "prompt": "Change each singular noun to plural form.",
+      "items": [
+        {
+          "q": "a bus",
+          "hint": "add 'es' to make it plural",
+          "answer": ["buses"]
+        },
+        {
+          "q": "a glass",
+          "hint": "add 'es' to make it plural",
+          "answer": ["glasses"]
+        },
+        {
+          "q": "a brush",
+          "hint": "add 'es' to make it plural",
+          "answer": ["brushes"]
+        },
+        {
+          "q": "a watch",
+          "hint": "add 'es' to make it plural",
+          "answer": ["watches"]
+        },
+        {
+          "q": "a box",
+          "hint": "add 'es' to make it plural",
+          "answer": ["boxes"]
+        },
+        {
+          "q": "a tomato",
+          "hint": "change 'o' to 'oes' for plural",
+          "answer": ["tomatoes"]
+        },
+        {
+          "q": "a potato",
+          "hint": "change 'o' to 'oes' for plural",
+          "answer": ["potatoes"]
+        },
+        {
+          "q": "a photo",
+          "hint": "add 's' to make it plural",
+          "answer": ["photos"]
+        },
+        {
+          "q": "a piano",
+          "hint": "add 's' to make it plural",
+          "answer": ["pianos"]
+        },
+        {
+          "q": "a city",
+          "hint": "change 'y' to 'ies' for plural",
+          "answer": ["cities"]
+        },
+        {
+          "q": "a baby",
+          "hint": "change 'y' to 'ies' for plural",
+          "answer": ["babies"]
+        },
+        {
+          "q": "a boy",
+          "hint": "add 's' to make it plural",
+          "answer": ["boys"]
+        },
+        {
+          "q": "a toy",
+          "hint": "add 's' to make it plural",
+          "answer": ["toys"]
+        },
+        {
+          "q": "a leaf",
+          "hint": "change 'f' to 'ves' for plural",
+          "answer": ["leaves"]
+        },
+        {
+          "q": "a knife",
+          "hint": "change 'fe' to 'ves' for plural",
+          "answer": ["knives"]
+        },
+        {
+          "q": "a roof",
+          "hint": "add 's' to make it plural",
+          "answer": ["roofs"]
+        },
+        {
+          "q": "a man",
+          "hint": "change to 'men' for plural",
+          "answer": ["men"]
+        },
+        {
+          "q": "a woman",
+          "hint": "change to 'women' for plural",
+          "answer": ["women"]
+        },
+        {
+          "q": "a tooth",
+          "hint": "change to 'teeth' for plural",
+          "answer": ["teeth"]
+        },
+        {
+          "q": "a foot",
+          "hint": "change to 'feet' for plural",
+          "answer": ["feet"]
+        },
+        {
+          "q": "a goose",
+          "hint": "change to 'geese' for plural",
+          "answer": ["geese"]
+        },
+        {
+          "q": "a mouse",
+          "hint": "change to 'mice' for plural",
+          "answer": ["mice"]
+        },
+        {
+          "q": "a child",
+          "hint": "change to 'children' for plural",
+          "answer": ["children"]
+        },
+        {
+          "q": "a person",
+          "hint": "change to 'people' for plural",
+          "answer": ["people"]
+        },
+        {
+          "q": "a cactus",
+          "hint": "change to 'cacti' or 'cactuses' for plural",
+          "answer": ["cacti", "cactuses"]
+        },
+        {
+          "q": "a phenomenon",
+          "hint": "change to 'phenomena' for plural",
+          "answer": ["phenomena"]
+        },
+        {
+          "q": "a criterion",
+          "hint": "change to 'criteria' for plural",
+          "answer": ["criteria"]
+        }
+      ]
+    }
+  ]
+}

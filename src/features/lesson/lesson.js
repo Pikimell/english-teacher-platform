@@ -467,6 +467,120 @@ async function loadLesson() {
   }
 }
 
+function normaliseCommunicationKey(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+const communicationWordKeyIndex = (() => {
+  const keys = Object.keys(communicationWords || {});
+  return keys.map(key => ({
+    key,
+    normalized: normaliseCommunicationKey(key),
+  }));
+})();
+
+const communicationWordNormalizedMap = (() => {
+  const map = new Map();
+  communicationWordKeyIndex.forEach(entry => {
+    if (entry.normalized && !map.has(entry.normalized)) {
+      map.set(entry.normalized, entry.key);
+    }
+  });
+  return map;
+})();
+
+function findCommunicationWordsKey(rawValue) {
+  if (typeof rawValue !== 'string') return null;
+  const directKey = Object.prototype.hasOwnProperty.call(
+    communicationWords,
+    rawValue
+  )
+    ? rawValue
+    : null;
+  if (directKey) return directKey;
+
+  const normalizedCandidate = normaliseCommunicationKey(rawValue);
+  if (!normalizedCandidate) return null;
+
+  if (communicationWordNormalizedMap.has(normalizedCandidate)) {
+    return communicationWordNormalizedMap.get(normalizedCandidate);
+  }
+
+  const partial = communicationWordKeyIndex.find(entry =>
+    entry.normalized.includes(normalizedCandidate)
+  );
+  if (partial) return partial.key;
+
+  const reversePartial = communicationWordKeyIndex.find(entry =>
+    normalizedCandidate.includes(entry.normalized)
+  );
+  if (reversePartial) return reversePartial.key;
+
+  return null;
+}
+
+function resolveCommunicationTopic(container) {
+  if (!container) return null;
+
+  const candidates = [];
+  const appendCandidate = value => {
+    if (!value) return;
+    const candidate = String(value).trim();
+    if (!candidate) return;
+    candidates.push(candidate);
+  };
+
+  const preferredDatasetKeys = [
+    'communicationTopic',
+    'topic',
+    'topicId',
+    'module',
+    'communicationModule',
+  ];
+
+  preferredDatasetKeys.forEach(key => {
+    if (container.dataset?.[key]) {
+      appendCandidate(container.dataset[key]);
+    }
+  });
+
+  const ancestor = container.closest(
+    '[data-communication-topic],[data-topic],[data-topic-id],[data-module],[data-communication-module]'
+  );
+  if (ancestor && ancestor !== container) {
+    preferredDatasetKeys.forEach(key => {
+      if (ancestor.dataset?.[key]) {
+        appendCandidate(ancestor.dataset[key]);
+      }
+    });
+  }
+
+  if (container.id) {
+    appendCandidate(container.id);
+  }
+
+  const context = window.lessonContext || {};
+  appendCandidate(context.id);
+  appendCandidate(context.topicId);
+  if (Array.isArray(context.topicIds)) {
+    context.topicIds.forEach(appendCandidate);
+  }
+
+  const seen = new Set();
+  for (const candidate of candidates) {
+    if (seen.has(candidate)) continue;
+    seen.add(candidate);
+    const matchedKey = findCommunicationWordsKey(candidate);
+    if (matchedKey) return matchedKey;
+  }
+
+  return null;
+}
+
 function renderCommunicationTable(container, entries) {
   if (!container) return;
   const words = Array.isArray(entries) ? entries : [];
@@ -510,19 +624,6 @@ function renderCommunicationTable(container, entries) {
 
   container.innerHTML = '';
   container.appendChild(table);
-}
-
-function resolveCommunicationTopic(container) {
-  if (!container) return null;
-  if (container.dataset.communicationTopic)
-    return container.dataset.communicationTopic;
-  if (container.dataset.topic) return container.dataset.topic;
-  const ancestor = container.closest('[data-communication-topic]');
-  if (ancestor?.dataset.communicationTopic)
-    return ancestor.dataset.communicationTopic;
-  const contextId = window.lessonContext?.id;
-  if (contextId && communicationWords[contextId]) return contextId;
-  return null;
 }
 
 async function hydrateCommunicationWords(root) {
