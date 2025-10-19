@@ -1,0 +1,569 @@
+{
+  "title": "Офіс та робочі предмети",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "mcq-task-mcq-1",
+      "type": "mcq",
+      "prompt": "Choose the correct option.",
+      "items": [
+        {
+          "q": "I need a ___ to write a note.",
+          "choices": ["pen", "paper", "desk"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Can you find my ___? It is on the table.",
+          "choices": ["stapler", "computer", "folder"],
+          "answer": ["2"]
+        },
+        {
+          "q": "She uses a ___ to print documents.",
+          "choices": ["printer", "scissors", "ruler"],
+          "answer": ["0"]
+        },
+        {
+          "q": "We need more ___ for the meeting.",
+          "choices": ["chairs", "books", "pens"],
+          "answer": ["0"]
+        },
+        {
+          "q": "He has a new ___ for his papers.",
+          "choices": ["notebook", "calendar", "folder"],
+          "answer": ["2"]
+        },
+        {
+          "q": "Please pass me the ___.",
+          "choices": ["tape", "phone", "lamp"],
+          "answer": ["0"]
+        },
+        {
+          "q": "They are looking for a new ___.",
+          "choices": ["desk", "window", "clock"],
+          "answer": ["0"]
+        },
+        {
+          "q": "I need a ___ to cut the paper.",
+          "choices": ["knife", "scissors", "pen"],
+          "answer": ["1"]
+        },
+        {
+          "q": "This ___ is very old.",
+          "choices": ["computer", "paper", "stapler"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Can you bring me a ___ of paper?",
+          "choices": ["box", "pack", "piece"],
+          "answer": ["1"]
+        }
+      ]
+    },
+
+    {
+      "id": "match-task-match-1",
+      "type": "match",
+      "prompt": "Match the office item with its description.",
+      "pairs": [
+        {
+          "left": "pen",
+          "right": "used for writing"
+        },
+        {
+          "left": "paper",
+          "right": "used for printing"
+        },
+        {
+          "left": "stapler",
+          "right": "used to hold papers together"
+        },
+        {
+          "left": "notebook",
+          "right": "used for taking notes"
+        },
+        {
+          "left": "folder",
+          "right": "used to organize documents"
+        },
+        {
+          "left": "calculator",
+          "right": "used for doing math"
+        },
+        {
+          "left": "tape",
+          "right": "used for sticking things"
+        },
+        {
+          "left": "scissors",
+          "right": "used for cutting paper"
+        },
+        {
+          "left": "marker",
+          "right": "used for highlighting"
+        },
+        {
+          "left": "sticky notes",
+          "right": "used for reminders"
+        }
+      ]
+    },
+    {
+      "id": "context-task-context-1",
+      "type": "context",
+      "prompt": "Read the text and answer the questions.",
+      "context": {
+        "title": "Office Items",
+        "format": "narrative",
+        "body": [
+          "In an office, there are many important items. You can find a desk, a chair, and a computer. The desk is for working. The chair is for sitting.",
+          "On the desk, there are also some office supplies. You can see pens, pencils, and paper. Pens are for writing. Pencils are for drawing.",
+          "There is a printer in the office. The printer prints documents. People use it to make copies of papers.",
+          "A stapler is another useful item. It helps to keep papers together. You can find it next to the paper.",
+          "In the office, there is also a calendar. The calendar shows the days and months. It helps people remember important dates."
+        ]
+      },
+      "questions": [
+        {
+          "q": "What is on the desk?",
+          "choices": ["A chair", "Pens and pencils", "A computer"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What does the printer do?",
+          "choices": ["It writes", "It prints documents", "It draws"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What is a stapler used for?",
+          "choices": ["To write", "To keep papers together", "To draw"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What helps people remember dates?",
+          "choices": ["A pen", "A calendar", "A chair"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What do people use pencils for?",
+          "choices": ["Writing", "Drawing", "Printing"],
+          "answer": ["1"]
+        },
+        {
+          "q": "Where do you sit in the office?",
+          "choices": ["On the desk", "On the chair", "On the floor"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What is the desk for?",
+          "choices": ["Sitting", "Working", "Printing"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What can you find in an office?",
+          "choices": ["A car", "A computer", "A garden"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What is next to the paper?",
+          "choices": ["A printer", "A stapler", "A calendar"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What do you use to make copies?",
+          "choices": ["A stapler", "A printer", "A pencil"],
+          "answer": ["1"]
+        }
+      ]
+    },
+    {
+      "id": "order-task-order-1",
+      "type": "order",
+      "prompt": "Put the words in the correct order.",
+      "items": [
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "on", "desk", "is", "computer"],
+          "answer": "the computer is on desk"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "pen", "is", "blue"],
+          "answer": "the pen is blue"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["paper", "the", "is", "on", "table"],
+          "answer": "the paper is on table"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["she", "uses", "the", "stapler"],
+          "answer": "she uses the stapler"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "notebook", "is", "new"],
+          "answer": "the notebook is new"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["he", "writes", "with", "a", "pencil"],
+          "answer": "he writes with a pencil"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "files", "are", "in", "the", "cabinet"],
+          "answer": "the files are in the cabinet"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "printer", "is", "next", "to", "the", "computer"],
+          "answer": "the printer is next to the computer"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["they", "read", "the", "documents"],
+          "answer": "they read the documents"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "folder", "is", "yellow"],
+          "answer": "the folder is yellow"
+        }
+      ]
+    },
+    {
+      "id": "writing-task-writing-1",
+      "type": "writing",
+      "prompt": "Short writing task about Офіс та робочі предмети. Канцелярія.",
+      "description": "Write 5 sentences about your office and the office supplies you use. Describe at least three items.",
+      "checklist": [
+        "The writing includes 5 sentences.",
+        "At least three office items are mentioned.",
+        "Sentences are clear and easy to understand.",
+        "Correct use of basic vocabulary related to office supplies.",
+        "Proper punctuation and capitalization are used."
+      ]
+    },
+    {
+      "id": "definition-match-task-definition-match-1",
+      "type": "definition-match",
+      "prompt": "Match the word with its definition.",
+      "pairs": [
+        {
+          "left": "pen",
+          "right": "A thing you use to write with ink."
+        },
+        {
+          "left": "paper",
+          "right": "A thing you write or print on."
+        },
+        {
+          "left": "stapler",
+          "right": "A tool that puts small metal pieces to hold papers together."
+        },
+        {
+          "left": "notebook",
+          "right": "A small book with empty pages for writing."
+        },
+        {
+          "left": "folder",
+          "right": "A cover you use to keep papers together."
+        },
+        {
+          "left": "pencil",
+          "right": "A thing you use to write or draw with lead."
+        },
+        {
+          "left": "eraser",
+          "right": "A thing you use to remove pencil marks."
+        },
+        {
+          "left": "tape",
+          "right": "A sticky strip used to join things."
+        },
+        {
+          "left": "ruler",
+          "right": "A tool you use to measure or draw straight lines."
+        },
+        {
+          "left": "marker",
+          "right": "A pen with a big tip for writing or drawing."
+        }
+      ]
+    },
+    {
+      "id": "open-task-open-1",
+      "type": "open",
+      "prompt": "Answer the questions about office and stationery items.",
+      "items": [
+        {
+          "situation": "What do you need to write a letter?"
+        },
+        {
+          "situation": "Describe your favorite office supply."
+        },
+        {
+          "situation": "What items are on your desk?"
+        },
+        {
+          "situation": "How do you organize your papers?"
+        },
+        {
+          "situation": "What do you use a stapler for?"
+        },
+        {
+          "situation": "Name three things you find in a pencil case."
+        },
+        {
+          "situation": "What is your favorite color of pen?"
+        },
+        {
+          "situation": "How do you take notes in a meeting?"
+        },
+        {
+          "situation": "What do you use to highlight important text?"
+        },
+        {
+          "situation": "Describe how you use a calendar at work."
+        }
+      ],
+      "scoring": {
+        "criteria": [
+          "Use at least two office items in your answer.",
+          "Provide a clear description or explanation.",
+          "Write in complete sentences."
+        ]
+      }
+    },
+    {
+      "id": "writing-task-writing-1",
+      "type": "writing",
+      "prompt": "Short writing task about Офіс та робочі предмети. Канцелярія.",
+      "description": "Write 5 sentences about your office and the office supplies you use. Describe at least three items.",
+      "checklist": [
+        "Includes at least 5 sentences.",
+        "Describes at least three office items.",
+        "Uses simple and clear language.",
+        "Correctly spells common office vocabulary.",
+        "Sentences are complete and make sense."
+      ]
+    },
+    {
+      "id": "roleplay-task-roleplay-1",
+      "type": "roleplay",
+      "prompt": "Roleplay a conversation in an office about office supplies.",
+      "scenario": {
+        "setting": "An office with desks and supplies",
+        "summary": "You need to discuss the office supplies you need for your work.",
+        "roles": [
+          {
+            "name": "Student 1",
+            "goal": "Ask for office supplies.",
+            "details": "You need paper and pens. You want to know where to find them."
+          },
+          {
+            "name": "Student 2",
+            "goal": "Help Student 1 find supplies.",
+            "details": "You know where the supplies are. You can suggest alternatives."
+          }
+        ],
+        "steps": [
+          "Student 1 asks Student 2 about paper and pens.",
+          "Student 2 answers and suggests where to find them.",
+          "Student 1 asks if there are other options for pens.",
+          "Student 2 suggests different types of pens.",
+          "Student 1 thanks Student 2 for the help."
+        ]
+      },
+      "phrases": [
+        {
+          "phrase": "Can I have...",
+          "translation": "A polite way to ask for something."
+        },
+        {
+          "phrase": "Where can I find...",
+          "translation": "Asking for the location of something."
+        },
+        {
+          "phrase": "I need some...",
+          "translation": "Expressing a requirement for items."
+        },
+        {
+          "phrase": "What do you suggest?",
+          "translation": "Asking for recommendations."
+        },
+        {
+          "phrase": "Thank you for your help.",
+          "translation": "A polite way to show gratitude."
+        },
+        {
+          "phrase": "Do you have any...",
+          "translation": "Asking if someone possesses something."
+        },
+        {
+          "phrase": "I like this type of...",
+          "translation": "Expressing a preference for something."
+        },
+        {
+          "phrase": "Is there another option?",
+          "translation": "Asking for alternatives."
+        },
+        {
+          "phrase": "Let's check the supply room.",
+          "translation": "Suggesting a place to look for items."
+        },
+        {
+          "phrase": "I appreciate it.",
+          "translation": "Another way to say thank you."
+        }
+      ]
+    },
+    {
+      "id": "dialogue-gap-task-dialogue-gap-1",
+      "type": "dialogue-gap",
+      "prompt": "Fill the blanks in the dialogue using the word bank.",
+      "words": [
+        "pen",
+        "paper",
+        "notebook",
+        "folder",
+        "stapler",
+        "desk",
+        "printer",
+        "computer"
+      ],
+      "dialogue": [
+        {
+          "speaker": "Student 1",
+          "line": "Can I borrow a ___? I want to write something."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Sure, here is a ___."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Thanks! Do you have any ___ to write on?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Yes, take this ___."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "I want to keep my notes safe. Do you have a ___?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Yes, it’s on the ___."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "I need to print my homework. Where is the ___?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "It’s next to the ___."
+        }
+      ],
+      "answers": [
+        "pen",
+        "pen",
+        "paper",
+        "notebook",
+        "folder",
+        "desk",
+        "printer",
+        "computer"
+      ]
+    },
+    {
+      "id": "dialogue-order-task-dialogue-order-1",
+      "type": "dialogue-order",
+      "prompt": "Arrange the dialogue lines in the correct order.",
+      "lines": [
+        {
+          "speaker": "Student 1",
+          "line": "Do you have a pen I can borrow?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Sure, here is a blue pen."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Thank you! I need to write a note."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "What kind of note do you need to write?"
+        },
+        {
+          "speaker": "Student 1",
+          "line": "It's for our meeting later today."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Oh, I see. Do you have paper?"
+        },
+        {
+          "speaker": "Student 1",
+          "line": "No, I forgot to bring some."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "I have extra paper. You can use it."
+        }
+      ],
+      "solution": [0, 1, 2, 3, 4, 5, 6, 7]
+    },
+    {
+      "id": "scramble-task-scramble-1",
+      "type": "scramble",
+      "prompt": "Unscramble the word.",
+      "items": [
+        {
+          "scrambled": "nep",
+          "answers": ["pen"]
+        },
+        {
+          "scrambled": "reapp",
+          "answers": ["paper"]
+        },
+        {
+          "scrambled": "cilpen",
+          "answers": ["pencil"]
+        },
+        {
+          "scrambled": "koob",
+          "answers": ["book"]
+        },
+        {
+          "scrambled": "lufoder",
+          "answers": ["folder"]
+        },
+        {
+          "scrambled": "relur",
+          "answers": ["ruler"]
+        },
+        {
+          "scrambled": "kboetoon",
+          "answers": ["notebook"]
+        },
+        {
+          "scrambled": "retapsl",
+          "answers": ["stapler"]
+        },
+        {
+          "scrambled": "resera",
+          "answers": ["eraser"]
+        },
+        {
+          "scrambled": "pate",
+          "answers": ["tape"]
+        }
+      ]
+    }
+  ]
+}
