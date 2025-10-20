@@ -32,6 +32,30 @@ export const lessonWordwalls = {
       url: 'https://wordwall.net/embed/110f5ab8bba8415eadefd09fb52c4e87?themeId=65&templateId=30&fontStackId=12',
     },
   ],
+  'custom-no4-c6f6abec': [
+    {
+      id: '110f5ab8bba8415eadefd09fb52c4e87',
+      themeId: '65',
+      templateId: '30',
+      fontStackId: '12',
+      title: 'Wordwall вправа для особових займенників',
+      url: 'https://wordwall.net/embed/110f5ab8bba8415eadefd09fb52c4e87?themeId=65&templateId=30&fontStackId=12',
+    },
+  ],
+  // 'custom-no5-a3c6ccb2': [],
+  // 'custom-no4-c6f6abec': [],
+  // 'custom-no4-c6f6abec': [],
+  // 'custom-no4-c6f6abec': [],
+  // 'custom-no4-c6f6abec': [],
+  // 'custom-no4-c6f6abec': [],
+  // 'custom-no4-c6f6abec': [],
+  // 'custom-no4-c6f6abec': [],
+  // 'custom-no4-c6f6abec': [],
+  // 'custom-no4-c6f6abec': [],
+  // 'custom-no4-c6f6abec': [],
+  // 'custom-no4-c6f6abec': [],
+  // 'custom-no4-c6f6abec': [],
+  // 'custom-no4-c6f6abec': [],
 };
 
 function buildBaseUrl(config) {
