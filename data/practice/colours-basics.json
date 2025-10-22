@@ -1,0 +1,470 @@
+{
+  "title": "Кольори",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "context-task-context-1",
+      "type": "context",
+      "prompt": "Read the text and answer the questions about colors and office supplies.",
+      "context": {
+        "title": "Office Colors",
+        "format": "narrative",
+        "body": [
+          "In the office, there are many colors. The walls are white and the desks are brown.",
+          "The chairs are blue and the files are red. There is a green plant on the desk.",
+          "The computer is black and the keyboard is grey. The paper is white and the pen is blue.",
+          "There are orange folders and yellow sticky notes. The light in the office is bright.",
+          "Some people like pastel colors, like pink and light blue. Others like dark colors, like deep purple."
+        ]
+      },
+      "questions": [
+        {
+          "q": "What color are the walls?",
+          "choices": ["Black", "White", "Red"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What color is the computer?",
+          "choices": ["Grey", "Black", "Blue"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What color are the chairs?",
+          "choices": ["Red", "Blue", "Green"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What color are the sticky notes?",
+          "choices": ["Yellow", "Orange", "Pink"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What color are the files?",
+          "choices": ["Red", "Green", "Blue"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What color is the plant?",
+          "choices": ["Green", "Brown", "White"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What color is the paper?",
+          "choices": ["White", "Grey", "Black"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What color are the folders?",
+          "choices": ["Orange", "Purple", "Pink"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What color is the keyboard?",
+          "choices": ["Grey", "Black", "White"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What kind of colors do some people like?",
+          "choices": ["Pastel", "Bright", "Dark"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "open-task-open-1",
+      "type": "open",
+      "prompt": "Describe colors of office supplies you see.",
+      "items": [
+        {
+          "situation": "What color is your favorite pen?"
+        },
+        {
+          "situation": "Describe the color of your notebook."
+        },
+        {
+          "situation": "What color are the sticky notes on your desk?"
+        },
+        {
+          "situation": "What color is your office chair?"
+        },
+        {
+          "situation": "Describe the color of your computer mouse."
+        },
+        {
+          "situation": "What color are the folders in your office?"
+        },
+        {
+          "situation": "What color is the paper you use?"
+        },
+        {
+          "situation": "What color are your scissors?"
+        },
+        {
+          "situation": "Describe the color of your desk lamp."
+        },
+        {
+          "situation": "What color is the tape dispenser?"
+        }
+      ],
+      "scoring": {
+        "criteria": [
+          "Use at least one color word.",
+          "Provide a complete sentence.",
+          "Make your answer clear and understandable."
+        ]
+      }
+    },
+    {
+      "id": "roleplay-task-roleplay-1",
+      "type": "roleplay",
+      "prompt": "Choose office supplies and describe their colors.",
+      "scenario": {
+        "setting": "a classroom with various office supplies",
+        "summary": "You will talk about different office supplies and their colors.",
+        "roles": [
+          {
+            "name": "Student 1",
+            "goal": "Describe the colors of office supplies.",
+            "details": "You have a red pen, a blue notebook, and a green folder."
+          },
+          {
+            "name": "Student 2",
+            "goal": "Ask about the colors of office supplies.",
+            "details": "You want to know the colors of Student 1's supplies and share your own."
+          }
+        ],
+        "steps": [
+          "Student 1 shows their supplies and says the colors.",
+          "Student 2 asks questions about the colors.",
+          "Student 1 answers and describes more supplies.",
+          "Student 2 shares their own supplies and their colors.",
+          "Both students discuss their favorite colors."
+        ]
+      },
+      "phrases": [
+        {
+          "phrase": "What color is this?",
+          "translation": "Asking about the color of an object."
+        },
+        {
+          "phrase": "This is red.",
+          "translation": "Describing the color of an item."
+        },
+        {
+          "phrase": "I have a blue notebook.",
+          "translation": "Talking about your own supplies."
+        },
+        {
+          "phrase": "Do you like green?",
+          "translation": "Asking about someone's color preference."
+        },
+        {
+          "phrase": "My pen is black.",
+          "translation": "Stating the color of a pen."
+        },
+        {
+          "phrase": "What color do you prefer?",
+          "translation": "Inquiring about someone's favorite color."
+        },
+        {
+          "phrase": "This folder is yellow.",
+          "translation": "Describing the color of a folder."
+        },
+        {
+          "phrase": "I like bright colors.",
+          "translation": "Expressing a preference for vivid colors."
+        },
+        {
+          "phrase": "This is a pastel shade.",
+          "translation": "Describing a light color."
+        },
+        {
+          "phrase": "I have a pink eraser.",
+          "translation": "Talking about the color of an eraser."
+        }
+      ]
+    },
+    {
+      "id": "dialogue-order-task-dialogue-order-1",
+      "type": "dialogue-order",
+      "prompt": "Arrange the dialogue lines in the correct order.",
+      "lines": [
+        {
+          "speaker": "Student 1",
+          "line": "What color is your pen?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "My pen is blue and bright."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "I like blue. It's a cool color."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "What about your notebook?"
+        },
+        {
+          "speaker": "Student 1",
+          "line": "My notebook is black and grey."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Black is a neutral color."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Do you have a red pencil?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Yes, my red pencil is very vivid."
+        }
+      ],
+      "solution": [0, 1, 2, 3, 4, 5, 6, 7]
+    },
+    {
+      "id": "definition-match-task-definition-match-1",
+      "type": "definition-match",
+      "prompt": "Match the word with its definition.",
+      "pairs": [
+        {
+          "left": "black",
+          "right": "This color is very dark and absorbs light."
+        },
+        {
+          "left": "white",
+          "right": "This color is the lightest and reflects all light."
+        },
+        {
+          "left": "red",
+          "right": "This color is often associated with love and passion."
+        },
+        {
+          "left": "blue",
+          "right": "This color is like the sky on a clear day."
+        },
+        {
+          "left": "green",
+          "right": "This color is the color of grass and trees."
+        },
+        {
+          "left": "yellow",
+          "right": "This color is bright like the sun."
+        },
+        {
+          "left": "orange",
+          "right": "This color is a mix of red and yellow."
+        },
+        {
+          "left": "purple",
+          "right": "This color is often linked to royalty and luxury."
+        },
+        {
+          "left": "pink",
+          "right": "This color is a light shade of red."
+        },
+        {
+          "left": "brown",
+          "right": "This color is like the earth and wood."
+        }
+      ]
+    },
+    {
+      "id": "synonym-clue-task-synonym-clue-1",
+      "type": "synonym-clue",
+      "prompt": "Choose the correct word based on the clue.",
+      "wordBank": [
+        "black",
+        "white",
+        "grey",
+        "red",
+        "blue",
+        "green",
+        "yellow",
+        "orange"
+      ],
+      "items": [
+        {
+          "clue": "the color of a pencil that is not light",
+          "answers": ["black"]
+        },
+        {
+          "clue": "the color of paper that is not dark",
+          "answers": ["white"]
+        },
+        {
+          "clue": "a color that is similar to gray",
+          "answers": ["grey"]
+        },
+        {
+          "clue": "the color of a stop sign",
+          "answers": ["red"]
+        },
+        {
+          "clue": "the color of the sky on a clear day",
+          "answers": ["blue"]
+        },
+        {
+          "clue": "the color of grass",
+          "answers": ["green"]
+        },
+        {
+          "clue": "the color of a banana",
+          "answers": ["yellow"]
+        },
+        {
+          "clue": "the color of a pumpkin",
+          "answers": ["orange"]
+        },
+        {
+          "clue": "a color that is not bright, often used in office decor",
+          "answers": ["muted"]
+        },
+        {
+          "clue": "a color that is very light and soft",
+          "answers": ["pastel"]
+        }
+      ]
+    },
+    {
+      "id": "wordpairs-task-wordpairs-1",
+      "type": "wordpairs",
+      "prompt": "Match the singular form to the plural form.",
+      "pairs": [
+        {
+          "left": "red pen",
+          "right": "red pens"
+        },
+        {
+          "left": "blue notebook",
+          "right": "blue notebooks"
+        },
+        {
+          "left": "green paper",
+          "right": "green papers"
+        },
+        {
+          "left": "yellow folder",
+          "right": "yellow folders"
+        },
+        {
+          "left": "black marker",
+          "right": "black markers"
+        },
+        {
+          "left": "purple stapler",
+          "right": "purple staplers"
+        },
+        {
+          "left": "orange highlighter",
+          "right": "orange highlighters"
+        },
+        {
+          "left": "pink eraser",
+          "right": "pink erasers"
+        },
+        {
+          "left": "brown clipboard",
+          "right": "brown clipboards"
+        },
+        {
+          "left": "white ruler",
+          "right": "white rulers"
+        }
+      ]
+    },
+    {
+      "id": "short-task-short-1",
+      "type": "short",
+      "prompt": "Write short answers about Кольори.",
+      "items": [
+        {
+          "q": "What is your favorite color?",
+          "keywords": ["my", "favorite", "color"]
+        },
+        {
+          "q": "What color is the sky?",
+          "keywords": ["the", "sky", "is"]
+        },
+        {
+          "q": "What color do you like to wear?",
+          "keywords": ["like", "to", "wear"]
+        },
+        {
+          "q": "Name a color of a fruit.",
+          "keywords": ["color", "of", "fruit"]
+        },
+        {
+          "q": "What color is grass?",
+          "keywords": ["grass", "is", "green"]
+        },
+        {
+          "q": "What color are your shoes?",
+          "keywords": ["your", "shoes", "are"]
+        },
+        {
+          "q": "What color is a banana?",
+          "keywords": ["banana", "is", "yellow"]
+        },
+        {
+          "q": "What color do you see in autumn?",
+          "keywords": ["see", "in", "autumn"]
+        },
+        {
+          "q": "What color is your favorite book cover?",
+          "keywords": ["favorite", "book", "cover"]
+        },
+        {
+          "q": "What color is a stop sign?",
+          "keywords": ["stop", "sign", "is"]
+        }
+      ]
+    },
+    {
+      "id": "open-task-open-1",
+      "type": "open",
+      "prompt": "Describe your favorite colors and why you like them.",
+      "items": [
+        {
+          "situation": "What color do you like for your clothes?"
+        },
+        {
+          "situation": "Describe a colorful object in your room."
+        },
+        {
+          "situation": "What color is your favorite fruit?"
+        },
+        {
+          "situation": "Which color do you see in nature today?"
+        },
+        {
+          "situation": "What color do you want for your next car?"
+        },
+        {
+          "situation": "What color is your best friend's favorite?"
+        },
+        {
+          "situation": "Describe a colorful painting you like."
+        },
+        {
+          "situation": "What colors do you see in your favorite flag?"
+        },
+        {
+          "situation": "What color makes you feel happy?"
+        },
+        {
+          "situation": "What color do you want for your room?"
+        }
+      ],
+      "scoring": {
+        "criteria": [
+          "Use at least two color words.",
+          "Explain why you like the color.",
+          "Write at least three sentences."
+        ]
+      }
+    }
+  ]
+}

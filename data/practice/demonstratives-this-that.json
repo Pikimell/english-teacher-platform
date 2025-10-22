@@ -1,0 +1,428 @@
+{
+  "title": "Вказівні займенники (this / that / these / those)",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "mcq-this-tha-mcq-1",
+      "type": "mcq",
+      "prompt": "Choose the correct option.",
+      "items": [
+        {
+          "q": "___ is my favorite book.",
+          "choices": [
+            "This",
+            "Those",
+            "These"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "___ are my friends.",
+          "choices": [
+            "That",
+            "These",
+            "This"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "___ is a nice car.",
+          "choices": [
+            "These",
+            "That",
+            "This"
+          ],
+          "answer": [
+            "2"
+          ]
+        },
+        {
+          "q": "___ are the apples I bought.",
+          "choices": [
+            "This",
+            "Those",
+            "That"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "___ is my house.",
+          "choices": [
+            "These",
+            "This",
+            "Those"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "___ are great shoes!",
+          "choices": [
+            "These",
+            "That",
+            "This"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "___ is a beautiful painting.",
+          "choices": [
+            "This",
+            "Those",
+            "These"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "___ are the mountains in the distance.",
+          "choices": [
+            "These",
+            "That",
+            "This"
+          ],
+          "answer": [
+            "0"
+          ]
+        },
+        {
+          "q": "___ was a fun party last night.",
+          "choices": [
+            "This",
+            "That",
+            "Those"
+          ],
+          "answer": [
+            "1"
+          ]
+        },
+        {
+          "q": "___ are my favorite cookies.",
+          "choices": [
+            "This",
+            "Those",
+            "These"
+          ],
+          "answer": [
+            "2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gap-this-tha-gap-1",
+      "type": "gap",
+      "prompt": "Fill the gaps with the correct word.",
+      "items": [
+        {
+          "q": "___ is my book.",
+          "answer": [
+            "this"
+          ]
+        },
+        {
+          "q": "___ are my friends.",
+          "answer": [
+            "these"
+          ]
+        },
+        {
+          "q": "___ is a nice car.",
+          "answer": [
+            "that"
+          ]
+        },
+        {
+          "q": "___ are the apples.",
+          "answer": [
+            "those"
+          ]
+        },
+        {
+          "q": "I like ___ dress.",
+          "answer": [
+            "this"
+          ]
+        },
+        {
+          "q": "Can you see ___ stars?",
+          "answer": [
+            "those"
+          ]
+        },
+        {
+          "q": "___ is my favorite song.",
+          "answer": [
+            "this"
+          ]
+        },
+        {
+          "q": "___ are my shoes.",
+          "answer": [
+            "these"
+          ]
+        },
+        {
+          "q": "Do you want ___ ice cream?",
+          "answer": [
+            "that"
+          ]
+        },
+        {
+          "q": "___ are very interesting books.",
+          "answer": [
+            "those"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "error-this-tha-error-1",
+      "type": "error",
+      "prompt": "Find and correct the mistake (Present Simple, no final period).",
+      "items": [
+        {
+          "q": "This are my friends.",
+          "hint": "use is for singular",
+          "answer": [
+            "this is my friend"
+          ]
+        },
+        {
+          "q": "Those is my book.",
+          "hint": "use are for plural",
+          "answer": [
+            "those are my books"
+          ]
+        },
+        {
+          "q": "These is very nice.",
+          "hint": "use are for plural",
+          "answer": [
+            "these are very nice"
+          ]
+        },
+        {
+          "q": "That are my favorite shirt.",
+          "hint": "use is for singular",
+          "answer": [
+            "that is my favorite shirt"
+          ]
+        },
+        {
+          "q": "This are a good idea.",
+          "hint": "use is for singular",
+          "answer": [
+            "this is a good idea"
+          ]
+        },
+        {
+          "q": "Those is my parents.",
+          "hint": "use are for plural",
+          "answer": [
+            "those are my parents"
+          ]
+        },
+        {
+          "q": "These is my toys.",
+          "hint": "use are for plural",
+          "answer": [
+            "these are my toys"
+          ]
+        },
+        {
+          "q": "That are a nice car.",
+          "hint": "use is for singular",
+          "answer": [
+            "that is a nice car"
+          ]
+        },
+        {
+          "q": "This are my favorite movies.",
+          "hint": "use is for singular",
+          "answer": [
+            "this is my favorite movie"
+          ]
+        },
+        {
+          "q": "Those is very interesting.",
+          "hint": "use are for plural",
+          "answer": [
+            "those are very interesting"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "truefalse-this-tha-truefalse-1",
+      "type": "truefalse",
+      "prompt": "Decide if each statement is true or false.",
+      "items": [
+        {
+          "statement": "This is a book.",
+          "answer": true
+        },
+        {
+          "statement": "Those is a cat.",
+          "answer": false
+        },
+        {
+          "statement": "These are apples.",
+          "answer": true
+        },
+        {
+          "statement": "That are my shoes.",
+          "answer": false
+        },
+        {
+          "statement": "This is my friend.",
+          "answer": true
+        },
+        {
+          "statement": "Those are cars.",
+          "answer": true
+        },
+        {
+          "statement": "These is a table.",
+          "answer": false
+        },
+        {
+          "statement": "That is a house.",
+          "answer": true
+        },
+        {
+          "statement": "These are my keys.",
+          "answer": true
+        },
+        {
+          "statement": "This are flowers.",
+          "answer": false
+        }
+      ]
+    },
+    {
+      "id": "roleplay-this-tha-roleplay-1",
+      "type": "roleplay",
+      "prompt": "Practice using demonstrative pronouns in a conversation.",
+      "scenario": {
+        "setting": "Office",
+        "summary": "You are in an office discussing items on your desk. Use 'this', 'that', 'these', and 'those' to talk about the items.",
+        "roles": [
+          {
+            "name": "Student 1",
+            "goal": "Identify and describe items on the desk.",
+            "details": "You have a pen, a notebook, and some papers. Ask about the items."
+          },
+          {
+            "name": "Student 2",
+            "goal": "Respond to questions about the items.",
+            "details": "You have a stapler, a book, and a coffee mug. Describe your items."
+          }
+        ],
+        "steps": [
+          "Student 1 points to the pen and asks, 'What is this?'",
+          "Student 2 responds, 'This is a stapler.'",
+          "Student 1 asks about the notebook, 'What are these?'",
+          "Student 2 replies, 'Those are my papers.'",
+          "Student 1 points to the coffee mug and asks, 'What is that?'"
+        ]
+      },
+      "phrases": [
+        {
+          "phrase": "What is this?",
+          "translation": "Asking about a nearby item."
+        },
+        {
+          "phrase": "This is a...",
+          "translation": "Describing a nearby item."
+        },
+        {
+          "phrase": "What are these?",
+          "translation": "Asking about multiple nearby items."
+        },
+        {
+          "phrase": "Those are...",
+          "translation": "Describing multiple items that are farther away."
+        },
+        {
+          "phrase": "What is that?",
+          "translation": "Asking about a distant item."
+        },
+        {
+          "phrase": "These are my...",
+          "translation": "Describing multiple nearby items you own."
+        },
+        {
+          "phrase": "That is my...",
+          "translation": "Describing a distant item you own."
+        },
+        {
+          "phrase": "Can you show me this?",
+          "translation": "Asking someone to point to a nearby item."
+        },
+        {
+          "phrase": "I like those.",
+          "translation": "Expressing preference for distant items."
+        },
+        {
+          "phrase": "Is this yours?",
+          "translation": "Asking if a nearby item belongs to someone."
+        }
+      ]
+    },
+    {
+      "id": "open-this-tha-open-1",
+      "type": "open",
+      "prompt": "Answer the questions using 'this', 'that', 'these', or 'those'.",
+      "items": [
+        {
+          "situation": "What is this in your hand?"
+        },
+        {
+          "situation": "Can you see those birds in the sky?"
+        },
+        {
+          "situation": "What are these books on the table?"
+        },
+        {
+          "situation": "Is that your backpack over there?"
+        },
+        {
+          "situation": "What are those flowers in the garden?"
+        },
+        {
+          "situation": "Can you pass me this pen?"
+        },
+        {
+          "situation": "What is that noise outside?"
+        },
+        {
+          "situation": "Are these your shoes?"
+        },
+        {
+          "situation": "What is this picture on the wall?"
+        },
+        {
+          "situation": "Who are those people in the park?"
+        }
+      ],
+      "scoring": {
+        "criteria": [
+          "Use the correct demonstrative pronoun.",
+          "Provide clear and complete answers.",
+          "Use simple sentences."
+        ]
+      }
+    }
+  ]
+}
