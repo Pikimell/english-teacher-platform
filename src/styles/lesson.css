@@ -468,3 +468,12 @@
 .lesson-footer {
   margin-top: auto;
 }
+
+.play-speak-btn {
+  cursor: pointer;
+}
+
+.inline-cell {
+  display: flex;
+  gap: 5px;
+}

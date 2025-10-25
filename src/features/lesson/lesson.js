@@ -7,6 +7,7 @@ import {
   createWordwallIframe,
   getWordwallConfigsForLesson,
 } from '@data/wordwall.js';
+import { createPlayBtn } from '@features/helpers/speaker';
 
 const basePath =
   (typeof import.meta !== 'undefined' &&
@@ -592,7 +593,7 @@ function renderCommunicationTable(container, entries) {
 
   const thead = document.createElement('thead');
   const headRow = document.createElement('tr');
-  ['Слово', 'Переклад', 'Приклад'].forEach(label => {
+  ['Слово', 'Транскрипція', 'Переклад', 'Приклад'].forEach(label => {
     const th = document.createElement('th');
     th.textContent = label;
     headRow.appendChild(th);
@@ -605,15 +606,24 @@ function renderCommunicationTable(container, entries) {
     const row = document.createElement('tr');
 
     const wordCell = document.createElement('td');
-    wordCell.textContent = item.word || item.term || '';
+    wordCell.innerHTML = `<p>${item.word}</p>`;
+    const playBtn = createPlayBtn(item.word);
+    wordCell.append(playBtn);
+
+    wordCell.classList.add('inline-cell');
+    wordCell.addEventListener('click', () => speakText(item.word));
+
+    const transcriptionCell = document.createElement('td');
+    transcriptionCell.textContent = item.transcription || '';
 
     const translationCell = document.createElement('td');
-    translationCell.textContent = item.translation || item.meaning || '';
+    translationCell.textContent = item.translation || '';
 
     const exampleCell = document.createElement('td');
     exampleCell.textContent = item.example || item.sentence || '';
 
     row.appendChild(wordCell);
+    row.appendChild(transcriptionCell);
     row.appendChild(translationCell);
     row.appendChild(exampleCell);
     tbody.appendChild(row);
