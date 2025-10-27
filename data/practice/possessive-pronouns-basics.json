@@ -1,0 +1,235 @@
+{
+  "title": "Присвійні займенники (my / your / his / her / our / their)",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "mcq-possessive-1",
+      "type": "mcq",
+      "prompt": "Choose the correct possessive pronoun.",
+      "items": [
+        {
+          "q": "This is Anna. ___ name is Anna.",
+          "choices": ["Her", "His", "Their"],
+          "answer": ["0"]
+        },
+        {
+          "q": "John is my friend. ___ car is red.",
+          "choices": ["His", "Her", "My"],
+          "answer": ["0"]
+        },
+        {
+          "q": "We have a big house. ___ garden is beautiful.",
+          "choices": ["Our", "Their", "My"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Tom and Lisa love music. ___ guitars are new.",
+          "choices": ["Their", "His", "Her"],
+          "answer": ["0"]
+        },
+        {
+          "q": "I have a dog. ___ name is Max.",
+          "choices": ["My", "Your", "His"],
+          "answer": ["0"]
+        },
+        {
+          "q": "You have a sister. ___ name is Kate.",
+          "choices": ["Your", "Her", "Our"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Mary has a cat. ___ cat is white.",
+          "choices": ["Her", "His", "Their"],
+          "answer": ["0"]
+        },
+        {
+          "q": "They have children. ___ children go to school.",
+          "choices": ["Their", "Our", "His"],
+          "answer": ["0"]
+        },
+        {
+          "q": "We have a teacher. ___ name is Mr. Brown.",
+          "choices": ["Our", "Their", "His"],
+          "answer": ["0"]
+        },
+        {
+          "q": "I have a book. ___ cover is blue.",
+          "choices": ["My", "Her", "Our"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "gap-possessive-1",
+      "type": "gap",
+      "prompt": "Fill in the blanks with the correct possessive pronoun (my, your, his, her, our, their).",
+      "items": [
+        { "q": "I have a cat. ___ name is Snow.", "answer": ["my"] },
+        { "q": "You have a dog. ___ tail is long.", "answer": ["your"] },
+        { "q": "He has a car. ___ car is fast.", "answer": ["his"] },
+        { "q": "She has a brother. ___ brother is tall.", "answer": ["her"] },
+        { "q": "We have a classroom. ___ teacher is kind.", "answer": ["our"] },
+        {
+          "q": "They have parents. ___ parents are doctors.",
+          "answer": ["their"]
+        },
+        { "q": "Tom has a bag. ___ bag is green.", "answer": ["his"] },
+        { "q": "Kate has a bike. ___ bike is new.", "answer": ["her"] },
+        { "q": "I have a computer. ___ screen is big.", "answer": ["my"] },
+        { "q": "We have a house. ___ kitchen is small.", "answer": ["our"] }
+      ]
+    },
+    {
+      "id": "match-possessive-1",
+      "type": "match",
+      "prompt": "Match the person with the correct possessive pronoun.",
+      "pairs": [
+        { "left": "I", "right": "my" },
+        { "left": "you", "right": "your" },
+        { "left": "he", "right": "his" },
+        { "left": "she", "right": "her" },
+        { "left": "we", "right": "our" },
+        { "left": "they", "right": "their" },
+        { "left": "Anna", "right": "her" },
+        { "left": "Tom", "right": "his" },
+        { "left": "Tom and Anna", "right": "their" },
+        { "left": "My family", "right": "our" }
+      ]
+    },
+    {
+      "id": "order-possessive-1",
+      "type": "order",
+      "prompt": "Put the words in the correct order.",
+      "items": [
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["her", "This", "is", "book"],
+          "answer": "This is her book"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["our", "This", "is", "classroom"],
+          "answer": "This is our classroom"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["his", "is", "This", "pen"],
+          "answer": "This is his pen"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["name", "is", "My", "Lily"],
+          "answer": "My name is Lily"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["dog", "is", "their", "cute"],
+          "answer": "Their dog is cute"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["her", "bag", "is", "This"],
+          "answer": "This is her bag"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["our", "teacher", "is", "He"],
+          "answer": "He is our teacher"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["your", "bike", "is", "This"],
+          "answer": "This is your bike"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["his", "This", "car", "is"],
+          "answer": "This is his car"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["my", "friend", "is", "She"],
+          "answer": "She is my friend"
+        }
+      ]
+    },
+    {
+      "id": "truefalse-possessive-1",
+      "type": "truefalse",
+      "prompt": "Decide if each statement is true or false.",
+      "items": [
+        { "statement": "This is Anna. His name is Anna.", "answer": false },
+        { "statement": "Tom has a bike. His bike is blue.", "answer": true },
+        { "statement": "We have a dog. Our dog is black.", "answer": true },
+        { "statement": "You have a car. My car is red.", "answer": false },
+        {
+          "statement": "She has a brother. Her brother is tall.",
+          "answer": true
+        },
+        { "statement": "They have a cat. Their cat is small.", "answer": true },
+        { "statement": "I have a book. Your book is green.", "answer": false },
+        {
+          "statement": "He has parents. His parents are kind.",
+          "answer": true
+        },
+        {
+          "statement": "We have a teacher. His name is Mr. White.",
+          "answer": true
+        },
+        { "statement": "Kate has a bag. Their bag is pink.", "answer": false }
+      ]
+    },
+    {
+      "id": "roleplay-possessive-1",
+      "type": "roleplay",
+      "prompt": "Practice a short roleplay using possessive pronouns.",
+      "scenario": {
+        "setting": "Classroom",
+        "summary": "Two students talk about school things.",
+        "roles": [
+          { "name": "Student 1", "goal": "find your notebook" },
+          { "name": "Student 2", "goal": "help find it and ask questions" }
+        ],
+        "steps": [
+          "Greet each other",
+          "Ask whose item it is",
+          "Use possessive pronouns to answer"
+        ]
+      },
+      "phrases": [
+        { "phrase": "Is this your notebook?", "translation": "Це твій зошит?" },
+        {
+          "phrase": "No, it’s her notebook.",
+          "translation": "Ні, це її зошит."
+        },
+        { "phrase": "That’s my pen.", "translation": "Це моя ручка." },
+        { "phrase": "Is that his backpack?", "translation": "Це його рюкзак?" }
+      ]
+    },
+    {
+      "id": "open-possessive-1",
+      "type": "open",
+      "prompt": "Speak or write using possessive pronouns.",
+      "items": [
+        {
+          "situation": "Talk about your family using my, his, her, our, their."
+        },
+        {
+          "situation": "Describe two things you have at home using my and our."
+        },
+        {
+          "situation": "Look at a photo of people. Describe their clothes using his/her."
+        },
+        { "situation": "Talk about your best friend. Use his/her correctly." },
+        { "situation": "Write three sentences about your school using our." }
+      ],
+      "scoring": {
+        "criteria": [
+          "Uses correct possessive pronouns",
+          "Speaks in full sentences",
+          "Keeps to A1 vocabulary"
+        ]
+      }
+    }
+  ]
+}
