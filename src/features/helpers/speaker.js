@@ -9,27 +9,42 @@ function getVoicesReady() {
 
 export async function speakText(
   text,
-  { lang = 'en-EN', voiceName, rate = 1, pitch = 1, volume = 1 } = {}
+  {
+    lang = 'en',
+    voiceName = 'Google UK English Female',
+    rate = 1,
+    pitch = 1,
+    volume = 1,
+  } = {}
 ) {
   await getVoicesReady();
   const utter = new SpeechSynthesisUtterance(text);
   const voices = speechSynthesis.getVoices();
-
-  // Обрати голос під мову або за назвою
-  let voice = voices.find(v =>
-    voiceName
-      ? v.name === voiceName
-      : v.lang.toLowerCase().startsWith(lang.toLowerCase())
+  console.log(
+    [...voices]
+      .filter(el => el.lang.includes(lang))
+      .map(el => el.name)
+      .join(',')
   );
-  if (!voice) voice = voices.find(v => v.lang.startsWith('en')) || voices[0]; // фолбек
-  utter.voice = voice;
 
+  // вибір голосу
+  let voice =
+    voices.find(v =>
+      voiceName
+        ? v.name === voiceName
+        : v.lang.toLowerCase().startsWith(lang.toLowerCase()) &&
+          v.name.toLowerCase().includes('female')
+    ) ||
+    voices.find(v => v.lang.startsWith('en')) ||
+    voices[0];
+
+  utter.voice = voice;
   utter.lang = voice?.lang || lang;
-  utter.rate = rate;
+  utter.rate = rate; // можна передати 0.5 для повільного
   utter.pitch = pitch;
   utter.volume = volume;
 
-  speechSynthesis.cancel(); // скинемо попередні черги
+  speechSynthesis.cancel();
   speechSynthesis.speak(utter);
 }
 

@@ -8,6 +8,7 @@ import {
   getWordwallConfigsForLesson,
 } from '@data/wordwall.js';
 import { createPlayBtn } from '@features/helpers/speaker';
+import { speakText } from '../helpers/speaker';
 
 const basePath =
   (typeof import.meta !== 'undefined' &&
@@ -611,7 +612,6 @@ function renderCommunicationTable(container, entries) {
     wordCell.append(playBtn);
 
     wordCell.classList.add('inline-cell');
-    wordCell.addEventListener('click', () => speakText(item.word));
 
     const transcriptionCell = document.createElement('td');
     transcriptionCell.textContent = item.transcription || '';

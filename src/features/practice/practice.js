@@ -2080,7 +2080,11 @@ const practiceAPI = (function () {
     });
   }
 
-  document.addEventListener('DOMContentLoaded', init);
+  const globalPracticeConfig =
+    (typeof window !== 'undefined' && window.practiceConfig) || {};
+  if (!globalPracticeConfig.disableAutoInit) {
+    document.addEventListener('DOMContentLoaded', init);
+  }
 
   window.practice = window.practice || {};
   Object.assign(window.practice, {

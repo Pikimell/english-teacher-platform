@@ -172,6 +172,7 @@ export const communicationWords = {
       translation: 'дата народження',
       example: 'My date of birth is May 12, 2005.',
     },
+
     {
       word: 'job / occupation',
       translation: 'робота / професія',

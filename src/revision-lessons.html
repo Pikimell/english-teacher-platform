@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Revision Lessons</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <link
+      rel="icon"
+      href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/United-kingdom_flag_icon_round.svg/768px-United-kingdom_flag_icon_round.svg.png"
+    />
+  </head>
+  <body>
+    <header class="lesson-header">
+      <a class="lesson-header__back" href="index.html">&larr; На головну</a>
+      <div>
+        <p class="lesson-header__eyebrow" data-lesson-category></p>
+        <h1 class="lesson-header__title" data-lesson-title>Перевірка знаннь</h1>
+        <p class="lesson-header__meta">
+          <span data-lesson-level></span>
+        </p>
+      </div>
+    </header>
+    <main class="main">
+      <section
+        class="catalog"
+        id="revision-tests"
+        aria-labelledby="revision-tests-heading"
+      >
+        <div class="catalog__header">
+          <p class="section-title">Контрольні роботи</p>
+          <h2 id="revision-tests-heading">Готові тести</h2>
+          <p class="catalog__description">
+            Оберіть контрольну роботу, щоб переглянути повний список завдань і
+            використати їх на уроці.
+          </p>
+        </div>
+        <div class="cards-grid" data-tests-grid aria-live="polite"></div>
+        <p class="catalog__empty" data-tests-empty hidden>
+          Додайте новий файл у <code>src/data/revision-tests</code>, щоб
+          зʼявилася перша контрольна робота.
+        </p>
+      </section>
+
+      <section
+        class="catalog"
+        data-lessons-section
+        aria-labelledby="lessons-heading"
+      >
+        <div class="catalog__header">
+          <p class="section-title">База матеріалів</p>
+          <h2 id="lessons-heading">Усі уроки</h2>
+          <p class="catalog__description">
+            Один список для комбінованих уроків, граматики та лексики.
+            Використовуйте пошук і фільтри зверху.
+          </p>
+        </div>
+        <div class="cards-grid" data-lessons-grid aria-live="polite"></div>
+        <p class="catalog__empty" data-lessons-empty hidden>
+          Знайдені матеріали з’являться тут.
+        </p>
+      </section>
+    </main>
+    <footer class="footer">
+      <small
+        >&copy; <span data-component="copyright-year"></span> English Teacher
+        Platform</small
+      >
+    </footer>
+
+    <script type="module" src="/features/revision-tests/revision-tests-list.js"></script>
+  </body>
+</html>

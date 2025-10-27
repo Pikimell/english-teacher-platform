@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Контрольна робота | English Teacher Platform</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link
+      rel="icon"
+      href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/United-kingdom_flag_icon_round.svg/768px-United-kingdom_flag_icon_round.svg.png"
+    />
+  </head>
+  <body class="revision-page">
+    <header class="header revision-header">
+      <div class="header__inner">
+        <div class="header__copy">
+          <p class="header__eyebrow" data-test-eyebrow>Контрольна робота</p>
+          <h1 data-test-title>Контрольна робота</h1>
+          <p class="tagline" data-test-tagline>
+            Використайте завдання нижче, щоб перевірити знання учня.
+          </p>
+          <ul class="revision-header__meta">
+            <li data-test-level>Рівень: A1</li>
+            <li data-test-duration>Тривалість: ~20 хв</li>
+            <li data-test-tags>Мітки: граматика</li>
+          </ul>
+          <div class="header__actions">
+            <a class="button button--light" href="./revision-lessons.html">
+              ← До списку контрольних
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="lesson-main revision-main">
+      <article class="lesson-content revision-content" data-test-content>
+        <section class="revision-summary" data-test-summary hidden>
+          <h2>Що включає контрольна</h2>
+          <p class="revision-summary__description" data-test-description></p>
+          <ul class="revision-summary__meta" data-test-meta></ul>
+        </section>
+        <section class="revision-practice">
+          <h2>Завдання контрольної</h2>
+          <p class="revision-practice__note muted">
+            Виведіть завдання на екран або роздрукуйте — після виконання ви зможете
+            обговорити відповіді з учнем.
+          </p>
+          <div class="revision-practice__list" data-test-practice></div>
+        </section>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <small
+        >&copy; <span data-component="copyright-year"></span> English Teacher
+        Platform</small
+      >
+    </footer>
+
+    <script>
+      window.practiceConfig = { disableAutoInit: true };
+    </script>
+    <script type="module" src="/features/revision-tests/revision-test-detail.js"></script>
+  </body>
+</html>
