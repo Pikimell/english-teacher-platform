@@ -1,0 +1,242 @@
+{
+  "title": "Родина і родинні стосунки",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "gap-family-1",
+      "type": "gap",
+      "prompt": "Fill in the blanks with the correct family word.",
+      "items": [
+        { "q": "My ___ is my mother’s husband.", "answer": ["father"] },
+        {
+          "q": "Anna is my aunt’s daughter. She is my ___.",
+          "answer": ["cousin"]
+        },
+        { "q": "My ___ is my mother’s father.", "answer": ["grandfather"] },
+        { "q": "Their ___ is very big.", "answer": ["family"] },
+        { "q": "He has one brother and two ___.", "answer": ["sisters"] },
+        { "q": "My ___ is my father's wife.", "answer": ["mother"] },
+        {
+          "q": "My ___ are my aunt and uncle's children.",
+          "answer": ["cousins"]
+        },
+        { "q": "My ___ is my sister's son.", "answer": ["nephew"] },
+        { "q": "My ___ is my brother's daughter.", "answer": ["niece"] },
+        { "q": "Our ___ live in the country.", "answer": ["grandparents"] }
+      ]
+    },
+    {
+      "id": "match-family-1",
+      "type": "match",
+      "prompt": "Match the word with its meaning.",
+      "pairs": [
+        { "left": "mother", "right": "a female parent" },
+        { "left": "father", "right": "a male parent" },
+        { "left": "aunt", "right": "your mother’s or father’s sister" },
+        { "left": "uncle", "right": "your mother’s or father’s brother" },
+        { "left": "cousin", "right": "your uncle’s or aunt’s child" },
+        { "left": "niece", "right": "your brother’s or sister’s daughter" },
+        { "left": "nephew", "right": "your brother’s or sister’s son" },
+        { "left": "grandparents", "right": "the parents of your parents" },
+        { "left": "sibling", "right": "a brother or sister" },
+        { "left": "spouse", "right": "a husband or wife" }
+      ]
+    },
+    {
+      "id": "dialogue-gap-family-1",
+      "type": "dialogue-gap",
+      "prompt": "Complete the dialogue using the word bank. Hints in brackets help you choose the correct family word.",
+      "words": [
+        "grandmother",
+        "niece",
+        "father",
+        "cousins",
+        "grandfather",
+        "aunt",
+        "uncle",
+        "brother",
+        "sister",
+        "mother"
+      ],
+      "dialogue": [
+        { "speaker": "Anna", "line": "Let’s look at your family photo." },
+        {
+          "speaker": "Ben",
+          "line": "Sure. This is my ___ (boy in a blue T‑shirt)."
+        },
+        {
+          "speaker": "Anna",
+          "line": "And is this your ___ (girl standing next to him)?"
+        },
+        { "speaker": "Ben", "line": "Yes. Here is my ___ (woman in glasses)." },
+        { "speaker": "Anna", "line": "And the man next to her?" },
+        { "speaker": "Ben", "line": "That’s my ___ (my mom’s husband)." },
+        { "speaker": "Anna", "line": "Who are these two kids (on the sofa)?" },
+        { "speaker": "Ben", "line": "They are my ___ (children of my aunt)." },
+        {
+          "speaker": "Anna",
+          "line": "Who is this elderly woman (with white hair)?"
+        },
+        { "speaker": "Ben", "line": "That’s my ___." },
+        { "speaker": "Anna", "line": "And this man beside her?" },
+        { "speaker": "Ben", "line": "He is my ___ (her husband)." },
+        { "speaker": "Anna", "line": "Is this your mother’s sister?" },
+        { "speaker": "Ben", "line": "Yes, she is my ___." },
+        { "speaker": "Anna", "line": "And her husband is your…?" },
+        { "speaker": "Ben", "line": "He is my ___." },
+        {
+          "speaker": "Anna",
+          "line": "This baby (your sister’s little girl) is your ___, right?"
+        },
+        { "speaker": "Ben", "line": "Exactly!" }
+      ],
+      "answers": [
+        "brother",
+        "sister",
+        "mother",
+        "father",
+        "cousins",
+        "grandmother",
+        "grandfather",
+        "aunt",
+        "uncle",
+        "niece"
+      ]
+    },
+    {
+      "id": "roleplay-family-1",
+      "type": "roleplay",
+      "prompt": "Roleplay: Talking about your family.",
+      "scenario": {
+        "setting": "At home",
+        "summary": "Two friends talk about their families.",
+        "roles": [
+          { "name": "Student 1", "goal": "describe your family" },
+          { "name": "Student 2", "goal": "ask questions about family members" }
+        ],
+        "steps": [
+          "Introduce your family",
+          "Ask about parents and siblings",
+          "Say who lives with you"
+        ]
+      },
+      "phrases": [
+        {
+          "phrase": "I live with my parents and my sister.",
+          "translation": "Я живу з батьками та сестрою."
+        },
+        {
+          "phrase": "How many people are in your family?",
+          "translation": "Скільки людей у твоїй родині?"
+        },
+        { "phrase": "This is my brother.", "translation": "Це мій брат." },
+        {
+          "phrase": "These are my grandparents.",
+          "translation": "Це мої дідусь і бабуся."
+        },
+        {
+          "phrase": "Do you have any siblings?",
+          "translation": "У тебе є брати чи сестри?"
+        },
+        {
+          "phrase": "He is my cousin.",
+          "translation": "Він мій двоюрідний брат."
+        },
+        { "phrase": "She is my niece.", "translation": "Вона моя племінниця." },
+        {
+          "phrase": "This is our family photo.",
+          "translation": "Це наше сімейне фото."
+        },
+        {
+          "phrase": "We live with our grandparents.",
+          "translation": "Ми живемо з дідусем і бабусею."
+        },
+        {
+          "phrase": "My parents are from Kyiv.",
+          "translation": "Мої батьки з Києва."
+        }
+      ]
+    },
+    {
+      "id": "open-family-1",
+      "type": "open",
+      "prompt": "Answer these questions about your family.",
+      "items": [
+        { "situation": "Who do you live with?" },
+        { "situation": "How many people are in your family?" },
+        { "situation": "Do you have brothers or sisters?" },
+        { "situation": "Who is the oldest person in your family?" },
+        { "situation": "What do you like doing with your family?" },
+        { "situation": "Who do you spend the most time with in your family?" },
+        { "situation": "Do you have any cousins? How many?" },
+        { "situation": "Describe one family tradition you like." },
+        { "situation": "Who helps you with homework at home?" },
+        { "situation": "Who do you call when you need advice?" }
+      ],
+      "scoring": {
+        "criteria": [
+          "Uses correct family words",
+          "Speaks in full sentences",
+          "Keeps to A1 vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "mcq-family-1",
+      "type": "mcq",
+      "prompt": "Choose the correct family word.",
+      "items": [
+        {
+          "q": "My father's sister is my ___.",
+          "choices": ["aunt", "cousin", "niece"],
+          "answer": ["0"]
+        },
+        {
+          "q": "My mother's brother is my ___.",
+          "choices": ["uncle", "aunt", "grandfather"],
+          "answer": ["0"]
+        },
+        {
+          "q": "My aunt's child is my ___.",
+          "choices": ["cousin", "niece", "nephew"],
+          "answer": ["0"]
+        },
+        {
+          "q": "My sister's son is my ___.",
+          "choices": ["nephew", "niece", "cousin"],
+          "answer": ["0"]
+        },
+        {
+          "q": "My brother's daughter is my ___.",
+          "choices": ["niece", "cousin", "aunt"],
+          "answer": ["0"]
+        },
+        {
+          "q": "My mother's mother is my ___.",
+          "choices": ["grandmother", "grandfather", "aunt"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Two people who are married are ___.",
+          "choices": ["spouses", "siblings", "cousins"],
+          "answer": ["0"]
+        },
+        {
+          "q": "I am a child in my family. My parents are my ___.",
+          "choices": ["mother and father", "aunt and uncle", "cousins"],
+          "answer": ["0"]
+        },
+        {
+          "q": "My parents' parents are my ___.",
+          "choices": ["grandparents", "parents", "siblings"],
+          "answer": ["0"]
+        },
+        {
+          "q": "My sister and I are ___.",
+          "choices": ["siblings", "spouses", "cousins"],
+          "answer": ["0"]
+        }
+      ]
+    }
+  ]
+}
