@@ -237,6 +237,24 @@
           "answer": ["0"]
         }
       ]
+    },
+    {
+      "id": "audio-family-1",
+      "type": "audio",
+      "prompt": "Listen to this text and answer the questions!",
+      "dialogs": [
+        {
+          "text": "Hello! My name is Emma. I live in a small house with my family. There are four people in my family: my father, my mother, my brother, and me. My father works in an office. My mother is a teacher. My brother goes to school. Every evening, we have dinner together and talk about our day. On weekends, we like to visit our grandparents. They live in a village not far from our town. We always have fun there!",
+          "voice": "female"
+        }
+      ],
+      "questions": [
+        "How many people are there in Emma’s family?",
+        "Where does Emma’s father work?",
+        "What is Emma’s mother’s job?",
+        "When do they have dinner together?",
+        "Where do they go on weekends?"
+      ]
     }
   ]
 }
