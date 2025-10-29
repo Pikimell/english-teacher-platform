@@ -8,6 +8,7 @@ import {
   isSharePanelActive,
   setShareAvailability,
 } from '@features/helpers/share-panel.js';
+import { speakText } from '@features/helpers/speaker.js';
 
 // Convention: for page /X/indexN.html → fetch /X/practice/indexN.json
 const practiceAPI = (function () {
@@ -662,6 +663,9 @@ const practiceAPI = (function () {
         break;
       case 'writing':
         renderWriting(box, task);
+        break;
+      case 'audio':
+        renderAudio(box, task);
         break;
       default:
         box.appendChild(
@@ -1988,6 +1992,367 @@ const practiceAPI = (function () {
     });
     container.appendChild(btn);
     container.appendChild(note);
+  }
+
+  function renderAudio(container, task) {
+    container.appendChild(el('h3', {}, task.prompt || 'Audio task'));
+
+    const audioCandidates = [];
+    const collectAudio = value => {
+      if (!value) return;
+      if (Array.isArray(value)) {
+        value.forEach(collectAudio);
+        return;
+      }
+      const src = String(value).trim();
+      if (src) audioCandidates.push(src);
+    };
+
+    collectAudio(task.audioSrc);
+    collectAudio(task.audioUrl);
+    collectAudio(task.audio);
+    collectAudio(task.source);
+    collectAudio(task.sources);
+
+    const audioSources = Array.from(new Set(audioCandidates));
+    if (audioSources.length) {
+      const audioWrap = el('div', {
+        style:
+          'margin-top:8px;padding:12px;border:1px solid #cbd5e1;border-radius:10px;background:#f1f5f9;',
+      });
+      const player = el('audio', {
+        controls: true,
+        style: 'width:100%;display:block;',
+      });
+      audioSources.forEach(src => {
+        player.appendChild(el('source', { src: resolveAssetPath(src) }));
+      });
+      player.appendChild(document.createTextNode('Ваш браузер не підтримує відтворення аудіо.'));
+      audioWrap.appendChild(player);
+      container.appendChild(audioWrap);
+    }
+
+    const rawDialogs = Array.isArray(task.dialogs) ? task.dialogs : [];
+    const dialogs = [];
+    rawDialogs.forEach(entry => {
+      if (!entry) return;
+      if (typeof entry === 'string') {
+        const text = entry.trim();
+        if (text) dialogs.push({ text });
+        return;
+      }
+      if (typeof entry === 'object') {
+        const text = 'text' in entry ? String(entry.text || '').trim() : '';
+        if (!text) return;
+        const normalized = { text };
+        if (entry.voice) normalized.voice = entry.voice;
+        if (entry.voiceName) normalized.voiceName = entry.voiceName;
+        if (entry.gender) normalized.gender = entry.gender;
+        if (entry.lang) normalized.lang = entry.lang;
+        if (entry.rate != null) normalized.rate = entry.rate;
+        if (entry.pitch != null) normalized.pitch = entry.pitch;
+        if (entry.volume != null) normalized.volume = entry.volume;
+        if (entry.ttsOptions && typeof entry.ttsOptions === 'object') {
+          normalized.ttsOptions = { ...entry.ttsOptions };
+        }
+        dialogs.push(normalized);
+      }
+    });
+
+    if (!dialogs.length) {
+      if (Array.isArray(task.text)) {
+        task.text
+          .map(segment => String(segment || '').trim())
+          .filter(Boolean)
+          .forEach(text => dialogs.push({ text }));
+      } else if (typeof task.text === 'string') {
+        const text = String(task.text || '').trim();
+        if (text) dialogs.push({ text });
+      }
+    }
+
+    const synth =
+      typeof window !== 'undefined' && 'speechSynthesis' in window
+        ? window.speechSynthesis
+        : null;
+    const ttsOptions = {};
+    if (task.lang) ttsOptions.lang = task.lang;
+    if (task.voiceName) ttsOptions.voiceName = task.voiceName;
+    if (task.voice) ttsOptions.voice = task.voice;
+    if (task.gender) ttsOptions.gender = task.gender;
+    if (typeof task.ttsOptions === 'object' && task.ttsOptions)
+      Object.assign(ttsOptions, task.ttsOptions);
+    if (typeof task.voiceOptions === 'object' && task.voiceOptions)
+      Object.assign(ttsOptions, task.voiceOptions);
+    if (typeof task.speechOptions === 'object' && task.speechOptions)
+      Object.assign(ttsOptions, task.speechOptions);
+
+    if (dialogs.length && synth) {
+      const ttsWrap = el('div', {
+        style:
+          'margin-top:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;',
+      });
+      const playBtn = el(
+        'button',
+        {
+          type: 'button',
+          class: 'btn primary',
+          style:
+            'padding:8px 14px;border-radius:8px;border:1px solid #0284c7;background:#0ea5e9;color:#fff;cursor:pointer;display:inline-flex;align-items:center;gap:6px;',
+        },
+        '▶ Play'
+      );
+      playBtn.setAttribute('aria-pressed', 'false');
+      let isSpeaking = false;
+      let currentIndex = 0;
+      let currentUtterance = null;
+
+      const resetState = () => {
+        isSpeaking = false;
+        currentIndex = 0;
+        if (currentUtterance) {
+          currentUtterance.onend = null;
+          currentUtterance.onerror = null;
+          currentUtterance = null;
+        }
+        playBtn.textContent = '▶ Play';
+        playBtn.setAttribute('aria-pressed', 'false');
+      };
+
+      const playNext = async () => {
+        if (!isSpeaking || currentIndex >= dialogs.length) {
+          resetState();
+          return;
+        }
+        const dialog = dialogs[currentIndex];
+        const options = { ...ttsOptions };
+        if (dialog.lang) options.lang = dialog.lang;
+        if (dialog.voiceName) options.voiceName = dialog.voiceName;
+        if (dialog.voice) options.voice = dialog.voice;
+        if (dialog.gender) options.gender = dialog.gender;
+        if (dialog.rate != null) options.rate = dialog.rate;
+        if (dialog.pitch != null) options.pitch = dialog.pitch;
+        if (dialog.volume != null) options.volume = dialog.volume;
+        if (
+          dialog.ttsOptions &&
+          typeof dialog.ttsOptions === 'object' &&
+          dialog.ttsOptions
+        ) {
+          Object.assign(options, dialog.ttsOptions);
+        }
+        try {
+          const utterance = await speakText(dialog.text, options);
+          if (!utterance) {
+            currentIndex += 1;
+            playNext();
+            return;
+          }
+          currentUtterance = utterance;
+          utterance.onend = () => {
+            if (!isSpeaking) return;
+            currentUtterance = null;
+            currentIndex += 1;
+            playNext();
+          };
+          utterance.onerror = resetState;
+        } catch (error) {
+          resetState();
+        }
+      };
+
+      playBtn.addEventListener('click', () => {
+        if (!isSpeaking) {
+          if (!dialogs.length) return;
+          isSpeaking = true;
+          currentIndex = 0;
+          playBtn.textContent = '⏹ Stop';
+          playBtn.setAttribute('aria-pressed', 'true');
+          playNext();
+        } else {
+          if (synth) synth.cancel();
+          resetState();
+        }
+      });
+
+      ttsWrap.appendChild(playBtn);
+      if (!audioSources.length) {
+        ttsWrap.appendChild(
+          el(
+            'span',
+            { class: 'muted', style: 'font-size:14px;' },
+            'Прослухайте діалог за допомогою синтезу мовлення.'
+          )
+        );
+      }
+      container.appendChild(ttsWrap);
+    } else if (!audioSources.length && dialogs.length) {
+      container.appendChild(
+        el(
+          'p',
+          { class: 'muted', style: 'margin-top:8px;' },
+          'Ваш браузер не підтримує синтез мовлення.'
+        )
+      );
+    }
+
+    const rawQuestions = Array.isArray(task.questions)
+      ? task.questions.filter(Boolean)
+      : [];
+    if (!rawQuestions.length) return;
+
+    const questionsWrap = el('div', { style: 'margin-top:16px;' });
+    const checkableEntries = [];
+
+    rawQuestions.forEach((entry, index) => {
+      const question =
+        typeof entry === 'string'
+          ? { prompt: entry }
+          : entry && typeof entry === 'object'
+          ? entry
+          : { prompt: String(entry) };
+      const promptText =
+        question.prompt || question.q || `Question ${index + 1}`;
+
+      const block = el(
+        'div',
+        {
+          style:
+            'margin-bottom:12px;padding:12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;',
+        },
+        el('div', { style: 'font-weight:600;margin-bottom:8px;' }, promptText)
+      );
+
+      if (question.hint) {
+        block.appendChild(makeHint(question.hint));
+      }
+
+      if (Array.isArray(question.choices) && question.choices.length) {
+        const expectedRaw = Array.isArray(question.answer)
+          ? question.answer
+          : question.answer != null
+          ? [question.answer]
+          : [];
+        const expected = expectedRaw.map(value => String(value));
+        const allowMulti = expected.length > 1;
+        const expectedIsIndex = expected.every(value => /^\d+$/.test(value));
+        const name = uniqueInputId(`${task.id || 'audio'}-${index}`);
+        question.choices.forEach((choice, choiceIndex) => {
+          const id = uniqueInputId(`${name}-${choiceIndex}`);
+          block.appendChild(
+            el(
+              'label',
+              {
+                for: id,
+                style:
+                  'display:flex;align-items:center;gap:8px;margin:4px 0;',
+              },
+              el('input', {
+                type: allowMulti ? 'checkbox' : 'radio',
+                name,
+                id,
+                value: String(choiceIndex),
+              }),
+              el('span', {}, choice)
+            )
+          );
+        });
+        if (expected.length) {
+          checkableEntries.push({
+            type: 'choices',
+            block,
+            getPicked: () => {
+              const inputs = Array.from(
+                block.querySelectorAll(`input[name='${name}']`)
+              );
+              const picked = inputs
+                .filter(input => input.checked)
+                .map(input => input.value);
+              if (expectedIsIndex) return picked;
+              return picked.map(idx =>
+                normalize(question.choices[Number(idx)] || '')
+              );
+            },
+            expected: expectedIsIndex
+              ? expected.slice()
+              : expected.map(value => normalize(value)),
+          });
+        }
+      } else {
+        const input = el('textarea', {
+          rows: question.rows || 2,
+          style:
+            'width:100%;max-width:640px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;',
+        });
+        block.appendChild(input);
+        const expectedRaw = Array.isArray(question.answer)
+          ? question.answer
+          : question.answer != null
+          ? [question.answer]
+          : Array.isArray(question.answers)
+          ? question.answers
+          : [];
+        const expected = expectedRaw
+          .map(value => normalize(value))
+          .filter(Boolean);
+        if (expected.length) {
+          checkableEntries.push({
+            type: 'text',
+            block,
+            input,
+            expected,
+          });
+        }
+      }
+
+      questionsWrap.appendChild(block);
+    });
+
+    if (checkableEntries.length) {
+      const result = el('div', {
+        style: 'margin-top:8px;font-weight:600;',
+      });
+      const button = el(
+        'button',
+        {
+          type: 'button',
+          class: 'btn primary',
+          style: 'margin-top:8px;',
+        },
+        'Перевірити'
+      );
+      button.addEventListener('click', () => {
+        let correct = 0;
+        checkableEntries.forEach(entry => {
+          if (entry.type === 'choices') {
+            const picked = entry.getPicked().sort();
+            const expected = entry.expected.slice().sort();
+            const ok =
+              picked.length === expected.length &&
+              picked.every((value, idx) => value === expected[idx]);
+            entry.block.style.borderColor = ok ? '#10b981' : '#ef4444';
+            if (ok) correct++;
+          } else if (entry.type === 'text') {
+            const value = normalize(entry.input.value);
+            const ok = entry.expected.includes(value);
+            entry.block.style.borderColor = ok ? '#10b981' : '#ef4444';
+            if (ok) correct++;
+          }
+        });
+        result.textContent = `Результат: ${correct}/${checkableEntries.length}`;
+      });
+      questionsWrap.appendChild(button);
+      questionsWrap.appendChild(result);
+    } else {
+      questionsWrap.appendChild(
+        el(
+          'p',
+          { class: 'muted', style: 'margin-top:4px;' },
+          'Запишіть відповіді — викладач перевірить їх пізніше.'
+        )
+      );
+    }
+
+    container.appendChild(questionsWrap);
   }
 
   function ensurePracticeContainer() {

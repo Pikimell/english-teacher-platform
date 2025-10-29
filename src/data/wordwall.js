@@ -59,7 +59,16 @@ export const lessonWordwalls = {
       url: 'https://wordwall.net/embed/cd69f6a25d164b098c91cb9f50c307ee?themeId=65&templateId=30&fontStackId=0',
     },
   ],
-  'custom-no6-da70b690': [],
+  'custom-no6-da70b690': [
+    {
+      id: 'cd69f6a25d164b098c91cb9f50c307ee',
+      themeId: '65',
+      templateId: '30',
+      fontStackId: '12',
+      title: 'Wordwall вправа для особових займенників',
+      url: 'https://wordwall.net/embed/cd69f6a25d164b098c91cb9f50c307ee?themeId=65&templateId=30&fontStackId=0',
+    },
+  ],
   'custom-no7-43000f0c': [],
   'custom-no8-846a8d9e': [],
   'custom-no9-cf6e6bee': [],
