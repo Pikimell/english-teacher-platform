@@ -122,9 +122,8 @@ const practiceAPI = (function () {
   }
 
   function renderMCQ(container, task) {
-    container.appendChild(
-      el('h3', {}, task.prompt || 'Choose the correct option')
-    );
+    renderTaskTitle(container, task, 'Choose the correct option');
+
     const blocks = [];
     (task.items || []).forEach((item, idx) => {
       const name = `${task.id || 'mcq'}-${idx}`;
@@ -213,7 +212,7 @@ const practiceAPI = (function () {
   }
 
   function renderGap(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Fill the gaps'));
+    renderTaskTitle(container, task, 'Fill the gaps');
     const items = [];
     (task.items || []).forEach((it, idx) => {
       const row = el('div', {
@@ -266,7 +265,7 @@ const practiceAPI = (function () {
   }
 
   function renderMatch(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Match pairs'));
+    renderTaskTitle(container, task, 'Match pairs');
     const pairs = task.pairs || [];
     const rights = shuffle(pairs.map(p => p.right));
     const rows = [];
@@ -317,9 +316,7 @@ const practiceAPI = (function () {
   }
 
   function renderContext(container, task) {
-    container.appendChild(
-      el('h3', {}, task.prompt || 'Прочитайте текст та дайте відповіді')
-    );
+    renderTaskTitle(container, task, 'Прочитайте текст та дайте відповіді');
 
     const context = task.context || {};
     const format = String(context.format || 'narrative').toLowerCase();
@@ -814,9 +811,7 @@ const practiceAPI = (function () {
 
   // ============ Extra renderers (moved inside closure) ============
   function renderTransform(container, task) {
-    container.appendChild(
-      el('h3', {}, task.prompt || 'Transform the sentence')
-    );
+    renderTaskTitle(container, task, 'Transform the sentence');
     const items = [];
     (task.items || []).forEach((it, idx) => {
       const row = el('div', {
@@ -862,9 +857,7 @@ const practiceAPI = (function () {
   }
 
   function renderError(container, task) {
-    container.appendChild(
-      el('h3', {}, task.prompt || 'Find and correct the error')
-    );
+    renderTaskTitle(container, task, 'Find and correct the error');
     const items = [];
     (task.items || []).forEach((it, idx) => {
       const row = el('div', {
@@ -910,9 +903,7 @@ const practiceAPI = (function () {
   }
 
   function renderOrder(container, task) {
-    container.appendChild(
-      el('h3', {}, task.prompt || 'Put the words in order')
-    );
+    renderTaskTitle(container, task, 'Put the words in order');
     const blocks = [];
     (task.items || []).forEach((it, idx) => {
       const correctStr = normalize(
@@ -1005,7 +996,7 @@ const practiceAPI = (function () {
   }
 
   function renderShort(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Short answer'));
+    renderTaskTitle(container, task, 'Short answer');
     const items = [];
     (task.items || []).forEach((it, index) => {
       const row = el('div', {
@@ -1072,9 +1063,7 @@ const practiceAPI = (function () {
   }
 
   function renderOpen(container, task) {
-    container.appendChild(
-      el('h3', {}, task.prompt || 'Відповіді у вільній формі')
-    );
+    renderTaskTitle(container, task, 'Відповіді у вільній формі');
 
     const items = Array.isArray(task && task.items)
       ? task.items.filter(Boolean)
@@ -1164,7 +1153,7 @@ const practiceAPI = (function () {
   }
 
   function renderRoleplay(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Role-play scenario'));
+    renderTaskTitle(container, task, 'Role-play scenario');
 
     const scenario =
       task && typeof task.scenario === 'object' ? task.scenario : {};
@@ -1340,9 +1329,7 @@ const practiceAPI = (function () {
   }
 
   function renderDialogueGap(container, task) {
-    container.appendChild(
-      el('h3', {}, task.prompt || 'Заповніть пропуски у діалозі')
-    );
+    renderTaskTitle(container, task, 'Заповніть пропуски у діалозі');
 
     const answers = Array.isArray(task?.answers)
       ? task.answers.map(item => normalize(item))
@@ -1528,7 +1515,7 @@ const practiceAPI = (function () {
   }
 
   function renderDialogueOrder(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Упорядкуйте діалог'));
+    renderTaskTitle(container, task, 'Упорядкуйте діалог');
 
     const lines = Array.isArray(task?.lines)
       ? task.lines.map(line => ({
@@ -1666,7 +1653,7 @@ const practiceAPI = (function () {
   }
 
   function renderTrueFalse(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Обери True або False'));
+    renderTaskTitle(container, task, 'Обери True або False');
 
     const rows = [];
     const items = Array.isArray(task?.items) ? task.items : [];
@@ -1739,9 +1726,7 @@ const practiceAPI = (function () {
   }
 
   function renderSynonymClue(container, task) {
-    container.appendChild(
-      el('h3', {}, task.prompt || 'Доберіть слово за описом')
-    );
+    renderTaskTitle(container, task, 'Доберіть слово за описом');
 
     const wordBank = Array.isArray(task?.wordBank) ? task.wordBank : [];
     if (wordBank.length) {
@@ -1819,7 +1804,7 @@ const practiceAPI = (function () {
   }
 
   function renderScramble(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Розшифруйте слова'));
+    renderTaskTitle(container, task, 'Розшифруйте слова');
 
     const rows = [];
     const items = Array.isArray(task?.items) ? task.items : [];
@@ -1880,7 +1865,7 @@ const practiceAPI = (function () {
   }
 
   function renderOddOneOut(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Знайди зайве слово'));
+    renderTaskTitle(container, task, 'Знайди зайве слово');
 
     const blocks = [];
     const items = Array.isArray(task?.items) ? task.items : [];
@@ -1960,9 +1945,7 @@ const practiceAPI = (function () {
   }
 
   function renderWriting(container, task) {
-    container.appendChild(
-      el('h3', {}, task.prompt || 'Writing/Speaking prompt')
-    );
+    renderTaskTitle(container, task, 'Writing/Speaking prompt');
     if (task.description)
       container.appendChild(el('p', { class: 'muted' }, task.description));
     const list = el('div', { style: 'margin-top:8px;' });
@@ -1995,7 +1978,7 @@ const practiceAPI = (function () {
   }
 
   function renderAudio(container, task) {
-    container.appendChild(el('h3', {}, task.prompt || 'Audio task'));
+    renderTaskTitle(container, task, 'Audio task');
 
     const audioCandidates = [];
     const collectAudio = value => {
@@ -2027,7 +2010,9 @@ const practiceAPI = (function () {
       audioSources.forEach(src => {
         player.appendChild(el('source', { src: resolveAssetPath(src) }));
       });
-      player.appendChild(document.createTextNode('Ваш браузер не підтримує відтворення аудіо.'));
+      player.appendChild(
+        document.createTextNode('Ваш браузер не підтримує відтворення аудіо.')
+      );
       audioWrap.appendChild(player);
       container.appendChild(audioWrap);
     }
@@ -2243,8 +2228,7 @@ const practiceAPI = (function () {
               'label',
               {
                 for: id,
-                style:
-                  'display:flex;align-items:center;gap:8px;margin:4px 0;',
+                style: 'display:flex;align-items:center;gap:8px;margin:4px 0;',
               },
               el('input', {
                 type: allowMulti ? 'checkbox' : 'radio',
@@ -2365,6 +2349,19 @@ const practiceAPI = (function () {
       document.body.appendChild(wrap);
     }
     return root;
+  }
+  function createCheckbox() {
+    const elem = el('input', {
+      type: 'checkbox',
+      class: 'check-task-status',
+    });
+    return elem;
+  }
+
+  function renderTaskTitle(container, task, prompt) {
+    container.appendChild(
+      el('h3', {}, createCheckbox(), task.prompt || prompt)
+    );
   }
 
   function init() {
