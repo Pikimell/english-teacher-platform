@@ -1,0 +1,667 @@
+{
+  "title": "Конструкція there is / there are",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "mcq-there-is-mcq-1",
+      "type": "mcq",
+      "prompt": "Choose the correct option.",
+      "items": [
+        {
+          "q": "___ a cat on the roof?",
+          "choices": ["Is there", "Are there", "There is"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ two books on the table.",
+          "choices": ["There is", "There are", "There be"],
+          "answer": ["1"]
+        },
+        {
+          "q": "___ a dog in the garden.",
+          "choices": ["There is", "There are", "There be"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ any students in the classroom today?",
+          "choices": ["Is there", "Are there", "There is"],
+          "answer": ["1"]
+        },
+        {
+          "q": "___ a TV in the kitchen?",
+          "choices": ["Is there", "Are there", "There is"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ any milk in the fridge?",
+          "choices": ["Is there", "Are there", "There is"],
+          "answer": ["0"]
+        },
+        {
+          "q": "There ___ not any apples on the table.",
+          "choices": ["is", "are", "be"],
+          "answer": ["1"]
+        },
+        {
+          "q": "There ___ not a chair in the room.",
+          "choices": ["is", "are", "be"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ five students in the class.",
+          "choices": ["There is", "There are", "There be"],
+          "answer": ["1"]
+        },
+        {
+          "q": "___ many flowers in the garden.",
+          "choices": ["There is", "There are", "There be"],
+          "answer": ["1"]
+        }
+      ]
+    },
+    {
+      "id": "gap-there-is-1",
+      "type": "gap",
+      "prompt": "Complete the sentences with the correct form of 'there is' or 'there are'.",
+      "items": [
+        { "q": "___ a book on the desk.", "answer": ["There is"] },
+        { "q": "___ two chairs in the kitchen.", "answer": ["There are"] },
+        { "q": "___ any milk in the fridge?", "answer": ["Is there"] },
+        { "q": "No, ___ not.", "answer": ["there is"] },
+        {
+          "q": "___ a lot of people in the park today.",
+          "answer": ["There are"]
+        },
+        { "q": "___ a mirror on the wall?", "answer": ["Is there"] },
+        { "q": "___ an apple on the table.", "answer": ["There is"] },
+        { "q": "___ any pictures on the wall?", "answer": ["Are there"] },
+        { "q": "Yes, ___!", "answer": ["there is"] },
+        { "q": "There ___ not any flowers in the garden.", "answer": ["are"] },
+        { "q": "___ a cat under the table.", "answer": ["There is"] },
+        { "q": "___ five cars in the parking lot.", "answer": ["There are"] },
+        { "q": "___ an umbrella in your bag?", "answer": ["Is there"] },
+        { "q": "___ a TV in your living room?", "answer": ["Is there"] }
+      ]
+    },
+    {
+      "id": "order-there-is-1",
+      "type": "order",
+      "prompt": "Put the words in the correct order to make a sentence.",
+      "items": [
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["a", "There", "is", "lamp", "in", "the", "room"],
+          "answer": "There is a lamp in the room"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["There", "three", "are", "chairs", "in", "the", "kitchen"],
+          "answer": "There are three chairs in the kitchen"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["a", "There", "cat", "is", "on", "the", "roof"],
+          "answer": "There is a cat on the roof"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["many", "There", "in", "are", "books", "the", "bag"],
+          "answer": "There are many books in the bag"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["in", "the", "park", "There", "is", "bench", "a"],
+          "answer": "There is a bench in the park"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["There", "is", "a", "clock", "on", "the", "wall"],
+          "answer": "There is a clock on the wall"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["There", "are", "many", "people", "in", "the", "park"],
+          "answer": "There are many people in the park"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["There", "is", "an", "apple", "on", "the", "table"],
+          "answer": "There is an apple on the table"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["There", "are", "two", "dogs", "in", "the", "yard"],
+          "answer": "There are two dogs in the yard"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["There", "is", "a", "bus", "stop", "near", "my", "house"],
+          "answer": "There is a bus stop near my house"
+        },
+        {
+          "q": "Arrange the question",
+          "tokens": ["Is", "there", "a", "dog", "in", "the", "yard", "?"],
+          "answer": "Is there a dog in the yard?"
+        },
+        {
+          "q": "Arrange the question",
+          "tokens": [
+            "Are",
+            "there",
+            "any",
+            "students",
+            "in",
+            "the",
+            "classroom",
+            "?"
+          ],
+          "answer": "Are there any students in the classroom?"
+        },
+        {
+          "q": "Arrange the question",
+          "tokens": ["Is", "there", "a", "TV", "in", "your", "room", "?"],
+          "answer": "Is there a TV in your room?"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["There", "is", "not", "a", "chair", "in", "the", "room"],
+          "answer": "There is not a chair in the room"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": [
+            "There",
+            "are",
+            "not",
+            "any",
+            "books",
+            "on",
+            "the",
+            "desk"
+          ],
+          "answer": "There are not any books on the desk"
+        }
+      ]
+    },
+    {
+      "id": "truefalse-there-is-1",
+      "type": "truefalse",
+      "prompt": "Read the sentences and decide if they are true or false.",
+      "items": [
+        { "statement": "There isn’t a car in the garage.", "answer": true },
+        {
+          "statement": "There aren’t any chairs in the room.",
+          "answer": false
+        },
+        { "statement": "Is there a TV in the living room?", "answer": true },
+        { "statement": "Are there any books on the desk?", "answer": true },
+        { "statement": "There is a dog under the chair.", "answer": false },
+        { "statement": "There are three lamps on the desk.", "answer": false },
+        { "statement": "There is a computer in the office.", "answer": true },
+        { "statement": "There are ten students in the class.", "answer": true },
+        { "statement": "There is a phone on the table.", "answer": true },
+        { "statement": "There are birds in the sky.", "answer": true }
+      ]
+    },
+    {
+      "id": "context-there-is-1",
+      "type": "context",
+      "prompt": "Read the text and answer the questions below.",
+      "context": {
+        "title": "My Room",
+        "format": "descriptive",
+        "body": [
+          "My room is small but very comfortable.",
+          "There is a big window that lets a lot of sunlight in every morning.",
+          "Next to the window, there is a wooden desk where I study and do my homework.",
+          "On the desk, there are some books, a notebook, and a small green lamp.",
+          "There is also a computer on the desk that I use to watch videos and learn English.",
+          "In the corner of the room, there is a soft chair where I like to read my favorite stories.",
+          "There are two pictures on the wall — one of my family and another of a beach.",
+          "Next to the bed, there is a small table with a clock and a plant on it.",
+          "There is a big wardrobe near the door where I keep my clothes and shoes.",
+          "My room isn’t very big, but there are many things that make it feel cozy and special."
+        ]
+      },
+      "questions": [
+        {
+          "q": "How many pictures are on the wall?",
+          "choices": ["one", "two", "three"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What is next to the window?",
+          "choices": ["a wooden desk", "a big wardrobe", "a soft chair"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What is on the desk?",
+          "choices": [
+            "some books, a notebook, and a lamp",
+            "only a computer",
+            "a vase with flowers"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "What color is the lamp on the desk?",
+          "choices": ["green", "blue", "yellow"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Where is the soft chair?",
+          "choices": [
+            "in the corner of the room",
+            "next to the door",
+            "behind the desk"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "What pictures are on the wall?",
+          "choices": [
+            "one of my family and one of a beach",
+            "one of a cat and one of flowers",
+            "one of my school and one of a park"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "What is on the small table next to the bed?",
+          "choices": [
+            "a clock and a plant",
+            "books and a lamp",
+            "a photo and a candle"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "Where is the wardrobe?",
+          "choices": [
+            "near the door",
+            "next to the bed",
+            "in front of the window"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "What do I keep in the wardrobe?",
+          "choices": ["clothes and shoes", "books and toys", "plants and food"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Why does the person like the room?",
+          "choices": [
+            "because it’s cozy and special",
+            "because it’s big and empty",
+            "because it has a TV and sofa"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "What is near the door?",
+          "choices": ["a big wardrobe", "a small table", "a desk"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What can you see on the wall?",
+          "choices": ["two pictures", "a big mirror", "nothing"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Where is the small table?",
+          "choices": ["next to the bed", "under the window", "near the door"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What does the computer help the person do?",
+          "choices": [
+            "watch videos and learn English",
+            "play games",
+            "read books"
+          ],
+          "answer": ["0"]
+        },
+        {
+          "q": "Is the room big or small?",
+          "choices": ["small", "big", "empty"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "roleplay-there-is-1",
+      "type": "roleplay",
+      "prompt": "Roleplay: describing a place using 'there is' and 'there are'.",
+      "scenario": {
+        "setting": "At a new apartment",
+        "summary": "One person describes what is in each room, and the other asks questions.",
+        "roles": [
+          {
+            "name": "Student 1",
+            "goal": "describe the apartment using 'there is' and 'there are'"
+          },
+          {
+            "name": "Student 2",
+            "goal": "ask questions about what is in each room"
+          }
+        ],
+        "steps": [
+          "Start with the living room",
+          "Ask about the bedroom",
+          "Talk about the kitchen"
+        ]
+      },
+      "phrases": [
+        {
+          "phrase": "There is a sofa in the living room.",
+          "translation": "У вітальні є диван."
+        },
+        {
+          "phrase": "There are two chairs in the kitchen.",
+          "translation": "На кухні є два стільці."
+        },
+        {
+          "phrase": "Is there a TV in the bedroom?",
+          "translation": "У спальні є телевізор?"
+        },
+        { "phrase": "Yes, there is.", "translation": "Так, є." },
+        {
+          "phrase": "There aren’t any pictures on the wall.",
+          "translation": "На стіні немає жодних картин."
+        },
+        {
+          "phrase": "There is a mirror on the wall.",
+          "translation": "На стіні є дзеркало."
+        },
+        {
+          "phrase": "There are flowers on the balcony.",
+          "translation": "На балконі є квіти."
+        },
+        {
+          "phrase": "There is a fridge in the kitchen.",
+          "translation": "На кухні є холодильник."
+        },
+        {
+          "phrase": "There are three rooms in my flat.",
+          "translation": "У моїй квартирі є три кімнати."
+        },
+        {
+          "phrase": "There is a carpet on the floor.",
+          "translation": "На підлозі є килим."
+        },
+        {
+          "phrase": "Is there a table in the kitchen?",
+          "translation": "Є стіл на кухні?"
+        },
+        {
+          "phrase": "There isn’t a sofa in the living room.",
+          "translation": "У вітальні немає дивану."
+        },
+        {
+          "phrase": "Are there any pictures on the wall?",
+          "translation": "Є картини на стіні?"
+        },
+        {
+          "phrase": "There aren’t any chairs in the garden.",
+          "translation": "У саду немає стільців."
+        },
+        {
+          "phrase": "Is there a fridge in the kitchen?",
+          "translation": "Є холодильник на кухні?"
+        }
+      ]
+    },
+    {
+      "id": "open-there-is-1",
+      "type": "open",
+      "prompt": "Speak or write sentences using 'there is' and 'there are'.",
+      "items": [
+        { "situation": "Describe your room using 'there is' and 'there are'." },
+        { "situation": "Look around and say what you see in your classroom." },
+        {
+          "situation": "Describe a park or a place you like using 'there is' and 'there are'."
+        },
+        {
+          "situation": "Talk about your dream room using 'there is' and 'there are'."
+        },
+        {
+          "situation": "Say five sentences about your house using 'there is' and 'there are'."
+        },
+        {
+          "situation": "Describe what is in your kitchen using 'there is' and 'there are'."
+        },
+        { "situation": "Talk about a park near your house." },
+        { "situation": "Imagine a dream office — what is there?" },
+        { "situation": "Describe what is in your bag or backpack." },
+        { "situation": "Say what is in your favorite café or restaurant." },
+        {
+          "situation": "Ask your teacher three questions using 'Is there' or 'Are there'."
+        },
+        {
+          "situation": "Say three sentences about things that are not in your room."
+        },
+        {
+          "situation": "Ask your friend questions about what is in their house."
+        }
+      ],
+      "scoring": {
+        "criteria": [
+          "Uses correct forms of 'there is' and 'there are'",
+          "Speaks in full sentences",
+          "Keeps to A1 vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "mcq-there-is-hw-1",
+      "type": "mcq",
+      "prompt": "Choose the correct form of 'there is' or 'there are'.",
+      "items": [
+        {
+          "q": "___ a pencil on the desk.",
+          "choices": ["There is", "There are", "There be"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ two apples in the basket.",
+          "choices": ["There is", "There are", "There be"],
+          "answer": ["1"]
+        },
+        {
+          "q": "___ a computer in your classroom?",
+          "choices": ["Is there", "Are there", "There is"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ any students at school today?",
+          "choices": ["Is there", "Are there", "There is"],
+          "answer": ["1"]
+        },
+        {
+          "q": "There ___ not any chairs in the kitchen.",
+          "choices": ["is", "are", "be"],
+          "answer": ["1"]
+        },
+        {
+          "q": "___ a park near your house?",
+          "choices": ["Is there", "Are there", "There is"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ any bread in the cupboard?",
+          "choices": ["Is there", "Are there", "There is"],
+          "answer": ["0"]
+        },
+        {
+          "q": "There ___ not a TV in my bedroom.",
+          "choices": ["is", "are", "be"],
+          "answer": ["0"]
+        },
+        {
+          "q": "___ many books on the shelf.",
+          "choices": ["There is", "There are", "There be"],
+          "answer": ["1"]
+        },
+        {
+          "q": "___ an umbrella in your bag?",
+          "choices": ["Is there", "Are there", "There is"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "gap-there-is-hw-1",
+      "type": "gap",
+      "prompt": "Complete the sentences using 'there is' or 'there are'.",
+      "items": [
+        { "q": "___ a big clock on the wall.", "answer": ["There is"] },
+        { "q": "___ many cars in the street.", "answer": ["There are"] },
+        { "q": "___ a cinema in your city?", "answer": ["Is there"] },
+        { "q": "___ not any milk left.", "answer": ["There is"] },
+        { "q": "___ two windows in my room.", "answer": ["There are"] },
+        {
+          "q": "___ a beautiful garden behind the house.",
+          "answer": ["There is"]
+        },
+        { "q": "___ any pictures in the hall?", "answer": ["Are there"] },
+        { "q": "___ not any people in the park now.", "answer": ["There are"] },
+        { "q": "___ a supermarket near your home?", "answer": ["Is there"] },
+        { "q": "___ not a bus stop on this street.", "answer": ["There is"] }
+      ]
+    },
+    {
+      "id": "order-there-is-hw-1",
+      "type": "order",
+      "prompt": "Arrange the words to make correct sentences with 'there is' or 'there are'.",
+      "items": [
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["There", "is", "a", "book", "on", "the", "table"],
+          "answer": "There is a book on the table"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["There", "are", "four", "chairs", "in", "the", "room"],
+          "answer": "There are four chairs in the room"
+        },
+        {
+          "q": "Arrange the question",
+          "tokens": [
+            "Is",
+            "there",
+            "a",
+            "mirror",
+            "in",
+            "the",
+            "bathroom",
+            "?"
+          ],
+          "answer": "Is there a mirror in the bathroom?"
+        },
+        {
+          "q": "Arrange the question",
+          "tokens": [
+            "Are",
+            "there",
+            "any",
+            "students",
+            "in",
+            "the",
+            "library",
+            "?"
+          ],
+          "answer": "Are there any students in the library?"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["There", "is", "not", "a", "TV", "in", "the", "bedroom"],
+          "answer": "There is not a TV in the bedroom"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": [
+            "There",
+            "are",
+            "not",
+            "any",
+            "books",
+            "on",
+            "the",
+            "desk"
+          ],
+          "answer": "There are not any books on the desk"
+        },
+        {
+          "q": "Arrange the question",
+          "tokens": ["Is", "there", "a", "window", "in", "your", "room", "?"],
+          "answer": "Is there a window in your room?"
+        },
+        {
+          "q": "Arrange the question",
+          "tokens": ["Are", "there", "many", "trees", "in", "the", "park", "?"],
+          "answer": "Are there many trees in the park?"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["There", "is", "a", "lamp", "on", "the", "desk"],
+          "answer": "There is a lamp on the desk"
+        },
+        {
+          "q": "Arrange the question",
+          "tokens": ["Is", "there", "a", "bus", "stop", "nearby", "?"],
+          "answer": "Is there a bus stop nearby?"
+        }
+      ]
+    },
+    {
+      "id": "truefalse-there-is-hw-1",
+      "type": "truefalse",
+      "prompt": "Decide if each sentence is true or false based on grammar.",
+      "items": [
+        { "statement": "There are not any dogs in the yard.", "answer": true },
+        { "statement": "There is a computer on the bed.", "answer": false },
+        { "statement": "Is there a shop near the school?", "answer": true },
+        { "statement": "There is two chairs in the kitchen.", "answer": false },
+        { "statement": "There are some pictures on the wall.", "answer": true },
+        {
+          "statement": "There isn’t a mirror in the bathroom.",
+          "answer": true
+        },
+        { "statement": "Are there any apples on the table?", "answer": true },
+        {
+          "statement": "There are a book and a pen on the desk.",
+          "answer": false
+        },
+        { "statement": "Is there a TV in your living room?", "answer": true },
+        {
+          "statement": "There aren’t any people in the park now.",
+          "answer": true
+        }
+      ]
+    },
+    {
+      "id": "audio-there-is-1",
+      "type": "audio",
+      "prompt": "Listen to the text and answer the questions!",
+      "dialogs": [
+        {
+          "text": "Hello! My name is Mia. Today I want to tell you about my new classroom. It is bright and clean. There is one big window, and there is a lot of light in the morning. There are twenty desks for students and one desk for the teacher. The teacher’s desk is near the board. On the wall, there are many posters and a big map. There is a projector on the ceiling, but there isn’t a TV. There are two green plants near the window, and there is a clock above the door. At the end of the day, we check the room. There aren’t any papers on the floor, and there is a nice, quiet feeling.",
+          "voice": "female"
+        }
+      ],
+      "questions": [
+        "What place does Mia describe?",
+        "How many windows are there in the classroom?",
+        "How many desks are there for students?",
+        "Where is the teacher’s desk?",
+        "Is there a TV in the classroom?",
+        "What is on the wall?",
+        "Is there a projector?",
+        "Are there any plants? How many?",
+        "Where is the clock?",
+        "What do students check at the end of the day?"
+      ]
+    }
+  ]
+}
