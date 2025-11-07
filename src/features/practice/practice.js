@@ -8,7 +8,11 @@ import {
   isSharePanelActive,
   setShareAvailability,
 } from '@features/helpers/share-panel.js';
-import { speakText } from '@features/helpers/speaker.js';
+import {
+  speakText,
+  listAvailableVoices,
+  estimateVoiceGender,
+} from '@features/helpers/speaker.js';
 
 // Convention: for page /X/indexN.html → fetch /X/practice/indexN.json
 const practiceAPI = (function () {
@@ -1980,6 +1984,272 @@ const practiceAPI = (function () {
   function renderAudio(container, task) {
     renderTaskTitle(container, task, 'Audio task');
 
+    const voiceOptionKeys = [
+      'voice',
+      'voiceName',
+      'voiceGender',
+      'gender',
+      'lang',
+      'rate',
+      'pitch',
+      'volume',
+    ];
+    const hasVoiceOptionKeys = value => {
+      if (!value || typeof value !== 'object' || Array.isArray(value))
+        return false;
+      return voiceOptionKeys.some(key =>
+        Object.prototype.hasOwnProperty.call(value, key)
+      );
+    };
+    const toNumberOrNull = value => {
+      if (typeof value === 'number' && Number.isFinite(value)) return value;
+      if (typeof value === 'string' && value.trim() !== '') {
+        const num = Number(value);
+        return Number.isFinite(num) ? num : null;
+      }
+      return null;
+    };
+    const normalizeVoiceProfile = raw => {
+      if (!raw) return null;
+      if (Array.isArray(raw)) {
+        for (const candidate of raw) {
+          const normalized = normalizeVoiceProfile(candidate);
+          if (normalized) return normalized;
+        }
+        return null;
+      }
+      if (typeof raw === 'string') {
+        const trimmed = raw.trim();
+        if (!trimmed) return null;
+        const lowered = trimmed.toLowerCase();
+        if (lowered === 'male' || lowered === 'female') {
+          return {
+            voice: trimmed,
+            gender: lowered,
+            voiceGender: lowered,
+          };
+        }
+        if (/\s/.test(trimmed)) return { voiceName: trimmed };
+        return { voice: trimmed };
+      }
+      if (typeof raw !== 'object') return null;
+      const profile = {};
+      if (raw.voice) profile.voice = raw.voice;
+      if (raw.voiceName) profile.voiceName = raw.voiceName;
+      if (raw.voiceGender) profile.voiceGender = raw.voiceGender;
+      if (raw.gender) profile.gender = raw.gender;
+      if (raw.lang) profile.lang = raw.lang;
+      const numericKeys = ['rate', 'pitch', 'volume'];
+      numericKeys.forEach(key => {
+        if (raw[key] != null) {
+          const parsed = toNumberOrNull(raw[key]);
+          if (parsed != null) profile[key] = parsed;
+        }
+      });
+      return Object.keys(profile).length ? profile : null;
+    };
+    const normalizeVoiceSequence = source => {
+      if (!Array.isArray(source)) return null;
+      const list = source
+        .map(normalizeVoiceProfile)
+        .filter(Boolean);
+      return list.length ? list : null;
+    };
+    const normalizeVoiceMap = source => {
+      if (!source || typeof source !== 'object' || Array.isArray(source))
+        return null;
+      const entries = Object.entries(source).reduce((acc, [key, value]) => {
+        const profile = normalizeVoiceProfile(value);
+        if (profile) acc[key] = profile;
+        return acc;
+      }, {});
+      return Object.keys(entries).length ? entries : null;
+    };
+    const assignVoiceProfile = (target, profile) => {
+      if (!profile) return;
+      if (profile.voice && !target.voice) target.voice = profile.voice;
+      if (profile.voiceName && !target.voiceName)
+        target.voiceName = profile.voiceName;
+      if (profile.voiceGender && !target.voiceGender)
+        target.voiceGender = profile.voiceGender;
+      if (profile.gender && !target.gender) target.gender = profile.gender;
+      if (profile.lang && !target.lang) target.lang = profile.lang;
+      if (profile.rate != null && target.rate == null)
+        target.rate = profile.rate;
+      if (profile.pitch != null && target.pitch == null)
+        target.pitch = profile.pitch;
+      if (profile.volume != null && target.volume == null)
+        target.volume = profile.volume;
+    };
+    const createDialogVoiceResolver = taskConfig => {
+      const sequence =
+        normalizeVoiceSequence(taskConfig.voices) ||
+        normalizeVoiceSequence(taskConfig.voiceSequence) ||
+        normalizeVoiceSequence(
+          Array.isArray(taskConfig.voice) ? taskConfig.voice : null
+        ) ||
+        [];
+      const mapSourceCandidates = [
+        taskConfig.voiceMap,
+        taskConfig.voiceBySpeaker,
+        taskConfig.dialogVoices,
+      ];
+      let mapSource =
+        mapSourceCandidates.find(
+          candidate =>
+            candidate && typeof candidate === 'object' && !Array.isArray(candidate)
+        ) || null;
+      if (
+        !mapSource &&
+        taskConfig.voice &&
+        typeof taskConfig.voice === 'object' &&
+        !Array.isArray(taskConfig.voice) &&
+        !hasVoiceOptionKeys(taskConfig.voice)
+      ) {
+        mapSource = taskConfig.voice;
+      }
+      const map = normalizeVoiceMap(mapSource);
+      if (!sequence.length && !map) return null;
+      const fallback = map ? map.default || map['*'] || null : null;
+      return (dialog, index = 0) => {
+        const key =
+          dialog.voiceKey ||
+          dialog.speaker ||
+          dialog.role ||
+          dialog.character ||
+          dialog.actor;
+        if (key && map && map[key]) return map[key];
+        if (sequence.length) return sequence[index % sequence.length];
+        if (fallback) return fallback;
+        return null;
+      };
+    };
+    const dialogVoiceResolver = createDialogVoiceResolver(task);
+
+    let voiceWarningEl = null;
+    let lastVoiceSummary = null;
+    const applyVoiceWarning = summary => {
+      if (summary) lastVoiceSummary = summary;
+      if (!voiceWarningEl) return;
+      const payload = summary || lastVoiceSummary;
+      if (!payload || !payload.stats) {
+        voiceWarningEl.style.display = 'none';
+        return;
+      }
+      const { stats } = payload;
+      if (stats.male && stats.female) {
+        voiceWarningEl.style.display = 'none';
+        voiceWarningEl.textContent = '';
+        return;
+      }
+      let message = '';
+      if (!stats.male && !stats.female) {
+        message =
+          '⚠️ Браузер не надав жодного голосу для синтезу мовлення. Буде використано стандартний голос.';
+      } else if (!stats.male) {
+        message =
+          '⚠️ У браузері не знайдено чоловічих голосів. Всі репліки будуть відтворені з доступними голосами.';
+      } else if (!stats.female) {
+        message =
+          '⚠️ У браузері не знайдено жіночих голосів. Всі репліки будуть відтворені з доступними голосами.';
+      } else if (stats.total < 2) {
+        message =
+          '⚠️ Доступний лише один голос синтезу, тому діалог звучатиме однаково.';
+      }
+      if (message) {
+        voiceWarningEl.textContent = message;
+        voiceWarningEl.style.display = 'block';
+      } else {
+        voiceWarningEl.style.display = 'none';
+      }
+    };
+
+    const createVoiceSummary = voices => {
+      const buckets = {
+        male: [],
+        female: [],
+        neutral: [],
+      };
+      voices.forEach(voice => {
+        const detected = estimateVoiceGender(voice);
+        if (detected === 'male') buckets.male.push(voice);
+        else if (detected === 'female') buckets.female.push(voice);
+        else buckets.neutral.push(voice);
+      });
+      const used = new Set();
+      const pickFrom = list => {
+        if (!list.length) return null;
+        const candidate = list.find(v => !used.has(v.name)) || list[0];
+        if (candidate) used.add(candidate.name);
+        return candidate;
+      };
+      const pick = gender => {
+        if (gender === 'male') {
+          return pickFrom(buckets.male) || pickFrom(buckets.neutral);
+        }
+        if (gender === 'female') {
+          return pickFrom(buckets.female) || pickFrom(buckets.neutral);
+        }
+        return (
+          pickFrom(buckets.neutral) ||
+          pickFrom(buckets.male) ||
+          pickFrom(buckets.female)
+        );
+      };
+      return {
+        pick,
+        stats: {
+          male: buckets.male.length,
+          female: buckets.female.length,
+          neutral: buckets.neutral.length,
+          total: voices.length,
+        },
+      };
+    };
+
+    const assignVoicesFromSummary = summary => {
+      if (!summary || typeof summary.pick !== 'function') return;
+      dialogs.forEach(dialog => {
+        if (!dialog || dialog.voiceName) return;
+        const rawVoice = String(dialog.voice || '').trim().toLowerCase();
+        const genderPreference =
+          dialog.gender ||
+          dialog.voiceGender ||
+          (rawVoice === 'male' || rawVoice === 'female' ? rawVoice : null);
+        if (!genderPreference) return;
+        const selected = summary.pick(genderPreference);
+        if (selected) {
+          dialog.voiceName = selected.name;
+          if (!dialog.lang && selected.lang) dialog.lang = selected.lang;
+        }
+      });
+    };
+
+    let voiceSummaryPromise = null;
+    const ensureVoiceSummary = () => {
+      if (!synth) return Promise.resolve(null);
+      if (!voiceSummaryPromise) {
+        voiceSummaryPromise = (async () => {
+          try {
+            const voices = await listAvailableVoices();
+            if (!voices || !voices.length) {
+              applyVoiceWarning({
+                stats: { male: 0, female: 0, neutral: 0, total: 0 },
+              });
+              return null;
+            }
+            const summary = createVoiceSummary(voices);
+            assignVoicesFromSummary(summary);
+            applyVoiceWarning(summary);
+            return summary;
+          } catch {
+            return null;
+          }
+        })();
+      }
+      return voiceSummaryPromise;
+    };
+
     const audioCandidates = [];
     const collectAudio = value => {
       if (!value) return;
@@ -2023,7 +2293,17 @@ const practiceAPI = (function () {
       if (!entry) return;
       if (typeof entry === 'string') {
         const text = entry.trim();
-        if (text) dialogs.push({ text });
+        if (text) {
+          const normalized = { text };
+          if (dialogVoiceResolver) {
+            const resolved = dialogVoiceResolver(
+              normalized,
+              dialogs.length
+            );
+            assignVoiceProfile(normalized, resolved);
+          }
+          dialogs.push(normalized);
+        }
         return;
       }
       if (typeof entry === 'object') {
@@ -2037,8 +2317,17 @@ const practiceAPI = (function () {
         if (entry.rate != null) normalized.rate = entry.rate;
         if (entry.pitch != null) normalized.pitch = entry.pitch;
         if (entry.volume != null) normalized.volume = entry.volume;
+        if (entry.speaker) normalized.speaker = entry.speaker;
+        if (entry.role) normalized.role = entry.role;
+        if (entry.character) normalized.character = entry.character;
+        if (entry.actor) normalized.actor = entry.actor;
+        if (entry.voiceKey) normalized.voiceKey = entry.voiceKey;
         if (entry.ttsOptions && typeof entry.ttsOptions === 'object') {
           normalized.ttsOptions = { ...entry.ttsOptions };
+        }
+        if (dialogVoiceResolver) {
+          const resolved = dialogVoiceResolver(normalized, dialogs.length);
+          assignVoiceProfile(normalized, resolved);
         }
         dialogs.push(normalized);
       }
@@ -2049,10 +2338,30 @@ const practiceAPI = (function () {
         task.text
           .map(segment => String(segment || '').trim())
           .filter(Boolean)
-          .forEach(text => dialogs.push({ text }));
+          .forEach(text => {
+            const normalized = { text };
+            if (dialogVoiceResolver) {
+              const resolved = dialogVoiceResolver(
+                normalized,
+                dialogs.length
+              );
+              assignVoiceProfile(normalized, resolved);
+            }
+            dialogs.push(normalized);
+          });
       } else if (typeof task.text === 'string') {
         const text = String(task.text || '').trim();
-        if (text) dialogs.push({ text });
+        if (text) {
+          const normalized = { text };
+          if (dialogVoiceResolver) {
+            const resolved = dialogVoiceResolver(
+              normalized,
+              dialogs.length
+            );
+            assignVoiceProfile(normalized, resolved);
+          }
+          dialogs.push(normalized);
+        }
       }
     }
 
@@ -2063,8 +2372,19 @@ const practiceAPI = (function () {
     const ttsOptions = {};
     if (task.lang) ttsOptions.lang = task.lang;
     if (task.voiceName) ttsOptions.voiceName = task.voiceName;
-    if (task.voice) ttsOptions.voice = task.voice;
+    if (typeof task.voice === 'string') {
+      ttsOptions.voice = task.voice;
+    } else if (
+      task.voice &&
+      typeof task.voice === 'object' &&
+      !Array.isArray(task.voice) &&
+      hasVoiceOptionKeys(task.voice)
+    ) {
+      assignVoiceProfile(ttsOptions, normalizeVoiceProfile(task.voice));
+    }
     if (task.gender) ttsOptions.gender = task.gender;
+    if (task.voiceGender && !ttsOptions.voiceGender)
+      ttsOptions.voiceGender = task.voiceGender;
     if (typeof task.ttsOptions === 'object' && task.ttsOptions)
       Object.assign(ttsOptions, task.ttsOptions);
     if (typeof task.voiceOptions === 'object' && task.voiceOptions)
@@ -2125,12 +2445,17 @@ const practiceAPI = (function () {
           'display:none;margin-top:12px;padding:12px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#0f172a;',
       });
       dialogs.forEach((dialog, idx) => {
+        const speakerLabel =
+          dialog.speaker || dialog.role || dialog.character || dialog.actor;
+        const transcriptLine = speakerLabel
+          ? `${speakerLabel}: ${dialog.text}`
+          : dialog.text;
         const paragraph = el(
           'p',
           {
             style: idx === 0 ? 'margin:0 0 6px 0;' : 'margin:6px 0 0 0;',
           },
-          dialog.text
+          transcriptLine
         );
         transcriptBox.appendChild(paragraph);
       });
@@ -2206,6 +2531,7 @@ const practiceAPI = (function () {
           resetState();
           return;
         }
+        await ensureVoiceSummary();
         const dialog = dialogs[currentIndex];
         const options = { ...ttsOptions };
         if (dialog.lang) options.lang = dialog.lang;
@@ -2245,9 +2571,10 @@ const practiceAPI = (function () {
         }
       };
 
-      playBtn.addEventListener('click', () => {
+      playBtn.addEventListener('click', async () => {
         if (!isSpeaking) {
           if (!dialogs.length) return;
+          await ensureVoiceSummary();
           isSpeaking = true;
           currentIndex = 0;
           playBtn.textContent = '⏹ Stop';
@@ -2278,6 +2605,14 @@ const practiceAPI = (function () {
       }
       container.appendChild(ttsWrap);
       container.appendChild(transcriptBox);
+      voiceWarningEl = el('div', {
+        class: 'muted',
+        style:
+          'display:none;margin-top:6px;font-size:13px;color:#b45309;line-height:1.4;',
+      });
+      applyVoiceWarning(lastVoiceSummary);
+      container.appendChild(voiceWarningEl);
+      ensureVoiceSummary();
     } else if (!audioSources.length && dialogs.length) {
       container.appendChild(
         el(

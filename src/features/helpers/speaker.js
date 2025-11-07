@@ -1,10 +1,26 @@
+const hasSpeechSynthesis = () =>
+  typeof window !== 'undefined' && 'speechSynthesis' in window;
+
+let voicesReadyPromise = null;
 function getVoicesReady() {
-  return new Promise(resolve => {
-    const voices = speechSynthesis.getVoices();
-    if (voices.length) return resolve(voices);
-    speechSynthesis.onvoiceschanged = () =>
-      resolve(speechSynthesis.getVoices());
+  if (!hasSpeechSynthesis()) return Promise.resolve([]);
+  if (voicesReadyPromise) return voicesReadyPromise;
+  voicesReadyPromise = new Promise(resolve => {
+    const voices = window.speechSynthesis.getVoices();
+    if (voices.length) {
+      resolve(voices);
+      return;
+    }
+    const handle = () => {
+      const nextVoices = window.speechSynthesis.getVoices();
+      if (nextVoices.length) {
+        window.speechSynthesis.onvoiceschanged = null;
+        resolve(nextVoices);
+      }
+    };
+    window.speechSynthesis.onvoiceschanged = handle;
   });
+  return voicesReadyPromise;
 }
 
 function normalizeLower(value) {
@@ -12,6 +28,81 @@ function normalizeLower(value) {
     .trim()
     .toLowerCase();
 }
+
+const FEMALE_VOICE_HINTS = [
+  'female',
+  'woman',
+  'girl',
+  'samantha',
+  'victoria',
+  'karen',
+  'moira',
+  'serena',
+  'allison',
+  'ava',
+  'amelie',
+  'amelia',
+  'emma',
+  'olivia',
+  'isabella',
+  'mia',
+  'sophia',
+  'sofia',
+  'fiona',
+  'pauline',
+  'paula',
+  'linda',
+  'viola',
+  'nora',
+  'clara',
+  'lucy',
+  'tessa',
+  'zoe',
+];
+
+const MALE_VOICE_HINTS = [
+  'male',
+  'man',
+  'boy',
+  'alex',
+  'daniel',
+  'fred',
+  'bruce',
+  'oliver',
+  'arthur',
+  'henry',
+  'james',
+  'john',
+  'luke',
+  'mark',
+  'michael',
+  'paul',
+  'peter',
+  'thomas',
+  'victor',
+  'william',
+  'liam',
+  'noah',
+  'sam',
+  'george',
+  'carlos',
+  'diego',
+  'roberto',
+  'sergio',
+  'mateo',
+];
+
+const matchVoiceHints = (name, uri, hints) =>
+  hints.some(hint => name.includes(hint) || uri.includes(hint));
+
+export const estimateVoiceGender = voice => {
+  if (!voice) return null;
+  const name = normalizeLower(voice.name);
+  const uri = normalizeLower(voice.voiceURI);
+  if (matchVoiceHints(name, uri, FEMALE_VOICE_HINTS)) return 'female';
+  if (matchVoiceHints(name, uri, MALE_VOICE_HINTS)) return 'male';
+  return null;
+};
 
 function pickVoice(voices, options = {}) {
   if (!Array.isArray(voices) || !voices.length) return null;
@@ -38,23 +129,10 @@ function pickVoice(voices, options = {}) {
 
   const voiceMatchesGender = candidate => {
     if (!genderHint) return false;
+    const detected = estimateVoiceGender(candidate);
+    if (detected) return detected === genderHint;
     const name = normalizeLower(candidate.name);
     const uri = normalizeLower(candidate.voiceURI);
-    if (genderHint === 'male') {
-      return (
-        name.includes('male') ||
-        uri.includes('male') ||
-        /\bmale\b|\bman\b|\bboy\b|m\d/.test(name)
-      );
-    }
-    if (genderHint === 'female') {
-      return (
-        name.includes('female') ||
-        uri.includes('female') ||
-        name.includes('woman') ||
-        name.includes('girl')
-      );
-    }
     return name.includes(genderHint) || uri.includes(genderHint);
   };
 
@@ -102,9 +180,10 @@ export async function speakText(
     volume = 1,
   } = {}
 ) {
+  if (!hasSpeechSynthesis()) return null;
   await getVoicesReady();
   const utter = new SpeechSynthesisUtterance(text);
-  const availableVoices = speechSynthesis.getVoices();
+  const availableVoices = window.speechSynthesis.getVoices();
   const chosen = pickVoice(availableVoices, {
     lang,
     voiceName,
@@ -124,8 +203,8 @@ export async function speakText(
   utter.pitch = pitch;
   utter.volume = volume;
 
-  speechSynthesis.cancel();
-  speechSynthesis.speak(utter);
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utter);
   return utter;
 }
 
@@ -137,6 +216,13 @@ export function createPlayBtn(text) {
   });
   playBtn.classList.add('play-speak-btn');
   return playBtn;
+}
+
+export async function listAvailableVoices() {
+  if (!hasSpeechSynthesis()) return [];
+  await getVoicesReady();
+  const voices = window.speechSynthesis.getVoices();
+  return Array.isArray(voices) ? voices.slice() : [];
 }
 
 export { pickVoice };

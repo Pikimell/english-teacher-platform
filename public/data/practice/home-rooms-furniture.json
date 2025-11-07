@@ -430,23 +430,70 @@
       "id": "audio-home-1",
       "type": "audio",
       "prompt": "Listen to this text and answer the questions!",
+      "voices": ["female", "male"],
       "dialogs": [
         {
-          "text": "Hi! My name is Daniel. I live in an apartment in the city. My apartment has a small living room, a kitchen, and a bedroom. In the living room, there is a gray sofa and a big TV. I like to watch movies there. The kitchen is small but clean. There is a table and two chairs. I cook breakfast there every morning. In my bedroom, there is a comfortable bed and a desk. I study at my desk in the evening. My favorite place is the balcony. There are some flowers and a chair where I can drink tea and read a book.",
+          "speaker": "Emma",
+          "text": "Hi, Liam! Thanks for visiting my apartment in the city. It's small but really cozy.",
+          "voice": "female"
+        },
+        {
+          "speaker": "Liam",
+          "text": "Hi, Emma! I love seeing new places. Can you show me the living room first?",
+          "voice": "male"
+        },
+        {
+          "speaker": "Emma",
+          "text": "Sure! The living room has a gray sofa and a big TV. I like to relax here and watch movies after work.",
+          "voice": "female"
+        },
+        {
+          "speaker": "Liam",
+          "text": "It looks comfortable. What about the kitchen?",
+          "voice": "male"
+        },
+        {
+          "speaker": "Emma",
+          "text": "The kitchen is small but very clean. There is a table and two chairs, and I cook breakfast there every morning.",
+          "voice": "female"
+        },
+        {
+          "speaker": "Liam",
+          "text": "Nice! Where do you usually study or work?",
+          "voice": "male"
+        },
+        {
+          "speaker": "Emma",
+          "text": "I study in my bedroom. There's a comfortable bed and a desk where I read in the evening.",
+          "voice": "female"
+        },
+        {
+          "speaker": "Liam",
+          "text": "Do you have a favorite spot in the apartment?",
+          "voice": "male"
+        },
+        {
+          "speaker": "Emma",
+          "text": "Yes, the balcony! It has some flowers and a chair. I like to drink tea there and read a book when the weather is nice.",
+          "voice": "female"
+        },
+        {
+          "speaker": "Liam",
+          "text": "That sounds perfect. Thanks for the tour, Emma!",
           "voice": "male"
         }
       ],
       "questions": [
-        "Where does Daniel live?",
-        "How many rooms are in Daniel’s apartment?",
+        "Who is visiting Emma?",
+        "Where does Emma live?",
         "What color is the sofa in the living room?",
-        "What does Daniel do in the kitchen?",
-        "Where does Daniel study?",
-        "What can we find on the balcony?",
-        "When does Daniel cook breakfast?",
-        "What is Daniel’s favorite place in his apartment?",
+        "What does Emma like to do in the living room?",
         "How many chairs are in the kitchen?",
-        "What does Daniel do on the balcony?"
+        "What does Emma cook every morning?",
+        "Where does Emma study in the evening?",
+        "What makes the balcony special?",
+        "What drink does Emma enjoy on the balcony?",
+        "How does Liam react at the end of the visit?"
       ]
     }
   ]
