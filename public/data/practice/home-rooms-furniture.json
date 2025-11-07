@@ -1,0 +1,453 @@
+{
+  "title": "Дім і квартира (кімнати, меблі, предмети)",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "mcq-task-mcq-1",
+      "type": "mcq",
+      "prompt": "Choose the correct option.",
+      "items": [
+        {
+          "q": "The ___ is where we sleep.",
+          "choices": ["kitchen", "bedroom", "bathroom"],
+          "answer": ["1"]
+        },
+        {
+          "q": "We cook food in the ___.",
+          "choices": ["living room", "kitchen", "garage"],
+          "answer": ["1"]
+        },
+        {
+          "q": "The ___ is for washing hands.",
+          "choices": ["bedroom", "bathroom", "dining room"],
+          "answer": ["1"]
+        },
+        {
+          "q": "We eat meals at the ___.",
+          "choices": ["table", "sofa", "desk"],
+          "answer": ["0"]
+        },
+        {
+          "q": "A ___ is a place to sit.",
+          "choices": ["table", "chair", "lamp"],
+          "answer": ["1"]
+        },
+        {
+          "q": "The ___ keeps our clothes.",
+          "choices": ["shelf", "wardrobe", "floor"],
+          "answer": ["1"]
+        },
+        {
+          "q": "We watch TV in the ___.",
+          "choices": ["kitchen", "living room", "bathroom"],
+          "answer": ["1"]
+        },
+        {
+          "q": "A ___ is used for light.",
+          "choices": ["lamp", "bed", "carpet"],
+          "answer": ["0"]
+        },
+        {
+          "q": "The ___ is where we park the car.",
+          "choices": ["garden", "garage", "balcony"],
+          "answer": ["1"]
+        },
+        {
+          "q": "We keep food in the ___.",
+          "choices": ["fridge", "desk", "chair"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "match-task-match-1",
+      "type": "match",
+      "prompt": "Match the item with its correct description.",
+      "pairs": [
+        {
+          "left": "bed",
+          "right": "a piece of furniture for sleeping"
+        },
+        {
+          "left": "table",
+          "right": "a piece of furniture with a flat top and legs"
+        },
+        {
+          "left": "chair",
+          "right": "a seat for one person"
+        },
+        {
+          "left": "sofa",
+          "right": "a comfortable seat for multiple people"
+        },
+        {
+          "left": "kitchen",
+          "right": "a room for cooking"
+        },
+        {
+          "left": "bathroom",
+          "right": "a room for washing"
+        },
+        {
+          "left": "living room",
+          "right": "a room for relaxing and socializing"
+        },
+        {
+          "left": "window",
+          "right": "an opening in the wall for light and air"
+        },
+        {
+          "left": "door",
+          "right": "a movable barrier for entering or exiting"
+        },
+        {
+          "left": "cupboard",
+          "right": "a piece of furniture for storing dishes"
+        }
+      ]
+    },
+    {
+      "id": "context-task-context-1",
+      "type": "context",
+      "prompt": "Read the text and answer the questions.",
+      "context": {
+        "title": "My Home",
+        "format": "narrative",
+        "body": [
+          "I live in a small house with my family.",
+          "My house has three rooms: a living room, a kitchen, and a bedroom.",
+          "The living room is bright and cozy.",
+          "In the living room, there is a blue sofa and a TV on a stand.",
+          "There is also a small table and a lamp next to the sofa.",
+          "In the kitchen, there is a table and four chairs where I eat breakfast.",
+          "There is a fridge, a sink, and a window that looks to the garden.",
+          "My bedroom has a big, soft bed and a wardrobe for my clothes.",
+          "There is also a small desk where I read or write.",
+          "Outside, there is a small garden with flowers and a swing.",
+          "We water the flowers in the evening and sit on the swing at the weekend."
+        ]
+      },
+      "questions": [
+        {
+          "q": "How many rooms are in the house?",
+          "choices": ["Two", "Three", "Four"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What color is the sofa?",
+          "choices": ["Red", "Blue", "Green"],
+          "answer": ["1"]
+        },
+        {
+          "q": "How many chairs are in the kitchen?",
+          "choices": ["Two", "Three", "Four"],
+          "answer": ["2"]
+        },
+        {
+          "q": "What is in the bedroom?",
+          "choices": ["A sofa", "A bed", "A table"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What is the bed like?",
+          "choices": ["Big and soft", "Small and hard", "Old and broken"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Where does the person eat breakfast?",
+          "choices": ["In the garden", "In the living room", "At the table"],
+          "answer": ["2"]
+        },
+        {
+          "q": "What is in the garden?",
+          "choices": ["A car", "Flowers", "A table"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What furniture is in the living room?",
+          "choices": ["A bed", "A sofa", "A wardrobe"],
+          "answer": ["1"]
+        },
+        {
+          "q": "How many rooms does the house have?",
+          "choices": ["One", "Three", "Five"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What can you find in the kitchen?",
+          "choices": ["A sofa", "A table", "A bed"],
+          "answer": ["1"]
+        }
+      ]
+    },
+    {
+      "id": "short-task-short-1",
+      "type": "short",
+      "prompt": "Write short answers about Дім і квартира (кімнати, меблі, предмети).",
+      "items": [
+        {
+          "q": "What room do you sleep in?",
+          "keywords": ["sleep", "room", "name"]
+        },
+        {
+          "q": "What furniture is in your living room?",
+          "keywords": ["furniture", "living", "room"]
+        },
+        {
+          "q": "Describe your kitchen.",
+          "keywords": ["kitchen", "describe", "what"]
+        },
+        {
+          "q": "What do you have on your desk?",
+          "keywords": ["desk", "have", "on"]
+        },
+        {
+          "q": "How many rooms are in your house?",
+          "keywords": ["how", "many", "rooms"]
+        },
+        {
+          "q": "What color are your walls?",
+          "keywords": ["color", "walls", "what"]
+        },
+        {
+          "q": "Do you have a garden? Describe it.",
+          "keywords": ["garden", "have", "describe"]
+        },
+        {
+          "q": "What is your favorite room? Why?",
+          "keywords": ["favorite", "room", "why"]
+        },
+        {
+          "q": "What items do you have in your bedroom?",
+          "keywords": ["items", "bedroom", "have"]
+        },
+        {
+          "q": "What do you like about your home?",
+          "keywords": ["like", "about", "home"]
+        }
+      ]
+    },
+    {
+      "id": "roleplay-task-roleplay-1",
+      "type": "roleplay",
+      "prompt": "Roleplay a conversation about your home and furniture.",
+      "scenario": {
+        "setting": "In a living room",
+        "summary": "You are talking about your home and the furniture in it. Describe your favorite room and what is in it.",
+        "roles": [
+          {
+            "name": "Student 1",
+            "goal": "Describe your favorite room and its furniture.",
+            "details": "Your favorite room is the bedroom. You have a bed and a desk."
+          },
+          {
+            "name": "Student 2",
+            "goal": "Ask questions about Student 1's room and share your own room.",
+            "details": "Your favorite room is the kitchen. You have a table and chairs."
+          }
+        ],
+        "steps": [
+          "Student 1 starts by saying what their favorite room is.",
+          "Student 1 describes the furniture in their room.",
+          "Student 2 asks questions about the room and furniture.",
+          "Student 2 shares about their own favorite room.",
+          "Students discuss similarities and differences in their rooms."
+        ]
+      },
+      "phrases": [
+        {
+          "phrase": "What is your favorite room?",
+          "translation": "A question to ask about someone's preferred room."
+        },
+        {
+          "phrase": "I like my bedroom.",
+          "translation": "A statement about liking a specific room."
+        },
+        {
+          "phrase": "There is a bed in my room.",
+          "translation": "Describing an item of furniture in the room."
+        },
+        {
+          "phrase": "Do you have a desk?",
+          "translation": "Asking if someone has a specific piece of furniture."
+        },
+        {
+          "phrase": "My kitchen has a table.",
+          "translation": "Describing an item in the kitchen."
+        },
+        {
+          "phrase": "What furniture do you have?",
+          "translation": "A question about the items in a room."
+        },
+        {
+          "phrase": "I have chairs and a table.",
+          "translation": "Listing furniture items in a room."
+        },
+        {
+          "phrase": "My favorite room is cozy.",
+          "translation": "Describing a room as comfortable."
+        },
+        {
+          "phrase": "I like to study at my desk.",
+          "translation": "Talking about an activity in a specific room."
+        },
+        {
+          "phrase": "What color is your room?",
+          "translation": "Asking about the color of the room."
+        }
+      ]
+    },
+    {
+      "id": "truefalse-task-truefalse-1",
+      "type": "truefalse",
+      "prompt": "Decide if each statement is true or false.",
+      "items": [
+        {
+          "statement": "A kitchen has a stove.",
+          "answer": true
+        },
+        {
+          "statement": "A bathroom has a bed.",
+          "answer": false
+        },
+        {
+          "statement": "A living room has a sofa.",
+          "answer": true
+        },
+        {
+          "statement": "A bedroom has a table.",
+          "answer": false
+        },
+        {
+          "statement": "A dining room has chairs.",
+          "answer": true
+        },
+        {
+          "statement": "A closet is for clothes.",
+          "answer": true
+        },
+        {
+          "statement": "A garage is for cars.",
+          "answer": true
+        },
+        {
+          "statement": "A window is a type of door.",
+          "answer": false
+        },
+        {
+          "statement": "A lamp gives light.",
+          "answer": true
+        },
+        {
+          "statement": "A rug is on the wall.",
+          "answer": false
+        }
+      ]
+    },
+    {
+      "id": "synonym-clue-task-synonym-clue-1",
+      "type": "synonym-clue",
+      "prompt": "Choose the correct word based on the clue.",
+      "wordBank": [
+        "sofa",
+        "table",
+        "bed",
+        "chair",
+        "lamp",
+        "kitchen",
+        "wardrobe",
+        "desk",
+        "living room"
+      ],
+      "items": [
+        {
+          "clue": "A place to sleep",
+          "answers": ["bed"]
+        },
+        {
+          "clue": "A seat with four legs",
+          "answers": ["chair"]
+        },
+        {
+          "clue": "A piece of furniture for eating or working",
+          "answers": ["table"]
+        },
+        {
+          "clue": "A soft seat for relaxing",
+          "answers": ["sofa"]
+        },
+        {
+          "clue": "A light that stands on a desk or table",
+          "answers": ["lamp"]
+        },
+        {
+          "clue": "A room for cooking food",
+          "answers": ["kitchen"]
+        },
+        {
+          "clue": "A room where we sit and watch TV",
+          "answers": ["living room"]
+        },
+        {
+          "clue": "A flat surface for studying or working",
+          "answers": ["desk"]
+        },
+        {
+          "clue": "A tall piece of furniture for keeping clothes",
+          "answers": ["wardrobe"]
+        },
+        {
+          "clue": "A small piece of furniture for sitting alone",
+          "answers": ["chair"]
+        }
+      ]
+    },
+    {
+      "id": "open-task-open-1",
+      "type": "open",
+      "prompt": "Let's talk about your home — a place where you feel comfortable.",
+      "items": [
+        { "situation": "Which room do you like most in your home? Why?" },
+        { "situation": "Where do you spend the most time at home?" },
+        { "situation": "What can you see from your window?" },
+        { "situation": "What do you do in your living room?" },
+        { "situation": "What small thing in your home makes you happy?" },
+        { "situation": "Do you like your room clean or a little messy?" },
+        { "situation": "What new thing would you like to have in your home?" },
+        { "situation": "What do you hear in your home in the evening?" },
+        { "situation": "Describe a cozy place in your home." },
+        { "situation": "What three words describe your home?" }
+      ],
+      "scoring": {
+        "criteria": [
+          "Uses descriptive language and personal opinions.",
+          "Gives thoughtful and clear answers.",
+          "Speaks naturally about real experiences or feelings."
+        ]
+      }
+    },
+    {
+      "id": "audio-home-1",
+      "type": "audio",
+      "prompt": "Listen to this text and answer the questions!",
+      "dialogs": [
+        {
+          "text": "Hi! My name is Daniel. I live in an apartment in the city. My apartment has a small living room, a kitchen, and a bedroom. In the living room, there is a gray sofa and a big TV. I like to watch movies there. The kitchen is small but clean. There is a table and two chairs. I cook breakfast there every morning. In my bedroom, there is a comfortable bed and a desk. I study at my desk in the evening. My favorite place is the balcony. There are some flowers and a chair where I can drink tea and read a book.",
+          "voice": "male"
+        }
+      ],
+      "questions": [
+        "Where does Daniel live?",
+        "How many rooms are in Daniel’s apartment?",
+        "What color is the sofa in the living room?",
+        "What does Daniel do in the kitchen?",
+        "Where does Daniel study?",
+        "What can we find on the balcony?",
+        "When does Daniel cook breakfast?",
+        "What is Daniel’s favorite place in his apartment?",
+        "How many chairs are in the kitchen?",
+        "What does Daniel do on the balcony?"
+      ]
+    }
+  ]
+}

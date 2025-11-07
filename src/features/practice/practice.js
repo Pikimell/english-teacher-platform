@@ -2088,9 +2088,106 @@ const practiceAPI = (function () {
         '▶ Play'
       );
       playBtn.setAttribute('aria-pressed', 'false');
+      const transcriptToggleBtn = el(
+        'button',
+        {
+          type: 'button',
+          class: 'btn secondary',
+          style:
+            'padding:8px 14px;border-radius:8px;border:1px solid #cbd5e1;background:#fff;color:#0f172a;cursor:pointer;display:inline-flex;align-items:center;gap:6px;',
+        },
+        '👁 Показати текст'
+      );
+      transcriptToggleBtn.setAttribute('aria-expanded', 'false');
+      const clampRate = (value, min, max) =>
+        Math.min(max, Math.max(min, value));
+      const rateInputId = uniqueInputId('speech-rate');
+      const minRate = 0.5;
+      const maxRate = 1.5;
+      const parseRate = value => {
+        const num = Number(value);
+        return Number.isFinite(num) ? num : 1;
+      };
+      const initialRate = clampRate(
+        parseRate(ttsOptions.rate != null ? ttsOptions.rate : 1),
+        minRate,
+        maxRate
+      );
+      let rateValue = initialRate;
+      let rateDirty = false;
       let isSpeaking = false;
       let currentIndex = 0;
       let currentUtterance = null;
+      let transcriptVisible = false;
+      const transcriptBox = el('div', {
+        class: 'audio-transcript',
+        style:
+          'display:none;margin-top:12px;padding:12px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#0f172a;',
+      });
+      dialogs.forEach((dialog, idx) => {
+        const paragraph = el(
+          'p',
+          {
+            style: idx === 0 ? 'margin:0 0 6px 0;' : 'margin:6px 0 0 0;',
+          },
+          dialog.text
+        );
+        transcriptBox.appendChild(paragraph);
+      });
+      const rateValueLabel = el(
+        'span',
+        {
+          style:
+            'font-weight:600;min-width:42px;text-align:right;color:#0f172a;',
+        },
+        `${rateValue.toFixed(1)}x`
+      );
+      const rateSlider = el('input', {
+        type: 'range',
+        id: rateInputId,
+        min: String(minRate),
+        max: String(maxRate),
+        step: '0.1',
+        value: String(rateValue),
+        style: 'flex:1;',
+      });
+      rateSlider.addEventListener('input', () => {
+        rateValue = clampRate(
+          parseRate(rateSlider.value),
+          minRate,
+          maxRate
+        );
+        rateDirty = true;
+        rateValueLabel.textContent = `${rateValue.toFixed(1)}x`;
+      });
+      const rateControl = el(
+        'div',
+        {
+          style:
+            'display:flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid #e2e8f0;border-radius:8px;background:#fff;min-width:240px;',
+        },
+        el(
+          'label',
+          {
+            for: rateInputId,
+            style: 'font-size:14px;color:#475569;',
+          },
+          'Швидкість'
+        ),
+        rateSlider,
+        rateValueLabel
+      );
+
+      const updateTranscriptState = () => {
+        transcriptBox.style.display = transcriptVisible ? 'block' : 'none';
+        transcriptToggleBtn.textContent = transcriptVisible
+          ? '🙈 Сховати текст'
+          : '👁 Показати текст';
+        transcriptToggleBtn.setAttribute(
+          'aria-expanded',
+          transcriptVisible ? 'true' : 'false'
+        );
+      };
 
       const resetState = () => {
         isSpeaking = false;
@@ -2125,6 +2222,9 @@ const practiceAPI = (function () {
         ) {
           Object.assign(options, dialog.ttsOptions);
         }
+        if (rateDirty || options.rate == null) {
+          options.rate = clampRate(rateValue, minRate, maxRate);
+        }
         try {
           const utterance = await speakText(dialog.text, options);
           if (!utterance) {
@@ -2158,8 +2258,15 @@ const practiceAPI = (function () {
           resetState();
         }
       });
+      transcriptToggleBtn.addEventListener('click', () => {
+        transcriptVisible = !transcriptVisible;
+        updateTranscriptState();
+      });
+      updateTranscriptState();
 
       ttsWrap.appendChild(playBtn);
+      ttsWrap.appendChild(transcriptToggleBtn);
+      ttsWrap.appendChild(rateControl);
       if (!audioSources.length) {
         ttsWrap.appendChild(
           el(
@@ -2170,6 +2277,7 @@ const practiceAPI = (function () {
         );
       }
       container.appendChild(ttsWrap);
+      container.appendChild(transcriptBox);
     } else if (!audioSources.length && dialogs.length) {
       container.appendChild(
         el(
