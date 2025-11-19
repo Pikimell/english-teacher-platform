@@ -51,6 +51,7 @@
 | `order`           | Відновлення порядку слів                        | 10                              | `items[].q`, `items[].tokens[]`, `items[].answer` |
 | `short`           | Коротка письмова відповідь                      | 3–6                             | `items[].q`, `items[].keywords[]`                 |
 | `writing`         | Міні writing task з чеклістом                   | 1                               | `description`, `checklist[]`                      |
+| `audio`           | Аудіювання з питаннями                          | 6–10 питань                     | `dialogs[]`, `voices[]`, `questions[]`            |
 | `roleplay`        | Рольова гра з ролями та фразами                 | 6–10                            | `scenario`, `phrases[]`                           |
 | `dialogue-gap`    | Діалог із пропусками і банком слів              | 4–8 реплік                      | `words[]`, `dialogue[]`, `answers[]`              |
 | `dialogue-order`  | Впорядкування реплік діалогу                    | 4–8 реплік                      | `lines[]`, `solution[]`                           |
@@ -202,6 +203,36 @@
     "Use at least three Present Simple verbs",
     "Add one connective (and, then, next)",
     "Check spelling and punctuation"
+  ]
+}
+```
+
+### `audio` — Аудіювання
+- Використовується для прослуховування (через TTS або завантажений файл) і перевірки розуміння.
+- `dialogs` — масив реплік, де кожна репліка є рядком або обʼєктом `{ "speaker": "", "voice": "female|male", "text": "" }`. Рекомендовано 8–10 коротких реплік з 2 персонажами.
+- `voices` — масив голосів, які варто використати у TTS (наприклад, `["female","male"]`).
+- `questions` — масив рядків або обʼєктів. Щоб авто-перевірка працювала, бажано повертати обʼєкти з `prompt`, `choices[]` (рівно 3 опції) та `answer`. Для відкритих питань `answer` може бути рядком або списком синонімів у нижньому регістрі.
+
+```json
+{
+  "id": "audio-shopping-1",
+  "type": "audio",
+  "prompt": "Listen to the chat and answer the questions.",
+  "voices": ["female", "male"],
+  "dialogs": [
+    { "speaker": "Emma", "voice": "female", "text": "Hi, Tom! Ready to go to the supermarket?" },
+    { "speaker": "Tom", "voice": "male", "text": "Yes, let me grab the list so I don't forget anything." }
+  ],
+  "questions": [
+    {
+      "prompt": "Where are Emma and Tom going?",
+      "choices": ["To the cinema", "To the supermarket", "To the post office"],
+      "answer": ["1"]
+    },
+    {
+      "prompt": "What does Tom need before leaving?",
+      "answer": ["a list", "the list"]
+    }
   ]
 }
 ```

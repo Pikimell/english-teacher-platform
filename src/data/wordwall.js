@@ -70,11 +70,56 @@ export const lessonWordwalls = {
     },
   ],
   'custom-no7-43000f0c': [],
-  'custom-no8-846a8d9e': [],
-  'custom-no9-cf6e6bee': [],
-  'custom-no10-28500f64': [],
-  'custom-no11-d8d86e31': [],
-  'custom-no12-93e53fe8': [],
+  'custom-no8-846a8d9e': [
+    {
+      id: '4cb129b786784655babbc0b994405e7e',
+      themeId: '65',
+      templateId: '30',
+      fontStackId: '12',
+      title: 'Wordwall вправа для особових займенників',
+      url: 'hhttps://wordwall.net/ru/embed/4cb129b786784655babbc0b994405e7e?themeId=42&templateId=30&fontStackId=0',
+    },
+  ],
+  'custom-no9-cf6e6bee': [
+    {
+      id: '4cb129b786784655babbc0b994405e7e',
+      themeId: '65',
+      templateId: '30',
+      fontStackId: '12',
+      title: 'Wordwall вправа для особових займенників',
+      url: 'hhttps://wordwall.net/ru/embed/4cb129b786784655babbc0b994405e7e?themeId=42&templateId=30&fontStackId=0',
+    },
+  ],
+  'custom-no10-28500f64': [
+    {
+      id: 'ba00f615444e40e5ae7e67727e98b34d',
+      themeId: '65',
+      templateId: '30',
+      fontStackId: '12',
+      title: 'Wordwall вправа для особових займенників',
+      url: 'https://wordwall.net/ru/embed/ba00f615444e40e5ae7e67727e98b34d?themeId=65&templateId=30&fontStackId=0',
+    },
+  ],
+  'custom-no11-d8d86e31': [
+    {
+      id: 'ba00f615444e40e5ae7e67727e98b34d',
+      themeId: '65',
+      templateId: '30',
+      fontStackId: '12',
+      title: 'Wordwall вправа для особових займенників',
+      url: 'https://wordwall.net/ru/embed/ba00f615444e40e5ae7e67727e98b34d?themeId=65&templateId=30&fontStackId=0',
+    },
+  ],
+  'custom-no12-93e53fe8': [
+    {
+      id: 'ba00f615444e40e5ae7e67727e98b34d',
+      themeId: '65',
+      templateId: '30',
+      fontStackId: '12',
+      title: 'Wordwall вправа для особових займенників',
+      url: 'https://wordwall.net/ru/embed/ba00f615444e40e5ae7e67727e98b34d?themeId=65&templateId=30&fontStackId=0',
+    },
+  ],
   'custom-no13-f4bcb910': [],
   'custom-no14-40fdaa86': [],
   'custom-no15-ef51a27e': [],
@@ -112,7 +157,9 @@ export const lessonWordwalls = {
   'custom-no47-d6148758': [],
   'custom-no48-3e5720c9': [],
   'custom-no49-f759cafd': [],
-  'custom-no50-23930ae8': [],
+  'custom-no50-23930ae8': [
+    //https://wordwall.net/ru/resource/37338716/first-lesson-cool-speaking
+  ],
 };
 
 function buildBaseUrl(config) {

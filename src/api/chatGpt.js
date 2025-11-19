@@ -602,6 +602,64 @@ REQUIREMENTS:
       `.trim(),
       user: oneLineUser(topic, 'odd-one-out', itemsCount),
     },
+    audio: {
+      system: `
+${commonRules}
+OUTPUT SCHEMA:
+{
+  "id": "audio-${seedId}-1",
+  "type": "audio",
+  "prompt": "Listen to the conversation and answer the questions.",
+  "voices": ["female", "male"],
+  "dialogs": [
+    { "speaker": "<Name>", "voice": "female", "text": "<1–2 short sentences>" }
+  ],
+  "questions": [
+    {
+      "prompt": "<question text>",
+      "choices": ["<option0>", "<option1>", "<option2>"],
+      "answer": ["<index_of_correct_choice_as_string>"]
+    },
+    {
+      "prompt": "<short-question>",
+      "answer": ["<expected text answer>"]
+    }
+  ]
+}
+
+REQUIREMENTS:
+- Create a coherent listening script (dialogue or monologue) of 120–160 words tied to "${topic}".
+- Use 2 speakers whenever possible and alternate their lines in "dialogs". Every entry must supply "speaker", "voice" ("female" or "male"), and "text" under 20 words.
+- Provide the "voices" array listing the genders you use (e.g., ["female","male"]).
+- Generate ${itemsCount} comprehension questions in "questions". Mix multiple-choice and short-answer prompts.
+- Multiple-choice questions must include exactly 3 choices and return the correct index as a string ("0" | "1" | "2").
+- Short-answer questions must keep answers within 2–5 words. Provide text solutions using "answer": "<text>" or an array of acceptable phrasings.
+- Return only JSON following the schema—no commentary, markdown, or extra keys.
+
+EXAMPLE (FORMAT ONLY; DO NOT COPY CONTENT):
+{
+  "id": "audio-ps-1",
+  "type": "audio",
+  "prompt": "Listen to the chat and answer the questions.",
+  "voices": ["female", "male"],
+  "dialogs": [
+    { "speaker": "Emma", "voice": "female", "text": "Hi, Leo! Ready for the quiz today?" },
+    { "speaker": "Leo", "voice": "male", "text": "Almost. I still need to review the verbs." }
+  ],
+  "questions": [
+    {
+      "prompt": "What are Emma and Leo talking about?",
+      "choices": ["A movie night", "A school quiz", "A family visit"],
+      "answer": ["1"]
+    },
+    {
+      "prompt": "Where will Leo study after school?",
+      "answer": ["in the library", "at the library"]
+    }
+  ]
+}`.trim(),
+      user: oneLineUser(topic, 'audio', itemsCount),
+    },
     context: {
       system: `
 ${commonRules}
@@ -685,6 +743,7 @@ const defaultItemsByType = {
   short: 3,
   open: 4,
   writing: 1,
+  audio: 6,
   roleplay: 8,
   'dialogue-gap': 6,
   'dialogue-order': 6,

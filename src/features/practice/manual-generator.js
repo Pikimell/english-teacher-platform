@@ -43,6 +43,7 @@ function attachToolbar(topic = 'Present Simple') {
         ['error', 'Error — виправ помилки'],
         ['order', 'Order — порядок слів'],
         ['short', 'Short — короткі відповіді'],
+        ['audio', 'Аудіювання — прослухай і відповідай'],
         ['writing', 'Writing — міні-письмо'],
       ].map(([val, text]) => {
         const o = document.createElement('option');

@@ -441,7 +441,6 @@
         "cushion"
       ]
     },
-
     {
       "id": "synonym-clue-task-synonym-clue-1",
       "type": "synonym-clue",
@@ -498,6 +497,110 @@
         {
           "clue": "a piece of furniture for sitting",
           "answers": ["cushion"]
+        }
+      ]
+    },
+    {
+      "id": "audio-task-audio-1",
+      "type": "audio",
+      "prompt": "Listen to the conversation and answer the questions.",
+      "voices": ["female", "male"],
+      "dialogs": [
+        {
+          "speaker": "Anna",
+          "voice": "female",
+          "text": "Hey, Mark! Did you see the new bathroom?"
+        },
+        {
+          "speaker": "Mark",
+          "voice": "male",
+          "text": "Yes! The bathtub looks amazing!"
+        },
+        {
+          "speaker": "Anna",
+          "voice": "female",
+          "text": "I love the shower gel and towels too."
+        },
+        {
+          "speaker": "Mark",
+          "voice": "male",
+          "text": "Where do you keep the toilet paper?"
+        },
+        {
+          "speaker": "Anna",
+          "voice": "female",
+          "text": "It's on the shelf next to the sink."
+        },
+        {
+          "speaker": "Mark",
+          "voice": "male",
+          "text": "Great! I need to brush my teeth."
+        },
+        {
+          "speaker": "Anna",
+          "voice": "female",
+          "text": "Don't forget your toothbrush and toothpaste!"
+        },
+        {
+          "speaker": "Mark",
+          "voice": "male",
+          "text": "I won't! What about the bedroom?"
+        },
+        {
+          "speaker": "Anna",
+          "voice": "female",
+          "text": "The double bed is very comfortable."
+        },
+        {
+          "speaker": "Mark",
+          "voice": "male",
+          "text": "And the cushions on the side table are nice!"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "What does Anna love in the bathroom?",
+          "choices": ["The bathtub", "The sink", "The toilet"],
+          "answer": ["0"]
+        },
+        {
+          "prompt": "Where is the toilet paper?",
+          "answer": ["on the shelf"]
+        },
+        {
+          "prompt": "What does Mark need to brush?",
+          "answer": ["his teeth"]
+        },
+        {
+          "prompt": "What type of bed is in the bedroom?",
+          "choices": ["Single bed", "Double bed", "Bunk bed"],
+          "answer": ["1"]
+        },
+        {
+          "prompt": "What is on the side table?",
+          "choices": ["A lamp", "A cushion", "A book"],
+          "answer": ["1"]
+        },
+        {
+          "prompt": "What does Anna ask Mark not to forget?",
+          "answer": ["toothbrush and toothpaste"]
+        },
+        {
+          "prompt": "What looks amazing in the bathroom?",
+          "answer": ["the bathtub"]
+        },
+        {
+          "prompt": "What does Mark say about the double bed?",
+          "answer": ["very comfortable"]
+        },
+        {
+          "prompt": "What does Anna mention about the towels?",
+          "answer": ["she loves them"]
+        },
+        {
+          "prompt": "What does Mark need to use in the bathroom?",
+          "choices": ["Shower gel", "Toilet paper", "Toothbrush"],
+          "answer": ["2"]
         }
       ]
     }
