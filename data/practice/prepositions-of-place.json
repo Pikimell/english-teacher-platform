@@ -475,6 +475,110 @@
           "answer": false
         }
       ]
+    },
+    {
+      "id": "audio-in-on-under-1",
+      "type": "audio",
+      "prompt": "Listen to the conversation and answer the questions.",
+      "voices": ["female", "male"],
+      "dialogs": [
+        {
+          "speaker": "Anna",
+          "voice": "female",
+          "text": "Look at my room, Tom! It's messy."
+        },
+        {
+          "speaker": "Tom",
+          "voice": "male",
+          "text": "Yes, I see. Where is your book?"
+        },
+        {
+          "speaker": "Anna",
+          "voice": "female",
+          "text": "It's under the bed."
+        },
+        {
+          "speaker": "Tom",
+          "voice": "male",
+          "text": "And what about your pencil?"
+        },
+        {
+          "speaker": "Anna",
+          "voice": "female",
+          "text": "It's on the desk."
+        },
+        {
+          "speaker": "Tom",
+          "voice": "male",
+          "text": "What is in the drawer?"
+        },
+        {
+          "speaker": "Anna",
+          "voice": "female",
+          "text": "There are some papers in there."
+        },
+        {
+          "speaker": "Tom",
+          "voice": "male",
+          "text": "Is your backpack on the chair?"
+        },
+        {
+          "speaker": "Anna",
+          "voice": "female",
+          "text": "Yes, it is on the chair."
+        },
+        {
+          "speaker": "Tom",
+          "voice": "male",
+          "text": "Let's clean your room together!"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "Where is Anna's book?",
+          "choices": ["on the desk", "under the bed", "in the drawer"],
+          "answer": ["1"]
+        },
+        {
+          "prompt": "What is on the desk?",
+          "choices": ["a book", "a pencil", "some papers"],
+          "answer": ["1"]
+        },
+        {
+          "prompt": "Where are the papers?",
+          "choices": ["in the drawer", "on the desk", "under the bed"],
+          "answer": ["0"]
+        },
+        {
+          "prompt": "Is the backpack on the chair?",
+          "choices": ["Yes", "No", "Maybe"],
+          "answer": ["0"]
+        },
+        {
+          "prompt": "Who is helping Anna?",
+          "answer": ["Tom"]
+        },
+        {
+          "prompt": "What does Anna think about her room?",
+          "answer": ["It's messy"]
+        },
+        {
+          "prompt": "Where is the pencil?",
+          "answer": ["on the desk"]
+        },
+        {
+          "prompt": "What is under the bed?",
+          "answer": ["the book"]
+        },
+        {
+          "prompt": "What is in the drawer?",
+          "answer": ["some papers"]
+        },
+        {
+          "prompt": "What do Anna and Tom plan to do?",
+          "answer": ["clean the room"]
+        }
+      ]
     }
   ]
 }
