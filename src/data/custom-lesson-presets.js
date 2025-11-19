@@ -44,7 +44,7 @@ export const customLessonPresets = [
   {
     id: 'custom-no8-846a8d9e',
     title: 'Урок №8',
-    topicIds: ['prepositions-of-place', 'home-rooms-furniture'],
+    topicIds: ['prepositions-of-place', 'home-rooms-furniture-v2'],
     createdAt: '2025-10-07T19:12:17.356Z',
   },
   {
@@ -300,3 +300,5 @@ export const customLessonPresets = [
     createdAt: '2025-10-07T19:12:59.356Z',
   },
 ];
+
+// in ,on, under, next to, near, by, Between, Behind, In front of, Above, Below

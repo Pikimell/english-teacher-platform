@@ -527,6 +527,15 @@ export const lessons = [
     tags: ['home', 'rooms', 'furniture'],
   },
   {
+    id: 'home-rooms-furniture-v2',
+    category: 'lexical',
+    level: 'A1',
+    title: 'Дім і квартира (кімнати, меблі, предмети)',
+    description: 'Назви кімнат та основних предметів у домі.',
+    htmlPath: 'lessons/lexical/home-rooms-furniture-v2.html',
+    tags: ['home', 'rooms', 'furniture'],
+  },
+  {
     id: 'household-actions',
     category: 'lexical',
     level: 'A1',

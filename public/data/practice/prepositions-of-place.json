@@ -1,0 +1,480 @@
+{
+  "title": "Прийменники місця (in, on, under...)",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "mcq-in-on-un-mcq-1",
+      "type": "mcq",
+      "prompt": "Choose the correct option.",
+      "items": [
+        {
+          "q": "The cat is ___ the table.",
+          "choices": ["on", "in", "under"],
+          "answer": ["2"]
+        },
+        {
+          "q": "The book is ___ the shelf.",
+          "choices": ["between", "on", "by"],
+          "answer": ["1"]
+        },
+        {
+          "q": "The dog is sitting ___ the chair.",
+          "choices": ["next to", "behind", "above"],
+          "answer": ["0"]
+        },
+        {
+          "q": "The picture is hanging ___ the wall.",
+          "choices": ["in front of", "on", "below"],
+          "answer": ["1"]
+        },
+        {
+          "q": "The park is ___ my house.",
+          "choices": ["near", "under", "between"],
+          "answer": ["0"]
+        },
+        {
+          "q": "The shoes are ___ the bed.",
+          "choices": ["in", "next to", "behind"],
+          "answer": ["0"]
+        },
+        {
+          "q": "The car is parked ___ the garage.",
+          "choices": ["in", "on", "above"],
+          "answer": ["0"]
+        },
+        {
+          "q": "The lamp is ___ the table.",
+          "choices": ["next to", "under", "between"],
+          "answer": ["0"]
+        },
+        {
+          "q": "The clock is ___ the door.",
+          "choices": ["behind", "in front of", "by"],
+          "answer": ["1"]
+        },
+        {
+          "q": "The flowers are ___ the window.",
+          "choices": ["above", "below", "on"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "gap-in-on-un-gap-1",
+      "type": "gap",
+      "prompt": "Fill the gaps with the correct word.",
+      "items": [
+        {
+          "q": "The cat is ___ the table.",
+          "answer": ["under"]
+        },
+        {
+          "q": "My book is ___ my bag.",
+          "answer": ["in"]
+        },
+        {
+          "q": "The dog is sitting ___ the chair.",
+          "answer": ["next to"]
+        },
+        {
+          "q": "There is a picture ___ the wall.",
+          "answer": ["on"]
+        },
+        {
+          "q": "The park is ___ my house.",
+          "answer": ["near"]
+        },
+        {
+          "q": "The car is parked ___ the garage.",
+          "answer": ["in"]
+        },
+        {
+          "q": "She is standing ___ the door.",
+          "answer": ["in front of"]
+        },
+        {
+          "q": "The clock is hanging ___ the shelf.",
+          "answer": ["above"]
+        },
+        {
+          "q": "The ball is ___ the box.",
+          "answer": ["below"]
+        },
+        {
+          "q": "The restaurant is ___ the bank and the store.",
+          "answer": ["between"]
+        }
+      ]
+    },
+    {
+      "id": "error-in-on-un-error-1",
+      "type": "error",
+      "prompt": "Find and correct the mistake (Present Simple, no final period).",
+      "items": [
+        {
+          "q": "The cat is in the table.",
+          "hint": "use on or under",
+          "answer": ["the cat is on the table", "the cat is under the table"]
+        },
+        {
+          "q": "She is sitting under the chair.",
+          "hint": "use in front of or next to",
+          "answer": [
+            "she is sitting in front of the chair",
+            "she is sitting next to the chair"
+          ]
+        },
+        {
+          "q": "The dog is behind the garden.",
+          "hint": "use in or near",
+          "answer": ["the dog is in the garden", "the dog is near the garden"]
+        },
+        {
+          "q": "The keys are between the sofa.",
+          "hint": "use on or under",
+          "answer": ["the keys are on the sofa", "the keys are under the sofa"]
+        },
+        {
+          "q": "The picture is above the desk.",
+          "hint": "use on or in front of",
+          "answer": [
+            "the picture is on the desk",
+            "the picture is in front of the desk"
+          ]
+        },
+        {
+          "q": "The shoes are next to the bed.",
+          "hint": "use in or on",
+          "answer": ["the shoes are in the bed", "the shoes are on the bed"]
+        },
+        {
+          "q": "The lamp is below the table.",
+          "hint": "use on or under",
+          "answer": ["the lamp is on the table", "the lamp is under the table"]
+        },
+        {
+          "q": "The car is in front of the house.",
+          "hint": "use next to or by",
+          "answer": ["the car is next to the house", "the car is by the house"]
+        },
+        {
+          "q": "The ball is in the box.",
+          "hint": "use on or under",
+          "answer": ["the ball is on the box", "the ball is under the box"]
+        }
+      ]
+    },
+    {
+      "id": "order-in-on-un-order-1",
+      "type": "order",
+      "prompt": "Put the words in the correct order.",
+      "items": [
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "cat", "is", "under", "the", "table"],
+          "answer": "the cat is under the table"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "book", "is", "on", "the", "shelf"],
+          "answer": "the book is on the shelf"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "dog", "is", "in", "the", "garden"],
+          "answer": "the dog is in the garden"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "ball", "is", "next", "to", "the", "chair"],
+          "answer": "the ball is next to the chair"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "park", "is", "near", "my", "house"],
+          "answer": "the park is near my house"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "car", "is", "by", "the", "road"],
+          "answer": "the car is by the road"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "cat", "is", "between", "the", "two", "dogs"],
+          "answer": "the cat is between the two dogs"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "school", "is", "behind", "the", "library"],
+          "answer": "the school is behind the library"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": [
+            "the",
+            "teacher",
+            "is",
+            "in",
+            "front",
+            "of",
+            "the",
+            "class"
+          ],
+          "answer": "the teacher is in front of the class"
+        },
+        {
+          "q": "Arrange the sentence",
+          "tokens": ["the", "bird", "is", "above", "the", "tree"],
+          "answer": "the bird is above the tree"
+        }
+      ]
+    },
+    {
+      "id": "short-in-on-un-short-1",
+      "type": "short",
+      "prompt": "Write short answers about Прийменники місця (in, on, under...).",
+      "items": [
+        {
+          "q": "Where is your favorite book? Write a sentence.",
+          "keywords": ["my", "favorite", "book"]
+        },
+        {
+          "q": "What is on your desk? Write 2–3 sentences.",
+          "keywords": ["there", "is", "on", "my", "desk"]
+        },
+        {
+          "q": "Describe your room. Where is your bed?",
+          "keywords": ["my", "bed", "is", "in", "the", "room"]
+        },
+        {
+          "q": "What is next to your house? Write a sentence.",
+          "keywords": ["next", "to", "my", "house"]
+        },
+        {
+          "q": "Where do you keep your shoes? Write 2–3 sentences.",
+          "keywords": ["my", "shoes", "are", "under", "the", "bed"]
+        },
+        {
+          "q": "What is near your school? Write a sentence.",
+          "keywords": ["there", "is", "a", "park", "near", "my", "school"]
+        },
+        {
+          "q": "What is between your two friends? Write a sentence.",
+          "keywords": ["i", "sit", "between", "my", "friends"]
+        },
+        {
+          "q": "Where is the cat? Write a sentence.",
+          "keywords": ["the", "cat", "is", "behind", "the", "sofa"]
+        },
+        {
+          "q": "What is in front of your house? Write a sentence.",
+          "keywords": [
+            "there",
+            "is",
+            "a",
+            "garden",
+            "in",
+            "front",
+            "of",
+            "my",
+            "house"
+          ]
+        },
+        {
+          "q": "What is above your head right now? Write a sentence.",
+          "keywords": ["the", "light", "is", "above", "my", "head"]
+        }
+      ]
+    },
+    {
+      "id": "writing-in-on-un-writing-1",
+      "type": "writing",
+      "prompt": "Write sentences using prepositions of place (in, on, under, next to, near, by, between, behind, in front of, above, below).",
+      "description": "Create 10 sentences that describe the location of different objects using the given prepositions. Make sure your sentences are interesting and not too simple.",
+      "checklist": [
+        "Use at least 10 different prepositions of place correctly.",
+        "Make sentences that are clear and easy to understand.",
+        "Include a variety of objects and locations in your sentences.",
+        "Check for correct grammar and punctuation.",
+        "Ensure each sentence is at least 5 words long."
+      ]
+    },
+    {
+      "id": "roleplay-in-on-un-roleplay-1",
+      "type": "roleplay",
+      "prompt": "Act out a scene where you describe where things are using prepositions of place.",
+      "scenario": {
+        "setting": "a classroom filled with different objects",
+        "summary": "You and your partner will describe the location of various items in the classroom using prepositions of place.",
+        "roles": [
+          {
+            "name": "Student 1",
+            "goal": "Describe the location of objects to Student 2.",
+            "details": "You see a book on the desk and a chair next to the window."
+          },
+          {
+            "name": "Student 2",
+            "goal": "Ask questions about the location of objects.",
+            "details": "You want to know where the pencil is and where the backpack is."
+          }
+        ],
+        "steps": [
+          "Student 1 starts by saying where the book is.",
+          "Student 2 asks where the pencil is.",
+          "Student 1 describes the pencil's location using a preposition.",
+          "Student 2 asks about the backpack's location.",
+          "Student 1 responds with the backpack's position."
+        ]
+      },
+      "phrases": [
+        {
+          "phrase": "The book is on the desk.",
+          "translation": "The book is placed on the surface of the desk."
+        },
+        {
+          "phrase": "The pencil is in the drawer.",
+          "translation": "The pencil is inside the drawer."
+        },
+        {
+          "phrase": "The chair is next to the window.",
+          "translation": "The chair is beside the window."
+        },
+        {
+          "phrase": "The backpack is under the table.",
+          "translation": "The backpack is beneath the table."
+        },
+        {
+          "phrase": "The clock is above the blackboard.",
+          "translation": "The clock is positioned higher than the blackboard."
+        },
+        {
+          "phrase": "The desk is near the door.",
+          "translation": "The desk is close to the door."
+        },
+        {
+          "phrase": "The plant is behind the computer.",
+          "translation": "The plant is located at the back of the computer."
+        },
+        {
+          "phrase": "The chair is in front of the desk.",
+          "translation": "The chair is positioned before the desk."
+        },
+        {
+          "phrase": "The books are between the notebooks.",
+          "translation": "The books are located in the space separating the notebooks."
+        },
+        {
+          "phrase": "The lamp is by the sofa.",
+          "translation": "The lamp is located next to the sofa."
+        }
+      ]
+    },
+    {
+      "id": "dialogue-gap-in-on-un-dialogue-gap-1",
+      "type": "dialogue-gap",
+      "prompt": "Fill the blanks in the dialogue using the word bank.",
+      "words": [
+        "in",
+        "on",
+        "under",
+        "next to",
+        "near",
+        "by",
+        "between",
+        "behind"
+      ],
+      "dialogue": [
+        {
+          "speaker": "Student 1",
+          "line": "Where is your book?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "It is ___ my bag."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Is it ___ the table?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "No, it is ___ the chair."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "What is ___ the book?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "There is a pen ___ it."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Is the pencil ___ the book?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Yes, it is ___ the book."
+        }
+      ],
+      "answers": [
+        "in",
+        "on",
+        "under",
+        "next to",
+        "by",
+        "between",
+        "behind",
+        "in"
+      ]
+    },
+    {
+      "id": "truefalse-in-on-un-truefalse-1",
+      "type": "truefalse",
+      "prompt": "Decide if each statement is true or false.",
+      "items": [
+        {
+          "statement": "The cat is under the table.",
+          "answer": true
+        },
+        {
+          "statement": "The book is on the shelf.",
+          "answer": true
+        },
+        {
+          "statement": "The dog is in the garden.",
+          "answer": true
+        },
+        {
+          "statement": "The chair is behind the door.",
+          "answer": true
+        },
+        {
+          "statement": "The lamp is next to the sofa.",
+          "answer": true
+        },
+        {
+          "statement": "The car is in front of the house.",
+          "answer": true
+        },
+        {
+          "statement": "The clock is above the fireplace.",
+          "answer": true
+        },
+        {
+          "statement": "The shoes are below the bed.",
+          "answer": true
+        },
+        {
+          "statement": "The park is near the school.",
+          "answer": true
+        },
+        {
+          "statement": "The picture is on the floor.",
+          "answer": false
+        }
+      ]
+    }
+  ]
+}
