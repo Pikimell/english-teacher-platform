@@ -1,0 +1,505 @@
+{
+  "title": "Дім і квартира (кімнати, меблі, предмети)",
+  "level": "A1",
+  "tasks": [
+    {
+      "id": "mcq-task-mcq-1",
+      "type": "mcq",
+      "prompt": "Choose the correct option.",
+      "items": [
+        {
+          "q": "I wash my hands at the ___.",
+          "choices": ["sink", "floor", "door"],
+          "answer": ["0"]
+        },
+        {
+          "q": "You sit on a ___.",
+          "choices": ["pillow", "toilet", "blanket"],
+          "answer": ["1"]
+        },
+        {
+          "q": "I put my clothes in the ___.",
+          "choices": ["wardrobe space", "garage", "stairs"],
+          "answer": ["0"]
+        },
+        {
+          "q": "I sleep on a ___.",
+          "choices": ["double bed", "counter", "remote control"],
+          "answer": ["0"]
+        },
+        {
+          "q": "I use a ___ to brush my teeth.",
+          "choices": ["toothbrush", "towel", "mug"],
+          "answer": ["0"]
+        },
+        {
+          "q": "The ___ is next to the bed.",
+          "choices": ["bedside table", "ceiling", "window"],
+          "answer": ["0"]
+        },
+        {
+          "q": "I cook with a ___.",
+          "choices": ["frying pan", "cushion", "picture"],
+          "answer": ["0"]
+        },
+        {
+          "q": "I drink water from a ___.",
+          "choices": ["glass", "pot", "bath mat"],
+          "answer": ["0"]
+        },
+        {
+          "q": "You can watch a movie on the ___.",
+          "choices": ["television", "stairs", "wall"],
+          "answer": ["0"]
+        },
+        {
+          "q": "I keep my books in a ___.",
+          "choices": ["magazine rack", "toilet paper", "shower gel"],
+          "answer": ["0"]
+        }
+      ]
+    },
+    {
+      "id": "gap-task-gap-1",
+      "type": "gap",
+      "prompt": "Fill the gaps with the correct word.",
+      "items": [
+        {
+          "q": "I wash my hands in the ___.",
+          "answer": ["sink"]
+        },
+        {
+          "q": "The ___ is in the bathroom.",
+          "answer": ["bathtub"]
+        },
+        {
+          "q": "Please put the ___ in the holder.",
+          "answer": ["toilet paper"]
+        },
+        {
+          "q": "I need a clean ___ after my shower.",
+          "answer": ["towel"]
+        },
+        {
+          "q": "The ___ is next to the bed.",
+          "answer": ["bedside table"]
+        },
+        {
+          "q": "I sleep on a ___ bed.",
+          "answer": ["double bed"]
+        },
+        {
+          "q": "The ___ is on the wall.",
+          "answer": ["picture"]
+        },
+        {
+          "q": "I drink tea from a ___.",
+          "answer": ["mug"]
+        },
+        {
+          "q": "The ___ is in the kitchen.",
+          "answer": ["countertop"]
+        },
+        {
+          "q": "There is a ___ in the living room.",
+          "answer": ["TV"]
+        }
+      ]
+    },
+    {
+      "id": "match-task-match-1",
+      "type": "match",
+      "prompt": "Match the item with its description.",
+      "pairs": [
+        {
+          "left": "sink",
+          "right": "a place to wash hands"
+        },
+        {
+          "left": "bathtub",
+          "right": "a place to take a bath"
+        },
+        {
+          "left": "toilet",
+          "right": "a place for using the bathroom"
+        },
+        {
+          "left": "towel",
+          "right": "used to dry your body"
+        },
+        {
+          "left": "toothbrush",
+          "right": "used to clean your teeth"
+        },
+        {
+          "left": "bedside table",
+          "right": "a small table next to the bed"
+        },
+        {
+          "left": "TV",
+          "right": "a device to watch shows"
+        },
+        {
+          "left": "kitchen sink",
+          "right": "a place to wash dishes"
+        },
+        {
+          "left": "garage",
+          "right": "a place to park a car"
+        },
+        {
+          "left": "window",
+          "right": "an opening to let in light"
+        }
+      ]
+    },
+    {
+      "id": "context-task-context-1",
+      "type": "context",
+      "prompt": "Read the text and answer the questions.",
+      "context": {
+        "title": "Home Items",
+        "format": "narrative",
+        "body": [
+          "In the bathroom, there is a bathtub and a sink. The toilet is next to the sink. There is toilet paper on the holder.",
+          "On the towel rack, there are clean towels. A toothbrush and toothpaste are on the counter. The bath mat is soft and nice.",
+          "In the bedroom, there is a double bed with a blanket and pillows. The duvet is warm. There is a bedside table with a lamp.",
+          "In the living room, there is a TV on the stand. The remote control is on the side table. There are cushions on the sofa.",
+          "In the kitchen, there is a kitchen sink and a countertop. A cutting board is next to the frying pan. There are mugs and glasses in the cupboard."
+        ]
+      },
+      "questions": [
+        {
+          "q": "What is in the bathroom?",
+          "choices": ["Bed", "Bathtub", "Sofa"],
+          "answer": ["1"]
+        },
+        {
+          "q": "Where is the toilet paper?",
+          "choices": ["On the floor", "On the holder", "On the sink"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What is on the towel rack?",
+          "choices": ["Dirty towels", "Clean towels", "No towels"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What is next to the sink?",
+          "choices": ["Bathtub", "Toilet", "Bed"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What type of bed is in the bedroom?",
+          "choices": ["Single bed", "Double bed", "Sofa bed"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What is on the bedside table?",
+          "choices": ["A book", "A lamp", "A plant"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What is in the living room?",
+          "choices": ["TV", "Fridge", "Oven"],
+          "answer": ["0"]
+        },
+        {
+          "q": "Where is the remote control?",
+          "choices": ["On the sofa", "On the side table", "On the floor"],
+          "answer": ["1"]
+        },
+        {
+          "q": "What is on the countertop?",
+          "choices": ["Cutting board", "Bed", "Chair"],
+          "answer": ["0"]
+        },
+        {
+          "q": "What is next to the frying pan?",
+          "choices": ["Pot", "Knife", "Cutting board"],
+          "answer": ["2"]
+        }
+      ]
+    },
+    {
+      "id": "short-task-short-1",
+      "type": "short",
+      "prompt": "Write short answers about Дім і квартира (кімнати, меблі, предмети).",
+      "items": [
+        {
+          "q": "What do you have in your bathroom? Write 2–3 sentences.",
+          "keywords": ["sink", "bathtub", "toilet"]
+        },
+        {
+          "q": "Describe your bedroom. What furniture is there?",
+          "keywords": ["double bed", "wardrobe", "bedside table"]
+        },
+        {
+          "q": "What do you use in the kitchen? List 3 items.",
+          "keywords": ["frying pan", "cutting board", "kitchen sink"]
+        },
+        {
+          "q": "How do you relax in your living room? Write 2–3 sentences.",
+          "keywords": ["TV", "cushion", "sound system"]
+        },
+        {
+          "q": "What is in your garage? Write 2–3 sentences.",
+          "keywords": ["ceiling", "floor", "parking space"]
+        },
+        {
+          "q": "What do you keep on your bedside table?",
+          "keywords": ["lamp", "toothbrush", "book"]
+        },
+        {
+          "q": "What do you have on your kitchen countertop?",
+          "keywords": ["mug", "glass", "fork"]
+        },
+        {
+          "q": "Describe your favorite room in your house. Why do you like it?",
+          "keywords": ["window", "wall", "indoor plant"]
+        },
+        {
+          "q": "What do you need for a shower? List 3 items.",
+          "keywords": ["shampoo", "shower gel", "towel"]
+        },
+        {
+          "q": "What is your favorite piece of wall art? Describe it.",
+          "keywords": ["picture", "painting", "wall"]
+        }
+      ]
+    },
+    {
+      "id": "open-task-open-1",
+      "type": "open",
+      "prompt": "Describe your home and its rooms.",
+      "items": [
+        {
+          "situation": "What is in your kitchen? Describe the items."
+        },
+        {
+          "situation": "What furniture do you have in your bedroom?"
+        },
+        {
+          "situation": "How do you use the bathroom? List the items."
+        },
+        {
+          "situation": "What do you see in your living room?"
+        },
+        {
+          "situation": "Describe your favorite place in your house."
+        },
+        {
+          "situation": "What do you keep in your wardrobe?"
+        },
+        {
+          "situation": "How do you organize your garage?"
+        },
+        {
+          "situation": "What is on your bedside table?"
+        },
+        {
+          "situation": "Describe the items on your kitchen countertop."
+        },
+        {
+          "situation": "What decorations do you have in your home?"
+        }
+      ],
+      "scoring": {
+        "criteria": [
+          "Use at least five vocabulary words from the list.",
+          "Provide clear descriptions of rooms or items.",
+          "Write complete sentences with correct grammar."
+        ]
+      }
+    },
+    {
+      "id": "roleplay-task-roleplay-1",
+      "type": "roleplay",
+      "prompt": "Describe your home and ask questions about each other's rooms.",
+      "scenario": {
+        "setting": "Rent an appartment",
+        "summary": "You will talk about rent homes, rooms, and furniture.",
+        "roles": [
+          {
+            "name": "Student 1",
+            "goal": "Describe your bedroom and ask about Student 2's bedroom.",
+            "details": "You have a double bed and a wardrobe. You want to know about the furniture in Student 2's room."
+          },
+          {
+            "name": "Student 2",
+            "goal": "Describe your living room and ask about Student 1's bedroom.",
+            "details": "You have a TV and a sofa. You want to know about the items in Student 1's room."
+          }
+        ],
+        "steps": [
+          "Student 1 starts by describing their bedroom.",
+          "Student 1 asks Student 2 about their bedroom.",
+          "Student 2 describes their living room.",
+          "Student 2 asks Student 1 about their favorite item in their bedroom.",
+          "Both students share what they like about their rooms."
+        ]
+      },
+      "phrases": [
+        {
+          "phrase": "What is in your bedroom?",
+          "translation": "Asking about items in the room."
+        },
+        {
+          "phrase": "I have a double bed.",
+          "translation": "Describing a type of bed."
+        },
+        {
+          "phrase": "Do you have a TV?",
+          "translation": "Asking if there is a television."
+        },
+        {
+          "phrase": "I like my bedside lamp.",
+          "translation": "Expressing preference for a lamp."
+        },
+        {
+          "phrase": "Where is your wardrobe?",
+          "translation": "Asking about the location of the wardrobe."
+        },
+        {
+          "phrase": "I have a sofa and cushions.",
+          "translation": "Describing living room furniture."
+        },
+        {
+          "phrase": "What color is your wall?",
+          "translation": "Inquiring about wall color."
+        },
+        {
+          "phrase": "I keep my books on a shelf.",
+          "translation": "Explaining where books are stored."
+        },
+        {
+          "phrase": "Do you have a garage?",
+          "translation": "Asking about parking space."
+        },
+        {
+          "phrase": "I use a towel after a shower.",
+          "translation": "Talking about bathroom items."
+        }
+      ]
+    },
+    {
+      "id": "dialogue-gap-task-dialogue-gap-1",
+      "type": "dialogue-gap",
+      "prompt": "Fill the blanks in the dialogue using the word bank.",
+      "words": [
+        "toilet",
+        "towel",
+        "bathtub",
+        "sink",
+        "shampoo",
+        "toothbrush",
+        "bedside table",
+        "cushion"
+      ],
+      "dialogue": [
+        {
+          "speaker": "Student 1",
+          "line": "Where is the ___ in the bathroom?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "The ___ is next to the bathtub."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Do you have a ___ for drying?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Yes, I have a clean ___."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "I need some ___ for my hair."
+        },
+        {
+          "speaker": "Student 2",
+          "line": "The ___ is on the shelf."
+        },
+        {
+          "speaker": "Student 1",
+          "line": "Can I put my ___ on your bedside table?"
+        },
+        {
+          "speaker": "Student 2",
+          "line": "Sure! There is a ___ on it."
+        }
+      ],
+      "answers": [
+        "toilet",
+        "sink",
+        "towel",
+        "towel",
+        "shampoo",
+        "shampoo",
+        "toothbrush",
+        "cushion"
+      ]
+    },
+
+    {
+      "id": "synonym-clue-task-synonym-clue-1",
+      "type": "synonym-clue",
+      "prompt": "Choose the correct word based on the clue.",
+      "wordBank": [
+        "sink",
+        "bathtub",
+        "toilet",
+        "towel",
+        "pillow",
+        "wardrobe",
+        "blanket",
+        "bedside table",
+        "mug",
+        "cushion"
+      ],
+      "items": [
+        {
+          "clue": "a place to wash your hands",
+          "answers": ["sink"]
+        },
+        {
+          "clue": "a large container for bathing",
+          "answers": ["bathtub"]
+        },
+        {
+          "clue": "a bowl for human waste",
+          "answers": ["toilet"]
+        },
+        {
+          "clue": "a piece of cloth for drying",
+          "answers": ["towel"]
+        },
+        {
+          "clue": "a soft object for your head while sleeping",
+          "answers": ["pillow"]
+        },
+        {
+          "clue": "a space for clothes",
+          "answers": ["wardrobe"]
+        },
+        {
+          "clue": "a small table beside the bed",
+          "answers": ["bedside table"]
+        },
+        {
+          "clue": "a soft covering for warmth",
+          "answers": ["blanket"]
+        },
+        {
+          "clue": "a container for holding drinks",
+          "answers": ["mug"]
+        },
+        {
+          "clue": "a piece of furniture for sitting",
+          "answers": ["cushion"]
+        }
+      ]
+    }
+  ]
+}
