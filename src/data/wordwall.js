@@ -74,10 +74,11 @@ export const lessonWordwalls = {
     {
       id: '4cb129b786784655babbc0b994405e7e',
       themeId: '42',
-      templateId: '30',
+      templateId: '70',
       fontStackId: '0',
       title: 'Wordwall вправа для особових займенників',
       url: 'hhttps://wordwall.net/ru/embed/4cb129b786784655babbc0b994405e7e?themeId=42&templateId=30&fontStackId=0',
+      html: `<iframe style="max-width:100%" src="https://wordwall.net/ru/embed/4cb129b786784655babbc0b994405e7e?themeId=42&templateId=70&fontStackId=0" width="500" height="380" frameborder="0" allowfullscreen></iframe>`,
     },
   ],
   'custom-no9-cf6e6bee': [
@@ -173,7 +174,6 @@ function buildBaseUrl(config) {
 
 export function buildWordwallUrl(config) {
   const baseUrl = buildBaseUrl(config);
-  if (!baseUrl) return null;
   const params = new URLSearchParams();
   const themeId = config.themeId ?? DEFAULT_THEME_ID;
   const templateId = config.templateId ?? DEFAULT_TEMPLATE_ID;
@@ -188,6 +188,16 @@ export function buildWordwallUrl(config) {
 }
 
 export function createWordwallIframe(config) {
+  console.log(config);
+
+  if (config.html) {
+    const iframe = document.createElement('div');
+    iframe.innerHTML = config.html;
+    iframe.firstElementChild.width = String(config.width ?? 1000);
+    iframe.firstElementChild.height = String(config.height ?? 760);
+    return iframe.firstElementChild;
+  }
+
   const src = buildWordwallUrl(config);
   if (!src) return null;
 
