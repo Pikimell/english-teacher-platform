@@ -73,9 +73,9 @@ export const lessonWordwalls = {
   'custom-no8-846a8d9e': [
     {
       id: '4cb129b786784655babbc0b994405e7e',
-      themeId: '65',
+      themeId: '42',
       templateId: '30',
-      fontStackId: '12',
+      fontStackId: '0',
       title: 'Wordwall вправа для особових займенників',
       url: 'hhttps://wordwall.net/ru/embed/4cb129b786784655babbc0b994405e7e?themeId=42&templateId=30&fontStackId=0',
     },
